@@ -8,11 +8,12 @@ package com.longweekendmobile.android.xflash.model;
 //
 //      *** ALL METHODS STATIC ***
 //
+//  public static Tag blankTagWithId(int  )
 //  public Tag starredWordsTag()
 //  public void recacheCountsForUserTags()
 //  public void setCardCount(int  ,Tag  )
 //  public boolean cancelMembership(Card  ,Tag  )
-//  public boolean card(Card  ,Tag  )
+//  public boolean cardIsMemberOfTag(Card  ,Tag  )
 //  public ArrayList<Tag> faultedTagsForCard(Card  )
 //  public boolean subscribeCard(Card  ,Tag  )
 //
@@ -39,7 +40,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.longweekendmobile.android.xflash.XFApplication;
+import com.longweekendmobile.android.xflash.XflashAlert;
 import com.longweekendmobile.android.xflash.XflashNotification;
+import com.longweekendmobile.android.xflash.XflashSettings;
 
 public class TagPeer
 {
@@ -56,6 +59,20 @@ public class TagPeer
 
     public static final int STARRED_TAG_ID = 0;
     
+    
+    // this method simply returns a new Tag object with the same tag ID
+    // as the Tag from which this method was called
+    public static Tag blankTagWithId(int inId)
+    {
+        Tag newTag = new Tag();
+
+        newTag.setId(inId);
+
+        return newTag;
+    }
+
+
+    // returns the starred words Tag
     public static Tag starredWordsTag()
     {
         Tag tempTag = TagPeer.retrieveTagById(STARRED_TAG_ID);
@@ -117,90 +134,48 @@ public class TagPeer
     }
 
     // removes inCard.cardId from the incoming Tag object
-    // this will also check regarding the last card on the active set and automatically
-    // remove that card from the active set card cache
+    // this will also check whether inTag is currently active, and if so,m
+    // will refuse to remove the card (and throw up a dialog)
     //
     // note this method DOES update the tag count cache on the tags table
-    @SuppressWarnings("unused")
     public static boolean cancelMembership(Card inCard,Tag inTag)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
+        boolean tagIsActive = ( inTag.getId() == XflashSettings.getActiveTag().getId() );
         String[] tempArgs = null;
 
         // first check whether the removed card is in the active tag
-        // if the tagId supplied is the active card, check for last card cause
-        // we don't want the last card being removed from a tag. 
-        
-        // TODO - don't know the proper way to implement this yet
-        //      - it will probably require passing Context from the 
-        //      - Activity calling this method?
-        //
-        // CurrentState *currentState = [CurrentState sharedCurrentState];
-        // if ([tag isEqual:currentState.activeTag])
-        if( false )
+        if( tagIsActive )
         {
-            Log.d(MYTAG,"editing current set tags");
-
-            // get the total card count of relevant tag
-            tempArgs = new String[] { Integer.toString( inTag.getId() ) };
-            String query = "SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = ?";
-        
-            Cursor myCursor = tempDB.rawQuery(query,tempArgs);
-            myCursor.moveToFirst();
-
-            int tempColumn = myCursor.getColumnIndex("total_card");
-            int totalCard = myCursor.getInt(tempColumn);
-            myCursor.close();
-
-            // if we're downt to the last card
-            if( totalCard <= 1 )
-            {
-                Log.d(MYTAG,"last card in set");
-
-                // TODO - NO idea what this is about yet
-
-/* 
-                // this is the last card, abort!
-                // construct the error object to be returned back to its caller.
-      
-                NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.", @"AddTagViewController.AlertViewLastCardMessage"), NSLocalizedDescriptionKey,nil];
-                    
-                if( theError != NULL )
-                    {
-                        *theError = [NSError errorWithDomain:kTagPeerErrorDomain code:kRemoveLastCardOnATagError userInfo:userInfo];
-                    }
-
-*/      
-        
-                return false;
+            // TODO - keep an eye on this: in Obj C this is an SQL call to
+            //      - get the card count, but I don't think it's required
             
-            }  // end if( totalCard <= 1 )
+            // if we're downt to the last card
+            if( inTag.getCardCount() <= 1 )
+            {
+                // this is the last card, abort!
+                XflashAlert.fireLastCardDialog(inTag);
 
+                return false;
+            }
 
-        }  // end if(the passed Card is in the active Tag)
-           // initial - to determine if we're' downt to the last card
-
+        }  // end if( removing from active tag )
         
         // now we actually delete from card_tag_link
         tempArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( inTag.getId() ) };
         tempDB.delete("card_tag_link","card_id = ? AND tag_id = ?",tempArgs);
         
-        // only update this stuff if NOT the active set - actual comment
-        // TODO - don't know the proper way to implement this yet
-        //
-        // if ([tag isEqual:currentState.activeTag] == NO)
-        if( true )
-        {
-            tempArgs = new String[] { Integer.toString( inTag.getId() ) };
-            String query = "UPDATE tags SET count = (count - 1) WHERE tag_id = ?";
+        // TODO - keep an eye on this: used to be conditional on inTag not
+        //      - being active, but doesn't seem to be necessary
+        tempArgs = new String[] { Integer.toString( inTag.getId() ) };
+        String query = "UPDATE tags SET count = (count - 1) WHERE tag_id = ?";
 
-            tempDB.execSQL(query,tempArgs);
-        } 
+        tempDB.execSQL(query,tempArgs);
 
         // broadcast the card whose subscription status has changed
         XflashNotification theNotifier = XFApplication.getNotifier();
+        theNotifier.setCardWasAdded(false);
         theNotifier.setTagIdPassed( inTag.getId() );
         theNotifier.subscriptionBroadcast(inCard); 
         
@@ -210,7 +185,7 @@ public class TagPeer
 
 
     // checked if a passed tagId/cardId are matched
-    public static boolean card(Card inCard,Tag inTag)
+    public static boolean cardIsMemberOfTag(Card inCard,Tag inTag)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
@@ -231,7 +206,7 @@ public class TagPeer
             return false;
         }   
 
-    }
+    }  // end cardIsMemberOfTag()
 
     // returns an ArrayList<int> of Tag objects this card is a member of
     public static ArrayList<Tag> faultedTagsForCard(Card inCard)
@@ -268,6 +243,7 @@ public class TagPeer
 
     }  // end faultedTagsForCard()
 
+    
     // subscribes a Card to a given Tag based on incoming object Id's
     // note that this method DOES NOT update the tag count cache on the tags table
     public static boolean subscribeCard(Card inCard,Tag inTag)
@@ -294,12 +270,14 @@ public class TagPeer
         
         // broadcast the card whose subscription status has changed
         XflashNotification theNotifier = XFApplication.getNotifier();
+        theNotifier.setCardWasAdded(true);
         theNotifier.setTagIdPassed( inTag.getId() );
         theNotifier.subscriptionBroadcast(inCard); 
  
         return true;
 
     }  // end subscribeCard()
+
 
     // gets system Tag objects as an ArrayList
     public static ArrayList<Tag> retrieveSysTagList()

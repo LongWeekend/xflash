@@ -13,32 +13,33 @@ package com.longweekendmobile.android.xflash;
 //  public boolean onOptionsItemSelected(MenuItem  )                    @over
 //
 //  public static void setPracticeBlank()
+//  public static void setRight()
+//  public static void setWrong()
+//  public static void setGoAway()
+//  public static void reveal()
+//  public static void practiceClick(View  )
+//  public static void browseClick(View  )
+//  public static void goRight()
 //
-//  private static void reveal()
-//  private static void toggleReading()
-//  private static void practiceClick(View  )
-//  private static void browseClick(View  )
+//  public static void dumpObservers()
+//
 //  private static void launchBrowseCard(int  )
-//  private static void goRight()
 //
+//  private void loadSavedPracticeValues()
 //  private void toggleCardStarred()
 //  private void launchAddCard()
 //  private void fixCardEmail()
-//
-//  private static class PracticeScreen
-//
-//      public static void initialize()
-//      public static void dump()
-//      public static void refreshCountBar()
-//      public static void setupPracticeView(int  )
-//      public static void setAnswerBar(int  )
-//      public static void toggleReading()
-//      private static void loadMeaning()
-//      private static void setClickListeners()
+//  private void setupObservers()
+//  private void updateFromSubscriptionObserver(Object  )
+//  private void updateFromActiveTagObserver()
 
-import android.os.Bundle;
+import java.util.Observable;
+import java.util.Observer;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,31 +48,34 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.longweekendmobile.android.xflash.model.ExampleSentencePeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
-import com.longweekendmobile.android.xflash.model.LWEDatabase;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
+import com.longweekendmobile.android.xflash.model.UserHistoryPeer;
 
 public class PracticeFragment extends Fragment
 {
     private static final String MYTAG = "XFlash PracticeFragment";
     
-    public static final int PRACTICE_VIEW_BLANK = 0;
-    public static final int PRACTICE_VIEW_BROWSE = 1;
-    public static final int PRACTICE_VIEW_REVEAL = 2;
-
-    public static int[] cardCounts = { 1, 2, 3, 4, 5 };
+    public static final int STUDYING_INDEX = 0;
+    public static final int RIGHT1_INDEX = 1;
+    public static final int RIGHT2_INDEX = 2;
+    public static final int RIGHT3_INDEX = 3;
+    public static final int LEARNED_INDEX = 4;
     
-    private static int percentageRight = 100;
+    private static Observer activeTagObserver = null;
+    private static Observer onStopObserver = null;
+    private static Observer subscriptionObserver = null;
     
-    // TODO - temporarily public so Xflash has access in onCreatePanelMenu()
+    // made public for access in PracticeScreen
+    public static int rightStreak = 0;
+    public static int wrongStreak = 0;
+    public static int numRight = 0;
+    public static int numWrong = 0;
+    public static int numViewed = 0;
+    
     public static int practiceViewStatus = -1;
 
     private static RelativeLayout practiceLayout;
@@ -84,11 +88,11 @@ public class PracticeFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // TODO - we need to manage whether the options menu is available before
-        //      - reveal, however this is a non-static method and all of our layout
-        //      - changes are still static   >:(
+        // allow this fragment to open the options menu via hardware button
         setHasOptionsMenu(true);
-        
+
+        setupObservers();
+       
         // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
@@ -100,25 +104,31 @@ public class PracticeFragment extends Fragment
         if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_PRACTICE )    
         {
             // if we're not revealed, reset to blank (in case of mode change)
-            if( practiceViewStatus != PRACTICE_VIEW_REVEAL )
+            if( practiceViewStatus != PracticeScreen.PRACTICE_VIEW_REVEAL )
             {
-                practiceViewStatus = PRACTICE_VIEW_BLANK;
+                practiceViewStatus = PracticeScreen.PRACTICE_VIEW_BLANK;
             }
         }
         else  
         {
-            practiceViewStatus = PRACTICE_VIEW_BROWSE;
+            practiceViewStatus = PracticeScreen.PRACTICE_VIEW_BROWSE;
         } 
     
         // load all view elements and set up based on view status
-        PracticeScreen.initialize();
+        loadSavedPracticeValues();
+        PracticeScreen.initialize(practiceLayout,currentTag,currentCard);
         PracticeScreen.setupPracticeView(practiceViewStatus);
+
+        if( currentTag.needShowAllLearned() )
+        {
+            XflashAlert.fireTagLearned(currentTag);
+        }
 
         return practiceLayout;
 
     }  // end onCreateView()
 
-   
+
     @Override
     public void onDestroyView()
     {
@@ -133,8 +143,6 @@ public class PracticeFragment extends Fragment
     }  // end onDestroyView()
 
 
-// TODO - temporarily bypassed by use of Xflash.onCreatePanelMenu()
-/*
     @Override
     public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) 
     {
@@ -150,7 +158,7 @@ public class PracticeFragment extends Fragment
         MenuItem starredItem = (MenuItem)menu.findItem(R.id.pm_toggle_starred);
         Tag starredTag = TagPeer.starredWordsTag();
 
-        if( TagPeer.card(currentCard,starredTag) )
+        if( TagPeer.cardIsMemberOfTag(currentCard,starredTag) )
         {
             starredItem.setTitle(R.string.pm_starred_yes);
         }
@@ -160,7 +168,6 @@ public class PracticeFragment extends Fragment
         }
     
     }  // end onPrepareOptionsMenu()
-*/
   
 
     @Override
@@ -173,7 +180,6 @@ public class PracticeFragment extends Fragment
             case R.id.pm_add_tag:           launchAddCard();
                                             return true;
             case R.id.pm_tweet:             Log.d(MYTAG,"> pm_tweet clicked");
-                                            Log.d(MYTAG,".");
                                             return true;
             case R.id.pm_fix:               fixCardEmail();
                                             return true;
@@ -189,47 +195,86 @@ public class PracticeFragment extends Fragment
     // called by ExampleSentenceFragment to reset the view
     public static void setPracticeBlank()
     {
-        practiceViewStatus = PRACTICE_VIEW_BLANK;
+        practiceViewStatus = PracticeScreen.PRACTICE_VIEW_BLANK;
     }
 
 
-    // called by Xflash when someone clicks 'tap for answer'
-    private static void reveal()
+    // methods for PracticeFragment and ExampleSentence to respond
+    // to user right / wrong/ goaway choices
+    public static void setRight()
     {
-        PracticeScreen.setupPracticeView(PRACTICE_VIEW_REVEAL);
+        ++numRight;
+        ++numViewed;
+        ++rightStreak;
+        wrongStreak = 0;
+        UserHistoryPeer.recordCorrectForCard(currentCard,currentTag);
+
+    }  // end setRight()
+
+    public static void setWrong()
+    {
+        ++numWrong;
+        ++numViewed;
+        ++wrongStreak;
+        rightStreak = 0;
+        UserHistoryPeer.recordWrongForCard(currentCard,currentTag);
+        
+        // reset our all-learned flag
+        currentTag.resetAllLearned();
+
+    }  // end setWrong()
+
+    public static void setGoAway()
+    {
+        ++numRight;
+        ++numViewed;
+        ++rightStreak;
+        wrongStreak = 0;
+        UserHistoryPeer.buryCard(currentCard,currentTag);
+
+    }  // end setGoAway()
+
+
+    // called by Xflash when someone clicks 'tap for answer'
+    public static void reveal()
+    {
+        PracticeScreen.setupPracticeView(PracticeScreen.PRACTICE_VIEW_REVEAL);
     }
 
     
     // method called when any button in the options block is clicked
-    private static void practiceClick(View v)
-    {
-        // TODO - temporary, evolving as we go
-        if( v.getId() == R.id.optionblock_actions )
-        {
-            Xflash.getActivity().openOptionsMenu();
-        }
-        else
-        {
-
-        
-        // load the next practice view without adding to the back stack
-        XflashScreen.setPracticeOverride();
-        practiceViewStatus = PRACTICE_VIEW_BLANK;
-        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
-
-        }
-
-    }  // end practiceClick()
-
-
-    // method called when any button in the options block is clicked
-    private static void browseClick(View v)
+    public static void practiceClick(View v)
     {
         switch( v.getId() )
         {
-            case R.id.browseblock_actions:  Xflash.getActivity().openOptionsMenu();
+            case R.id.optionblock_right:    setRight();
                                             break;
             
+            case R.id.optionblock_wrong:    setWrong();
+                                            break;
+
+            case R.id.optionblock_goaway:   setGoAway();
+                                            break;
+
+            default:    Log.d(MYTAG,"ERROR - practiceClick() passed invalied button id");
+        
+        }  // end switch( practice button )
+
+        // load the next practice view without adding to the back stack
+        PracticeCardSelector.setNextPracticeCard(currentTag,currentCard);
+        
+        practiceViewStatus = PracticeScreen.PRACTICE_VIEW_BLANK;
+        XflashScreen.setPracticeOverride();
+        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+
+    }  // end practiceClick()
+
+    
+    // method called when any button in the options block is clicked
+    public static void browseClick(View v)
+    {
+        switch( v.getId() )
+        {
             case R.id.browseblock_last:     launchBrowseCard(XflashScreen.DIRECTION_CLOSE);
                                             break;
             
@@ -240,6 +285,23 @@ public class PracticeFragment extends Fragment
     }  // end browseClick()
 
     
+    // method called when user click to queue the extra screen
+    public static void goRight()
+    {
+        // load the ExampleSentenceFragment to the fragment tab manager
+        Xflash.getActivity().onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
+    }
+
+
+    public static void dumpObservers()
+    {
+        activeTagObserver = null;
+        onStopObserver = null;
+        subscriptionObserver = null;
+    }
+
+
+    // method to subscribe/unsubscrible cards in user tags
     // set the card and screen transition for a browse click
     private static void launchBrowseCard(int inDirection)
     {
@@ -248,13 +310,40 @@ public class PracticeFragment extends Fragment
     } 
 
 
-    // method called when user click to queue the extra screen
-    private static void goRight()
+    // check/load saved practice counts from previous app exit
+    private void loadSavedPracticeValues()
     {
-        // load the ExampleSentenceFragment to the fragment tab manager
-        ExampleSentenceFragment.loadCard(currentCard,cardCounts);
-        Xflash.getActivity().onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
-    }
+        // check for a saved index
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        // if there was anything index saved
+        if( settings.contains("current_index") )
+        {
+            // set the index left on app exit
+            int tempIndex = settings.getInt("current_index",0);
+            currentTag.setCurrentIndex(tempIndex);
+
+            // load the various card summary/count values
+            rightStreak = settings.getInt("right_streak",0);
+            wrongStreak = settings.getInt("wrong_streak",0);
+            numRight    = settings.getInt("num_right",0);
+            numWrong    = settings.getInt("num_wrong",0);
+            numViewed   = settings.getInt("num_viewed",0);
+            
+            // clear the saved values
+            SharedPreferences.Editor editor = settings.edit();
+            editor.remove("current_index");
+            editor.remove("right_streak");
+            editor.remove("wrong_streak");
+            editor.remove("num_right");
+            editor.remove("num_wrong");
+            editor.remove("num_viewed");
+            
+            editor.commit();
+        }
+
+    }  // end loadSavedPracticeValues()
 
 
     // toggles a card's starred status from the options menu
@@ -262,7 +351,7 @@ public class PracticeFragment extends Fragment
     {
         Tag starredTag = TagPeer.starredWordsTag();
 
-        if( TagPeer.card(currentCard,starredTag) )
+        if( TagPeer.cardIsMemberOfTag(currentCard,starredTag) )
         {
             TagPeer.cancelMembership(currentCard,starredTag);
         }
@@ -325,428 +414,142 @@ public class PracticeFragment extends Fragment
         Xflash.getActivity().startActivity(myIntent);
 
     }  // end fixCardEmail()
-    
-    
-    // class to manage screen setup
-    private static class PracticeScreen
+   
+
+    private void setupObservers()
     {
-        // used for toggle of reading view
-        private static boolean readingTextVisible = false; 
-       
-        // all of the layout views
-        private static ImageButton blankButton = null;
-        private static ImageButton rightArrow = null;
-        private static ImageButton showReadingButton = null;
-        private static ImageView hhBubble = null;
-        private static ImageView hhImage = null;
-        private static ImageView miniAnswerImage = null;
-        private static LinearLayout countBar = null;
-        private static RelativeLayout browseFrame = null;
-        private static RelativeLayout showFrame = null;
-        private static RelativeLayout practiceBack = null;
-        private static RelativeLayout practiceScrollBack = null;
-        private static TextView headwordView = null;
-        private static TextView hhView = null;
-        private static TextView showReadingText = null;
-        private static TextView[] cardCountViews = { null, null, null, null, null };
+        XflashNotification theNotifier = XFApplication.getNotifier();
 
-        public static void initialize()
+        if( subscriptionObserver == null )
         {
-            // load the title bar and background elements and pass them to the color manager
-            practiceBack = (RelativeLayout)PracticeFragment.practiceLayout.findViewById(R.id.practice_mainlayout);
-            XflashSettings.setupPracticeBack(practiceBack);
+            // create and define behavior for newTagObserver
+            subscriptionObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromSubscriptionObserver(arg);
+                }
+            };
 
-            practiceScrollBack = (RelativeLayout)PracticeFragment.practiceLayout.findViewById(R.id.practice_scroll_back);
-        
-            // load the progress count bar
-            countBar = (LinearLayout)practiceLayout.findViewById(R.id.count_bar);
-            cardCountViews[0] = (TextView)practiceLayout.findViewById(R.id.study_num);
-            cardCountViews[1] = (TextView)practiceLayout.findViewById(R.id.right1_num);
-            cardCountViews[2] = (TextView)practiceLayout.findViewById(R.id.right2_num);
-            cardCountViews[3] = (TextView)practiceLayout.findViewById(R.id.right3_num);
-            cardCountViews[4] = (TextView)practiceLayout.findViewById(R.id.learned_num);
-           
-            refreshCountBar();
+            theNotifier.addSubscriptionObserver(subscriptionObserver);
+
+        }  // end if( subscriptionObserver == null )
     
-            // load the show-reading button
-            showReadingButton = (ImageButton)PracticeFragment.practiceLayout.findViewById(R.id.practice_showreadingbutton);
-            
-            // load the show-reading text
-            showReadingText = (TextView)PracticeFragment.practiceLayout.findViewById(R.id.practice_readingtext);
-            showReadingText.setText( currentCard.reading() );
-            
-            // load the headword view - variable based on study language in Card.java
-            headwordView = (TextView)PracticeFragment.practiceLayout.findViewById(R.id.practice_headword);
-            headwordView.setText( currentCard.getHeadword() );
-           
-            // load the mini answer button
-            miniAnswerImage = (ImageView)practiceLayout.findViewById(R.id.practice_minianswer);
-            
-            // load the hot head
-            hhImage = (ImageView)practiceLayout.findViewById(R.id.practice_hothead);
-            
-            // load the hot head's image bubble
-            hhBubble = (ImageView)practiceLayout.findViewById(R.id.practice_hhbubble);
-                
-            // load the hot head percentage view
-            hhView = (TextView)practiceLayout.findViewById(R.id.practice_talkbubble_text);
-    
-            // load the resources for the answer bar
-            blankButton = (ImageButton)practiceLayout.findViewById(R.id.practice_answerbutton);
-            browseFrame = (RelativeLayout)practiceLayout.findViewById(R.id.browse_options_block);
-            rightArrow = (ImageButton)practiceLayout.findViewById(R.id.practice_rightbutton);
-            showFrame = (RelativeLayout)practiceLayout.findViewById(R.id.practice_options_block);
-       
-            // load the tag name
-            TextView tempPracticeInfo = (TextView)practiceLayout.findViewById(R.id.practice_tag_name);
-            tempPracticeInfo.setText( PracticeFragment.currentTag.getName() );
+        if( activeTagObserver == null )
+        {
+            // create and define behavior for activeTagObserver 
+            activeTagObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromActiveTagObserver();
+                }
+            };
 
-            // load the tag card count
-            String tempString = Integer.toString( PracticeFragment.currentTag.getCurrentIndex() + 1 );
-            tempString = tempString + " / ";
-            tempString = tempString + Integer.toString( PracticeFragment.currentTag.getCardCount() );
+            theNotifier.addActiveTagObserver(activeTagObserver);
 
-            tempPracticeInfo = (TextView)practiceLayout.findViewById(R.id.practice_tag_count);
-            tempPracticeInfo.setText(tempString);
+        }  // end if( activeTagObserver == null )
 
-            // set all of our click listeners
-            PracticeScreen.setClickListeners();
-            
-        }  // end PracticeScreen.initialize()
-       
+        if( onStopObserver == null )
+        {
+            // create and define behavior for onStopObserver
+            onStopObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromOnStopObserver();
+                }
+            };
+
+            theNotifier.addOnStopObserver(onStopObserver);
+
+        }  // end if( activeTagObserver == null )
+
+    }  // end setupObservers()
+
+
+    private void updateFromSubscriptionObserver(Object passedObject)
+    {
+        XflashNotification theNotifier = XFApplication.getNotifier();
         
-        // dumps all static variables dealing with layout
-        public static void dump()
+        // only concern ourselves if the active tag changed
+        if( currentTag.getId() == theNotifier.getTagIdPassed() )
         {
-            blankButton = null;
-            rightArrow = null;
-            showReadingButton = null;
-            hhBubble = null;
-            hhImage = null;
-            miniAnswerImage = null;
-            countBar = null;
-            browseFrame = null;
-            showFrame = null;
-            practiceBack = null;
-            practiceScrollBack = null;
-            headwordView = null;
-            hhView = null;
-            showReadingText = null;
+            JapaneseCard theCard = (JapaneseCard)passedObject;
+            theCard.hydrate();
 
-            for(int i = 0; i < 5; i++)
+            if( theNotifier.getCardWasAdded() )
             {
-                cardCountViews[i] = null;
+                currentTag.addCardToActiveSet(theCard);
             }
+            else
+            {
+                // if the card was removed from the active set
+                currentTag.removeCardFromActiveSet(theCard);
 
-        }  // end dump()
+                // if they are removing the card we're actually showing,
+                // get a new card
+                if( currentCard.equals(theCard) )
+                {
+                    PracticeCardSelector.setNextPracticeCard(currentTag,currentCard);
+                    
+                    // if we're actually on the practice tab right now, force
+                    // reload of new card
+                    if( practiceLayout != null )
+                    {
+                        practiceViewStatus = PracticeScreen.PRACTICE_VIEW_BLANK;
         
-        // set all TextView elements of the count bar to the current values
-        private static void refreshCountBar()
-        {
-            for(int i = 0; i < 5; i++)
-            {
-                cardCountViews[i].setText( Integer.toString( PracticeFragment.cardCounts[i] ) );
-            }
-        }
-
-
-        // set all widgets to the card-hidden state
-        public static void setupPracticeView(int inViewMode)
-        {
-            if( inViewMode == PRACTICE_VIEW_BLANK )
-            {
-                // set up for blank view
-                hhImage.setVisibility(View.VISIBLE);
-                hhBubble.setVisibility(View.VISIBLE);
-                hhView.setText( Integer.toString( PracticeFragment.percentageRight ) + "%" );
-                hhView.setVisibility(View.VISIBLE);
-                rightArrow.setVisibility(View.GONE);
-                showReadingButton.setVisibility(View.VISIBLE);
-                if( readingTextVisible )
-                {
-                    showReadingButton.setVisibility(View.GONE);
-                    showReadingText.setVisibility(View.VISIBLE);
+                        XflashScreen.setPracticeOverride();
+                        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+                    }
                 }
-                else
-                {
-                    showReadingText.setVisibility(View.GONE);
-                    showReadingButton.setVisibility(View.VISIBLE);
-                }
-
-                // enable reveal clicks on the body content in blank mode
-                practiceScrollBack.setClickable(true);
-            }
-            else if( inViewMode == PRACTICE_VIEW_BROWSE )
-            {
-                // set up for browse view
-                countBar.setVisibility(View.INVISIBLE);
-                hhImage.setVisibility(View.GONE);
-                hhBubble.setVisibility(View.GONE);
-                hhView.setVisibility(View.GONE);
-                miniAnswerImage.setVisibility(View.GONE);
-                rightArrow.setVisibility(View.GONE);
-                showReadingButton.setVisibility(View.GONE);
-                if( readingTextVisible )
-                {
-                    showReadingButton.setVisibility(View.GONE);
-                    showReadingText.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    showReadingText.setVisibility(View.GONE);
-                    showReadingButton.setVisibility(View.VISIBLE);
-                }
-
-                // set and display the answer
-                loadMeaning();
-            }   
-            else 
-            {
-                // set up for reveal
-                hhImage.setVisibility(View.VISIBLE);
-                hhBubble.setVisibility(View.VISIBLE);
-                hhView.setText( Integer.toString( PracticeFragment.percentageRight ) + "%" );
-                hhView.setVisibility(View.VISIBLE);
-                miniAnswerImage.setVisibility(View.GONE);
-                showReadingText.setVisibility(View.VISIBLE);
-                
-                // temporarily show the reading and disable the click
-                showReadingButton.setVisibility(View.GONE);
-                showReadingText.setVisibility(View.VISIBLE);
-                showReadingText.setClickable(false);
-                
-                // only display the arrow if example sentences exist
-                XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
-                if( ExampleSentencePeer.sentencesExistForCardId( currentCard.getCardId() ) )
-                {
-                    rightArrow.setVisibility(View.VISIBLE);
-                }
-                XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
-
-                // set and display the answer
-                loadMeaning();
-                
-            }  // end if block for ( inViewMode )
-
-            practiceViewStatus = inViewMode;
-            setAnswerBar(practiceViewStatus);
-        
-        }  // end PracticeScreen.setupPracticeView()
-    
-
-        // method called when user taps to reveal the answer
-        public static void setAnswerBar(int inMode)
-        {
-            // set what should be visible based on study mode
-            switch(inMode)
-            {
-                case PRACTICE_VIEW_BLANK:   browseFrame.setVisibility(View.GONE);
-                                            showFrame.setVisibility(View.GONE);
-                                            blankButton.setVisibility(View.VISIBLE);
-                                            break;
-                case PRACTICE_VIEW_BROWSE:  blankButton.setVisibility(View.GONE);
-                                            showFrame.setVisibility(View.GONE);
-                                            browseFrame.setVisibility(View.VISIBLE);
-                                            break;
-                case PRACTICE_VIEW_REVEAL:  blankButton.setVisibility(View.GONE);
-                                            browseFrame.setVisibility(View.GONE);
-                                            showFrame.setVisibility(View.VISIBLE);
-                                            break;
-                default:    Log.d(MYTAG,"Error in PracticeScreen.setAnswerBar()  :  invalid study mode: " + inMode);
             } 
 
-        }  // end PracticeScreen.setAnswerBar()
+        }  // end if( card mod to active set ) 
+
+    }  // end updateFromSubscriptionObserver()
 
 
-        // flip between 'show reading' button and the actual reading value
-        public static void toggleReading()
-        {
-            if( readingTextVisible )
-            {
-                showReadingText.setVisibility(View.GONE);
-                showReadingButton.setVisibility(View.VISIBLE); 
-                readingTextVisible = false;
-            }
-            else
-            {
-                showReadingButton.setVisibility(View.GONE);
-                showReadingText.setVisibility(View.VISIBLE);
-                readingTextVisible = true;
-            }
+    private void updateFromActiveTagObserver()
+    {
+        // when a new tag is set to active, reset all relevant values
+        rightStreak = 0;
+        wrongStreak = 0;
+        numRight = 0;
+        numWrong = 0;
+        numViewed = 0;
     
-        }  // end PracticeScreen.toggleReading()
+        XflashScreen.resetPracticeScreen();
+
+    }  // end updateFromStartStudyingObserver()
 
 
-        // load and display HTML for the meaning WebView
-        private static void loadMeaning()
-        {
-            // get the WebView for displaying the answer
-            NoHorizontalWebView meaningView = (NoHorizontalWebView)practiceLayout.findViewById(R.id.practice_webview);
-            meaningView.getSettings().setSupportZoom(false);
-            meaningView.setHorizontalScrollBarEnabled(false);
-                
-            // load the html/css header for the meaning view
-            String header = null;
-            if( XflashSettings.getStudyLanguage() == XflashSettings.LWE_STUDYLANGUAGE_JAPANESE )
-            {
-                header = LWECardHtmlHeader;
-            }
-            else
-            {
-                header = LWECardHtmlHeader_EtoJ;
-            }
+    // unfortunately we have to rely on a dispatch from Xflash to determine 
+    // whether the app is paused/stopped due to how frequently we will be
+    // cycling this fragment's lifecycle
+    // otherwise we'd be saving the browse index ever single time the user
+    // navigated to different card
+    private void updateFromOnStopObserver()
+    {
+        // save the current card index
+        // NOTE - current tag index is saved automatically 
+        //      - in XflashSettings.setActiveTag()
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
 
-            // swap out the dfn declaration based on color scheme
-            header = header.replace("##SIZECSS##", XflashSettings.getAnswerSizeCSS() );
-            header = header.replace("##THEMECSS##", XflashSettings.getThemeCSS() );
-            
-            // set up the full web view data
-            String data = header + currentCard.getMeaning() + LWECardHtmlFooter;
-                
-            // we cannot use WebView.loadData(String,String,String) because for reasons
-            // not well articulated online, though apparently loadData presumes the string
-            // is URI encoded and needs to be changed to URL encoding
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("current_index", currentTag.getCurrentIndex() );
 
-            // use loadDataWithBaseURL() with a fake or null URL instead
-            // http://groups.google.com/group/android-developers/browse_thread/thread/f70c3cb62ec2a97b/1d5e0cd326c14e0b 
-            meaningView.loadDataWithBaseURL(null,data,"text/html","utf-8",null);
+        // save the various card summary/count values
+        editor.putInt("right_streak",rightStreak);
+        editor.putInt("wrong_streak",wrongStreak);
+        editor.putInt("num_right",numRight);
+        editor.putInt("num_wrong",numWrong);
+        editor.putInt("num_viewed",numViewed);
+    
+        editor.commit();
 
-            // WebView background must be set to transparency
-            // programatically or it won't work (known bug Android 2.2.x and up)
-            // see - http://code.google.com/p/android/issues/detail?id=14749
-            meaningView.setBackgroundColor(0x00000000);
-
-        }  // end loadMeaning()
-
-
-        // set click listeners for all relevant views
-        private static void setClickListeners()
-        {
-            // listener for the 'tap for answer' answer bar
-            blankButton.setOnClickListener( new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    reveal();
-                }
-            });
-
-            // THE PRACTICE-MODE ANSWER BAR
-            
-            // set listeners for each of the reveal buttons
-            int[] buttonIds = { R.id.optionblock_actions, R.id.optionblock_right,
-                                 R.id.optionblock_wrong, R.id.optionblock_goaway };
-
-            for(int i = 0; i < 4; i++)
-            {
-                ImageButton tempButton = (ImageButton)practiceLayout.findViewById( buttonIds[i] );
-                tempButton.setOnClickListener(practiceClickListener);
-            }
-
-            // THE BROWSE-MODE ANSWER BAR
-            
-            // set listeners for each of the browse buttons
-            buttonIds = new int[] { R.id.browseblock_last, R.id.browseblock_actions,
-                                    R.id.browseblock_next };
-
-            for(int i = 0; i < 3; i++)
-            {
-                ImageButton tempButton = (ImageButton)practiceLayout.findViewById( buttonIds[i] );
-                tempButton.setOnClickListener(browseClickListener);
-            }
-
-            // listener for the main scroll view
-            practiceScrollBack.setOnClickListener( new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    reveal();
-                }
-            });
-
-            // listener for 'show reading' button
-            showReadingButton.setOnClickListener( new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    PracticeScreen.toggleReading();
-                }
-            });
-
-            // listener for reading text 
-            showReadingText.setOnClickListener( new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    PracticeScreen.toggleReading();
-                }
-            });
-
-            // listener for 'go right' button to example sentences
-            rightArrow.setOnClickListener( new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    goRight();
-                }
-            });
-
-        }  // end setClickListeners()
-        
-        
-        private static String LWECardHtmlHeader =
-"<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />" +
-"<style>" +
-"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; ##SIZECSS## font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } " +
-"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} " +
-"#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;} " + 
-"ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} " +
-"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} " +
-"##THEMECSS##" +
-"</style></head>" +
-"<body><div id='container'>";
-
-
-        private static String LWECardHtmlHeader_EtoJ =
-"<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />" +
-"<style>" +
-"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } " +
-"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} " + 
-"#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;font-size:32px; padding-left:3px; line-height:32px;} " + 
-"ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} " +
-"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} " +
-"##THEMECSS##" +
-"</style></head>" +
-"<body><div id='container'>";
-
-        private static String LWECardHtmlFooter = "</div></body></html>";
-
-        // click listener for answer bar buttons in practice mode
-        private static View.OnClickListener practiceClickListener = new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                practiceClick(v);
-            }
-        };
-
-        // click listener for answer bar buttons in browse mode
-        private static View.OnClickListener browseClickListener = new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                browseClick(v);
-            }
-        };
-
-    }  // end PracticeScreen class declaration
+    }  // end updateFromOnStopObserver()
 
 
 }  // end PracticeFragment class declaration

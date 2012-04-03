@@ -444,21 +444,9 @@ public class XflashScreen
         // the new screen in line, otherwise do nothing to return null
         if( currentTab == "practice" )
         { 
-            if( currentPracticeScreen != 0 )
+            if( ( currentPracticeScreen != 0 ) && ( exampleSentenceOn ) )
             {
-                if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_BROWSE )
-                {
-                    // if we're in browse, automatically go back
-                    return "practice";
-                }
-                else
-                {
-                    // if we're in practice, make sure we're on ExampleSentenceFragment
-                    if( exampleSentenceOn )
-                    {
-                        return "practice";
-                    }
-                }
+                return "practice";
             }     
         }
         else if( currentTab == "tag" )

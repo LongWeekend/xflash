@@ -25,6 +25,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.longweekendmobile.android.xflash.model.Group;
 import com.longweekendmobile.android.xflash.model.GroupPeer;
@@ -107,14 +108,25 @@ public class CreateTagActivity extends Activity
             currentGroup = GroupPeer.retrieveGroupById(tempGroupId);
         }
 
-        // when they click 'done' on the keyboard, add the new group and exit
-        Tag theNewTag = TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
-         
-        int tempCardId = myIntent.getIntExtra("card_id",XflashNotification.NO_CARD_PASSED);
+        String editTextContent = myEdit.getText().toString();
+
+        if( editTextContent.length() > 0 )
+        {
+            // when they click 'done' on the keyboard, add the new group and exit
+            Tag theNewTag = TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
+             
+            int tempCardId = myIntent.getIntExtra("card_id",XflashNotification.NO_CARD_PASSED);
         
-        XflashNotification theNotifier = XFApplication.getNotifier();
-        theNotifier.setCardIdPassed(tempCardId); 
-        theNotifier.newTagBroadcast(theNewTag);
+            XflashNotification theNotifier = XFApplication.getNotifier();
+            theNotifier.setCardIdPassed(tempCardId); 
+            Log.d(MYTAG,">>> CreateTag sending Broadcast");
+            theNotifier.newTagBroadcast(theNewTag);
+        }
+        else
+        {
+            String needName = getResources().getString(R.string.addtag_needname);
+            Toast.makeText(this,needName, Toast.LENGTH_SHORT).show();
+        }
 
     }  // end keyboardDone()
 
@@ -128,7 +140,12 @@ public class CreateTagActivity extends Activity
             if( actionId == EditorInfo.IME_ACTION_DONE )
             {
                 keyboardDone();
-                finish();
+                
+                if( myEdit.getText().toString().length() > 0 )
+                {
+                    // only close the Activity if they typed in a title
+                    finish();
+                }
                     
                 return true;
 

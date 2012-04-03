@@ -25,14 +25,17 @@
 
     </RelativeLayout>
 
-    <ScrollView style="@style/default_scroll_block">
+    <ScrollView style="@style/scroll_block"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" >
 
+        <!-- content holder for help topics -->
         <LinearLayout android:id="@+id/help_list"  
-            style="@style/default_display_block"
+            style="@style/background_with_size"
             android:orientation="vertical" >
 
         </LinearLayout>
-    
+
     </ScrollView>
 
 </LinearLayout>

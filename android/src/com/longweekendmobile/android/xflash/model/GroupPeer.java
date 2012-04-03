@@ -26,8 +26,6 @@ public class GroupPeer
 {
     private static final String MYTAG = "XFlash GroupPeer";
 
-    // I'm not actually entirely sure what this is for.  It pulls the...
-    // uh... the top level group with owner = -1... I don't know what that means
     public static Group topLevelGroup()
     {
         ArrayList<Group> groups = retrieveGroupsByOwner(-1);

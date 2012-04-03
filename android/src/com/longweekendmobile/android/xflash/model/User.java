@@ -14,11 +14,9 @@ package com.longweekendmobile.android.xflash.model;
 //  public void deleteUser()
 //  
 //  public void setUserId(int  )
-//  public int getUserid()
+//  public int getUserId()
 //  public void setUserNickname(String  )
 //  public String getUserNickname()
-//  public void setAvatarImaegPath(String  )
-//  public String getAvatarImagePath()
 //  public void setDateCrated(String  )
 //  public String getDateCreated()
 
@@ -34,17 +32,15 @@ public class User
     // private static final String MYTAG = "XFlash User";
 
     private static final int kLWEUninitializedUserId = -1;
-    public static final String DEFAULT_USER_AVATAR_PATH  = "/avatars/default00.png";
+    public static final String DEFAULT_USER_AVATAR_PATH  = "NOT_IMPLEMENTED";
 
     private int userId;
     private String userNickname;
-    private String avatarImagePath;
     private String dateCreated;
 
     public User()
     {
         userId = kLWEUninitializedUserId;
-        avatarImagePath = DEFAULT_USER_AVATAR_PATH;
         userNickname = null;
         dateCreated = null;
     }
@@ -66,14 +62,6 @@ public class User
         tempColumn = inCursor.getColumnIndex("nickname");
         userNickname = inCursor.getString(tempColumn);
         
-        tempColumn = inCursor.getColumnIndex("avatar_image_path");
-        avatarImagePath = inCursor.getString(tempColumn);   
-
-        if( avatarImagePath.length() == 0 )
-        {
-            avatarImagePath = DEFAULT_USER_AVATAR_PATH;
-        }
-
         tempColumn = inCursor.getColumnIndex("date_created");
         dateCreated = inCursor.getString(tempColumn);
 
@@ -91,7 +79,7 @@ public class User
         // set our values for either insert or update
         ContentValues updateValues = new ContentValues();
         updateValues.put("nickname",userNickname);
-        updateValues.put("avatar_image_path",avatarImagePath);
+        updateValues.put("avatar_image_path",DEFAULT_USER_AVATAR_PATH);
         
         // if it's an existing user, UPDATE
         if( userId != kLWEUninitializedUserId )
@@ -108,7 +96,7 @@ public class User
     }  // end save()
 
     // also self explanatory
-    public void deleteUser(Context myContext)
+    public void deleteUser()
     {
         // we can't delete an unitialized user
         if( userId == kLWEUninitializedUserId )
@@ -123,7 +111,9 @@ public class User
 
         tempDB.delete("users","user_id = ?",deleteArgs);
         tempDB.delete("user_history","user_id = ?",deleteArgs);
-    }   
+
+    }  // end deleteUser()
+
 
     // generic getters / setters
     public int getUserId()
@@ -144,16 +134,6 @@ public class User
     public void setUserNickname(String inName)
     {
         userNickname = inName;
-    }
-
-    public String getAvatarImagePath()
-    {
-        return avatarImagePath;
-    }
-    
-    public void setAvatarImagePath(String inPath)
-    {
-        avatarImagePath = inPath;
     }
 
     public String getDateCreated()

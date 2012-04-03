@@ -21,7 +21,7 @@ package com.longweekendmobile.android.xflash.model;
 //  private Card retrieveCardWithCursor(Cursor  )
 //  private ArrayList<Card> addCardsToList(ArrayList<Card>  ,Cursor  ,boolean  )
 //
-//  public ArrayList<ArrayList<Integer>> retrieveCardIdsSortedByLevelForTag(Tag  )
+//  public ArrayList<ArrayList<Integer>> retrieveCardsSortedByLevelForTag(Tag  )
 //  public ArrayList<Card> retrieveFaultedCardsForTag(Tag  )
 //  public ArrayList<Card> retrieveCardSetForExampleSentenceId(int  )
 //
@@ -71,9 +71,6 @@ public class CardPeer
     // returns 'true' if the keyword appears to be reading-like.  note that
     // this implementation is specific to Chinese Flash, and would not work
     // for JFlash
-    //
-    // TODO - not tested in instances when it would return 'true'
-    //        also, do we need a special unicode char variable?
     @SuppressWarnings("unused")
     public static boolean keywordIsReading(String inKey)
     {
@@ -111,7 +108,6 @@ public class CardPeer
 
     }  // end keywordIsReading()
 
-    // TODO - see note on keywordIsReading() above
     @SuppressWarnings("unused")
     public static boolean keywordIsHeadword(String inKey)
     {
@@ -142,7 +138,6 @@ public class CardPeer
     }  // end keywordIsHeadword()
 
     // returns an ArrayList of Card objects after searching for keyword
-    // TODO - untested, need database with table cards_search_content
     public static ArrayList<Card> searchCardsForKeyword(String inKey)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
@@ -211,7 +206,6 @@ public class CardPeer
  
     // this will return a SQL query that will return Card IDs from the FTS table
     // based on settings passed in
-    // TODO - untested, we need database with table column card_search_content
     private static String FTSSQLForKeyword(String inKey,String inColumn,int inLimit)
     {
         // users understand '?' better than '*' ...  perhaps?
@@ -238,6 +232,7 @@ public class CardPeer
         return query;
 
     }  // end FTSSQLForKeyword()
+
 
     // returns a single Card from the cursor, in case of multiple rows
     // will operate on the LAST one
@@ -283,36 +278,32 @@ public class CardPeer
     }  // end addCardsToList()
 
     
-    // takes a cardId and returns a hydrated card from the database
-    // returns an ArrayList of (int) Card ids for a given tagId
-    // TODO - cannot test because we have no level_id columns in database
+    // returns an ArrayList of cards for the given Tag
     public static ArrayList<ArrayList<Card>> retrieveCardsSortedByLevelForTag(Tag inTag)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
-        // TODO - temporary in place of the following code
-        //        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-        //        [settings objectForKey:@"user_id"]
-        int debughold = 0;
-
+        // set up our empty array list to return
         ArrayList<ArrayList<Card>> cardList = new ArrayList<ArrayList<Card>>(6);
-
         for(int i = 0; i < 6; i++)
         {
             ArrayList<Card> tempList = new ArrayList<Card>();
             cardList.add(tempList);
         }
         
-        String[] selectionArgs = new String[] { Integer.toString(debughold), Integer.toString( inTag.getId() ) };
+        String[] selectionArgs = new String[] { Integer.toString( XflashSettings.getCurrentUserId() ), Integer.toString( inTag.getId() ) };
+        
         String query = "SELECT l.card_id AS card_id,u.card_level as card_level " +
                      "FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id " +
                      "AND u.user_id = ? WHERE l.tag_id = ?";
-
+        
+        // get all of our cards
         Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
 
         int rowCount = myCursor.getCount();
         myCursor.moveToFirst();
 
+        // psuedo-hydrate them
         for(int i = 0; i < rowCount; i++)
         {
             int tempColumn = myCursor.getColumnIndex("card_level");
@@ -322,6 +313,7 @@ public class CardPeer
             int tempCardId = myCursor.getInt(tempColumn);
 
             Card tempCard = blankCardWithId(tempCardId);
+            tempCard.setLevelId(tempLevelId);
 
             cardList.get(tempLevelId).add(tempCard);
 
@@ -332,7 +324,7 @@ public class CardPeer
 
         return cardList;  
 
-    }  // end retrieveCardIdsSortedByLevelForTag()
+    }  // end retrieveCardsSortedByLevelForTag()
 
     // returns an ArrayList of cardId integers contained in the Tag inTag
     public static ArrayList<Card> retrieveFaultedCardsForTag(Tag inTag)
@@ -353,10 +345,8 @@ public class CardPeer
     }  // end retrieveFaultedCardsForTag()
 
 
-    // returns an ArrayList<Integer> of cardIds that are linked to the sentence
+    // returns an ArrayList<Card> that are linked to the sentence
     // 'inId' primary key of the sentence to look up cards for
-    // TODO - uh... the code actually returns an array of Card objects, not IDs
-    //      - as the original comment would imply
     public static ArrayList<Card> retrieveCardSetForExampleSentenceId(int inId)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();

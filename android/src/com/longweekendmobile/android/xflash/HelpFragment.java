@@ -8,7 +8,6 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  private AlertDialog getDialog()
 //  private void goAskUs()
 //  private void pullHelpTopic(int  )
 
@@ -153,7 +152,6 @@ public class HelpFragment extends Fragment
                 inContext.startActivity(myIntent);
 
                 // dismiss, so we'll return to the overall help screen
-                // getDialog().dismiss();
                 askDialog.dismiss();
             }
         });
@@ -175,7 +173,6 @@ public class HelpFragment extends Fragment
                 inContext.startActivity(myIntent);
 
                 // dismiss, so we'll return to the overall help screen
-                //getDialog().dismiss();
                 askDialog.dismiss();
             }
         });
@@ -187,7 +184,6 @@ public class HelpFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                //getDialog().dismiss();
                 askDialog.dismiss();
             }
         });

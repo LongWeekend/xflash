@@ -32,7 +32,6 @@ public class AddCardActivity extends FragmentActivity
     {
         super.onResume();
         overridePendingTransition(R.anim.slidein_bottom,R.anim.hold);
-
     }
 
     @Override

@@ -10,7 +10,7 @@
         android:src="@drawable/check" />
 
     <TextView android:id="@+id/addcard_row_tagname"
-        style="@style/default_display_left"
+        style="@style/display_block_left"
         android:layout_width="match_parent"
         android:layout_toLeftOf="@id/addcard_row_checked"
         android:layout_marginRight="6dp" />

@@ -8,8 +8,6 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static void loadCard(JapaneseCard  ,int[]  )
-//
 //  private void setAnswerBarListeners()
 //  private void refreshCountBar();
 //  private void exampleClick(View  )
@@ -23,15 +21,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.ImageButton;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
@@ -39,27 +39,31 @@ import com.longweekendmobile.android.xflash.model.ExampleSentence;
 import com.longweekendmobile.android.xflash.model.ExampleSentencePeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
 import com.longweekendmobile.android.xflash.model.LWEDatabase;
+import com.longweekendmobile.android.xflash.model.Tag;
 
 public class ExampleSentenceFragment extends Fragment
 {
-    // private static final String MYTAG = "XFlash ExampleSentenceFragment";
+    private static final String MYTAG = "XFlash ExampleSentenceFragment";
     
-    private static int practiceCardCounts[] = { 0,0,0,0,5 };
-    private static JapaneseCard currentCard;
     private static ArrayList<ExampleSentence> esList = null;
     
     private RelativeLayout ESlayout;
     private LinearLayout exampleBody;
+    
+    private Tag currentTag;
+    private JapaneseCard currentCard;
 
-    private static boolean needLoad = false;
-    
-    
+    private int answerTextSize;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         // inflate the layout for our example sentence activity
         ESlayout = (RelativeLayout)inflater.inflate(R.layout.example_sentence, container, false);
+
+        currentTag = XflashSettings.getActiveTag();
+        currentCard = (JapaneseCard)XflashSettings.getActiveCard();
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout exampleBack = (RelativeLayout)ESlayout.findViewById(R.id.example_mainlayout);
@@ -80,14 +84,11 @@ public class ExampleSentenceFragment extends Fragment
         exampleBody = (LinearLayout)ESlayout.findViewById(R.id.es_body);
         
         // only reload the ArrayList via database if our card has changed
-        if( needLoad )
-        {
-            XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
-            esList = ExampleSentencePeer.getExampleSentencesByCardId( currentCard.getCardId() );
-            XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
+        XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
+        esList = ExampleSentencePeer.getExampleSentencesByCardId( currentCard.getCardId() );
+        XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
 
-            needLoad = false;
-        }
+        answerTextSize = XflashSettings.getAnswerTextSize();
 
         // load each of the present sentences 
         int numSentences = esList.size();
@@ -107,10 +108,18 @@ public class ExampleSentenceFragment extends Fragment
             // set the Japanese sentence
             tempView = (TextView)esRow.findViewById(R.id.es_sentence_jp);
             tempView.setText( tempSentence.getJa() ); 
+            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+            {
+                tempView.setTextSize(16.0f);
+            }
 
             // set the English sentence 
             tempView = (TextView)esRow.findViewById(R.id.es_sentence_en);
             tempView.setText( tempSentence.getEn() ); 
+            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+            {
+                tempView.setTextSize(16.0f);
+            }
 
             // tag the 'read' button with the sentence id
             Button tempReadButton = (Button)esRow.findViewById(R.id.es_readbutton);
@@ -137,58 +146,88 @@ public class ExampleSentenceFragment extends Fragment
     }  // end onCreateView()
 
 
-    // called by PracticeFragment to set new values
-    public static void loadCard(JapaneseCard inCard,int[] inCounts)
-    {
-        // don't do anything if it's the card we've already loaded
-        if( ( currentCard == null ) || ( !currentCard.isEqual(inCard) ) )
-        {
-            currentCard = inCard;
-            needLoad = true;
-            
-            // refresh the local card counts
-            for(int i = 0; i < 5; i++)
-            {
-                practiceCardCounts[i] = inCounts[i];
-            }
-        }
-
-    }  // end loadCard()
-
-    
     // sets onClick listeners for the three buttons in the answer bar
     private void setAnswerBarListeners()
     {
-        ImageButton tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_actions);
-        tempButton.setOnClickListener(exampleClickListener);
+        int ESbuttons[] = { R.id.es_optionblock_right, R.id.es_optionblock_wrong,
+                                       R.id.es_optionblock_goaway };
 
-        tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_right);
-        tempButton.setOnClickListener(exampleClickListener);
-
-        tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_wrong);
-        tempButton.setOnClickListener(exampleClickListener);
-
-        tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_goaway);
-        tempButton.setOnClickListener(exampleClickListener);
-
+        for(int i = 0; i < ESbuttons.length; i++)
+        {
+           ImageButton tempButton = (ImageButton)ESlayout.findViewById( ESbuttons[i] );
+           tempButton.setOnClickListener(exampleClickListener);
+        }
 
     }  // end setAnswerBarListeners()
 
 
     private void refreshCountBar()
     {
-        TextView cardCountViews[] = { null, null, null, null, null };
+        int seenCardCount = currentTag.getSeenCardCount();
+        int thisLevelCount = seenCardCount;
 
-        cardCountViews[0] = (TextView)ESlayout.findViewById(R.id.es_study_num);
-        cardCountViews[1] = (TextView)ESlayout.findViewById(R.id.es_right1_num);
-        cardCountViews[2] = (TextView)ESlayout.findViewById(R.id.es_right2_num);
-        cardCountViews[3] = (TextView)ESlayout.findViewById(R.id.es_right3_num);
-        cardCountViews[4] = (TextView)ESlayout.findViewById(R.id.es_learned_num);
+        int progressBars[] = { R.id.es_study_progress, R.id.es_right1_progress, R.id.es_right2_progress,
+                               R.id.es_right3_progress, R.id.es_learned_progress };
 
-        for(int i = 0; i < 5; i++)
+        int cardCountViews[] = { R.id.es_study_num, R.id.es_right1_num, R.id.es_right2_num,
+                                 R.id.es_right3_num, R.id.es_learned_num };
+
+        // I *think* this is operating the way you want it to... though I 
+        // completely fail to understand what we're displaying, so I'm not sure
+        for(int i = 1; i < 6; i++)
         {
-            cardCountViews[i].setText( Integer.toString( practiceCardCounts[i] ) );
-        }
+            if( i > 1 )
+            {
+                thisLevelCount -= currentTag.cardLevelCounts.get( (i - 1) );
+            }
+
+            // set the progress bar backgrounds
+            // apparently ProgressBar is buggy as shit, and no one knows why. I'd post a link
+            // but there's nothing coherent out there. If you have to work with them, expect
+            // to be pissed off.  You've been warned.
+
+            // these shouldn't need to be final, but for their use in an inner class
+            // below to set the progress and post a delayed invalidation
+            final ProgressBar tempProgress = (ProgressBar)ESlayout.findViewById( progressBars[i - 1] );
+            final float progress;
+
+            if( seenCardCount > 0 )
+            {
+                progress = (float)thisLevelCount / (float)seenCardCount;
+            }
+            else
+            {
+                progress = 0.0f;
+            }
+
+            // this shouldn't be necessary
+            tempProgress.postDelayed( new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    // this shouldn't be necessary either
+                    tempProgress.setProgress( (int)( 100 * progress ) );
+                    tempProgress.postInvalidate();
+                }
+            },350);
+
+            // set the label numbers
+            TextView tempCount = (TextView)ESlayout.findViewById( cardCountViews[i - 1] );
+            tempCount.setText( Integer.toString( currentTag.cardLevelCounts.get(i) ) );
+
+        }  // end for loop
+
+        // set a click listerer to fire the Practice summary
+        LinearLayout countBar = (LinearLayout)ESlayout.findViewById(R.id.example_sentence_bar);
+        countBar.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                PracticeScreen.showSummary();
+            }
+        });
 
     }  // end refreshCountBar()
 
@@ -196,13 +235,30 @@ public class ExampleSentenceFragment extends Fragment
     // method called when any button in the options block is clicked
     private void exampleClick(View v)
     {
-        // remove the transition to the example sentence fragment
-        XflashScreen.popBackPractice();
-        XflashScreen.setPracticeOverride();
+        switch( v.getId() )
+        {
+            case R.id.es_optionblock_right:     PracticeFragment.setRight();
+                                                break;
+
+            case R.id.es_optionblock_wrong:     PracticeFragment.setWrong();
+                                                break;
+
+            case R.id.es_optionblock_goaway:    PracticeFragment.setGoAway();
+                                                break;
+
+            default:    Log.d(MYTAG,"ERROR - exampleClick() passed invalied button id");
+
+        }  // end switch( example button )
         
+        PracticeCardSelector.setNextPracticeCard(currentTag,currentCard);
+
+        // reload Practice
+        XflashScreen.popBackPractice();
         PracticeFragment.setPracticeBlank();
+        XflashScreen.setPracticeOverride();
         Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
-    }
+
+    }  // end exampleClick()
 
 
     // launch AddCardToTagFragment as a modal Activity
@@ -273,10 +329,19 @@ public class ExampleSentenceFragment extends Fragment
             // headword
             TextView tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_headword);
             tempView.setText( tempCard.headwordIgnoringMode(true) );
+            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+            {
+                tempView.setTextSize(16.0f);
+            }
+
 
             // reading
             tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_reading);
             tempView.setText( tempCard.reading() );
+            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+            {
+                tempView.setTextSize(16.0f);
+            }
 
             // tag the button for addCard() with the card id
             Button tempAddButton = (Button)tempWordRow.findViewById(R.id.es_cardrow_button);

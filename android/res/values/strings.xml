@@ -12,10 +12,22 @@
     <string name="help_page_name">HelpPageActivity</string>
     <string name="create_tag_name">CreateTagActivity</string>
     <string name="add_card_name">AddCardActivity</string>
+    <string name="db_target_title">Database Target</string>
+    <string name="db_target_explain">Japanese Flash uses several different databases, that all together will take up about 120MB of space.\n\nPlease choose whether you would like them to be installed on your phones\'s internal storage space, or in the dedicated app space the SD card.</string>
+    <string name="db_target_nospace">Japanese Flash uses several different databases, that all together will take up about 120MB of space.\n\nYou do not currently have enough free space in either your phone\'s internal storage or your SD card\'s dedicated app space.  Please free up some space and try again.</string>
+    <string name="db_phone_free">Phone space free:</string>
+    <string name="db_sd_free">SD app space:</string>
+
+    <string name="db_phone">Phone</string>
+    <string name="db_sd">SD card</string>
+
+
     <string name="copyerror_title">Database copy failed!</string>
     <string name="copyerror_body">Uh oh, it looks like you don\'t have enough free space on your phone for Japanese Flash!  Please try clearing up some space and try again.</string>
     <string name="attacherror_title">Database attach failed!</string>
     <string name="attacherror_body">Uh oh, something went wrong initializing the databases for Japanese Flash!  Please exit and try again.</string>
+    <string name="nosd_title">SD Card not found!</string>
+    <string name="nosd_body">Uh oh!  You previously decided to install the Japanese Flash databasees on your SD card, but it is not currently available.  Please make sure the card is plugged in, and is not mounted for use by your computer, and try again.</string>
     <string name="pm_starred_yes">Remove from Starred</string>
     <string name="pm_starred_no">Add to Starred</string>
     <string name="pm_addtotag">Add to Study Set</string>
@@ -27,10 +39,30 @@
     <string name="fixcard_bodymeaning">Card Meaning:</string>
     <string name="fixcard_bodytagid">Active Tag Id:</string>
     <string name="fixcard_bodytagname">Active Tag Name:</string>
+    <string name="practice_studying">Studying</string>
+    <string name="practice_right1x">Right 1x</string>
+    <string name="practice_right2x">Right 2x</string>
+    <string name="practice_right3x">Right 3x</string>
+    <string name="practice_learned">Learned</string>
+    <string name="psummary_des1">You are studying</string>
+    <string name="psummary_des2">cards out of</string>
+    <string name="psummary_des3">in this set.</string>
+    <string name="psummary_sub1">*You can change this in</string>
+    <string name="psummary_sub2">Settings</string>
+    <string name="psummary_times_right">Times Right</string>
+    <string name="psummary_times_wrong">Times Wrong</string>
+    <string name="psummary_streak">Streak!</string>
+    <string name="psummary_right">right</string>
+    <string name="psummary_wrong">wrong</string>
+    <string name="psummary_seen">Cards Seen</string>
+    <string name="psummary_untested">Untested</string>
+    <string name="psummary_goodjob"><i>You\'re doing great, keep going!</i></string>
     <string name="tag_backupblock_title">Backup Custom Sets</string>
     <string name="tag_backup_now">Backup Now</string>
     <string name="tag_restore_now">Restore Now</string>
     <string name="tag_search_hint">Search Sets by Name</string>
+    <string name="tag_deletetag_title">Delete Study Sets</string>
+    <string name="tag_deletetag_message">Are you sure you want to delete the study set</string>
     <string name="emptyset_dialog_title">No Words In Set</string>
     <string name="emptyset_dialog_message">To add words to this set, you can use Search</string>
     <string name="startstudying_dialog_message">Do you want to start this set?\nProgress on your last set will be saved.</string>
@@ -43,6 +75,7 @@
     <string name="createtag_edit_caption">Name your new study set!</string>
     <string name="create_tag_hint">e.g. Words I Heard on TV</string>
     <string name="search_hint">Enter search keyword</string>
+    <string name="search_no_results">No search results found!</string>
     <string name="settings_title">Settings</string>
     <string name="settings_study_block_title">Studying</string>
     <string name="settings_studyblock_studymode">Study Mode</string>
@@ -68,10 +101,16 @@
     <string name="difficulty_frequency_title">Frequency of New Cards</string>
     <string name="difficulty_frequency_moreoften">More Often</string>
     <string name="difficulty_hide_learned">Hide Learned Cards</string>
+    <string name="just_ok">OK</string>
     <string name="just_on">On</string>
     <string name="just_off">Off</string>
     <string name="user_title">Choose User</string>
     <string name="user_edit">edit</string>
+    <string name="user_deleteuser_title">Delete Users</string>
+    <string name="user_deleteuser_message">Are you sure you want to delete the user</string>
+    <string name="user_deleteerror_title">Cannot Delete User</string>
+    <string name="user_deleteerror_default_message">The default user can be edited, but not deleted.</string>
+    <string name="user_deleteerror_active_message">The user ##USERNAME## is currently active!  Please switch to a different user before deleting.</string>
     <string name="new_user_title">New User</string>
     <string name="edituser_nickname">Nickname:</string>
     <string name="edituser_selectbutton">Select User</string>
@@ -93,6 +132,17 @@
     <string name="help_dialog_closebutton">No Thanks</string>
     <string name="helppage_nextbutton">Next ></string>
     <string name="help_topics_path">file:///android_asset/JFlash/help/</string>
+    <string name="learned_alert_title">Study Set Learned</string>
+    <string name="learned_alert_message">Congratulations! You\'ve already learned all of the words in \"##TAGNAME##\". We will show cards that would usually be hidden.</string>
+    <string name="lastcard_alert_title">Last Card in Set</string>
+    <string name="lastcard_alert_message">This is the last card in the study set \"##TAGNAME##\", which you are currently studying!  To delete a set entirely, please change to a different set first.</string>
+    <!-- NOTE: in Obj C, this alert includes reference to the Rikai Browser -->
+    <string name="firstrun_alert_title">Welcome to Japanese Flash!</string>
+    <string name="firstrun_alert_message">We\'ve loaded our favorite word set to get you started.\n\nTo study other sets, tap the \'Study Sets\' tab below.</string>
+    <string name="update_debug_title">Up\'dizzle?</string>
+    <string name="update_debug_message">Fo\'shizzle!</string>
+    <string name="addtag_needname">Please enter a name!</string>
+    
 </resources>
 
 

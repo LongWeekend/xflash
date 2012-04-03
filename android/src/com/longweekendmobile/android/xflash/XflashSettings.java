@@ -8,52 +8,63 @@ package com.longweekendmobile.android.xflash;
 //
 //  a class to maintain all of the app level settings
 //
-//  public static void load()
+//      *** ALL METHODS STATIC ***
 //
-//  public static void setActiveTag(Tag  )
-//  public static Tag getActiveTag()
-//  public static Card getActiveCard()
+//  public void load()
 //
-//  public static int getColorScheme()
-//  public static String getColorSchemeName()
-//  public static String getThemeCSS()
-//  public static void setColorScheme(int  )
-//  public static void setupPracticeBack(RelativeLayout  )
-//  public static void setupColorScheme(RelativeLayout  )
-//  public static void setupColorScheme(RelativeLayout  ,View  )
-//  public static void setupColorScheme(RelativeLayout  ,View  )
-//  public static void setRadioColors(XflashRadio[]  )
-//  public static int[] getIcons()
+//  public  void updateCheck()
+//  public  void setActiveTag(Tag  )
+//  public  Tag getActiveTag()
+//  private int checkForBug(int  )                      --------- temporary?
+//  private Tag checkForAnotherBug(Tag  )               --------- temporary? 
+//  public  Card getActiveCard()
+//  public static void setActiveCard(Card  )
 //
-//  public static int getStudyMode()
-//  public static String getStudyModeName()
-//  public static void setStudyMode(int  )
-//  public static int getStudyLanguage()
-//  public static String getStudyLanguageName()
-//  public static void setStudyLanguage(int  )
-//  public static int getCurrentUserId()
-//  public static void setCurrentUserId(int  )
-//  public static int getReadingMode()
-//  public static String getReadingModeName()
-//  public static void setReadingMode(int  )
-//  public static int getAnswerTextSize()
-//  public static int getAnswerTextLabel()
-//  public static String getAnswerSizeCSS()
-//  public static void setAnswerText(int  )
-//  public static int getDifficultyMode()
-//  public static void setDifficultyMode(int  )
-//  public static int getStudyPool()
-//  public static int getCustomStudyPool()
-//  public static void setCustomStudyPool(int  )
-//  public static int getFrequency()
-//  public static int getCustomFrequency()
-//  public static void setCustomFrequency(int  )
-//  public static boolean getHideLearned()
-//  public static boolean toggleHideLearned()
+//  public static void dumpObservers()
 //
-//  public static void throwBadValue(String  ,int  )
+//  public int getColorScheme()
+//  public String getColorSchemeName()
+//  public String getThemeCSS()
+//  public void setColorScheme(int  )
+//  public void setupPracticeBack(RelativeLayout  )
+//  public void setupColorScheme(RelativeLayout  )
+//  public void setupColorScheme(RelativeLayout  ,View  )
+//  public void setupColorScheme(RelativeLayout  ,View  )
+//  public void setRadioColors(XflashRadio[]  )
+//  public int[] getIcons()
+//  public int[] getHHArray()
+//
+//  public int getStudyMode()
+//  public String getStudyModeName()
+//  public void setStudyMode(int  )
+//  public int getStudyLanguage()
+//  public String getStudyLanguageName()
+//  public void setStudyLanguage(int  )
+//  public int getCurrentUserId()
+//  public void setCurrentUserId(int  )
+//  public int getReadingMode()
+//  public String getReadingModeName()
+//  public void setReadingMode(int  )
+//  public int getAnswerTextSize()
+//  public int getAnswerTextLabel()
+//  public String getAnswerSizeCSS()
+//  public void setAnswerText(int  )
+//  public int getDifficultyMode()
+//  public void setDifficultyMode(int  )
+//  public int getStudyPool()
+//  public int getCustomStudyPool()
+//  public void setCustomStudyPool(int  )
+//  public int getFrequency()
+//  public int getCustomFrequency()
+//  public void setCustomFrequency(int  )
+//  public boolean getHideLearned()
+//  public boolean toggleHideLearned()
+//
+//  private void throwBadValue(String  ,int  )
 
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -85,12 +96,31 @@ public class XflashSettings
     // they are loaded such that their index corresponds to the appropriate
     // color scheme, i.e.  { LWE_THEME_RED , LWE_THEME_BLUE , LWE_THEME_TAME }
     // so that we can use colorScheme directly
-    private static int[] backgroundIds = { R.drawable.practice_bg_red , R.drawable.practice_bg_blue , 
-                                               R.drawable.practice_bg_tame };
+    private static int[] backgroundIds = { R.drawable.practice_bg_red, 
+                                           R.drawable.practice_bg_blue , 
+                                           R.drawable.practice_bg_tame };
     private static int[] viewGradients = { R.drawable.gradient_red , R.drawable.gradient_blue ,
-                                               R.drawable.gradient_tame };
+                                           R.drawable.gradient_tame };
     private static int[] buttonGradients = { R.drawable.button_red , R.drawable.button_blue , 
-                                                 R.drawable.button_tame };
+                                             R.drawable.button_tame };
+            
+    // red hot head drawable resources
+    private static int[] redHeads = { R.drawable.red_hh_ecstatic, R.drawable.red_hh_happy,
+                                      R.drawable.red_hh_jolly, R.drawable.red_hh_small_smile,
+                                      R.drawable.red_hh_my_name_is_forest, 
+                                      R.drawable.red_hh_uncommunicative, 
+                                      R.drawable.red_hh_wounded, R.drawable.red_hh_losin_it,
+                                      R.drawable.red_hh_pissed, R.drawable.red_hh_sea_sick,
+                                      R.drawable.red_hh_wounded };
+
+    // blue hot head drawable resources 
+    private static int[] blueHeads = { R.drawable.blue_hh_ecstatic, R.drawable.blue_hh_happy,
+                                       R.drawable.blue_hh_jolly, R.drawable.blue_hh_small_smile,
+                                       R.drawable.blue_hh_my_name_is_forest, 
+                                       R.drawable.blue_hh_uncommunicative, 
+                                       R.drawable.blue_hh_wounded, R.drawable.blue_hh_losin_it,
+                                       R.drawable.blue_hh_pissed, R.drawable.blue_hh_sea_sick,
+                                       R.drawable.blue_hh_wounded };
 
     // properties for global app settings
     private static int colorScheme = -1;
@@ -162,6 +192,70 @@ public class XflashSettings
     }  // end load()
 
 
+    // called to check for first-run or updates, display dialogs as appropriate
+    public static void updateCheck()
+    {
+        // get a Context, get the SharedPreferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        int manifestVersionCode = 1;
+        
+        // get the current versionCode listed in AndroidManifest.xml
+        try
+        {
+            manifestVersionCode = tempInstance.getPackageManager().getPackageInfo( tempInstance.getPackageName(), 0).versionCode;
+        }
+        catch(android.content.pm.PackageManager.NameNotFoundException e)
+        {
+            // this should not be possible, given we are pulling the
+            // package name directly from the PackageManager we are 
+            // feeding it back to. However, it pleases the compiler gods
+            Log.d(MYTAG,"ERROR - in updateCheck(), bad package name");
+            throw new RuntimeException("Oh well!");
+        }
+        
+        // check if they is the first run of the app
+        boolean hasRanBefore = settings.contains("lwe_jf_version");
+        
+        if( !hasRanBefore )
+        {
+            // this will save our version for later reference based on the 
+            // versionCode we assign in AndroidManifest.xml 
+            
+            // if preferable we could pull a string value for versonName 
+            // (in this case "1.0") and save it as a float value instead
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt("lwe_jf_version",manifestVersionCode);
+            editor.commit();        
+
+            // fire update with first run (versionCode 1)
+            XflashAlert.fireUpdate(manifestVersionCode);
+        }
+        else
+        {
+            // check for an update, if for some reason the Preferences broke
+            // between settings.contains() and here, default to the code we 
+            // just pulled from the Manifest so we end up doing nothing and
+            // nothing goes wonky
+            int savedVersionCode = settings.getInt("lwe_jf_version",manifestVersionCode);
+
+            if( savedVersionCode != manifestVersionCode )
+            {
+                // save new version code
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putInt("lwe_jf_version",manifestVersionCode);
+                editor.commit();        
+
+                // on snap, we got ourselves an udpate
+                XflashAlert.fireUpdate(manifestVersionCode);
+            }
+        
+        }  // end check for updates
+    
+    }  // end updateCheck()
+
+ 
     // called when any Fragment is setting a new Tag to study
     public static void setActiveTag(Tag inTag)
     {
@@ -177,7 +271,7 @@ public class XflashSettings
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("active_tag", inTag.getId() );
         editor.commit();
-        
+    
         // set our actual active tag
         activeTag = inTag;
         activeTag.populateCards();
@@ -185,12 +279,11 @@ public class XflashSettings
         // when we set the active tag, also set the active card
         // to the zero-index card of said new tag, and reset
         // the practice screen count
-
-        // TODO - MAY BE TEMPORARY
         activeTag.setCurrentIndex(0);
         activeCard = activeTag.flattenedCardArray.get(0);
-        XflashScreen.resetPracticeScreen();
-        
+
+        XFApplication.getNotifier().activeTagBroadcast();
+       
     }  // end setActiveTag()
 
 
@@ -206,16 +299,92 @@ public class XflashSettings
             
             // pull the saved tag id, default to 'Long Weekend Favorites'
             int tempTagId = settings.getInt("active_tag",Tag.DEFAULT_TAG_ID);
-            activeTag = TagPeer.retrieveTagById(tempTagId);
+           
+            // TODO - bug, pain in the ass
+            tempTagId = checkForBug(tempTagId); 
             
+            activeTag = TagPeer.retrieveTagById(tempTagId);
             activeTag.populateCards();
         }
             
+        // TODO - another bug check
+        activeTag = checkForAnotherBug(activeTag);
+        
         return activeTag;
 
     }  // end getActiveTag()
 
-  
+ 
+/*
+        So, as I mentioned in an email (to Mark) there is a quirk with some
+        Samsung devices in that they override the standard directory that
+        Android uses to save Preferences and SharedPreferences. The consequence
+        of this is that you RETAIN ANY SAVED PREFERENCES WHEN YOU UNINSTALL
+        THE APP.  Why they did this, and then failed to fix their shit so that
+        it also uninstalled properly is unclear.
+        That's not terrible, necessarily, but in cases like this:
+
+        getActiveTag() is supposed to default to "Long Weekend Favorites" if 
+        there is no active tag saved.   However!  While debugging and whatnot,
+        if I make a new tag and EXIT THE APP WHILE STUDYING A USER CREATED TAG, 
+        then uninstall and re-install the app, I will retain a saved Preference 
+        with an active tag_id that is a HIGHER numeric value that any available 
+        in the freshly re-installed database.  That causes an empty query 
+        return when looking for our active tag in the database, and consequently 
+        causes the app to throw an Exception immediatly on load.
+
+        The purpose of this check is to make sure that isn't happening.
+*/
+
+    // TODO - bug, pain in the ass, probably not permanent
+    private static int checkForBug(int inId)
+    {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+
+        Cursor myCursor = tempDB.rawQuery("SELECT MAX(tag_id) FROM tags",null);
+        myCursor.moveToFirst();
+
+        int maxTagId = myCursor.getInt(0);
+        myCursor.close();
+
+        if( inId > maxTagId )
+        {
+            // got a problem! substitute "Long Weekend Favorites"
+            return Tag.DEFAULT_TAG_ID;
+        }
+        else
+        {
+            // if the id is valid, return it for use
+            return inId;
+        }
+
+    }  // end checkForBug()
+
+
+    // TODO - another bug check
+    private static Tag checkForAnotherBug(Tag inTag)
+    {
+        // until I get the bug sorted out in TagPeer.cancelMembership()
+        // it's possible to drop down to zero cards in the active
+        // Tag, causing major problems on load
+
+        if( inTag.getCardCount() < 1 )
+        {
+            Log.d(MYTAG,">   we exited the app with a zero-card tag active");
+            Log.d(MYTAG,">   defaulting to Long Weekend Favorites");
+
+            Tag tempTag = TagPeer.retrieveTagById(Tag.DEFAULT_TAG_ID);
+            
+            return tempTag;
+        }
+        else
+        {
+            return inTag;
+        }
+
+    }  // end checkForAnotherBug()
+ 
+
     // called only on app exit, to clear static values
     public static void clearActiveTag()
     {
@@ -223,7 +392,7 @@ public class XflashSettings
     }
 
     
-    // TODO - this probably will migrate out of XflashSettings shortly
+    // return the currently active Card
     public static Card getActiveCard()
     {
         // when we get the active card, if it's null, pull the
@@ -250,6 +419,21 @@ public class XflashSettings
     {
         activeCard = inCard;
     }
+
+    
+    // empties all fragment's observer properties - necessary because
+    // of static crap... kind feel like this shouldn't be necessary
+    // but oh well
+    public static void dumpObservers()
+    {
+        AddCardToTagFragment.dumpObservers();
+        PracticeFragment.dumpObservers();        
+        TagCardsFragment.dumpObservers();
+        TagFragment.dumpObservers();
+
+        XFApplication.clearNotifier();
+
+    }  // end dumpObservers()
 
 
 //  *** COLOR SETTINGS ***
@@ -400,8 +584,27 @@ public class XflashSettings
         }
         
         return tempIcons; 
-    }
+
+    }  // end getIcons()
  
+
+    // returns and int[] of Hot Head image resources based on
+    // current color theme
+    public static int[] getHHArray()
+    {
+        if( colorScheme == LWE_THEME_BLUE )
+        {
+            return blueHeads;
+        }
+        else
+        {
+            // though there's a separate folder with separate images for red
+            // and tame in the Obj C code, it looks like they're the same
+            return redHeads;
+        }
+    
+    }  // end getHHArray()
+
 
 //  *** STUDY MODE SETTINGS ***
 
@@ -756,7 +959,7 @@ public class XflashSettings
 
     // method to throw an exception when attempting to set any of the
     // settings to an invalid value
-    public static void throwBadValue(String method,int value)
+    private static void throwBadValue(String method,int value)
     {
         String error = "invalid value passed to XflashSettings." + method + "(" + value + ")";
         

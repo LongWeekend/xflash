@@ -9,21 +9,21 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="default_display_heading">
+    <style name="display_heading_text">
         <item name="android:textColor">#FF828282</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="default_display_text">
+    <style name="bold_display_text">
         <item name="android:textColor">#FF000000</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="default_normal_text">
+    <style name="normal_display_text">
         <item name="android:textColor">#FF000000</item>
         <item name="android:textSize">18sp</item>
     </style>
-    <style name="default_value_text">
+    <style name="gray_display_text">
         <item name="android:textColor">#FFB0B0B0</item>
         <item name="android:textSize">18sp</item>
     </style>
@@ -33,7 +33,7 @@
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">1</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="practice_headword_text">
@@ -47,17 +47,17 @@
     </style>
     <style name="practice_answer_text">
         <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="practice_talkbubble">
         <item name="android:textColor">#FF000000</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="es_reading_text">
         <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="es_headword_text">
@@ -71,20 +71,24 @@
     </style>
     <style name="es_jp">
         <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="es_en">
         <item name="android:textColor">#FF111111</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">14sp</item>
     </style>
     <style name="tag_text_top">
         <item name="android:textColor">#FF000000</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="tag_text_bottom">
         <item name="android:textColor">#FFB0B0B0</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="psummary_white_labels">
+        <item name="android:textColor">#FFFFFFFF</item>
         <item name="android:textSize">12sp</item>
     </style>
 </resources>

@@ -1,34 +1,19 @@
-Sign form and send to Mark
+- Tweet Card (in Practice)
 
+- tweak practice view clickable background
 
+- zippy example sentences unfolding
 
-Card.java
-	- audio and font related methods
+- help topics overlapping with next button?
 
-ChineseCard.java
-	- audio and font related methods
-	- didn't feel like dealing with any of the pinyin stuff yet
+- SQL max attach?
 
-CardPeer.java
-	- untested methods due to lack of appropriate database tables/columns
+- Settings rate button? - eventually open webkit to google play?
 
-ExampleSentence/Peer.java
-	- cannot test yet because I don't have a database to test on
-	- isNewVersion()
+- Settings footer
 
-LWEDatabase.java
-	- deal with cutting up the databases into small files (UGH)
+- Tag, alerts for backup and restore
 
-Tag.java
-	- add Receiver when hydrating
-	- send Broadcast when saving
-	- on receive, re-hydrate
+- Tag, backup and restore
 
-TagPeer.java
-	- cancelMembership() - is current tag? + notifications
-	- NSDictionary + throw error?
-	- subscribeCard() - notifications
-
-Everywhere
-	- implement real-time user settings -> user id
-
+- AddCard -> CreateTag in practice does not update on new tag

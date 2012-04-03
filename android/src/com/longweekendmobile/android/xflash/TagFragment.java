@@ -11,13 +11,11 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static boolean getSearchOn()
 //  public static void setNeedLoad()
+//  public static void dumpObservers()
 //
 //  private void addTopLevelTag()
 //  private void openGroup(View  )
 //  private static void goTagCards(View  )
-//  public static void startStudying(View  )
-//  private static void fireStartStudyingDialog(Tag  )
-//  private static void fireEmptyTagDialog()
 //
 //  private static OnLongClickListener userTagLongClick = new OnLongClickListener() 
 //
@@ -31,11 +29,11 @@ package com.longweekendmobile.android.xflash;
 //
 //  private static class TagSearch
 //
-//      public static void loadSearch()
-//      public static void dump()
-//      public static void showSearch()
-//      public static void hideSearch()
-//      public static void closeKeyboard()
+//      public  static void loadSearch()
+//      public  static void dump()
+//      public  static void showSearch()
+//      public  static void hideSearch()
+//      public  static void closeKeyboard()
 //      private static void showSearchScroll()
 //      private static void hideSearchScroll()
 //      private static TextWatcher searchListener 
@@ -50,6 +48,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -218,13 +217,16 @@ public class TagFragment extends Fragment
         refreshTagList();
 
         // only display backup block on root view
+        TextView backupHeading = (TextView)tagLayout.findViewById(R.id.tagbackup_heading);
         LinearLayout backupBlock = (LinearLayout)tagLayout.findViewById(R.id.tag_backup_block);
         if( ( currentGroup != null ) && currentGroup.isTopLevelGroup() )
         {
+            backupHeading.setVisibility(View.VISIBLE);
             backupBlock.setVisibility(View.VISIBLE);
         }
         else
         {
+            backupHeading.setVisibility(View.GONE);
             backupBlock.setVisibility(View.GONE);
         }
 
@@ -259,9 +261,10 @@ public class TagFragment extends Fragment
     {
         super.onDestroyView();
 
-        // free static layout resources
         // TODO - temporary fix, would be perferable to refactor TagSearch
         //      - to use no static layout variables
+        
+        // free static layout resources
         tagLayout = null;
         tagList = null;
         TagSearch.dump();
@@ -279,6 +282,12 @@ public class TagFragment extends Fragment
         needLoad = true;
     }
     
+    public static void dumpObservers()
+    {
+        newTagObserver = null; 
+        subscriptionObserver = null; 
+        tagSearchObserver = null; 
+    }
     
     // onClick for our PLUS button
     private void addTopLevelTag()
@@ -311,78 +320,6 @@ public class TagFragment extends Fragment
     }
     
     
-    // launch the clicked on Tag in the practice tab
-    public static void startStudying(View v)
-    {
-        int incomingTagId = (Integer)v.getTag();
-        Tag tempTag = TagPeer.retrieveTagById(incomingTagId);
-
-        // if user is trying to open an empty tag
-        if( tempTag.getCardCount() < 1 )
-        {
-            fireEmptyTagDialog();
-        }
-        else
-        {
-            fireStartStudyingDialog(tempTag);
-        }
-
-    }  // end startStudying()
-
-    
-    // launch the dialog to confirm user would like to start studying a tag
-    private static void fireStartStudyingDialog(Tag inTag)
-    {
-        final Tag tagToSet = inTag;
-        final Xflash inContext = Xflash.getActivity();
-        
-        // set and fire our AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(inContext);
-
-        builder.setTitle( tagToSet.getName() );
-
-        String tempString = inContext.getResources().getString(R.string.startstudying_dialog_message);
-        builder.setMessage(tempString);
-
-        // on postive response, set the new active user
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog,int which)
-            {
-                // set the new user and return to settings
-                XflashSettings.setActiveTag(tagToSet);
-                Xflash.getTabHost().setCurrentTabByTag("practice");
-            }
-        });
-
-        // on negative response, do nothing
-        builder.setNegativeButton("Cancel",null);
-        
-        builder.create().show();
-
-    }  // end fireEmptyTagDialong()
-
-
-    // dialog to display on attempt to start studying a tag with no cards
-    private static void fireEmptyTagDialog()
-    {
-        // set and fire our AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
-
-        String tempString = Xflash.getActivity().getResources().getString(R.string.emptyset_dialog_title);
-        builder.setTitle(tempString);
-
-        tempString = Xflash.getActivity().getResources().getString(R.string.emptyset_dialog_message);
-        builder.setMessage(tempString);
-
-        // on negative response, do nothing
-        builder.setNegativeButton("OK",null);
-        
-        builder.create().show();
-
-    }  // end fireEmptyTagDialong()
-
-
     // a long-click listener for deletion of user tags
     private static OnLongClickListener userTagLongClick = new OnLongClickListener() 
     {
@@ -392,14 +329,16 @@ public class TagFragment extends Fragment
             final View viewToRemove = v;
             final int tempInt = (Integer)viewToRemove.getTag();
             final Tag tempTag = TagPeer.retrieveTagById(tempInt);
+
+            Resources res = Xflash.getActivity().getResources();
             
             // set and fire our AlertDialog
             AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
-            builder.setTitle("Delete Tag?");
-            builder.setMessage("Are you sure you want to delete the study set \"" + tempTag.getName() + "\"?");
+            builder.setTitle( res.getString(R.string.tag_deletetag_title) );
+            builder.setMessage( res.getString(R.string.tag_deletetag_message) + " \"" + tempTag.getName() + "\"?");
 
             // on postive response, set the new active user
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+            builder.setPositiveButton( res.getString(R.string.just_ok), new DialogInterface.OnClickListener()
             {
                 public void onClick(DialogInterface dialog,int which)
                 {
@@ -439,7 +378,6 @@ public class TagFragment extends Fragment
         // if we need to refresh our arrays due to a change
         if( needLoad )
         {
-            // TODO - I feel like there MUST be a better way to do this
             rawTagArray = currentGroup.childTags();
             userTagArray = new ArrayList<Tag>();
         
@@ -574,7 +512,7 @@ public class TagFragment extends Fragment
                 @Override
                 public void onClick(View v)
                 {
-                    TagFragment.startStudying(v);
+                    XflashAlert.startStudying(v);
                 }
             });
 
@@ -584,8 +522,6 @@ public class TagFragment extends Fragment
                 @Override
                 public void onClick(View v)
                 {
-                    // TODO - the compiler is claiming this is a static
-                    //      - context, not sure why
                     goTagCards(v);
                 }
             });
@@ -807,9 +743,7 @@ public class TagFragment extends Fragment
                 @Override
                 public void run()
                 {
-                    // TODO - move this conditional outside of the post when
-                    //      - we can base it on something not tied to 
-                    //      - view instantiation
+                    // open the keyboard if there is no data
                     if( searchText.length() == 0 )
                     {
                         searchText.requestFocus();

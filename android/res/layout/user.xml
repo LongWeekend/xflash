@@ -29,9 +29,11 @@
 
     <!-- user list -->
     <LinearLayout android:id="@+id/user_list"
-        style="@style/default_frame_block"
+        style="@style/frame_block"
         android:orientation="vertical"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp" 
+        android:background="@drawable/default_background" >
+
     </LinearLayout>
 
 </LinearLayout>

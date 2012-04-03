@@ -8,9 +8,14 @@ package com.longweekendmobile.android.xflash.model;
 //
 //  public void onCreate(SQLiteDatabase  )      @over
 //
+//  public LWEDatabase(Context  )
+//  public LWEDatabase(Context  ,String  ,SQLiteDatabase.CursorFactory  ,int  )
+//
+//  public static int getDBStatus()
+//
+//  public void setLocation(int  )
 //  public void asynchCopyDatabaseFromAPK() 
 //  public boolean checkDatabase() 
-//  public boolean closeDatabase() 
 //  public String databaseVersion() 
 //  public boolean attachDatabase()
 //  public boolean detachDatabase()
@@ -28,17 +33,24 @@ import java.io.OutputStream;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.longweekendmobile.android.xflash.XFApplication;
 
 public class LWEDatabase extends SQLiteOpenHelper
 {
     // debug log tag
     private final String MYTAG = "XFlash LWEDatabase";
+
+    // database status constants
+    public static final int DATABASE_NO_EXIST = 0;
+    public static final int DATABASE_SDCARD = 1;
+    public static final int DATABASE_PHONE = 2;
 
     // our broadcast intent names
     public static final String COPY_START = "com.longweekendmobile.android.xflash.COPY_START";
@@ -50,7 +62,7 @@ public class LWEDatabase extends SQLiteOpenHelper
     public static final String DATABASE_READY = "com.longweekendmobile.android.xflash.DATABASE_READY";
                         
     // the Android default onboard database location
-    private static final String DB_PATH = "/data/data/com.longweekendmobile.android.xflash/databases/";
+    private static final String PHONE_PATH = "/data/data/com.longweekendmobile.android.xflash/databases/";
     
     // TODO change these from mp3 when files are cut up
     public static final String DB_NAME = "jFlash.mp3";
@@ -64,17 +76,8 @@ public class LWEDatabase extends SQLiteOpenHelper
     // copy of application context necessary for intent broadcasts
     private final Context myContext;
    
+    private int DBlocation;
  
-    public LWEDatabase(Context context)
-    {
-        // SQLiteOpenHelper( main context, database name, CursorFactory, int version )
-        super(context,DB_NAME,null,1);
-        
-        // the context passed in the the full Application context
-        this.myContext = context;
-    }
-
-
     @Override
     public void onCreate(SQLiteDatabase db)
     {
@@ -84,6 +87,61 @@ public class LWEDatabase extends SQLiteOpenHelper
 
         // since we are using a packaged database, this is unnecessary
     }
+
+
+    // constructor -- initialize the database to the local private phone space
+    public LWEDatabase(Context context)
+    {
+        super(context,DB_NAME,null,1);
+        
+        this.myContext = context;
+    }
+
+
+    // constructor -- initialize the database to the SD card
+    public LWEDatabase(Context context, String inPath, SQLiteDatabase.CursorFactory f, int version)
+    {
+        // this is ugly
+        super(context,inPath,null,1);
+        
+        this.myContext = context;
+    }
+
+    // return the database location in Preferences, default to no-exist
+    public static int getDBStatus()
+    {
+        // get a Context, get the SharedPreferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        // load all settings to user set or default
+        int dbStatus = settings.getInt("db_status",DATABASE_NO_EXIST);
+
+        return dbStatus;
+
+    }  // end getDBStatus()
+
+
+    // set the database location for reference when copying/attaching
+    public void setLocation(int inLocation)
+    {
+        if( ( inLocation < DATABASE_NO_EXIST ) || ( inLocation > DATABASE_PHONE ) )
+        {
+            throw new RuntimeException("Bad value in LWEDatabase.setLocation(" + inLocation + ")");
+        }
+
+        DBlocation = inLocation;
+
+        // set the location in Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("db_status",inLocation);
+        editor.commit();
+
+    }  // end setLocation()
+
 
 
     // will copy both Xflash databases from the APK to the phone so they 
@@ -97,15 +155,11 @@ public class LWEDatabase extends SQLiteOpenHelper
         {
             // do nothing - the database has already been copied over
             // on a previous run
-            Log.d(MYTAG,"in LWEDatabase.asynchCopy() -- database exists");
-            
             Intent myIntent = new Intent(DATABASE_READY);
             myContext.sendBroadcast(myIntent);
         }
         else
         {
-            Log.d(MYTAG,"in LWEDatabase.asynchCopy() -- database doesn't exist");
-            
             // this will create an empty db in our app's system path
             // which we can overwrite with our database
             getReadableDatabase();
@@ -126,37 +180,34 @@ public class LWEDatabase extends SQLiteOpenHelper
     //      *** actually only checks for jFlash.db ***
     public boolean checkDatabase()
     {
-        boolean doesExist = false;
-
         try
         {
-            String myPath = DB_PATH + DB_NAME;
-            File myFile = new File(myPath);
+            File checkFile = null;
             
-            if( myFile.exists() )
+            // get a File object pointing to the appropriate database location
+            if( DBlocation == DATABASE_PHONE )
             {
-                doesExist = true;
+                String myPath = PHONE_PATH + DB_NAME;
+                checkFile  = new File(myPath);
             }
+            else
+            {
+                File sdRoot = myContext.getExternalFilesDir(null);
+                checkFile = new File(sdRoot,DB_NAME);
+            }
+
+            boolean doesExist = checkFile.exists();
+
+            return doesExist;
         } 
-        catch( SQLiteException e )
+        catch(Exception e)
         {
-            // database does't exist yet.
-            Log.d(MYTAG,"checkDatabase() - DB does not exist yet");
+            Log.d(MYTAG,"checkDatabase() - caught exception:  " + e.toString() );
+            throw new RuntimeException("problem: LWEDatabase.checkDatabase() - check Log");
         }
         
-        return doesExist;
+    }  // end checkDatabase()
 
-    } 
-
-    // Closes an active database connection
-    // At the moment it returns true no matter what
-    public boolean closeDatabase()
-    {
-        SQLiteDatabase tempDao = this.getWritableDatabase();
-        tempDao.close();
-
-        return true;
-    }
 
     // Gets open database's version - proprietary to LWE databases (uses version table)
     // return String of the current version, or nil if the database is not open
@@ -188,13 +239,25 @@ public class LWEDatabase extends SQLiteOpenHelper
     }  // end databaseVersion() declaration
 
 
-    // Attaches the accessory jFlash-CARD database
+    // Attaches auxiliary databases by database name
     // Returns true on success, false on failure (even if it failed because
     // the database is already attached)
     public boolean attachDatabase(String toAttach)
     {
         SQLiteDatabase tempDao = this.getWritableDatabase();
         boolean databaseIsOpen = tempDao.isOpen();
+
+        String attachPath = null;
+        
+        if( DBlocation == DATABASE_PHONE )
+        {
+            attachPath = PHONE_PATH;  
+        }
+        else
+        {
+            File sdRoot = myContext.getExternalFilesDir(null);
+            attachPath = sdRoot + "/";
+        }
 
         // if the database is open
         if( databaseIsOpen )
@@ -203,15 +266,15 @@ public class LWEDatabase extends SQLiteOpenHelper
             
             if( toAttach == DB_CARD )
             {
-                query = "ATTACH DATABASE \"" + DB_PATH + DB_CARD + "\" AS " + CARD_ATTACH_NAME;
+                query = "ATTACH DATABASE \"" + attachPath + DB_CARD + "\" AS " + CARD_ATTACH_NAME;
             }
             else if( toAttach == DB_FTS )
             {
-                query = "ATTACH DATABASE \"" + DB_PATH + DB_FTS + "\" AS " + FTS_ATTACH_NAME;
+                query = "ATTACH DATABASE \"" + attachPath + DB_FTS + "\" AS " + FTS_ATTACH_NAME;
             }
             else if( toAttach == DB_EX )
             {
-                query = "ATTACH DATABASE \"" + DB_PATH + DB_EX + "\" AS " + EX_ATTACH_NAME;
+                query = "ATTACH DATABASE \"" + attachPath + DB_EX + "\" AS " + EX_ATTACH_NAME;
             }
             else
             {
@@ -246,8 +309,7 @@ public class LWEDatabase extends SQLiteOpenHelper
     }  // end attachDatabase() declaration
 
 
-    // detaches the accessory jFlash-CARD database
-    // return true on success, false on failure
+    // detaches auxiliary databases - return true on success, false on failure
     public boolean detachDatabase(String toDetach)
     {
         SQLiteDatabase tempDao = this.getWritableDatabase();
@@ -302,24 +364,6 @@ public class LWEDatabase extends SQLiteOpenHelper
     }  // end detachDatabase() declaration
 
     
-    // detach all attached databases
-    public void detachAll()
-    {
-        String query = "DETACH DATABASE \"" + CARD_ATTACH_NAME + "\"";
-
-        try
-        {
-                this.getWritableDatabase().execSQL(query);
-        } 
-        catch (Throwable t)
-        {
-            Log.d(MYTAG,"ERROR in detachAll()");
-            Log.d(MYTAG,"Exception:  " + t.toString() );    
-        }
-
-    }  // end detachAll()
-
-
     // Checks for the existence of a table name in the sqlite_master table
     // If database is not open, throws an exception
     public boolean tableExists(String tableName) throws Exception
@@ -407,6 +451,8 @@ public class LWEDatabase extends SQLiteOpenHelper
             int length;
             Intent myIntent;
 
+            File sdRoot = myContext.getExternalFilesDir(null);
+        
             // this is the actual copy process
             try
             {
@@ -423,29 +469,59 @@ public class LWEDatabase extends SQLiteOpenHelper
                         // open an empty db to fill
                         myInput = myContext.getAssets().open(DB_NAME);
 
-                        // Path to the just created empty db
-                        outFileName = DB_PATH + DB_NAME;
+                        if( DBlocation == DATABASE_PHONE )
+                        {
+                            outFileName = PHONE_PATH + DB_NAME;
+                        }
+                        else
+                        {
+                            outFileName = sdRoot + "/" + DB_NAME;
+                        }
                     }
                     else if( dbCycle == 1 )
                     {
                         myIntent = new Intent(COPY_START2);
                         myContext.sendBroadcast(myIntent);
                         myInput = myContext.getAssets().open(DB_CARD);
-                        outFileName = DB_PATH + DB_CARD;
+                        
+                        if( DBlocation == DATABASE_PHONE )
+                        {
+                            outFileName = PHONE_PATH + DB_CARD;
+                        }
+                        else
+                        {
+                            outFileName = sdRoot + "/" + DB_CARD;
+                        }
                     }
                     else if( dbCycle == 2 )
                     {
                         myIntent = new Intent(COPY_START3);
                         myContext.sendBroadcast(myIntent);
                         myInput = myContext.getAssets().open(DB_FTS);
-                        outFileName = DB_PATH + DB_FTS;
+                        
+                        if( DBlocation == DATABASE_PHONE )
+                        {
+                            outFileName = PHONE_PATH + DB_FTS;
+                        }
+                        else
+                        {
+                            outFileName = sdRoot + "/" + DB_FTS;
+                        }
                     }
                     else
                     {
                         myIntent = new Intent(COPY_START4);
                         myContext.sendBroadcast(myIntent);
                         myInput = myContext.getAssets().open(DB_EX);
-                        outFileName = DB_PATH + DB_EX;
+                        
+                        if( DBlocation == DATABASE_PHONE )
+                        {
+                            outFileName = PHONE_PATH + DB_EX;
+                        }
+                        else
+                        {
+                            outFileName = sdRoot + "/" + DB_EX;
+                        }
                     }
 
                     // open the empty db as the output stream
@@ -472,6 +548,7 @@ public class LWEDatabase extends SQLiteOpenHelper
             catch ( Throwable t )
             {
                 Log.d(MYTAG,"asyncCopy fail");
+                Log.d(MYTAG,t.toString());
             }
             
             return didWork;
@@ -498,9 +575,8 @@ public class LWEDatabase extends SQLiteOpenHelper
                 myIntent = new Intent(COPY_FAILURE);
                 myContext.sendBroadcast(myIntent);
             }   
-            
-            Log.d(MYTAG,"copy successful onPostExecute");
-        }
+
+        }  // end onPostExecute()
     
     }  // end AsyncCopy declaration
 

@@ -10,29 +10,33 @@
     <RelativeLayout android:id="@+id/search_heading"
         style="@style/heading_bar" >
 
-        <!-- RIGHT BUTTON -->
-        <Button android:id="@+id/search_cancelbutton"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:text="Cancel"
-            style="@style/heading_button" />
-
         <!-- SEARCH BAR -->
         <EditText android:id="@+id/search_text"
             style="@style/default_edittext"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/search_cancelbutton"
-            android:layout_marginRight="8dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:drawableRight="@drawable/search_edit_icon"
             android:hint="@string/search_hint"
             android:imeOptions="actionDone" />
 
     </RelativeLayout>
 
+    <TextView android:id="@+id/no_searchresults"
+        style="@style/bold_display_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/search_no_results"
+        android:visibility="gone" />
+
     <ListView android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
-        android:divider="#FFCCCCCC" />
+        android:divider="@drawable/list_divider"
+        android:cacheColorHint="#FFBBBBBB" >
+    </ListView>
         
 </LinearLayout>
 

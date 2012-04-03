@@ -3,7 +3,7 @@
     style="@style/default_display_block" >
 
     <TextView android:id="@+id/tagcards_row_click"
-        style="@style/default_display_right"
+        style="@style/display_block_right"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:text=">" />
@@ -18,16 +18,16 @@
             style="@style/tag_row_toplayout" />
 
         <TextView android:id="@+id/tagcards_meaning"
-            style="@style/tag_row_bottomlayout"
-            android:text="or testing" />
+            style="@style/tag_row_bottomlayout" />
 
     </LinearLayout>
-    
+<!--    
     <LinearLayout android:id="@+id/tagcards_divider"
         style="@style/generic_divider"
         android:layout_below="@id/cardrow_block"
         android:layout_marginTop="10dp" >
     </LinearLayout>
+-->
 
 </RelativeLayout>
 
