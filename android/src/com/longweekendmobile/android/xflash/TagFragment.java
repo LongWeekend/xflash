@@ -11,6 +11,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static boolean getSearchOn()
 //  public static void setNeedLoad()
+//  public static void dumpObservers()
 //
 //  private void addTopLevelTag()
 //  private void openGroup(View  )
@@ -281,6 +282,12 @@ public class TagFragment extends Fragment
         needLoad = true;
     }
     
+    public static void dumpObservers()
+    {
+        newTagObserver = null; 
+        subscriptionObserver = null; 
+        tagSearchObserver = null; 
+    }
     
     // onClick for our PLUS button
     private void addTopLevelTag()

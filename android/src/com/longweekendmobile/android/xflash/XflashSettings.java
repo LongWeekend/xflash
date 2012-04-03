@@ -16,8 +16,11 @@ package com.longweekendmobile.android.xflash;
 //  public  void setActiveTag(Tag  )
 //  public  Tag getActiveTag()
 //  private int checkForBug(int  )                      --------- temporary?
-//  private Tag checkForAnotherBug(Tag inTag)           --------- temporary? 
+//  private Tag checkForAnotherBug(Tag  )               --------- temporary? 
 //  public  Card getActiveCard()
+//  public static void setActiveCard(Card  )
+//
+//  public static void dumpObservers()
 //
 //  public int getColorScheme()
 //  public String getColorSchemeName()
@@ -416,6 +419,21 @@ public class XflashSettings
     {
         activeCard = inCard;
     }
+
+    
+    // empties all fragment's observer properties - necessary because
+    // of static crap... kind feel like this shouldn't be necessary
+    // but oh well
+    public static void dumpObservers()
+    {
+        AddCardToTagFragment.dumpObservers();
+        PracticeFragment.dumpObservers();        
+        TagCardsFragment.dumpObservers();
+        TagFragment.dumpObservers();
+
+        XFApplication.clearNotifier();
+
+    }  // end dumpObservers()
 
 
 //  *** COLOR SETTINGS ***

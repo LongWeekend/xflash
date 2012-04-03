@@ -9,6 +9,7 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
 //  public static void loadCard(int  )
+//  public static void dumpObservers()
 //
 //  private void toggleWord(View  )
 //  private void addTag()
@@ -24,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +45,7 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class AddCardToTagFragment extends Fragment
 {
-    // private static final String MYTAG = "XFlash AddCardToTagFragment";
+    private static final String MYTAG = "XFlash AddCardToTagFragment";
     
     private static int incomingCardId; 
     private static JapaneseCard EScard = null;
@@ -186,6 +188,12 @@ public class AddCardToTagFragment extends Fragment
     }  // end loadCard()
    
     
+    public static void dumpObservers()
+    {
+        newTagObserver = null;
+    }
+
+
     // method to subscribe/unsubscrible cards in user tags
     private void toggleWord(View v)
     {
@@ -241,6 +249,9 @@ public class AddCardToTagFragment extends Fragment
         ArrayList<Tag> userTagArray = TagPeer.retrieveUserTagList();
        
         int rowCount = userTagArray.size();
+
+        Log.d(MYTAG,">   rowCount: " + rowCount);
+
         for(int i = 0; i < rowCount; i++)
         {
             Tag tempTag = userTagArray.get(i);
@@ -320,6 +331,7 @@ public class AddCardToTagFragment extends Fragment
     // TODO - BUG - when this fragment is loaded modally inside of an 
     //      - AddCardActivity, this code ALL EXECUTES, including the 
     //      - refreshTagList(), however the view is not updated.
+    //      - WHY DON'T YOU WORK!?  YOU SHOULD WORK!
     private void updateFromNewTagObserver(Object passedObject)
     {
         // get the Tag that was just added

@@ -21,6 +21,8 @@ package com.longweekendmobile.android.xflash;
 //  public static void browseClick(View  )
 //  public static void goRight()
 //
+//  public static void dumpObservers()
+//
 //  private static void launchBrowseCard(int  )
 //
 //  private void loadSavedPracticeValues()
@@ -63,9 +65,9 @@ public class PracticeFragment extends Fragment
     public static final int RIGHT3_INDEX = 3;
     public static final int LEARNED_INDEX = 4;
     
-    private static Observer subscriptionObserver = null;
     private static Observer activeTagObserver = null;
     private static Observer onStopObserver = null;
+    private static Observer subscriptionObserver = null;
     
     // made public for access in PracticeScreen
     public static int rightStreak = 0;
@@ -291,6 +293,15 @@ public class PracticeFragment extends Fragment
     }
 
 
+    public static void dumpObservers()
+    {
+        activeTagObserver = null;
+        onStopObserver = null;
+        subscriptionObserver = null;
+    }
+
+
+    // method to subscribe/unsubscrible cards in user tags
     // set the card and screen transition for a browse click
     private static void launchBrowseCard(int inDirection)
     {

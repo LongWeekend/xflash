@@ -18,6 +18,7 @@ package com.longweekendmobile.android.xflash;
 //  public static SQLiteDatabase getWritableDao()
 //  public static XFApplication getInstance()
 //  public static XflashNotification getNotifier()
+//  public static void clearNotifier()
 
 import java.io.File;
 
@@ -55,9 +56,6 @@ public class XFApplication extends Application
         // set out database to the global app context
         myInstance = this;
         
-        // set up the master nofifier
-        myNotifier = new XflashNotification();
-
     }  // end onCreate()
 
     
@@ -114,7 +112,18 @@ public class XFApplication extends Application
     // return the global notification system
     public static XflashNotification getNotifier()
     {
+        // set up the master nofifier
+        if( myNotifier == null )
+        {
+            myNotifier = new XflashNotification();
+        }
+
         return myNotifier;
+    }
+
+    public static void clearNotifier()
+    {
+        myNotifier = null;
     }
 
     
