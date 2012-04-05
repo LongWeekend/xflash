@@ -328,10 +328,25 @@ public class AddCardToTagFragment extends Fragment
     }  // end setupObservers()
     
 
-    // TODO - BUG - when this fragment is loaded modally inside of an 
-    //      - AddCardActivity, this code ALL EXECUTES, including the 
-    //      - refreshTagList(), however the view is not updated.
-    //      - WHY DON'T YOU WORK!?  YOU SHOULD WORK!
+    // TODO - BUG update:
+    //      - it works the first time the fragment is launched, in any
+    //      - location, and works as many times as CreateTagActivity is called.
+    //      - however, after user navigates away from AddCardToTagFragment
+    //      - and then back to it (again, in any location) the view of user
+    //      - tags now longer updates.
+    //      -
+    //      - we know for certain:  the fragment IS receiving the notification
+    //      - and the refreshTagList() code IS executing.  We also know
+    //      - the data has updated correctly:  refreshTagList() iterates
+    //      - for an appropriate number of rows and DOES HAVE ACCESS to the
+    //      - new tag that was just added
+    //      -
+    //      - However, for some reason yet to be determined, the view itself is
+    //      - not refreshing.  (if the whole fragment is forced to refresh, then
+    //      - the added data is visible)
+    //  
+    //      - what the crap.
+
     private void updateFromNewTagObserver(Object passedObject)
     {
         // get the Tag that was just added
