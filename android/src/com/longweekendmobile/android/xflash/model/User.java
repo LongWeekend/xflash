@@ -21,7 +21,6 @@ package com.longweekendmobile.android.xflash.model;
 //  public String getDateCreated()
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 

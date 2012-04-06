@@ -63,10 +63,11 @@ public class XflashScreen
 
     // settings page extra screen ids 
     public static final int LWE_SETTINGS_DIFFICULTY = 0;
-    public static final int LWE_SETTINGS_USER = 1;
-    public static final int LWE_SETTINGS_EDIT_USER = 2;
-    public static final int LWE_SETTINGS_UPDATE = 3;
-    public static final int LWE_SETTINGS_WEB = 4;
+    public static final int LWE_SETTINGS_REMINDERS = 1;
+    public static final int LWE_SETTINGS_USER = 2;
+    public static final int LWE_SETTINGS_EDIT_USER = 3;
+    public static final int LWE_SETTINGS_UPDATE = 4;
+    public static final int LWE_SETTINGS_WEB = 5;
 
     // properties for screen transitions
     public static final int LWE_TAB_ROOT_SCREEN = 0;
@@ -246,8 +247,9 @@ public class XflashScreen
             extraScreensOn[LWE_SETTINGS_TAB] = false;
             currentSettingsScreen = 0;
         }
-        else if( ( inTag == "difficulty" ) || ( inTag == "user" ) ||
-                 ( inTag == "update" ) || ( inTag == "settings_web" ) )
+        else if( ( inTag == "difficulty" ) || ( inTag == "reminders") ||
+                 ( inTag == "user" ) || ( inTag == "update" ) || 
+                 ( inTag == "settings_web" ) )
         {
             extraScreensOn[LWE_SETTINGS_TAB] = true;
             currentSettingsScreen = 1;
@@ -331,6 +333,18 @@ public class XflashScreen
                 ( extraFragments[LWE_SETTINGS_TAB].tag != "difficulty" ) )
             {    
                 extraFragments[LWE_SETTINGS_TAB] = new TabInfo("difficulty", DifficultyFragment.class, null);
+            }
+
+            return extraFragments[LWE_SETTINGS_TAB];
+        }
+        else if( inTag == "reminders" )
+        {
+            // if we haven't instantiated our extra screen, or if we have 
+            // and it's the wrong one
+            if( ( extraFragments[LWE_SETTINGS_TAB] == null ) ||
+                ( extraFragments[LWE_SETTINGS_TAB].tag != "reminders" ) )
+            {    
+                extraFragments[LWE_SETTINGS_TAB] = new TabInfo("reminders", ReminderFragment.class, null);
             }
 
             return extraFragments[LWE_SETTINGS_TAB];
@@ -588,7 +602,6 @@ public class XflashScreen
     }
 
 
-    
 }  // end XflashScreen class declaration
 
 

@@ -16,9 +16,6 @@ package com.longweekendmobile.android.xflash;
 //      - however it is not available until API 11 and is not
 //      - included in the compatibility pack
 
-import java.lang.CharSequence;
-import java.lang.System;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -26,18 +23,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 
-import com.longweekendmobile.android.xflash.Xflash;
-
 public class ReminderNotification
 {
     private static final int reminderId = 0;
     
     private Notification reminderNotification;
-    private Xflash myContext;
+    private Context myContext;
     
-    public ReminderNotification()
+    public ReminderNotification(Context inContext)
     {
-        myContext = Xflash.getActivity();
+        myContext = inContext;
 
     }  // end constructor()
 

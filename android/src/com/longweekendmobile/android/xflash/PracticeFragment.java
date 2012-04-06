@@ -232,8 +232,6 @@ public class PracticeFragment extends Fragment
         wrongStreak = 0;
         UserHistoryPeer.buryCard(currentCard,currentTag);
 
-        ReminderNotification testReminder = new ReminderNotification();
-
     }  // end setGoAway()
 
 

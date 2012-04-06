@@ -59,10 +59,20 @@ package com.longweekendmobile.android.xflash;
 //  public void setCustomFrequency(int  )
 //  public boolean getHideLearned()
 //  public boolean toggleHideLearned()
+//  public boolean getRemindersOn()
+//  public int getReminderCount()
+//  public void toggleReminders()
+//  public String getReminderText()
+//  public void setReminders()
 //
 //  private void throwBadValue(String  ,int  )
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -122,6 +132,9 @@ public class XflashSettings
                                        R.drawable.blue_hh_pissed, R.drawable.blue_hh_sea_sick,
                                        R.drawable.blue_hh_wounded };
 
+    // reminder properties
+    private static final int LWE_DEFAULT_REMINDERCOUNT = 4;
+
     // properties for global app settings
     private static int colorScheme = -1;
     private static int studyMode = -1;
@@ -132,7 +145,9 @@ public class XflashSettings
     private static int customStudyPool = -1;
     private static int customFrequency = -1;
     private static int currentUser = -1;
+    private static int reminderCount = -1;
     private static boolean hideLearnedCards = false;
+    private static boolean remindersOn = false;
 
     // STUDY MODE PROPERTIES
     public static final int LWE_STUDYMODE_PRACTICE = 0;
@@ -187,7 +202,9 @@ public class XflashSettings
         customStudyPool = settings.getInt("customStudyPool",LWE_STUDYPOOL_HARD);
         customFrequency = settings.getInt("customFrequency",LWE_FREQUENCY_HARD);
         currentUser = settings.getInt("currentUser",LWE_DEFAULT_USER);
+        reminderCount = settings.getInt("reminderCount",LWE_DEFAULT_REMINDERCOUNT);
         hideLearnedCards = settings.getBoolean("hideLearnedCards",false);
+        remindersOn = settings.getBoolean("remindersOn",false);
 
     }  // end load()
 
@@ -956,7 +973,89 @@ public class XflashSettings
         return hideLearnedCards;
     }
 
+    
+    public static boolean getRemindersOn()
+    {
+        return remindersOn;
+    }
 
+    
+    // return the current user-defined reminder day count
+    public static int getReminderCount()
+    {
+        return reminderCount;
+    }
+
+
+    // return a string to display whether the study reminders are off/on
+    public static String getReminderText()
+    {
+        Resources res = Xflash.getActivity().getResources();
+        
+        if( remindersOn )
+        {
+            return res.getString(R.string.just_on);
+        }
+        else
+        {
+            return res.getString(R.string.just_off);
+        }
+
+    }  // end getReminderText()
+
+
+    public static void toggleReminders()
+    {
+        // get Preferences to update user setting
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+        SharedPreferences.Editor editor = settings.edit();
+        
+        if( remindersOn )
+        {
+            remindersOn = false;
+        }
+        else
+        {
+            remindersOn = true;
+        }
+            
+        // update preferences
+        editor.putBoolean("remindersOn",remindersOn);
+        editor.commit();        
+        
+        // if we just switched the reminders on, set the alarm
+        if( remindersOn )
+        {
+            setReminders();
+        }
+
+    }  // end toggleReminders()
+
+
+    // sets a new reminder based on the current value for reminder days
+    // but only if reminders are set to on
+    public static void setReminders()
+    {
+        if( remindersOn )
+        {
+            Xflash myContext = Xflash.getActivity();
+        
+            Intent myIntent = new Intent(myContext, OnAlarmReceiver.class);
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(myContext, 0, myIntent, PendingIntent.FLAG_ONE_SHOT);
+        
+            // milliseconds for days to wait
+            long daysToWait = (long)(reminderCount * ( 24 * 60 * 60 * 1000 ) );
+
+            Log.d(MYTAG,">>> setReminders() setting alarm for " + reminderCount + " days");
+        
+            AlarmManager aMgr = (AlarmManager)myContext.getSystemService(Context.ALARM_SERVICE);
+            aMgr.set(AlarmManager.RTC, ( System.currentTimeMillis() + daysToWait), alarmIntent);
+        }
+
+    }  // end setReminders() 
+
+    
     // method to throw an exception when attempting to set any of the
     // settings to an invalid value
     private static void throwBadValue(String method,int value)
