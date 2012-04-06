@@ -85,6 +85,7 @@
     <string name="settings_studyblock_answersize">Answer Text</string>
     <string name="settings_app_block_title">Application</string>
     <string name="settings_appblock_theme">Theme</string>
+    <string name="settings_appblock_reminder">Study Reminders</string>
     <string name="settings_appblock_activeuser">Active User</string>
     <string name="settings_appblock_updates">Updates</string>
     <string name="settings_follow_block_title">Follow Us</string>
@@ -104,6 +105,8 @@
     <string name="just_ok">OK</string>
     <string name="just_on">On</string>
     <string name="just_off">Off</string>
+
+
     <string name="user_title">Choose User</string>
     <string name="user_edit">edit</string>
     <string name="user_deleteuser_title">Delete Users</string>
@@ -142,7 +145,14 @@
     <string name="update_debug_title">Up\'dizzle?</string>
     <string name="update_debug_message">Fo\'shizzle!</string>
     <string name="addtag_needname">Please enter a name!</string>
-    
+    <string name="reminder_ticker">Time to Study!</string>
+    <string name="reminder_title">Ready to Study?</string>
+    <string name="reminder_content">It\'s been ##NUMDAYS## days, ready to brush up?</string>
+    <string name="reminder_settings">Reminder Settings</string>
+    <string name="reminder_days_after">Days After Last Session</string>
+    <string name="reminder_note">Reminders are reset each time the app is opened.  If you\'re diligent about studying, you may never see one!</string>
+
+
 </resources>
 
 

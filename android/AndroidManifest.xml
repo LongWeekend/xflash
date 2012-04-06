@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.longweekendmobile.android.xflash"
+      android:installLocation="auto"
       android:versionCode="1"
       android:versionName="1.0" >
     <uses-permission android:name="android.permission.INTERNET" /> 
@@ -46,5 +47,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <receiver android:name=".OnBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".OnAlarmReceiver" />
     </application>
 </manifest> 

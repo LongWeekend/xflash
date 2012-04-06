@@ -78,16 +78,22 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         exitOnce = false;
         exitCount = 0;
        
-    }  // end onCreate
+    }  // end nCreate
 
     @Override
     public void onStart()
     {
         super.onStart();
 
+        // if study reminders are on, set our reminder up
+        // TODO - eh, this should probably be in onStart()
+        XflashSettings.setReminders(); 
+
         // display dialog on first-run or update
         XflashSettings.updateCheck();
-    }
+        
+    }  // end onStart()
+
 
     @Override
     public void onPause()
@@ -409,6 +415,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                             if( tempSettingsType == XflashScreen.LWE_SETTINGS_DIFFICULTY )
                             {
                                 switchTab = XflashScreen.getTransitionFragment("difficulty");
+                            }
+                            else if( tempSettingsType == XflashScreen.LWE_SETTINGS_REMINDERS )
+                            {
+                                switchTab = XflashScreen.getTransitionFragment("reminders");
                             }
                             else if( tempSettingsType == XflashScreen.LWE_SETTINGS_USER )
                             {
