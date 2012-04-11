@@ -61,8 +61,8 @@ package com.longweekendmobile.android.xflash;
 //  public boolean toggleHideLearned()
 //  public boolean getRemindersOn()
 //  public int getReminderCount()
-//  public void toggleReminders()
 //  public String getReminderText()
+//  public void toggleReminders()
 //  public void setReminders()
 //
 //  private void throwBadValue(String  ,int  )
@@ -1006,7 +1006,7 @@ public class XflashSettings
 
     public static void toggleReminders()
     {
-        // get Preferences to update user setting
+        // get Preferences to update setting
         XFApplication tempInstance = XFApplication.getInstance();
         SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
         SharedPreferences.Editor editor = settings.edit();
@@ -1022,13 +1022,10 @@ public class XflashSettings
             
         // update preferences
         editor.putBoolean("remindersOn",remindersOn);
-        editor.commit();        
+        editor.commit();
         
-        // if we just switched the reminders on, set the alarm
-        if( remindersOn )
-        {
-            setReminders();
-        }
+        // set or clear the reminder
+        setReminders();
 
     }  // end toggleReminders()
 
@@ -1037,21 +1034,43 @@ public class XflashSettings
     // but only if reminders are set to on
     public static void setReminders()
     {
+        // get Preferences to update alarm settings
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+        SharedPreferences.Editor editor = settings.edit();
+        
+        // get the activity context
+        Xflash myContext = Xflash.getActivity();
+        
+        // create an PendingIntent for our alarm
+        Intent myIntent = new Intent(myContext, OnAlarmReceiver.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(myContext, 0, myIntent, PendingIntent.FLAG_ONE_SHOT);
+        
+        // get the phone's alarm manager
+        AlarmManager aMgr = (AlarmManager)myContext.getSystemService(Context.ALARM_SERVICE);
+        
         if( remindersOn )
         {
-            Xflash myContext = Xflash.getActivity();
-        
-            Intent myIntent = new Intent(myContext, OnAlarmReceiver.class);
-            PendingIntent alarmIntent = PendingIntent.getBroadcast(myContext, 0, myIntent, PendingIntent.FLAG_ONE_SHOT);
-        
-            // milliseconds for days to wait
+            // create a variable holding the time to have the alarm go off
             long daysToWait = (long)(reminderCount * ( 24 * 60 * 60 * 1000 ) );
+            long alarmTime = ( System.currentTimeMillis() + daysToWait );
 
-            Log.d(MYTAG,">>> setReminders() setting alarm for " + reminderCount + " days");
+            // save the alarm time to Preferences in case the phone is rebooted
+            editor.putLong("alarmTime",alarmTime);
         
-            AlarmManager aMgr = (AlarmManager)myContext.getSystemService(Context.ALARM_SERVICE);
-            aMgr.set(AlarmManager.RTC, ( System.currentTimeMillis() + daysToWait), alarmIntent);
+            // set the alarm
+            aMgr.set(AlarmManager.RTC, alarmTime, alarmIntent);
         }
+        else
+        {
+            // if we are turning the reminder off, clear it from Preferences
+            // and delete it from the alarm manager
+            editor.remove("alarmTime");
+            aMgr.cancel(alarmIntent);      
+        }
+
+        // commit changes to the Preferences,
+        editor.commit();
 
     }  // end setReminders() 
 
