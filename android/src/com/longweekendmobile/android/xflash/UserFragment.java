@@ -49,7 +49,7 @@ public class UserFragment extends Fragment
     {
         myInflater = inflater;
         
-        // inflate our layout for the HelpPage fragment
+        // inflate our layout for the user fragment
         LinearLayout userLayout = (LinearLayout)inflater.inflate(R.layout.user, container, false);
 
         // load the title bar elements and pass them to the color manager

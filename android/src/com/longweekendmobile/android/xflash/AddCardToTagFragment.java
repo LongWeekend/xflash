@@ -63,7 +63,7 @@ public class AddCardToTagFragment extends Fragment
     {
         setupObservers();
 
-        // inflate our layout for the HelpPage fragment
+        // inflate our layout for the add-card fragment
         LinearLayout addCardLayout = (LinearLayout)inflater.inflate(R.layout.add_card, container, false);
 
         // load the title bar elements and pass them to the color manager

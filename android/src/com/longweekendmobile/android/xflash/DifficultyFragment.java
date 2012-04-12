@@ -41,7 +41,7 @@ public class DifficultyFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // inflate our layout for the HelpPage fragment
+        // inflate our layout for the Difficulty fragment
         difficultyLayout = (LinearLayout)inflater.inflate(R.layout.difficulty, container, false);
 
         // set the seek bars so we can change their values

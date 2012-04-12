@@ -29,7 +29,7 @@ public class UpdateFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // inflate our layout for the HelpPage fragment
+        // inflate our layout for the Update fragment
         LinearLayout updateLayout = (LinearLayout)inflater.inflate(R.layout.update, container, false);
 
         // load the title bar elements and pass them to the color manager

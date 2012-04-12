@@ -149,7 +149,7 @@
     <string name="reminder_title">Ready to Study?</string>
     <string name="reminder_content">It\'s been ##NUMDAYS## days, ready to brush up?</string>
     <string name="reminder_settings">Reminder Settings</string>
-    <string name="reminder_days_after">Days After Last Session</string>
+    <string name="reminder_days_after">Days After\nLast Session</string>
     <string name="reminder_note">Reminders are reset each time the app is opened.  If you\'re diligent about studying, you may never see one!</string>
 
 

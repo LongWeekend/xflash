@@ -60,6 +60,7 @@ package com.longweekendmobile.android.xflash;
 //  public boolean getHideLearned()
 //  public boolean toggleHideLearned()
 //  public boolean getRemindersOn()
+//  public void setReminderCount(int  )
 //  public int getReminderCount()
 //  public String getReminderText()
 //  public void toggleReminders()
@@ -979,6 +980,16 @@ public class XflashSettings
         return remindersOn;
     }
 
+
+    // set the reminder count
+    public static void setReminderCount(int inCount)
+    {
+        reminderCount = inCount;
+
+        Log.d(MYTAG,">>> setReminderCount(" + reminderCount + ")");
+
+        setReminders();
+    }
     
     // return the current user-defined reminder day count
     public static int getReminderCount()
@@ -1006,6 +1017,8 @@ public class XflashSettings
 
     public static void toggleReminders()
     {
+        Log.d(MYTAG,">>> toggleReminders()");
+        
         // get Preferences to update setting
         XFApplication tempInstance = XFApplication.getInstance();
         SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
@@ -1019,7 +1032,7 @@ public class XflashSettings
         {
             remindersOn = true;
         }
-            
+       
         // update preferences
         editor.putBoolean("remindersOn",remindersOn);
         editor.commit();
@@ -1049,8 +1062,16 @@ public class XflashSettings
         // get the phone's alarm manager
         AlarmManager aMgr = (AlarmManager)myContext.getSystemService(Context.ALARM_SERVICE);
         
+        Log.d(MYTAG,">>> in setReminderS()");
+        
         if( remindersOn )
         {
+            
+            Log.d(MYTAG,">   reminders ON, reminderCount: " + reminderCount);
+
+            // save the days to wait
+            editor.putInt("reminderCount",reminderCount);
+            
             // create a variable holding the time to have the alarm go off
             long daysToWait = (long)(reminderCount * ( 24 * 60 * 60 * 1000 ) );
             long alarmTime = ( System.currentTimeMillis() + daysToWait );
@@ -1063,6 +1084,8 @@ public class XflashSettings
         }
         else
         {
+            Log.d(MYTAG,">   reminders OFF");
+            
             // if we are turning the reminder off, clear it from Preferences
             // and delete it from the alarm manager
             editor.remove("alarmTime");
@@ -1071,6 +1094,10 @@ public class XflashSettings
 
         // commit changes to the Preferences,
         editor.commit();
+
+        Log.d(MYTAG,">   committed");
+        Log.d(MYTAG,".");
+        Log.d(MYTAG,".");
 
     }  // end setReminders() 
 
