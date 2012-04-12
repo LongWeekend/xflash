@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="4dp"
-    android:paddingBottom="4dp" >
+    android:paddingTop="@dimen/default_block_padding"
+    android:paddingBottom="@dimen/default_block_padding" >
 
     <TextView android:id="@+id/es_cardrow_headword"
         style="@style/es_jp"
@@ -19,11 +19,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/default_block_padding"
         android:background="#33000000"
-        android:paddingLeft="8dp"
-        android:paddingTop="4dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="4dp"
+        android:paddingLeft="@dimen/default_block_padding"
+        android:paddingRight="@dimen/default_block_padding"
+        android:paddingTop="@dimen/short_block_padding"
+        android:paddingBottom="@dimen/short_block_padding"
         android:text="Add" />
     
     <TextView android:id="@+id/es_cardrow_reading"
@@ -32,8 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/es_cardrow_headword"
         android:layout_toLeftOf="@id/es_cardrow_button"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="8dp" />
+        android:layout_marginLeft="20dp" />
 
 </RelativeLayout>
 

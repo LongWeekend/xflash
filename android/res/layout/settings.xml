@@ -129,8 +129,7 @@
                         style="@style/display_block_left"
                         android:text="@string/settings_appblock_updates" />
                     <TextView android:id="@+id/settings_updates_label"
-                        style="@style/display_block_right" 
-                        android:text="0 installed" />
+                        style="@style/not_implemented"  />
                 </RelativeLayout>
             </LinearLayout>
 

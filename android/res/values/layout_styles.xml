@@ -68,7 +68,7 @@
     <style name="default_display_block">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">4dp</item>
+        <item name="android:padding">@dimen/default_block_padding</item>
         <item name="android:clickable">true</item>
     </style>
     <style name="display_block_left" parent="@style/bold_display_text">
@@ -165,6 +165,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:layout_marginTop">@dimen/mini_block_padding</item>
         <item name="android:singleLine">true</item>
     </style>
     <style name="default_edittext">
