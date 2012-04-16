@@ -236,15 +236,17 @@ public class SettingsFragment extends Fragment
         Xflash.getActivity().onScreenTransition("user",XflashScreen.DIRECTION_OPEN);
     }
 
-   
+
+/* 
     private void goUpdate()
     {
         // load the UpdateFragment to the fragment tab manager
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_UPDATE);
         Xflash.getActivity().onScreenTransition("update",XflashScreen.DIRECTION_OPEN);
     }
+*/
 
- 
+
     private void launchSettingsWeb(View v)
     {
         if( v.getId() == R.id.settings_launch_twitter )
@@ -352,6 +354,8 @@ public class SettingsFragment extends Fragment
             }
         });
 
+        
+/*
         // the update bar ( x installed )
         tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.update_block);
         tempLayout.setOnClickListener( new View.OnClickListener()
@@ -362,6 +366,7 @@ public class SettingsFragment extends Fragment
                 goUpdate();
             }
         });
+*/
 
         // the twitter bar 
         tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.settings_launch_twitter);

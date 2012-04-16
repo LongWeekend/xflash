@@ -123,6 +123,9 @@
                         style="@style/display_block_right" />
                 </RelativeLayout>
                 <View style="@style/generic_divider" />
+<!--
+        TODO - probably unnecessary with Android's new expansion files
+                
                 <RelativeLayout android:id="@+id/update_block"
                     style="@style/default_display_block" >
                     <TextView 
@@ -131,6 +134,7 @@
                     <TextView android:id="@+id/settings_updates_label"
                         style="@style/not_implemented"  />
                 </RelativeLayout>
+-->
             </LinearLayout>
 
             <!-- the 'Follow Us' block -->

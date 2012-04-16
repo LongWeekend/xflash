@@ -37,7 +37,8 @@ public class CreateTagActivity extends Activity
     private static final String MYTAG = "XFlash CreateTagActivity";
    
     // private static Group currentGroup;
-    private EditText myEdit;
+    private EditText nameEdit;
+    private EditText descriptionEdit;
  
     /** Called when the activity is first created. */
     @Override
@@ -46,19 +47,23 @@ public class CreateTagActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_tag);
     
-        // set our click listener for the edit text and request focus
-        myEdit = (EditText)findViewById(R.id.create_tag_text);
-        myEdit.setOnEditorActionListener(createTagActionListener);
+        // set our click listener for the tag name text and request focus
+        nameEdit = (EditText)findViewById(R.id.create_tag_nametext);
+        nameEdit.setOnEditorActionListener(createTagActionListener);
+
+        // get the description EditText and set the same keyboardDone() listener
+        descriptionEdit = (EditText)findViewById(R.id.create_tag_descriptiontext);
+        descriptionEdit.setOnEditorActionListener(createTagActionListener);
 
         // launch with the keyboard displayed
-        myEdit.postDelayed( new Runnable() 
+        nameEdit.postDelayed( new Runnable() 
         {
             @Override
             public void run() 
             {
-                myEdit.requestFocus();
+                nameEdit.requestFocus();
                 InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                keyboard.showSoftInput(myEdit,0);
+                keyboard.showSoftInput(nameEdit,0);
             }
         },300);
 
@@ -108,22 +113,31 @@ public class CreateTagActivity extends Activity
             currentGroup = GroupPeer.retrieveGroupById(tempGroupId);
         }
 
-        String editTextContent = myEdit.getText().toString();
+        // get the name input
+        String nameContent = nameEdit.getText().toString();
 
-        if( editTextContent.length() > 0 )
+        // when they click 'done' on the keyboard, add the new group and exit
+        if( nameContent.length() > 0 )
         {
-            // when they click 'done' on the keyboard, add the new group and exit
-            Tag theNewTag = TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
+            // get the description input
+            String descriptionContent = descriptionEdit.getText().toString();
+            
+            Log.d(MYTAG,"descrption is:  '" + descriptionContent + "'");
+
+            // create the new Tag in the database
+            Tag theNewTag = TagPeer.createTagNamed(nameContent, currentGroup, descriptionContent);
              
-            int tempCardId = myIntent.getIntExtra("card_id",XflashNotification.NO_CARD_PASSED);
-        
+            // broadcast the creation of a new Tag, tagged with the id of the passed
+            // card if 'this' was called from AddCardToTag
             XflashNotification theNotifier = XFApplication.getNotifier();
+            
+            int tempCardId = myIntent.getIntExtra("card_id",XflashNotification.NO_CARD_PASSED);
             theNotifier.setCardIdPassed(tempCardId); 
-            Log.d(MYTAG,">>> CreateTag sending Broadcast");
             theNotifier.newTagBroadcast(theNewTag);
         }
         else
         {
+            // they didn't have a tag name entered
             String needName = getResources().getString(R.string.addtag_needname);
             Toast.makeText(this,needName, Toast.LENGTH_SHORT).show();
         }
@@ -141,7 +155,7 @@ public class CreateTagActivity extends Activity
             {
                 keyboardDone();
                 
-                if( myEdit.getText().toString().length() > 0 )
+                if( nameEdit.getText().toString().length() > 0 )
                 {
                     // only close the Activity if they typed in a title
                     finish();

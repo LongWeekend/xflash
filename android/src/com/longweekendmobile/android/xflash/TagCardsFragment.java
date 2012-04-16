@@ -86,20 +86,42 @@ public class TagCardsFragment extends Fragment
         TextView tempView = (TextView)tagCardsLayout.findViewById(R.id.tagcards_heading_text);
         tempView.setText( currentTag.getName() );
 
-        // get the header, buried in a wrapper
+        // get the headers, buried in a wrapper
         cardList = (ListView)tagCardsLayout.findViewById(R.id.tagcards_list);
         LinearLayout header = (LinearLayout)inflater.inflate(R.layout.tagcards_header,cardList,false);
-        RelativeLayout realHeader = (RelativeLayout)header.findViewById(R.id.header_block);
         
-        // tag the header with the currentTag id, add a click listener
-        realHeader.setTag( currentTag.getId() );
-        realHeader.setOnClickListener( new View.OnClickListener()
+        // tag the 'start studying' header with the currentTag id, add a click listener
+        RelativeLayout tempHeader = (RelativeLayout)header.findViewById(R.id.tagcards_header_startstudying);
+        
+        tempHeader.setTag( currentTag.getId() );
+        tempHeader.setOnClickListener( new View.OnClickListener()
         {
             public void onClick(View v)
             {
                 XflashAlert.startStudying(v);
             }
         });
+
+        // get the 'edit set details' header
+        tempHeader = (RelativeLayout)header.findViewById(R.id.tagcards_header_editset);
+        
+        // if we're looking at a use tag, set a click listener to cue the EditTagDetailsFragment
+        // else, hide the view
+        if( currentTag.isEditable() )
+        {
+            tempHeader.setTag( currentTag.getId() );
+            tempHeader.setOnClickListener( new View.OnClickListener()
+            {
+                public void onClick(View v)
+                {
+                    XflashAlert.startStudying(v);
+                }
+            });
+        }
+        else
+        {
+            tempHeader.setVisibility(View.GONE);
+        }
 
         // assign the header to our ListView of cards
         cardList.addHeaderView(header);
