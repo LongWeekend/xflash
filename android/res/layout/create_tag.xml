@@ -10,11 +10,10 @@
         style="@style/heading_bar">
 
         <!-- HEADING -->
-        <TextView
+        <TextView android:id="@+id/createtag_heading_text"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:text="@string/create_tag_title" 
             style="@style/heading_text" />
 
     </RelativeLayout>

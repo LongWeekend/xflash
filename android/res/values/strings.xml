@@ -77,6 +77,7 @@
     <string name="createtag_name_hint">e.g. Words I Heard on TV</string>
     <string name="createtag_description_caption">Describe It!</string>
     <string name="createtag_description_hint">Optional</string>
+    <string name="update_tag_title">Update Study Set</string>
     <string name="search_hint">Enter search keyword</string>
     <string name="search_no_results">No search results found!</string>
     <string name="settings_title">Settings</string>

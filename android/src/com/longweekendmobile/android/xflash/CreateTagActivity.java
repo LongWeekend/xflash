@@ -36,7 +36,7 @@ public class CreateTagActivity extends Activity
 {
     private static final String MYTAG = "XFlash CreateTagActivity";
    
-    // private static Group currentGroup;
+    private static Tag tagToEdit;
     private EditText nameEdit;
     private EditText descriptionEdit;
  
@@ -69,6 +69,7 @@ public class CreateTagActivity extends Activity
 
     }  // end onCreate()
 
+    
     @Override
     public void onResume()
     {
@@ -77,9 +78,26 @@ public class CreateTagActivity extends Activity
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.create_tag_heading);
-            
         XflashSettings.setupColorScheme(titleBar);
-    }
+
+        TextView titleText = (TextView)findViewById(R.id.createtag_heading_text);
+
+        // set title text based on whether we are editing a Tag
+        if( tagToEdit == null )
+        {
+            titleText.setText( getResources().getString(R.string.create_tag_title) );
+        }
+        else
+        {
+            titleText.setText( getResources().getString(R.string.update_tag_title) );
+
+            // set content for the fields, since we are editing
+            // and existing Tag
+            nameEdit.setText( tagToEdit.getName() );
+            descriptionEdit.setText( tagToEdit.getDescription() );
+        }
+    
+    }  // end onResume()
 
     @Override
     public void onPause()
@@ -90,9 +108,11 @@ public class CreateTagActivity extends Activity
     }
 
 
-    public static void setCurrentGroup(Group inGroup)
+    // TODO - set a tag we are editing, this can be changed to Intent 
+    //      - extras if we don't need to also launch as a fragment
+    public static void setTagToEdit(Tag inTag)
     {
-        // currentGroup = inGroup;
+        tagToEdit = inTag;
     }
 
     
@@ -122,10 +142,19 @@ public class CreateTagActivity extends Activity
             // get the description input
             String descriptionContent = descriptionEdit.getText().toString();
             
-            Log.d(MYTAG,"descrption is:  '" + descriptionContent + "'");
+            if( tagToEdit == null )
+            {
+                // create the new Tag in the database
+                tagToEdit = TagPeer.createTagNamed(nameContent, currentGroup, descriptionContent);
+            }
+            else
+            {
+                // save the existing Tag we are editing
+                tagToEdit.setName(nameContent);
+                tagToEdit.setDescription(descriptionContent);
 
-            // create the new Tag in the database
-            Tag theNewTag = TagPeer.createTagNamed(nameContent, currentGroup, descriptionContent);
+                tagToEdit.save();
+            }
              
             // broadcast the creation of a new Tag, tagged with the id of the passed
             // card if 'this' was called from AddCardToTag
@@ -133,7 +162,7 @@ public class CreateTagActivity extends Activity
             
             int tempCardId = myIntent.getIntExtra("card_id",XflashNotification.NO_CARD_PASSED);
             theNotifier.setCardIdPassed(tempCardId); 
-            theNotifier.newTagBroadcast(theNewTag);
+            theNotifier.newTagBroadcast(tagToEdit);
         }
         else
         {

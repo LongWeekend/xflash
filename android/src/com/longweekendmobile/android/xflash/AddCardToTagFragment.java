@@ -55,7 +55,6 @@ public class AddCardToTagFragment extends Fragment
 
     private LinearLayout userTagList = null;
     private static Observer newTagObserver = null;
-    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -231,6 +230,9 @@ public class AddCardToTagFragment extends Fragment
         Intent myIntent = new Intent( Xflash.getActivity(), CreateTagActivity.class);
         myIntent.putExtra("card_id", currentCard.getCardId() );
         myIntent.putExtra("group_id", GroupPeer.topLevelGroup().getGroupId() );
+
+        // TODO - change to intent extra if we do not need to launch as a fragment
+        CreateTagActivity.setTagToEdit(null);
  
         Xflash.getActivity().startActivity(myIntent);
     
