@@ -179,7 +179,7 @@ public class PracticeFragment extends Fragment
                                             return true;
             case R.id.pm_add_tag:           launchAddCard();
                                             return true;
-            case R.id.pm_tweet:             Log.d(MYTAG,"> pm_tweet clicked");
+            case R.id.pm_tweet:             tweetCard();
                                             return true;
             case R.id.pm_fix:               fixCardEmail();
                                             return true;
@@ -378,7 +378,49 @@ public class PracticeFragment extends Fragment
 
     }  // end launchAddCard()
     
-   
+  
+    // launches a Twitter intent for this card
+    private void tweetCard()
+    {
+        Intent tweetIntent = new Intent(Intent.ACTION_SEND);
+        tweetIntent.putExtra(Intent.EXTRA_TEXT, "Test tweet");
+        
+        // tweetIntent.setType("application/twitter");
+        tweetIntent.setType("text/plain");
+        Xflash.getActivity().startActivity( Intent.createChooser(tweetIntent,"Share via Twitter") );
+
+
+        // TODO - unfortunately it looks like there is no specific Twitter intent
+        //      - to be broadcast.  There are a lot of different recommendations
+        //      - on how to handle this, many of them gross hacks
+        //
+        //      - It seems like the best options is to use the ACTION_SEND intent
+        //
+        //      - Using the type "text/plain" brings up a LARGE number of possible
+        //      - apps to use, however the type "application/twitter" is not
+        //      - universally supported, and leaves out several important
+        //      - options such as the actual official Twitter app.
+        //
+        //      - so, if we use "application/twitter" it will leave out important
+        //      - apps.  HOWEVER if we use "text/plain" we've got a big problem in
+        //      - that if our user once selected Gmail to always respond to the
+        //      - "text/plain" SEND Intent type in another app, our tweet-card 
+        //      - functionality would always open Gmail (or whatever else) instead.
+        //
+        //      - it may be challenging to obtain the desired behaviour here
+        //
+        //      - as an alternative, we can use the Intent.createChooser() functionality
+        //      - to override the Android platform's handling of the SEND request.
+        //      - this allow us to force the dialog to have a title (such as "Share
+        //      - via Twitter") but does NOT support any functionality to select
+        //      - a default response--i.e. the chooser will be displayed every time
+        //      - the user taps "tweet card"
+        //
+        //      - please advise as to your preference
+
+    }  // end tweetCard()
+
+
     // creates an email to notify Long Weekend about an error and 
     // launches it as a send-email intent
     private void fixCardEmail()
