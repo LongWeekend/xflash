@@ -20,7 +20,6 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +35,7 @@ import com.longweekendmobile.android.xflash.model.UserPeer;
 
 public class UserFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash UserFragment";
+    // private static final String MYTAG = "XFlash UserFragment";
    
     private ArrayList<User> userList;
     private LinearLayout userListLayout;
@@ -50,7 +49,7 @@ public class UserFragment extends Fragment
     {
         myInflater = inflater;
         
-        // inflate our layout for the HelpPage fragment
+        // inflate our layout for the user fragment
         LinearLayout userLayout = (LinearLayout)inflater.inflate(R.layout.user, container, false);
 
         // load the title bar elements and pass them to the color manager

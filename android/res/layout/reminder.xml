@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/table_background" >
+  
+    <!-- TITLE BAR -->
+    <RelativeLayout android:id="@+id/reminder_heading"
+        style="@style/heading_bar" >
+
+        <!-- HEADING -->
+        <TextView 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:text="@string/settings_appblock_reminder"
+            style="@style/heading_text" />
+
+    </RelativeLayout>
+
+    <LinearLayout 
+        style="@style/frame_block"
+        android:orientation="vertical" >
+
+        <!-- the reminder setting -->
+        <RelativeLayout android:id="@+id/reminder_toggle_block"
+            style="@style/default_display_block"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/default_background" >
+
+            <TextView
+                style="@style/display_block_left"
+                android:text="@string/settings_appblock_reminder" />
+            <TextView android:id="@+id/reminder_value"
+                style="@style/display_block_right" />
+
+        </RelativeLayout>
+
+        <!-- the reminder day count -->
+        <TextView 
+            style="@style/display_heading_layout"
+            android:text="@string/reminder_settings" />
+        <RelativeLayout
+            style="@style/default_display_block"
+            android:background="@drawable/default_background" >
+
+            <TextView
+                style="@style/display_block_left"
+                android:text="@string/reminder_days_after" />
+
+            <Spinner android:id="@+id/day_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp" />
+                 
+        </RelativeLayout>
+
+        <!-- the reminder note -->
+        <TextView
+            style="@style/display_heading_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:gravity="center"
+            android:text="@string/reminder_note" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

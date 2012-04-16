@@ -105,6 +105,15 @@
                         style="@style/display_block_right" />
                 </RelativeLayout>
                 <View style="@style/generic_divider" />
+                <RelativeLayout android:id="@+id/reminder_block"
+                    style="@style/default_display_block" >
+                    <TextView 
+                        style="@style/display_block_left" 
+                        android:text="@string/settings_appblock_reminder" />
+                    <TextView android:id="@+id/settings_reminder_label"
+                        style="@style/display_block_right" />
+                </RelativeLayout>
+                <View style="@style/generic_divider" />
                 <RelativeLayout android:id="@+id/activeuser_block"
                     style="@style/default_display_block" >
                     <TextView 
@@ -120,8 +129,7 @@
                         style="@style/display_block_left"
                         android:text="@string/settings_appblock_updates" />
                     <TextView android:id="@+id/settings_updates_label"
-                        style="@style/display_block_right" 
-                        android:text="0 installed >" />
+                        style="@style/not_implemented"  />
                 </RelativeLayout>
             </LinearLayout>
 

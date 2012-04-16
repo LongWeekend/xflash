@@ -16,11 +16,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/default_block_padding"
         android:background="#33000000"
-        android:paddingLeft="8dp"
-        android:paddingTop="4dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="4dp"
+        android:paddingLeft="@dimen/default_block_padding"
+        android:paddingRight="@dimen/default_block_padding"
+        android:paddingTop="@dimen/short_block_padding"
+        android:paddingBottom="@dimen/short_block_padding"
         android:text="Read" />
 
     <TextView android:id="@+id/es_sentence_jp"

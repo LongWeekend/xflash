@@ -4,4 +4,7 @@
     <dimen name="default_radio_height">34dp</dimen>
     <dimen name="default_radio_corner">6dp</dimen>
     <dimen name="background_corner_radius">8dp</dimen>
+    <dimen name="mini_block_padding">2dp</dimen>
+    <dimen name="short_block_padding">4dp</dimen>
+    <dimen name="default_block_padding">8dp</dimen>
 </resources>

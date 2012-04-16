@@ -14,6 +14,7 @@ package com.longweekendmobile.android.xflash;
 //  private void goDifficulty()
 //  private void switchAnswerSize()
 //  private void advanceColorScheme()
+//  private void goReminders()
 //  private void goUser()
 //  private void goUpdate()
 //  private void launchSettingsWeb(View  )
@@ -74,7 +75,11 @@ public class SettingsFragment extends Fragment
         // set the "Theme" label in our settings view
         tempView = (TextView)settingsLayout.findViewById(R.id.settings_theme_label);
         tempView.setText( XflashSettings.getColorSchemeName() );
-       
+      
+        // set the "Study Reminders" label in our settings view
+        tempView = (TextView)settingsLayout.findViewById(R.id.settings_reminder_label);
+        tempView.setText( XflashSettings.getReminderText() );
+
         // and set the current user label
         User tempUser = UserPeer.getUserByPK( XflashSettings.getCurrentUserId() );
         tempView = (TextView)settingsLayout.findViewById(R.id.settings_activeuser_label);
@@ -216,10 +221,17 @@ public class SettingsFragment extends Fragment
     }  // end advanceColorScheme()
 
     
-    // calls a new view activity for fragment tab layout 
+    // load the ReminderFragment to the fragment tab manager
+    private void goReminders()
+    {
+        XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_REMINDERS);
+        Xflash.getActivity().onScreenTransition("reminders",XflashScreen.DIRECTION_OPEN);
+    }
+
+   
+    // load the UserFragment to the fragment tab manager
     private void goUser()
     {
-        // load the UserFragment to the fragment tab manager
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_USER);
         Xflash.getActivity().onScreenTransition("user",XflashScreen.DIRECTION_OPEN);
     }
@@ -318,6 +330,17 @@ public class SettingsFragment extends Fragment
             }
         });
 
+        // the study reminders bar
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.reminder_block);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                goReminders();
+            }
+        });
+        
         // the active user bar ( various )
         tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.activeuser_block);
         tempLayout.setOnClickListener( new View.OnClickListener()
