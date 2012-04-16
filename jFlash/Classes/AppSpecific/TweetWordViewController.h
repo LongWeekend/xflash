@@ -10,10 +10,8 @@
 
 #import "LWETRequestDelegate.h"
 #import "LWETDelegates.h"
-#import "LWELoadingView.h"
-
-@class LWETwitterEngine;
-@class LWETUser;
+#import "LWETUser.h"
+#import "LWETwitterEngine.h"
 
 /**
  * This View Controller acts like a model, for user to change and have a say of what they are going to
@@ -31,7 +29,6 @@
 	IBOutlet UIButton *tweetBtn;
 	IBOutlet UILabel *counterLbl;
 @private
-  LWELoadingView *_loadingView;
 	UIBarButtonItem *_cancelBtn;
 	UIBarButtonItem *_signOutBtn;
 	UIBarButtonItem *_doneBtn;

@@ -394,7 +394,7 @@ static AudioSessionManager *sharedAudioSessionManager = nil;
   return NSUIntegerMax; 
 }
 
-- (void)release
+- (oneway void)release
 {
 }
 

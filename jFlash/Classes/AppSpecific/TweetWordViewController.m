@@ -11,6 +11,7 @@
 #import "LWETUser.h"
 #import "Constants.h"
 #import "GradientButton.h"
+#import "DSActivityView.h"
 
 @implementation TweetWordViewController
 
@@ -37,8 +38,7 @@
 	}
 }
 
-#pragma mark -
-#pragma mark IBAction
+#pragma mark - IBAction Methods
 
 //! Tweet the text in the text fields, and add the " #xflash" after.
 - (IBAction)tweet
@@ -50,7 +50,7 @@
     NSString *tweet = [NSString stringWithFormat:@"%@ %@", tweetTxt.text, LWE_TWITTER_HASH_TAG];
     [_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:tweet];
     
-    _loadingView = [LWELoadingView loadingView:self.parentViewController.view withText:@"Tweeting..."];
+    [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Tweeting...",@"")];
   }
   else
   {
@@ -155,6 +155,12 @@
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
 	self.view.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:LWETableBackgroundImage]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  [DSBezelActivityView removeViewAnimated:animated];
 }
 
 - (void)viewDidUnload 

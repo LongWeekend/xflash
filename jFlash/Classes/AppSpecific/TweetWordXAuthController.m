@@ -28,7 +28,7 @@
 	//the username text field is not empty, goes straight to the authentication.
 	//It makes the user not needed to click the authentication button.
 	//If its the username text field, move to password text field
-	if ((![unameTxt.text isEqualToString:@""]) && (textField == passwordTxt))
+	if ((![self.unameTxt.text isEqualToString:@""]) && (textField == self.passwordTxt))
 	{
 		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,0) withInterval:0.5f];
 		[self performSelector:@selector(authenticateUser:)
@@ -37,7 +37,7 @@
 	}
 	else if (textField == unameTxt)
 	{
-		[passwordTxt becomeFirstResponder];
+		[self.passwordTxt becomeFirstResponder];
 	}
 	return YES;
 }
@@ -139,13 +139,13 @@
 //! Handy method to resign the responder, check which text box is currently is the first responder, and resign it. 
 - (void)_textFieldResign
 {
-	if ([unameTxt isFirstResponder])
+	if ([self.unameTxt isFirstResponder])
   {
-		[unameTxt resignFirstResponder];
+		[self.unameTxt resignFirstResponder];
   }
-	else if ([passwordTxt isFirstResponder])
+	else if ([self.passwordTxt isFirstResponder])
   {
-		[passwordTxt resignFirstResponder];
+		[self.passwordTxt resignFirstResponder];
   }
 	
 	//Put the view back to the normal view

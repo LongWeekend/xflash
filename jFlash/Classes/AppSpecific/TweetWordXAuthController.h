@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 #import "LWETXAuthViewProtocol.h"
-#import "LWELoadingView.h"
 
 /**
  * This view controller is used for authenticating a user, with their username and password. 
@@ -24,7 +23,6 @@
 	
 @private
 	UIBarButtonItem *_cancelBtn;
-	LWELoadingView *_lv;
 	UIBarButtonItem *_doneBtn;
 }
 
