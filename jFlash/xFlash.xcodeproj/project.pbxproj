@@ -184,8 +184,6 @@
 		490D4401153BAA670003EA47 /* LWETUserDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D4364153BAA670003EA47 /* LWETUserDB.m */; };
 		490D4402153BAA670003EA47 /* LWETUserDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D4364153BAA670003EA47 /* LWETUserDB.m */; };
 		490D4403153BAA670003EA47 /* LWETUserDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D4364153BAA670003EA47 /* LWETUserDB.m */; };
-		490D4404153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 490D4365153BAA670003EA47 /* LWETUserDB.xcdatamodel */; };
-		490D4405153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 490D4365153BAA670003EA47 /* LWETUserDB.xcdatamodel */; };
 		490D4406153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 490D4365153BAA670003EA47 /* LWETUserDB.xcdatamodel */; };
 		490D4407153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 490D4365153BAA670003EA47 /* LWETUserDB.xcdatamodel */; };
 		490D4408153BAA670003EA47 /* LWETwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D4367153BAA670003EA47 /* LWETwitterEngine.m */; };
@@ -1255,8 +1253,6 @@
 		4965FD30126F6417000AC280 /* practice-btn-wrong@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-wrong@2x.png"; path = "Assets/practice-btn-wrong@2x.png"; sourceTree = "<group>"; };
 		4965FD80126F6FCF000AC280 /* bluetheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "bluetheme-cookie-cutters"; path = "Assets/bluetheme-cookie-cutters"; sourceTree = "<group>"; };
 		4965FD83126F7002000AC280 /* redtheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "redtheme-cookie-cutters"; path = "Assets/redtheme-cookie-cutters"; sourceTree = "<group>"; };
-		49668AE714581D6F005636D0 /* LWEAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEAnalytics.h; sourceTree = "<group>"; };
-		49668AE814581D6F005636D0 /* LWEAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEAnalytics.m; sourceTree = "<group>"; };
 		49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "XIBs/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		496BE54B11EC5303003AB713 /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionBarViewController.h; path = AppSpecific/ActionBarViewController.h; sourceTree = "<group>"; };
 		496BE54C11EC5303003AB713 /* ActionBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionBarViewController.m; path = AppSpecific/ActionBarViewController.m; sourceTree = "<group>"; };
@@ -3703,7 +3699,6 @@
 				490D43F4153BAA670003EA47 /* LWETDefaultAuthenticationViewController.m in Sources */,
 				490D43FC153BAA670003EA47 /* LWETUser.m in Sources */,
 				490D4400153BAA670003EA47 /* LWETUserDB.m in Sources */,
-				490D4404153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */,
 				490D4408153BAA670003EA47 /* LWETwitterEngine.m in Sources */,
 				490D440C153BAA670003EA47 /* LWETwitterOAuth.m in Sources */,
 				490D4418153BAA670003EA47 /* LWEUIAlertView.m in Sources */,
@@ -4130,7 +4125,6 @@
 				490D43F5153BAA670003EA47 /* LWETDefaultAuthenticationViewController.m in Sources */,
 				490D43FD153BAA670003EA47 /* LWETUser.m in Sources */,
 				490D4401153BAA670003EA47 /* LWETUserDB.m in Sources */,
-				490D4405153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */,
 				490D4409153BAA670003EA47 /* LWETwitterEngine.m in Sources */,
 				490D440D153BAA670003EA47 /* LWETwitterOAuth.m in Sources */,
 				490D4419153BAA670003EA47 /* LWEUIAlertView.m in Sources */,

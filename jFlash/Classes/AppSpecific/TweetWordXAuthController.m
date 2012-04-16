@@ -9,6 +9,7 @@
 #import "TweetWordXAuthController.h"
 #import "LWETwitterOAuth.h"
 #import "LWEViewAnimationUtils.h"
+#import "DSActivityView.h"
 
 @implementation TweetWordXAuthController
 
@@ -81,11 +82,8 @@
 //! This is the method called when authentication is failing. Either caused by the server, or the wrong username and password
 - (void)didFailAuthentication:(NSError *)error
 {
-	if (_lv != nil)
-	{
-		[_lv removeFromSuperview];
-		_lv = nil;
-	}
+  [DSBezelActivityView removeViewAnimated:YES];
+
 	//Pop up an alert message for user, telling that the authentication is not successful.
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to Log In",@"TweetWordXAuthController.FailMsgTitle")
                                      message:NSLocalizedString(@"Please check your username and password and try again.  Also, make sure that you have a network connection.", @"TweetWordXAuthController.FailMsgMsg")];
@@ -96,7 +94,8 @@
 //! IBAction for "Authentication" button being clicked. It fires the authentication engine being passed to this view controller.
 - (IBAction)authenticateUser:(id)sender
 {
-	_lv = [LWELoadingView loadingView:self.parentViewController.view withText:NSLocalizedString(@"Logging In",@"Logging In")];
+  [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Logging In",@"Logging In")];
+
   // TODO: MMA Danger Will Robinson, afterDelay:0.0
 	[self performSelector:@selector(_performAuthentication) withObject:nil afterDelay:0.0];
 }
