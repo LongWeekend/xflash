@@ -359,6 +359,8 @@ public class TagFragment extends Fragment
                         tagList.removeView(viewToRemove);            
                     }
 
+                    needLoad = true;
+
                 }  // end onClick()
             });
 
