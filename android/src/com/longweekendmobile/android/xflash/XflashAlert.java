@@ -15,10 +15,12 @@ package com.longweekendmobile.android.xflash;
 //  public  void fireLastCardDialog(Tag  )
 //  public  void startStudying(View  )
 //  public  void deleteUserError(User  )
+//  public  void fireNoTagNameDialog(Context  )
 //  private void fireStartStudyingDialog(Tag  )
 //  private void fireEmptyTagDialog()
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.View;
@@ -171,6 +173,30 @@ public class XflashAlert
         builder.create().show();
 
     }  // end deleteUserError()
+
+
+    // dialog to display error when attemping to save a Tag with no name
+    public static void fireNoTagNameDialog(Context inContext)
+    {
+        Resources res = inContext.getResources();
+        
+        // set and fire our AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(inContext);
+
+        // set the title
+        String tempString = res.getString(R.string.edittag_noname_title);
+        builder.setTitle(tempString);
+
+        // set the message
+        tempString = res.getString(R.string.edittag_noname_message);
+        builder.setMessage(tempString);
+
+        // on negative response, do nothing
+        builder.setNegativeButton( res.getString(R.string.just_ok) ,null);
+
+        builder.create().show();
+
+    }  // end fireNoTagNameDialog()
 
 
     // launch the dialog to confirm user would like to start studying a tag

@@ -33,6 +33,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static boolean getExampleSentenceOn()
 //  public static boolean getTagCardsOn()
+//  public static boolean getEditTagOn()
 //  public static boolean getAddCardToTagOn()
 //
 //  public static void resetPracticeScreen()
@@ -93,6 +94,7 @@ public class XflashScreen
     private static boolean[] extraScreensOn;
     private static boolean exampleSentenceOn;
     private static boolean tagCardsOn;
+    private static boolean editTagOn;
     private static boolean addCardToTagOn;
 
     private static TabInfo[] extraFragments;
@@ -117,6 +119,7 @@ public class XflashScreen
         extraScreensOn = new boolean[] { false, false, false, false, false };
         exampleSentenceOn = false;
         tagCardsOn = false;
+        editTagOn = false;
         addCardToTagOn= false;
         
         extraFragments = new TabInfo[] { null, null, null, null, null };
@@ -215,9 +218,22 @@ public class XflashScreen
             }
             else if( direction == DIRECTION_CLOSE )
             {
-                // coming from AddCardToTagFragment
+                // coming from AddCardToTagFragment or EditTagFragment
+                editTagOn = false;
                 addCardToTagOn = false;     
                 --currentTagScreen;
+            }
+        }
+        else if( inTag == "edit_tag" )
+        {
+            extraScreensOn[LWE_TAG_TAB] = true;
+            editTagOn = true;
+            
+            if( direction == DIRECTION_OPEN )
+            {
+                // coming from TagCardsFragment
+                tagCardsOn = false;
+                ++currentTagScreen;
             }
         }
         else if( inTag == "add_card" )
@@ -294,6 +310,16 @@ public class XflashScreen
                 ( extraFragments[LWE_TAG_TAB].tag != "tag_cards" ) )
             {    
                 extraFragments[LWE_TAG_TAB] = new TabInfo("tag_cards", TagCardsFragment.class, null);
+            }
+
+            return extraFragments[LWE_TAG_TAB];
+        }
+        if( inTag == "edit_tag" )
+        {
+            if( ( extraFragments[LWE_TAG_TAB] == null ) ||
+                ( extraFragments[LWE_TAG_TAB].tag != "edit_tag" ) )
+            {    
+                extraFragments[LWE_TAG_TAB] = new TabInfo("edit_tag", EditTagFragment.class, null);
             }
 
             return extraFragments[LWE_TAG_TAB];
@@ -414,7 +440,7 @@ public class XflashScreen
 
     public static void addTagStack()
     {
-        if(tagStack == null)
+        if( tagStack == null )
         {   
             tagStack = new ArrayList<Group>();
         }
@@ -480,6 +506,13 @@ public class XflashScreen
                     
                     return "tag";
                 }
+                else if( editTagOn == true ) 
+                {
+                    editTagOn = false;
+                    tagCardsOn = true;
+                    
+                    return "tag_cards";
+                }
                 else if( addCardToTagOn == true ) 
                 {
                     addCardToTagOn = false;
@@ -532,6 +565,11 @@ public class XflashScreen
     public static boolean getTagCardsOn()
     {
         return tagCardsOn;
+    }
+
+    public static boolean getEditTagOn()
+    {
+        return editTagOn;
     }
 
     public static boolean getAddCardToTagOn()

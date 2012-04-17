@@ -986,8 +986,6 @@ public class XflashSettings
     {
         reminderCount = inCount;
 
-        Log.d(MYTAG,">>> setReminderCount(" + reminderCount + ")");
-
         setReminders();
     }
     
@@ -1017,8 +1015,6 @@ public class XflashSettings
 
     public static void toggleReminders()
     {
-        Log.d(MYTAG,">>> toggleReminders()");
-        
         // get Preferences to update setting
         XFApplication tempInstance = XFApplication.getInstance();
         SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
@@ -1062,13 +1058,8 @@ public class XflashSettings
         // get the phone's alarm manager
         AlarmManager aMgr = (AlarmManager)myContext.getSystemService(Context.ALARM_SERVICE);
         
-        Log.d(MYTAG,">>> in setReminderS()");
-        
         if( remindersOn )
         {
-            
-            Log.d(MYTAG,">   reminders ON, reminderCount: " + reminderCount);
-
             // save the days to wait
             editor.putInt("reminderCount",reminderCount);
             
@@ -1084,8 +1075,6 @@ public class XflashSettings
         }
         else
         {
-            Log.d(MYTAG,">   reminders OFF");
-            
             // if we are turning the reminder off, clear it from Preferences
             // and delete it from the alarm manager
             editor.remove("alarmTime");
@@ -1094,10 +1083,6 @@ public class XflashSettings
 
         // commit changes to the Preferences,
         editor.commit();
-
-        Log.d(MYTAG,">   committed");
-        Log.d(MYTAG,".");
-        Log.d(MYTAG,".");
 
     }  // end setReminders() 
 

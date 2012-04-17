@@ -391,6 +391,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                         {
                             switchTab = XflashScreen.getTransitionFragment("tag_cards");
                         }
+                        else if( XflashScreen.getEditTagOn() )
+                        {
+                            switchTab = XflashScreen.getTransitionFragment("edit_tag");
+                        }
                         else if( XflashScreen.getAddCardToTagOn() )
                         {
                             switchTab = XflashScreen.getTransitionFragment("add_card");

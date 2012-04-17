@@ -73,10 +73,12 @@
     <string name="addcard_mysets">My Sets</string>
     <string name="addcard_othersets">Other Sets with this Card</string>
     <string name="create_tag_title">Create Study Set</string>
-    <string name="createtag_name_caption">Name your new study set!</string>
-    <string name="createtag_name_hint">e.g. Words I Heard on TV</string>
-    <string name="createtag_description_caption">Describe It!</string>
-    <string name="createtag_description_hint">Optional</string>
+    <string name="edittag_name_caption">Name your new study set!</string>
+    <string name="edittag_name_hint">e.g. Words I Heard on TV</string>
+    <string name="edittag_description_caption">Describe It!</string>
+    <string name="edittag_description_hint">Optional</string>
+    <string name="edittag_noname_title">No Name!</string>
+    <string name="edittag_noname_message">Please enter a name for your Study Set.</string>
     <string name="update_tag_title">Update Study Set</string>
     <string name="search_hint">Enter search keyword</string>
     <string name="search_no_results">No search results found!</string>
@@ -148,7 +150,6 @@
     <string name="firstrun_alert_message">We\'ve loaded our favorite word set to get you started.\n\nTo study other sets, tap the \'Study Sets\' tab below.</string>
     <string name="update_debug_title">Up\'dizzle?</string>
     <string name="update_debug_message">Fo\'shizzle!</string>
-    <string name="addtag_needname">Please enter a name!</string>
     <string name="reminder_ticker">Time to Study!</string>
     <string name="reminder_title">Ready to Study?</string>
     <string name="reminder_content">It\'s been ##NUMDAYS## days, ready to brush up?</string>
