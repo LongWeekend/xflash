@@ -156,7 +156,7 @@
     <string name="reminder_settings">Reminder Settings</string>
     <string name="reminder_days_after">Days After\nLast Session</string>
     <string name="reminder_note">Reminders are reset each time the app is opened.  If you\'re diligent about studying, you may never see one!</string>
-
+    <string name="twitter_chooser_title">Share on Twitter</string>
 
 </resources>
 

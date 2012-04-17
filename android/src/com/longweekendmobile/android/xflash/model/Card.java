@@ -61,6 +61,9 @@ public class Card
     protected static final int CARD_TYPE_DICTIONARY = 3;
     protected static final int CARD_TYPE_SENTENCE = 4;
     
+    protected static final int LWE_TWITTER_MAX_CHARS = 132;
+    protected static final String LWE_TWITTER_HASH_TAG = "#jflash";
+   
     protected int cardId;
     protected int userId;
     protected int levelId;
@@ -262,91 +265,100 @@ public class Card
         return ( cardId == inCard.cardId );
     }
 
+    
     // get the tweet word and try to cut the meaning so that it returns a String
-    // that will fit within the allocation of twitter status update (?)
+    // that will fit within the allocation of twitter status update
+    // returns String with format:  "headword [reading] meaning"
     public String tweetContent()
     {
-        // TODO - not implemented
-        
-        return null;
+        // String to return
+        String tweetString = null;
+
+        // get the lengths of everyone involved
+        int headwordLength = headword.length();
+        int readingLength = hw_reading.length();
+        int meaningLength = meaningWithoutMarkup().length();
+    
+        // go from most conservative (headword exceeds LWE_TWITTER_MAX_CHARS) 
+        // to most liberal (the whole thing fits in LWE_TWITTER_MAX_CHARS)  
+        if( headwordLength > LWE_TWITTER_MAX_CHARS )
+        {
+            // headword alone is longer than twitter allowance
+            tweetString = headword.substring(0,LWE_TWITTER_MAX_CHARS);
+        }
+        else
+        {
+            // add four, because we add brackets and spaces
+            if( ( headwordLength + readingLength + 4 ) > LWE_TWITTER_MAX_CHARS )
+            {
+                // headword + reading is too long, so just use headword
+                tweetString = headword;
+            }
+            else
+            {
+                tweetString = headword + " [" + hw_reading + "] ";
+            }
+        }
+  
+        // now determine if we have any space left for a meaning
+        int charsLeftBeforeMeaning = ( LWE_TWITTER_MAX_CHARS - tweetString.length() );
+  
+        // If there are less than 5, just ignore - not worth it
+        if( charsLeftBeforeMeaning > 5 )
+        {
+            String justMeaning = meaningWithoutMarkup();
+            
+            int charsLeftAfterMeaning = charsLeftBeforeMeaning - meaningLength; 
+            
+            // but in some cases, the "meaning" length, can exceed the maximum length
+            // of the twitter update status lenght, so it looks for "/" and cut the meaning
+            // to fit in. 
+            if( charsLeftAfterMeaning < 0 )
+            {
+                int cutIndex = justMeaning.indexOf("/");
+
+                if( ( cutIndex < 0 ) || ( cutIndex > charsLeftBeforeMeaning ) )
+                {
+                    // if the first meaning is too long, just truncate
+                    cutIndex = charsLeftBeforeMeaning;
+                }
+                else
+                {
+                    // loop until we've got as many meanings as we can fit
+                    // i.e. do stuff Mark and Co. were too lazy to implement ;)
+                    while( true )
+                    {
+                        int newSlashIndex = justMeaning.indexOf("/", ( cutIndex + 1 ) );
+                
+                        if( ( newSlashIndex < 0 ) || ( newSlashIndex > charsLeftBeforeMeaning ) )
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            cutIndex = newSlashIndex;
+                        }
+                    }
+                }
+                
+                // when we have as many meanings as will fit in a tweet, concat
+                // them onto the tweet string
+                tweetString = tweetString + justMeaning.substring(0,cutIndex);
+            }
+            else
+            {
+                // we have enough room for the whole meaning
+                tweetString = tweetString + justMeaning;
+            }
+        } 
+       
+        // add the hashtag
+        tweetString = tweetString + " " + LWE_TWITTER_HASH_TAG;
+         
+        return tweetString;
     }
 
-/*
-
-{
-    NSMutableString *str = nil; 
   
-    //Set up the tweet word, so that the str will have the following format
-    //Head Word [reading] meaning
-  
-  // Get the lengths of everyone involved
-  NSInteger headwordLength = [self.headword length];
-  NSInteger readingLength = [self.reading length];
-  NSInteger meaningLength = [[self meaningWithoutMarkup] length];
-  
-  // Now go from most conservative (headword exceeds LWE_TWITTER_MAX_CHARS) 
-  // to most liberal (the whole thing fits in LWE_TWITTER_MAX_CHARS)  
-  if (headwordLength > LWE_TWITTER_MAX_CHARS)
-  {
-    // Headword alone is longer than kMaxChars
-    str = [[NSMutableString alloc] initWithFormat:@"%@", [self.headword substringToIndex:LWE_TWITTER_MAX_CHARS]];
-  }
-  else
-  {
-    // Add four because we add brackets and spaces
-    if ((headwordLength + readingLength + 4) > LWE_TWITTER_MAX_CHARS)
-    {
-      // Headword + reading is too long, so just use headword.
-      str = [[NSMutableString alloc] initWithFormat:@"%@",self.headword];
-    }
-    else
-    {
-      str = [[NSMutableString alloc] initWithFormat:@"%@ [%@] ",self.headword,self.reading];
-    }
-  }
-  
-  // Now determine if we have any space left for a meaning.
-    NSInteger charLeftBeforeMeaning = LWE_TWITTER_MAX_CHARS - [str length];
-  
-  // If there are less than 5, just ignore - not worth it
-  if (charLeftBeforeMeaning > 5)
-  {
-    NSString *meaning = [self meaningWithoutMarkup];
-    NSInteger charLeftAfterMeaning = charLeftBeforeMeaning - meaningLength;
-    //but in some cases, the "meaning" length, can exceed the maximum length
-    //of the twitter update status lenght, so it looks for "/" and cut the meaning
-    //to fit in. 
-    if (charLeftAfterMeaning < 0)
-    {
-      NSRange range = [meaning rangeOfString:@"/" options:NSBackwardsSearch];
-      if (range.location != NSNotFound && (range.location < charLeftBeforeMeaning))
-      {
-        // We got one, and it fits
-        // This is still a naive implementation, it should recursively chop off slashes until it fits...
-        // AT present it only does it once
-        [str appendString:[meaning substringToIndex:range.location]];
-      }
-      else
-      {
-        // Simple truncate
-        [str appendString:[meaning substringToIndex:charLeftBeforeMeaning]];
-      }
-    }
-    else
-    {
-      // Enough room for the whole meaning
-      [str appendString:meaning];
-    }
-  } 
-  
-  // Debug output
-  LWE_LOG(@"Tweet string: %@",str);
-  LWE_LOG(@"Tweet length: %d",[str length]);
-  
-    return (NSString*)[str autorelease];
-}
-*/
-
     // generic getters/setters
     public void setCardId(int inId)
     {
