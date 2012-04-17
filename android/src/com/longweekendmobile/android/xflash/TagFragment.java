@@ -296,6 +296,9 @@ public class TagFragment extends Fragment
         Intent myIntent = new Intent( Xflash.getActivity() ,CreateTagActivity.class);
         myIntent.putExtra("group_id", currentGroup.getGroupId() );
         
+        // TODO - change to intent extra if we do not need to load as a fragment
+        CreateTagActivity.setTagToEdit(null);
+        
         Xflash.getActivity().startActivity(myIntent);
     }
 

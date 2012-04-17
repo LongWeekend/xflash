@@ -5,17 +5,36 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp" >
 
-    <RelativeLayout android:id="@+id/header_block"
-        style="@style/default_display_block"
+    <LinearLayout android:id="@+id/tagcards_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@drawable/default_background" >
+    
+        <!-- start studying -->
+        <RelativeLayout android:id="@+id/tagcards_header_startstudying"
+            style="@style/default_display_block" >
+            <TextView 
+                style="@style/display_block_left"
+                android:text="@string/addcard_start_studying" />
+            <TextView 
+                style="@style/display_block_right"
+                android:text=">" />
+        </RelativeLayout>
 
-        <TextView 
-            style="@style/display_block_left"
-            android:text="@string/addcard_start_studying" />
-        <TextView 
-            style="@style/display_block_right"
-            android:text=">" />
+        <View style="@style/generic_divider" />
+        
+        <!-- start studying -->
+        <RelativeLayout android:id="@+id/tagcards_header_editset"
+            style="@style/default_display_block" >
+            <TextView 
+                style="@style/display_block_left"
+                android:text="@string/tagcards_editset" />
+            <TextView 
+                style="@style/display_block_right"
+                android:text=">" />
+        </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

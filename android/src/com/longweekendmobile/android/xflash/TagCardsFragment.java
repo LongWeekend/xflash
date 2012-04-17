@@ -12,6 +12,7 @@ package com.longweekendmobile.android.xflash;
 //  public static void loadTag(int  )
 //  public static void dumpObservers()
 //
+//  private void editTag()
 //  private void addCard(View  )
 //  private void setupObservers()
 //  private void updateFromSubscriptionObserver()
@@ -25,6 +26,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -39,6 +41,7 @@ import android.widget.TextView;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
+import com.longweekendmobile.android.xflash.model.GroupPeer;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
 
@@ -58,8 +61,9 @@ public class TagCardsFragment extends Fragment
     private static ArrayList<Card> cardArray = null;
  
     private ProgressDialog cardLoadDialog = null;
+
     private static Observer subscriptionObserver = null;
-    
+    private static Observer newTagObserver = null;    
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,20 +90,42 @@ public class TagCardsFragment extends Fragment
         TextView tempView = (TextView)tagCardsLayout.findViewById(R.id.tagcards_heading_text);
         tempView.setText( currentTag.getName() );
 
-        // get the header, buried in a wrapper
+        // get the headers, buried in a wrapper
         cardList = (ListView)tagCardsLayout.findViewById(R.id.tagcards_list);
         LinearLayout header = (LinearLayout)inflater.inflate(R.layout.tagcards_header,cardList,false);
-        RelativeLayout realHeader = (RelativeLayout)header.findViewById(R.id.header_block);
         
-        // tag the header with the currentTag id, add a click listener
-        realHeader.setTag( currentTag.getId() );
-        realHeader.setOnClickListener( new View.OnClickListener()
+        // tag the 'start studying' header with the currentTag id, add a click listener
+        RelativeLayout tempHeader = (RelativeLayout)header.findViewById(R.id.tagcards_header_startstudying);
+        
+        tempHeader.setTag( currentTag.getId() );
+        tempHeader.setOnClickListener( new View.OnClickListener()
         {
             public void onClick(View v)
             {
                 XflashAlert.startStudying(v);
             }
         });
+
+        // get the 'edit set details' header
+        tempHeader = (RelativeLayout)header.findViewById(R.id.tagcards_header_editset);
+        
+        // if we're looking at a use tag, set a click listener to cue the EditTagDetailsFragment
+        // else, hide the view
+        if( currentTag.isEditable() )
+        {
+            tempHeader.setTag( currentTag.getId() );
+            tempHeader.setOnClickListener( new View.OnClickListener()
+            {
+                public void onClick(View v)
+                {
+                    editTag();
+                }
+            });
+        }
+        else
+        {
+            tempHeader.setVisibility(View.GONE);
+        }
 
         // assign the header to our ListView of cards
         cardList.addHeaderView(header);
@@ -135,6 +161,21 @@ public class TagCardsFragment extends Fragment
     }
 
 
+    // launch CreateTagActivity in edit mode
+    private void editTag()
+    {
+        // start the 'add tag' activity as a modal
+        Intent myIntent = new Intent( Xflash.getActivity(), CreateTagActivity.class);
+        myIntent.putExtra("group_id", GroupPeer.topLevelGroup().getGroupId() );
+
+        // TODO - change to intent extra if we do not need to launch as a fragment
+        CreateTagActivity.setTagToEdit(currentTag);
+ 
+        Xflash.getActivity().startActivity(myIntent);
+    
+    }  // end editTag()
+   
+    
     // launches AddCardToTagFragment
     private void addCard(View v)
     {
@@ -163,6 +204,21 @@ public class TagCardsFragment extends Fragment
         
         }  // end if( subscriptionObserver == null )
 
+        if( newTagObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            newTagObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromNewTagObserver(arg);
+                }  
+            };
+
+            XFApplication.getNotifier().addNewTagObserver(newTagObserver);
+        
+        }  // end if( subscriptionObserver == null )
+
     }  // end setupObservers()
 
 
@@ -176,6 +232,27 @@ public class TagCardsFragment extends Fragment
         }
     
     }  // end updateFromSubscriptionObserver()
+
+
+    private void updateFromNewTagObserver(Object passedObject)
+    {
+        // get the Tag that was just added
+        Tag theNewTag = (Tag)passedObject;
+
+        // only refresh the name if new tag notification came from 
+        // the Tag we're currently displaying
+        if( theNewTag.getId() == currentTag.getId() ) 
+        {
+            // reset the currentTag, since its name has changed
+            // in the database
+            currentTag = TagPeer.retrieveTagById(incomingTagId);
+            
+            // set the title bar to the tag name we're looking at
+            TextView tempView = (TextView)tagCardsLayout.findViewById(R.id.tagcards_heading_text);
+            tempView.setText( currentTag.getName() );
+        }
+
+    }  // end updateFromNewTagObserver()
 
 
     // custom adapter to appropriately fill the view for our ListView
