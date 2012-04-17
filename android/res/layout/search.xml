@@ -18,7 +18,7 @@
             android:layout_marginRight="10dp"
             android:drawableRight="@drawable/search_edit_icon"
             android:hint="@string/search_hint"
-            android:imeOptions="actionDone" />
+            android:imeOptions="actionSearch" />
 
     </RelativeLayout>
 

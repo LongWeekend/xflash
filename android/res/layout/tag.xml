@@ -29,6 +29,7 @@
             android:layout_centerInParent="true"
             android:visibility="gone"
             android:drawableRight="@drawable/search_edit_icon"
+            android:imeOptions="actionDone"
             android:hint="@string/tag_search_hint" />
 
     </RelativeLayout>

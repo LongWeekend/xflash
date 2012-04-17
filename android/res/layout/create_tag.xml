@@ -10,11 +10,10 @@
         style="@style/heading_bar">
 
         <!-- HEADING -->
-        <TextView
+        <TextView android:id="@+id/createtag_heading_text"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:text="@string/create_tag_title" 
             style="@style/heading_text" />
 
     </RelativeLayout>
@@ -26,16 +25,34 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp" >
 
+            <!-- the tag name block -->
             <TextView 
                 style="@style/normal_display_text"
                 android:layout_width="match_parent" 
                 android:layout_height="wrap_content" 
-                android:text="@string/createtag_edit_caption" />
-
-            <EditText android:id="@+id/create_tag_text"
+                android:layout_marginTop="10dp"
+                android:text="@string/createtag_name_caption" />
+            <EditText android:id="@+id/create_tag_nametext"
                 style="@style/default_edittext"
                 android:layout_marginTop="4dp"
-                android:hint="@string/create_tag_hint" />
+                android:imeOptions="actionDone"
+                android:hint="@string/createtag_name_hint" />
+     
+            <!-- the tag description block -->
+            <TextView 
+                style="@style/normal_display_text"
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content" 
+                android:layout_marginTop="10dp"
+                android:text="@string/createtag_description_caption" />
+            <EditText android:id="@+id/create_tag_descriptiontext"
+                style="@style/default_edittext"
+                android:layout_marginTop="4dp"
+                android:lines="2"
+                android:minLines="2"
+                android:gravity="top|left"
+                android:imeOptions="actionDone"
+                android:hint="@string/createtag_description_hint" />
      
     </LinearLayout>       
 
