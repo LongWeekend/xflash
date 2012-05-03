@@ -382,14 +382,20 @@ public class PracticeFragment extends Fragment
     // launches a Twitter intent for this card
     private void tweetCard()
     {
+        Xflash myContext = Xflash.getActivity();
+
+        // setup an intent for tweeting
+        String tweetString = currentCard.tweetContent();
         Intent tweetIntent = new Intent(Intent.ACTION_SEND);
-        tweetIntent.putExtra(Intent.EXTRA_TEXT, "Test tweet");
-        
-        // tweetIntent.setType("application/twitter");
+        tweetIntent.putExtra(Intent.EXTRA_TEXT, tweetString );
         tweetIntent.setType("text/plain");
-        Xflash.getActivity().startActivity( Intent.createChooser(tweetIntent,"Share via Twitter") );
+        
+        // get the title and send the Intenet
+        String chooserTitle = myContext.getResources().getString(R.string.twitter_chooser_title);
+        myContext.startActivity( Intent.createChooser(tweetIntent, chooserTitle ) );
 
 
+        
         // TODO - unfortunately it looks like there is no specific Twitter intent
         //      - to be broadcast.  There are a lot of different recommendations
         //      - on how to handle this, many of them gross hacks

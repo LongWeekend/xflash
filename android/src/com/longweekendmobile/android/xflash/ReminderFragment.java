@@ -119,7 +119,7 @@ public class ReminderFragment extends Fragment
             XflashSettings.setReminderCount(countToSet);
         }
 
-        public void onNothingSelected(AdapterView parent) 
+        public void onNothingSelected(AdapterView<?> parent) 
         {
             // do nothing
         }
