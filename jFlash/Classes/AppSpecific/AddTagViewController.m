@@ -494,6 +494,7 @@ enum EntrySectionRows
   self.currentCard = nil;
   self.membershipCacheArray = nil;
   self.sentencesArray = nil;
+  self._sectionsArray = nil;
   [super dealloc];
 }
 
