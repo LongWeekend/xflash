@@ -24,7 +24,6 @@ public class AddCardActivity extends FragmentActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addcard_activity);
-    
     }
 
     @Override
@@ -38,7 +37,6 @@ public class AddCardActivity extends FragmentActivity
     public void onPause()
     {
         super.onPause();
-        
         overridePendingTransition(R.anim.hold,R.anim.slideout_bottom);
     }
 

@@ -35,14 +35,12 @@ package com.longweekendmobile.android.xflash;
 import java.util.Observable;
 import java.util.Observer;
 
-import android.util.Log;
-
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.Tag;
 
 public class XflashNotification
 {
-    private static final String MYTAG = "XFlash XflashNotification";
+    // private static final String MYTAG = "XFlash XflashNotification";
     
     public static final int NO_CARD_PASSED = -1000;
     
@@ -105,7 +103,6 @@ public class XflashNotification
     }
     public void newTagBroadcast(Tag inTag)
     {
-        Log.d(MYTAG,">>> XflashNotification.newTagBroadcast()");
         newTagObserver.broadcastNotification(inTag);
     }
 

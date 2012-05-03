@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,7 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class AddCardToTagFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash AddCardToTagFragment";
+    // private static final String MYTAG = "XFlash AddCardToTagFragment";
     
     private static int incomingCardId; 
     private static JapaneseCard EScard = null;
@@ -228,11 +227,10 @@ public class AddCardToTagFragment extends Fragment
     {
         // start the 'add tag' activity as a modal
         Intent myIntent = new Intent( Xflash.getActivity(), CreateTagActivity.class);
-        myIntent.putExtra("card_id", currentCard.getCardId() );
-        myIntent.putExtra("group_id", GroupPeer.topLevelGroup().getGroupId() );
 
-        // TODO - change to intent extra if we do not need to launch as a fragment
-        CreateTagActivity.setTagToEdit(null);
+        // set relevant data statically, since we need to use a Fragment
+        EditTagFragment.setGroupId( GroupPeer.topLevelGroup().getGroupId() );
+        EditTagFragment.setCardId( currentCard.getCardId() );
  
         Xflash.getActivity().startActivity(myIntent);
     
@@ -251,8 +249,6 @@ public class AddCardToTagFragment extends Fragment
         ArrayList<Tag> userTagArray = TagPeer.retrieveUserTagList();
        
         int rowCount = userTagArray.size();
-
-        Log.d(MYTAG,">   rowCount: " + rowCount);
 
         for(int i = 0; i < rowCount; i++)
         {

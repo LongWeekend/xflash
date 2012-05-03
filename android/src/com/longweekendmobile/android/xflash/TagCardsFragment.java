@@ -26,7 +26,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -164,14 +163,13 @@ public class TagCardsFragment extends Fragment
     // launch CreateTagActivity in edit mode
     private void editTag()
     {
-        // start the 'add tag' activity as a modal
-        Intent myIntent = new Intent( Xflash.getActivity(), CreateTagActivity.class);
-        myIntent.putExtra("group_id", GroupPeer.topLevelGroup().getGroupId() );
-
-        // TODO - change to intent extra if we do not need to launch as a fragment
-        CreateTagActivity.setTagToEdit(currentTag);
+        // set relevant data statically, since we need to use a Fragment
+        EditTagFragment.setTagToEdit(currentTag);
+        EditTagFragment.setGroupId( GroupPeer.topLevelGroup().getGroupId() );
+        EditTagFragment.setCardId( XflashNotification.NO_CARD_PASSED );
+        // EditTagFragment.setActivityContext(null);
  
-        Xflash.getActivity().startActivity(myIntent);
+        Xflash.getActivity().onScreenTransition("edit_tag",XflashScreen.DIRECTION_OPEN);
     
     }  // end editTag()
    
