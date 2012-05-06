@@ -25,7 +25,7 @@
   {
     self.title = NSLocalizedString(@"Choose User",@"UserViewController.NavBarTitle");
     self.tableView.delegate = self;
-    self.usersArray = [UserPeer getUsers];
+    self.usersArray = [UserPeer allUsers];
   }
   return self;
 }
@@ -56,7 +56,7 @@
 {
   // REVIEW: MMA Dec.02.2011
   // A better way to do this would be to just update the table cell with this user.
-  self.usersArray = [UserPeer getUsers];
+  self.usersArray = [UserPeer allUsers];
   [self.tableView reloadData];
 }
 
@@ -169,41 +169,37 @@
 //! Delete row from table
 - (void)tableView:(UITableView *)lclTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (editingStyle == UITableViewCellEditingStyleDelete)
+  // Quick return unless we are deleting
+  if (editingStyle != UITableViewCellEditingStyleDelete)
   {
-    // REVIEW: MMA we're starting to move more in the direction now of trying to 
-    // do something, and if we get an error back, then report -- not so much upfront checking.
-    // This kind of logic goes better in the model.
-    
-    // Cancel deletion if the user is ID=1
-    NSInteger selectedUserId = [[self.usersArray objectAtIndex:indexPath.row] userId];
-    if (selectedUserId == DEFAULT_USER_ID)
-    {
-      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Cannot Delete User",@"UserViewController.CannotDelete_AlertViewTitle")
-                                         message:NSLocalizedString(@"The default user can be edited, but not deleted.",@"UserViewController.CannotDelete_AlertViewMessage")];
-      return;
-    }
-
-    // Delete the row from the data source
-    User *tmpUser = [self.usersArray objectAtIndex:indexPath.row];
-    [tmpUser deleteUser];
-
-    // Remove from usersArray
-    [self.usersArray removeObjectAtIndex:indexPath.row];
-
-    // If we just deleted the active user, change to iPhone Owner
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    if (selectedUserId == [settings integerForKey:@"user_id"])
-    {
-      [self activateUserWithModal:[UserPeer getUserByPK:DEFAULT_USER_ID]];
-    }
-    
-    // Delete from table
-    [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
-
-    // Redraw table if needed
-    [lclTableView reloadData];
+    return;
   }
+  
+  // Delete the row from the data source
+  NSError *error = nil;
+  User *tmpUser = [self.usersArray objectAtIndex:indexPath.row];
+  if ([tmpUser deleteUser:&error] == NO)
+  {
+    // If there was an error, it was most likely because the user tried to delete the default user, which you can't.
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Cannot Delete User",@"UserViewController.CannotDelete_AlertViewTitle")
+                                       message:NSLocalizedString(@"The default user can be edited, but not deleted.",@"UserViewController.CannotDelete_AlertViewMessage")];
+    return;
+  }
+
+  // Remove from usersArray
+  self.usersArray = [UserPeer allUsers];
+
+  // If we just deleted the active user, change to iPhone Owner
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  if (tmpUser.userId == [settings integerForKey:@"user_id"])
+  {
+    [self activateUserWithModal:[UserPeer userWithUserId:DEFAULT_USER_ID]];
+  }
+  
+  // Delete from table
+  [lclTableView beginUpdates];
+  [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
+  [lclTableView endUpdates];
 }
 
 # pragma mark UI Responders
