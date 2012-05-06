@@ -186,16 +186,16 @@
     return;
   }
 
-  // Remove from usersArray
-  self.usersArray = [UserPeer allUsers];
-
-  // If we just deleted the active user, change to iPhone Owner
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if (tmpUser.userId == [settings integerForKey:@"user_id"])
+  // If we just deleted the active user, change to default
+  NSInteger currentUserId = [[NSUserDefaults standardUserDefaults] integerForKey:@"user_id"];
+  if (tmpUser.userId == currentUserId)
   {
-    [self activateUserWithModal:[UserPeer userWithUserId:DEFAULT_USER_ID]];
+    [self activateUserWithModal:[User defaultUser]];
   }
   
+  // Reset the source data for the table before animating
+  self.usersArray = [UserPeer allUsers];
+
   // Delete from table
   [lclTableView beginUpdates];
   [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
@@ -237,6 +237,7 @@
 - (void) showUserDetailsView
 {
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:nil];
+  userDetailsView.delegate = self;
   [self.navigationController pushViewController:userDetailsView animated:YES];
 	[userDetailsView release];
 }
