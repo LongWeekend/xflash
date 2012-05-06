@@ -9,6 +9,7 @@
 #import "TweetWordXAuthController.h"
 #import "LWETwitterOAuth.h"
 #import "LWEViewAnimationUtils.h"
+#import "DSActivityView.h"
 
 @implementation TweetWordXAuthController
 
@@ -28,7 +29,7 @@
 	//the username text field is not empty, goes straight to the authentication.
 	//It makes the user not needed to click the authentication button.
 	//If its the username text field, move to password text field
-	if ((![unameTxt.text isEqualToString:@""]) && (textField == passwordTxt))
+	if ((![self.unameTxt.text isEqualToString:@""]) && (textField == self.passwordTxt))
 	{
 		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,0) withInterval:0.5f];
 		[self performSelector:@selector(authenticateUser:)
@@ -37,7 +38,7 @@
 	}
 	else if (textField == unameTxt)
 	{
-		[passwordTxt becomeFirstResponder];
+		[self.passwordTxt becomeFirstResponder];
 	}
 	return YES;
 }
@@ -81,11 +82,8 @@
 //! This is the method called when authentication is failing. Either caused by the server, or the wrong username and password
 - (void)didFailAuthentication:(NSError *)error
 {
-	if (_lv != nil)
-	{
-		[_lv removeFromSuperview];
-		_lv = nil;
-	}
+  [DSBezelActivityView removeViewAnimated:YES];
+
 	//Pop up an alert message for user, telling that the authentication is not successful.
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to Log In",@"TweetWordXAuthController.FailMsgTitle")
                                      message:NSLocalizedString(@"Please check your username and password and try again.  Also, make sure that you have a network connection.", @"TweetWordXAuthController.FailMsgMsg")];
@@ -96,7 +94,8 @@
 //! IBAction for "Authentication" button being clicked. It fires the authentication engine being passed to this view controller.
 - (IBAction)authenticateUser:(id)sender
 {
-	_lv = [LWELoadingView loadingView:self.parentViewController.view withText:NSLocalizedString(@"Logging In",@"Logging In")];
+  [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Logging In",@"Logging In")];
+
   // TODO: MMA Danger Will Robinson, afterDelay:0.0
 	[self performSelector:@selector(_performAuthentication) withObject:nil afterDelay:0.0];
 }
@@ -139,13 +138,13 @@
 //! Handy method to resign the responder, check which text box is currently is the first responder, and resign it. 
 - (void)_textFieldResign
 {
-	if ([unameTxt isFirstResponder])
+	if ([self.unameTxt isFirstResponder])
   {
-		[unameTxt resignFirstResponder];
+		[self.unameTxt resignFirstResponder];
   }
-	else if ([passwordTxt isFirstResponder])
+	else if ([self.passwordTxt isFirstResponder])
   {
-		[passwordTxt resignFirstResponder];
+		[self.passwordTxt resignFirstResponder];
   }
 	
 	//Put the view back to the normal view
@@ -193,6 +192,11 @@
 	self.passwordTxt.text = @"";
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  [DSBezelActivityView removeViewAnimated:NO];
+}
 
 - (void)viewDidUnload 
 {

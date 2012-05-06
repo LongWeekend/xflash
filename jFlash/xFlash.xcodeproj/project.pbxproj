@@ -184,8 +184,6 @@
 		490D4401153BAA670003EA47 /* LWETUserDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D4364153BAA670003EA47 /* LWETUserDB.m */; };
 		490D4402153BAA670003EA47 /* LWETUserDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D4364153BAA670003EA47 /* LWETUserDB.m */; };
 		490D4403153BAA670003EA47 /* LWETUserDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D4364153BAA670003EA47 /* LWETUserDB.m */; };
-		490D4404153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 490D4365153BAA670003EA47 /* LWETUserDB.xcdatamodel */; };
-		490D4405153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 490D4365153BAA670003EA47 /* LWETUserDB.xcdatamodel */; };
 		490D4406153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 490D4365153BAA670003EA47 /* LWETUserDB.xcdatamodel */; };
 		490D4407153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 490D4365153BAA670003EA47 /* LWETUserDB.xcdatamodel */; };
 		490D4408153BAA670003EA47 /* LWETwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D4367153BAA670003EA47 /* LWETwitterEngine.m */; };
@@ -325,6 +323,10 @@
 		4965FD84126F7002000AC280 /* redtheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD83126F7002000AC280 /* redtheme-cookie-cutters */; };
 		4965FD85126F7002000AC280 /* redtheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD83126F7002000AC280 /* redtheme-cookie-cutters */; };
 		4966C30112686DCE00F34E24 /* jflash_12_to_13.sql in Resources */ = {isa = PBXBuildFile; fileRef = 49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */; };
+		49695844150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */; };
+		49695845150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */; };
+		49695846150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */; };
+		49695847150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */; };
 		496BE55211EC5320003AB713 /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE54F11EC5320003AB713 /* ActionBarViewController.xib */; };
 		496BE55311EC5320003AB713 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */; };
 		496BE55411EC5320003AB713 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55111EC5320003AB713 /* SearchView.xib */; };
@@ -1251,6 +1253,7 @@
 		4965FD30126F6417000AC280 /* practice-btn-wrong@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-wrong@2x.png"; path = "Assets/practice-btn-wrong@2x.png"; sourceTree = "<group>"; };
 		4965FD80126F6FCF000AC280 /* bluetheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "bluetheme-cookie-cutters"; path = "Assets/bluetheme-cookie-cutters"; sourceTree = "<group>"; };
 		4965FD83126F7002000AC280 /* redtheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "redtheme-cookie-cutters"; path = "Assets/redtheme-cookie-cutters"; sourceTree = "<group>"; };
+		49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "XIBs/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		496BE54B11EC5303003AB713 /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionBarViewController.h; path = AppSpecific/ActionBarViewController.h; sourceTree = "<group>"; };
 		496BE54C11EC5303003AB713 /* ActionBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionBarViewController.m; path = AppSpecific/ActionBarViewController.m; sourceTree = "<group>"; };
 		496BE54F11EC5320003AB713 /* ActionBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionBarViewController.xib; path = XIBs/ActionBarViewController.xib; sourceTree = "<group>"; };
@@ -2902,6 +2905,7 @@
 				49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
 				917A5C6911AB844300016BD2 /* MainWindow.xib */,
+				49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */,
 				497125231487300A00D4D150 /* MoodIcon.xib */,
 				917A5C6A11AB844300016BD2 /* AddStudySetView.xib */,
 				49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */,
@@ -3055,7 +3059,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Long Weekend LLC";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "xFlash" */;
@@ -3286,6 +3290,7 @@
 				918EEB2814F5DACB00EF044C /* button_iosblue_280x40.png in Resources */,
 				4937876114DB8D9700361203 /* jflash_16_to_161.sql in Resources */,
 				49BA6DB514F4887500A48A21 /* jflash_161_to_162.sql in Resources */,
+				49695844150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 				490D43F8153BAA670003EA47 /* LWETDefaultAuthenticationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3315,6 +3320,7 @@
 				49FE8C7814A9B83200579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7A14A9B83200579716 /* CardViewController.xib in Resources */,
 				4937876214DB8D9700361203 /* jflash_16_to_161.sql in Resources */,
+				49695846150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 				490D43FA153BAA670003EA47 /* LWETDefaultAuthenticationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3339,6 +3345,7 @@
 				4982294E1490F028009EC2CD /* 02-turning-gear@2x.png in Resources */,
 				49FE8C7214A9B82300579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7414A9B82300579716 /* CardViewController.xib in Resources */,
+				49695847150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 				490D43FB153BAA670003EA47 /* LWETDefaultAuthenticationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3511,6 +3518,7 @@
 				918EEB2314F5DAB500EF044C /* button_iosblue_280x40@2x.png in Resources */,
 				918EEB2714F5DACB00EF044C /* button_iosblue_135x40.png in Resources */,
 				918EEB2914F5DACB00EF044C /* button_iosblue_280x40.png in Resources */,
+				49695845150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 				490D43F9153BAA670003EA47 /* LWETDefaultAuthenticationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3691,7 +3699,6 @@
 				490D43F4153BAA670003EA47 /* LWETDefaultAuthenticationViewController.m in Sources */,
 				490D43FC153BAA670003EA47 /* LWETUser.m in Sources */,
 				490D4400153BAA670003EA47 /* LWETUserDB.m in Sources */,
-				490D4404153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */,
 				490D4408153BAA670003EA47 /* LWETwitterEngine.m in Sources */,
 				490D440C153BAA670003EA47 /* LWETwitterOAuth.m in Sources */,
 				490D4418153BAA670003EA47 /* LWEUIAlertView.m in Sources */,
@@ -4118,7 +4125,6 @@
 				490D43F5153BAA670003EA47 /* LWETDefaultAuthenticationViewController.m in Sources */,
 				490D43FD153BAA670003EA47 /* LWETUser.m in Sources */,
 				490D4401153BAA670003EA47 /* LWETUserDB.m in Sources */,
-				490D4405153BAA670003EA47 /* LWETUserDB.xcdatamodel in Sources */,
 				490D4409153BAA670003EA47 /* LWETwitterEngine.m in Sources */,
 				490D440D153BAA670003EA47 /* LWETwitterOAuth.m in Sources */,
 				490D4419153BAA670003EA47 /* LWEUIAlertView.m in Sources */,
@@ -4159,20 +4165,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_DEBUG,
 					LWE_JFLASH,
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlash-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = jFlash;
 				PROVISIONING_PROFILE = "";
 			};
@@ -4182,22 +4186,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_APP_STORE,
 					LWE_JFLASH,
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_MISSING_PARENTHESES = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlash-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = jFlash;
 				PROVISIONING_PROFILE = "";
 			};
@@ -4219,6 +4219,8 @@
 					LWE_JFLASH,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/jFlashTests/jFlashTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
@@ -4247,6 +4249,8 @@
 					LWE_JFLASH,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/jFlashTests/jFlashTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
@@ -4276,6 +4280,8 @@
 					LWE_JFLASH,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/jFlashTests/jFlashTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
@@ -4304,6 +4310,8 @@
 					LWE_CFLASH,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/cFlashTests/cFlashTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
@@ -4332,6 +4340,8 @@
 					LWE_CFLASH,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/cFlashTests/cFlashTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
@@ -4361,6 +4371,8 @@
 					LWE_CFLASH,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/cFlashTests/cFlashTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
@@ -4382,13 +4394,13 @@
 					LWE_DEBUG,
 					LWE_CFLASH,
 				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "cFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 				);
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = cFlash;
 				PROVISIONING_PROFILE = "";
 			};
@@ -4403,15 +4415,15 @@
 					LWE_RELEASE_AD_HOC,
 					LWE_CFLASH,
 				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "cFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 				);
 				PRODUCT_NAME = cFlash;
 				PROVISIONING_PROFILE = "";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
 		};
@@ -4424,8 +4436,9 @@
 					LWE_RELEASE_APP_STORE,
 					LWE_CFLASH,
 				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "cFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
@@ -4448,11 +4461,15 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = LWE_RELEASE_AD_HOC;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
 		};
@@ -4460,23 +4477,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_AD_HOC,
 					LWE_JFLASH,
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlash-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = jFlash;
 				PROVISIONING_PROFILE = "";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
 		};
@@ -4491,13 +4505,16 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = LWE_DEBUG;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -4516,11 +4533,14 @@
 					LWE_RELEASE_APP_STORE,
 					APP_STORE_FINAL,
 				);
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
