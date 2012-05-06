@@ -10,8 +10,6 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2424111D11F6F46600D535D7 /* TweetWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111911F6F46600D535D7 /* TweetWordViewController.m */; };
-		2424111E11F6F46600D535D7 /* TweetWordXAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */; };
 		2424112311F6F48100D535D7 /* TweetWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112011F6F48100D535D7 /* TweetWordViewController.xib */; };
 		2424112411F6F48100D535D7 /* TweetWordXAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */; };
 		2424116511F7E1BC00D535D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */; };
@@ -492,8 +490,6 @@
 		496C7B001263274B004B6B90 /* UserHistoryPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */; };
 		496C7B011263274C004B6B90 /* ExampleSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */; };
 		496C7B021263274D004B6B90 /* ExampleSentencePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */; };
-		496C7B0412632754004B6B90 /* TweetWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111911F6F46600D535D7 /* TweetWordViewController.m */; };
-		496C7B0512632754004B6B90 /* TweetWordXAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */; };
 		496C7B0612632759004B6B90 /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BC611AB7C4600016BD2 /* AddTagViewController.m */; };
 		496C7B071263275A004B6B90 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
 		496C7B081263275A004B6B90 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD011AB7C4600016BD2 /* SearchViewController.m */; };
@@ -636,10 +632,6 @@
 		49A465CA14FD05DD00CF5C44 /* AddStudySetInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */; };
 		49A465CB14FD05DF00CF5C44 /* AddStudySetInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */; };
 		49A465CD14FD05F300CF5C44 /* LWEChineseSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4C2144D5CA000E6A9AE /* LWEChineseSearchBar.m */; };
-		49A465CE14FD060600CF5C44 /* TweetWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111911F6F46600D535D7 /* TweetWordViewController.m */; };
-		49A465CF14FD060600CF5C44 /* TweetWordXAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */; };
-		49A465D014FD060600CF5C44 /* TweetWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111911F6F46600D535D7 /* TweetWordViewController.m */; };
-		49A465D114FD060600CF5C44 /* TweetWordXAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */; };
 		49A465DE14FD065400CF5C44 /* OADataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F1311F3E754007F6FB7 /* OADataFetcher.m */; };
 		49A465DF14FD065400CF5C44 /* OARequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F1B11F3E754007F6FB7 /* OARequestParameter.m */; };
 		49A465E014FD065500CF5C44 /* OADataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F1311F3E754007F6FB7 /* OADataFetcher.m */; };
@@ -1048,10 +1040,6 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* jFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		2424111811F6F46600D535D7 /* TweetWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweetWordViewController.h; path = AppSpecific/TweetWordViewController.h; sourceTree = "<group>"; };
-		2424111911F6F46600D535D7 /* TweetWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetWordViewController.m; path = AppSpecific/TweetWordViewController.m; sourceTree = "<group>"; };
-		2424111A11F6F46600D535D7 /* TweetWordXAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweetWordXAuthController.h; path = AppSpecific/TweetWordXAuthController.h; sourceTree = "<group>"; };
-		2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetWordXAuthController.m; path = AppSpecific/TweetWordXAuthController.m; sourceTree = "<group>"; };
 		2424112011F6F48100D535D7 /* TweetWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordViewController.xib; path = XIBs/TweetWordViewController.xib; sourceTree = "<group>"; };
 		2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordXAuthController.xib; path = XIBs/TweetWordXAuthController.xib; sourceTree = "<group>"; };
 		242A173F1461AB60002977E6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -2376,17 +2364,6 @@
 			name = Search;
 			sourceTree = "<group>";
 		};
-		49C6E9F311F6F7B5004633FD /* Twitter */ = {
-			isa = PBXGroup;
-			children = (
-				2424111811F6F46600D535D7 /* TweetWordViewController.h */,
-				2424111911F6F46600D535D7 /* TweetWordViewController.m */,
-				2424111A11F6F46600D535D7 /* TweetWordXAuthController.h */,
-				2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */,
-			);
-			name = Twitter;
-			sourceTree = "<group>";
-		};
 		49D996C612705C9B00D176D0 /* Japanese Flash Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -2960,7 +2937,6 @@
 				49C5BC1E11C51AE300A595D6 /* Search */,
 				91DDB0A811C1F57700E8B962 /* Settings */,
 				4993AFBF1278103E00872875 /* Help */,
-				49C6E9F311F6F7B5004633FD /* Twitter */,
 				49F9692511AF680700DFC3C9 /* jFlashAppDelegate.h */,
 				49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */,
 				4925735111C12619006FA4E1 /* ModalTaskViewController.h */,
@@ -3641,8 +3617,6 @@
 				24E47F2C11F3E754007F6FB7 /* OARequestParameter.m in Sources */,
 				24E47F2D11F3E754007F6FB7 /* OAServiceTicket.m in Sources */,
 				24E47F2E11F3E754007F6FB7 /* OAToken.m in Sources */,
-				2424111D11F6F46600D535D7 /* TweetWordViewController.m in Sources */,
-				2424111E11F6F46600D535D7 /* TweetWordXAuthController.m in Sources */,
 				49C6EA2C11F6F95D004633FD /* ActionBarViewController.m in Sources */,
 				49AF3D351265EDCD00CEAA52 /* UpdateManager.m in Sources */,
 				490B23441277BCE100CF3484 /* FMDatabase.m in Sources */,
@@ -3819,8 +3793,6 @@
 				49A465BE14FD053500CF5C44 /* AddTagViewController.m in Sources */,
 				49A465C614FD056D00CF5C44 /* CardViewController.m in Sources */,
 				49A465CA14FD05DD00CF5C44 /* AddStudySetInputViewController.m in Sources */,
-				49A465CE14FD060600CF5C44 /* TweetWordViewController.m in Sources */,
-				49A465CF14FD060600CF5C44 /* TweetWordXAuthController.m in Sources */,
 				49A465DE14FD065400CF5C44 /* OADataFetcher.m in Sources */,
 				49A465DF14FD065400CF5C44 /* OARequestParameter.m in Sources */,
 				49A465E214FD066200CF5C44 /* OAConsumer.m in Sources */,
@@ -3952,8 +3924,6 @@
 				49A465C714FD056E00CF5C44 /* CardViewController.m in Sources */,
 				49A465CB14FD05DF00CF5C44 /* AddStudySetInputViewController.m in Sources */,
 				49A465CD14FD05F300CF5C44 /* LWEChineseSearchBar.m in Sources */,
-				49A465D014FD060600CF5C44 /* TweetWordViewController.m in Sources */,
-				49A465D114FD060600CF5C44 /* TweetWordXAuthController.m in Sources */,
 				49A465E014FD065500CF5C44 /* OADataFetcher.m in Sources */,
 				49A465E114FD065500CF5C44 /* OARequestParameter.m in Sources */,
 				49A465E514FD066300CF5C44 /* OAConsumer.m in Sources */,
@@ -4032,8 +4002,6 @@
 				496C7B001263274B004B6B90 /* UserHistoryPeer.m in Sources */,
 				496C7B011263274C004B6B90 /* ExampleSentence.m in Sources */,
 				496C7B021263274D004B6B90 /* ExampleSentencePeer.m in Sources */,
-				496C7B0412632754004B6B90 /* TweetWordViewController.m in Sources */,
-				496C7B0512632754004B6B90 /* TweetWordXAuthController.m in Sources */,
 				496C7B0612632759004B6B90 /* AddTagViewController.m in Sources */,
 				496C7B071263275A004B6B90 /* DisplaySearchedSentenceViewController.m in Sources */,
 				496C7B081263275A004B6B90 /* SearchViewController.m in Sources */,
