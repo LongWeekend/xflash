@@ -7,7 +7,6 @@
 //
 
 #import "ActionBarViewController.h"
-#import "LWEJanrainLoginManager.h"
 #import "LWETwitterEngine.h"
 
 @interface ActionBarViewController ()
@@ -141,11 +140,6 @@
   }
   else if (buttonIndex == SVC_ACTION_TWEET_BUTTON)
   {
-    // couldn't quite get this working the way I wanted. Good idea in the future but stopping for now.
-    // This is "almost awesome", tweets and facebook sharing each work OK if you pass the share and userContent differently
-//    [[LWEJanrainLoginManager sharedLWEJanrainLoginManager] share:@"Found a word with Japanese Flash" 
-//                                                           andUrl:@"http://su.pr/1TZSd4" 
-//                                                           userContentOrNil:[self getTweetWord]];
 	  [self tweet];
   }
 }

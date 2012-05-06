@@ -11,14 +11,22 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
-#define API_BACKUP_DATA_URL @"http://lweflash.appspot.com/api/uploadBackup";
+NSString * const BackupManagerRestoreURL = @"http://lweflash.appspot.com/api/getBackup";
+NSString * const BackupManagerBackupURL = @"http://lweflash.appspot.com/api/uploadBackup";
+NSString * const BMRequestType = @"requestType";
+NSString * const BMBackup = @"backup";
+NSString * const BMRestore = @"restore";
+NSString * const BMBackupFilename = @"backupFile";
+NSString * const BMFlashType = @"flashType";
 
 @interface BackupManager ()
 - (Tag *) _tagForName:(NSString *)tagName andId:(NSNumber *)key andGroupId:(NSNumber *)groupId;
 @end
 
 @implementation BackupManager
-@synthesize delegate;
+@synthesize delegate, loginManager;
+
+#pragma mark - Class Plumbing
 
 //! Init the BackupManager with a Delegate
 - (BackupManager*) initWithDelegate:(id<LWEBackupManagerDelegate>)aDelegate
@@ -26,8 +34,17 @@
   if ((self = [super init]))
   {
     self.delegate = aDelegate;
+    self.loginManager = [[[LWEJanrainLoginManager alloc] init] autorelease];
   }
   return self;
+}
+
+- (void) dealloc
+{
+  [loginManager release];
+  // In case we get dealloc'ed while waiting on an observation
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [super dealloc];
 }
 
 //! Helper method that returns the flashType string name used by the API
@@ -106,13 +123,13 @@
   // Stop listening for a login
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
   
-  //  download the userdate file
-  NSString *dataURL = [NSString stringWithFormat:@"http://lweflash.appspot.com/api/getBackup?flashType=%@",[self stringForFlashType]];
+  //  download the userdate file - concatenate the URL depending if this is JFlash or CFlash
+  NSString *dataURL = [BackupManagerRestoreURL stringByAppendingFormat:@"?%@=%@",BMFlashType,[self stringForFlashType]];
   
   //This url will return the value of the 'ASIHTTPRequestTestCookie' cookie
   ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:dataURL]];
   [request setDelegate:self];
-  [request setUserInfo:[NSDictionary dictionaryWithObject:@"restore" forKey:@"requestType"]];
+  [request setUserInfo:[NSDictionary dictionaryWithObject:BMRestore forKey:BMRequestType]];
   [request startAsynchronous];
 }
 
@@ -122,14 +139,14 @@
  */
 - (void) restoreUserData
 {
-  if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
+  if ([self.loginManager isAuthenticated])
   {
     [self _restoreUserDataFromWebService];
   }
   else
   {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_restoreUserDataFromWebService) name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
-    [[LWEJanrainLoginManager sharedLWEJanrainLoginManager] login]; // need to be logged in for this
+    [self.loginManager login]; // need to be logged in for this
   }
 }
 
@@ -230,28 +247,28 @@
   
   // Get the data
   NSData *archivedData = [self serializedDataForUserSets];
-  NSString *dataURL = API_BACKUP_DATA_URL;
   
   // Perform the request
-  ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:dataURL]];
-  [request setUserInfo:[NSDictionary dictionaryWithObject:@"backup" forKey:@"requestType"]];
+  ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:BackupManagerBackupURL]];
+  [request setUserInfo:[NSDictionary dictionaryWithObject:BMBackup forKey:BMRequestType]];
   [request setDelegate:self];
-  [request setPostValue:[self stringForFlashType] forKey:@"flashType"];
-  [request setData:archivedData forKey:@"backupFile"];
+  // Is this JFlash or CFlash?
+  [request setPostValue:[self stringForFlashType] forKey:BMFlashType];
+  [request setData:archivedData forKey:BMBackupFilename];
   [request startAsynchronous];
 }
 
 //! Backup the user's data to our API, currently set's and set membership only
 - (void) backupUserData
 {
-  if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
+  if ([self.loginManager isAuthenticated])
   {
     [self _backupUserData];
   }
   else
   {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_backupUserData) name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
-    [[LWEJanrainLoginManager sharedLWEJanrainLoginManager] login]; // need to be logged in for this
+    [self.loginManager login]; // need to be logged in for this
   }
 }
 
@@ -281,7 +298,7 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-  NSString *responseType = [[request userInfo] objectForKey:@"requestType"];
+  NSString *responseType = [[request userInfo] objectForKey:BMRequestType];
 
   // Quick return with a status error if we didn't get a 200
   if ([request responseStatusCode] != 200)
@@ -289,22 +306,22 @@
     NSError *error = [NSError errorWithDomain:NetworkRequestErrorDomain
                                          code:[request responseStatusCode] 
                                      userInfo:[NSDictionary dictionaryWithObject:[request responseStatusMessage] forKey:NSLocalizedDescriptionKey]];
-    if ([responseType isEqualToString:@"backup"])
+    if ([responseType isEqualToString:BMBackup])
     {
       [self didFailToBackupUserDataWithError:error];
     }
-    else if ([responseType isEqualToString:@"restore"])
+    else if ([responseType isEqualToString:BMRestore])
     {
       [self didFailToRestoreUserDataWithError:error];
     }
     return;
   }
 
-  if ([responseType isEqualToString:@"backup"])
+  if ([responseType isEqualToString:BMBackup])
   {
     [self didBackupUserData];
   }
-  else if ([responseType isEqualToString:@"restore"])
+  else if ([responseType isEqualToString:BMRestore])
   {
     [self _installDataFromResponse:request];
   }
@@ -312,14 +329,14 @@
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-  NSString *responseType = [[request userInfo] objectForKey:@"requestType"];
+  NSString *responseType = [[request userInfo] objectForKey:BMRequestType];
   NSError *error = [request error];
   
-  if ([responseType isEqualToString:@"backup"])
+  if ([responseType isEqualToString:BMBackup])
   {
     [self didFailToBackupUserDataWithError:error];
   }
-  else if ([responseType isEqualToString:@"restore"])
+  else if ([responseType isEqualToString:BMRestore])
   {
     [self didFailToRestoreUserDataWithError:error];
   }

@@ -7,14 +7,11 @@
 //
 
 #import "LWEJanrainLoginManager.h"
-#import "SynthesizeSingleton.h"
 
 @implementation LWEJanrainLoginManager
 @synthesize jrEngage, userIdentifier, profile;
 
 #pragma mark - Constructors
-
-SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 
 - (id) init
 {
@@ -23,7 +20,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
   {
     static NSString *appId = @"mhbbfdgbbdndhjlcnkfd"; // <-- This is your app ID
     static NSString *tokenURL = @"http://lweflash.appspot.com/api/authorize";
-    self.jrEngage = [JREngage jrEngageWithAppId:appId andTokenUrl:tokenURL delegate:self]; // TODO: add the appengine url
+    // TODO: add the appengine url
+    self.jrEngage = [JREngage jrEngageWithAppId:appId andTokenUrl:tokenURL delegate:self];
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
   }
@@ -45,7 +43,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 //! Determines if we already know who the user is
 - (BOOL) isAuthenticated
 {
-  if (self.userIdentifier != nil)
+  if (self.userIdentifier)
   {
     return YES;
   }
@@ -99,7 +97,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
     NSNotification *aNotification = [NSNotification notificationWithName:LWEJanrainLoginManagerUserDidAuthenticate object:self.userIdentifier];
     [[NSNotificationCenter defaultCenter] postNotification:aNotification];
   }
-  LWE_LOG(@"Provider: %@", provider);
 }
 
 - (void) jrAuthenticationDidNotComplete

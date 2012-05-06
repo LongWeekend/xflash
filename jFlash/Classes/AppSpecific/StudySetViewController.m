@@ -81,7 +81,10 @@ NSInteger const kLWEBackupSection = 2;
   _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet:)];
   self.navigationItem.rightBarButtonItem = _addButton;
   
-  [[NSNotificationCenter defaultCenter] addObserverForName:LWEJanrainLoginManagerUserDidNotAuthenticate object:nil queue:nil usingBlock:^(NSNotification *notif) { [DSBezelActivityView removeView]; }];
+  [[NSNotificationCenter defaultCenter] addObserverForName:LWEJanrainLoginManagerUserDidNotAuthenticate
+                                                    object:nil
+                                                     queue:nil
+                                                usingBlock:^(NSNotification *notif) { [DSBezelActivityView removeView]; }];
 
   self.tagArray = [[self.group.childTags mutableCopy] autorelease];
   self.activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
@@ -261,8 +264,9 @@ NSInteger const kLWEBackupSection = 2;
     }
     else if (section == kLWEBackupSection)
     {
-      if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
+      if ([self.backupManager.loginManager isAuthenticated])
       {
+        // One extra row for the "logout" button
         return 3;
       }
       return 2;
@@ -353,7 +357,7 @@ NSInteger const kLWEBackupSection = 2;
     }
     else
     {
-      if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
+      if ([self.backupManager.loginManager isAuthenticated])
       {
         cell.textLabel.text = NSLocalizedString(@"Logout", @"StudyViewController.backupLogot");
       }
@@ -528,7 +532,7 @@ NSInteger const kLWEBackupSection = 2;
     }
     else if (indexPath.row == 2)
     {
-      [[LWEJanrainLoginManager sharedLWEJanrainLoginManager] logout];
+      [self.backupManager.loginManager logout];
     }
     
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];

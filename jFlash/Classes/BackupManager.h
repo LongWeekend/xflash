@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LWEJanrainLoginManager.h"
 
 //! Error information sent by backup manager
 extern NSString *const LWEBackupManagerErrorDomain;
@@ -43,6 +44,7 @@ typedef enum {
 //! Helper method that returns the flashType string name used by the API
 - (NSString*) stringForFlashType;
 
+@property (retain) LWEJanrainLoginManager *loginManager;
 @property (assign) id<LWEBackupManagerDelegate> delegate;
 
 @end

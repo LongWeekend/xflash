@@ -10,7 +10,6 @@
 
 @interface LWEJanrainLoginManager : NSObject <JREngageDelegate> {}
 
-+ (LWEJanrainLoginManager *)sharedLWEJanrainLoginManager;
 - (void) login;
 - (void) loginForMoreProviders;
 - (void) logout;
