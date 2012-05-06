@@ -24,6 +24,9 @@ extern NSString * const LWEActiveTagDidChange;
 //! Keeps the same tag active, but resets it.  Useful for changing the user
 - (void) resetActiveTag;
 
+//! Keeps the same tag active, but resets it.  Useful for changing the user
+- (void) resetActiveTagWithCompletionHandler:(dispatch_block_t)completionBlock;
+
 //! returns YES if this is the first time we have launched this app, ever
 @property BOOL isFirstLoad;
 

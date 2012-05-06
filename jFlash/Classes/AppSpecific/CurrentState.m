@@ -118,8 +118,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
  */
 - (void) resetActiveTag
 {
+  [self resetActiveTagWithCompletionHandler:nil];
+}
+
+- (void) resetActiveTagWithCompletionHandler:(dispatch_block_t)completionBlock
+{
   LWE_ASSERT_EXC(_activeTag,@"Call to resetActiveTag but no tag active");
-  [self setActiveTag:_activeTag];
+  [self setActiveTag:_activeTag completionHandler:completionBlock];
 }
 
 #pragma mark - Initialization
