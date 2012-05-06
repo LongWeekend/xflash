@@ -182,18 +182,21 @@ NSInteger const kLWEBackupSection = 2;
  */
 - (void) activateTag:(Tag*) tag
 {
+  [self.activityIndicator startAnimating];
+  
+  // Put this on a queue so we are updating the UI
   CurrentState *appSettings = [CurrentState sharedCurrentState];
-  [appSettings setActiveTag:tag];
-  
-  // Tell the tab bar to switch to the SVC
-  NSNumber *index = [NSNumber numberWithInt:STUDY_VIEW_CONTROLLER_TAB_INDEX];
-  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:index forKey:@"index"];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:nil userInfo:userInfo];
-  
-  // Stop the animator
-  self.selectedTagId = kLWEUninitializedTagId;
-  [self.activityIndicator stopAnimating];
-  [self.tableView reloadData];
+  [appSettings setActiveTag:tag completionHandler:^{
+    // Tell the tab bar to switch to the SVC
+    NSNumber *index = [NSNumber numberWithInt:STUDY_VIEW_CONTROLLER_TAB_INDEX];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:index forKey:@"index"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:nil userInfo:userInfo];
+    
+    // Stop the animator & reset the table
+    self.selectedTagId = kLWEUninitializedTagId;
+    [self.activityIndicator stopAnimating];
+    [self.tableView reloadData];
+  }];
 }
 
 /** Pops up AddStudySetInputViewController modal to create a new set */
@@ -430,7 +433,7 @@ NSInteger const kLWEBackupSection = 2;
 {
   if (section == kLWEBackupSection && [self.group isTopLevelGroup])
   {
-    return NSLocalizedString(@"Backup Custom Sets",@"StudySetVC.BackupCustomSetsTitle");
+    return NSLocalizedString(@"Backup Sets & Study Progress",@"StudySetVC.BackupCustomSetsTitle");
   }
   else
   {
@@ -620,8 +623,8 @@ NSInteger const kLWEBackupSection = 2;
     // For some unknown reason, the above calls (but not -reloadData) reset the table offset.  We don't want that.
     self.tableView.contentOffset = offset;
 
-    [self.activityIndicator startAnimating];
-    [self performSelector:@selector(activateTag:) withObject:[self.tagArray objectAtIndex:self.selectedTagId] afterDelay:0.1];
+    // Activate the tag!
+    [self activateTag:[self.tagArray objectAtIndex:self.selectedTagId]]; 
   }
 }
 
@@ -704,10 +707,9 @@ NSInteger const kLWEBackupSection = 2;
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") message:alertMessage]; 
   [self reloadTableData];
 
-  // Reload the current tag so that the progress details are correct - otherwise the progress bar is out of whack after restore.
-  // TODO: there's probably a better way to do this with a notification or something.
-  CurrentState *appSettings = [CurrentState sharedCurrentState];
-  [appSettings setActiveTag:[appSettings activeTag]];
+  // Reload the current tag so that the progress details are correct - otherwise the progress bar can be
+  // out of whack after restore because we have different progress.
+  [self activateTag:[[CurrentState sharedCurrentState] activeTag]];
 }
 
 - (void)backupManager:(BackupManager *)manager didFailToRestoreUserDataWithError:(NSError *)error

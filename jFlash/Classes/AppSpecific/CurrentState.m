@@ -13,6 +13,7 @@
 // For private methods
 @interface CurrentState ()
 - (void) _createDefaultSettings;
+- (void) _setupActiveTag:(Tag *)tag;
 @end
 
 NSString * const LWEActiveTagDidChange = @"LWEActiveTagDidChange";
@@ -29,18 +30,40 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 /**
  * Sets the current active study set/tag - also loads cardIds for the tag
  */
-- (void) setActiveTag:(Tag*)tag
+- (void) setActiveTag:(Tag *)activeTag
 {
-  BOOL firstRun = (_activeTag == nil);
-  [tag populateCardIds];
-  LWE_ASSERT_EXC((tag.cardCount > 0),@"Whoa, somehow we set a tag that has zero cards!");
+  [self setActiveTag:activeTag completionHandler:nil];
+}
 
-  // This code is so we can figure out what our users are studying (only system sets)
-  if (tag.tagEditable == 0 && firstRun == NO)
+/**
+ * If a completion handler is passed, loads a tag asynchronously and executes the handler
+ * afterward.
+ */
+- (void) setActiveTag:(Tag*)tag completionHandler:(dispatch_block_t)completionBlock
+{
+  if (completionBlock)
   {
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:tag.tagId] forKey:@"id"];
-    [LWEAnalytics logEvent:LWEActiveTagDidChange parameters:userInfo];
+    dispatch_queue_t queue = dispatch_queue_create("com.longweekendmobile.loadtag",NULL);
+    dispatch_async(queue,^
+                   {
+                     [tag populateCardIds];
+                     dispatch_sync(dispatch_get_main_queue(), ^{ [self _setupActiveTag:tag]; });
+                     dispatch_sync(dispatch_get_main_queue(),completionBlock);
+                     dispatch_release(queue);
+                   });
   }
+  else
+  {
+    // Just do this synchronously
+    [tag populateCardIds];
+    [self _setupActiveTag:tag];
+  }
+}
+
+- (void) _setupActiveTag:(Tag *)tag
+{
+  LWE_ASSERT_EXC((tag.cardCount > 0),@"Whoa, somehow we set a tag that has zero cards!");
+  BOOL firstRun = (_activeTag == nil);
 
   @synchronized (self)
   {
@@ -55,6 +78,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   if (self.starredTag == nil)
   {
     self.starredTag = [Tag starredWordsTag];
+  }
+
+  // This code is so we can figure out what our users are studying (only system sets)
+  if (tag.tagEditable == 0 && firstRun == NO)
+  {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:tag.tagId] forKey:@"id"];
+    [LWEAnalytics logEvent:LWEActiveTagDidChange parameters:userInfo];
   }
   
   // Tell everyone to reload their data (only if we're not just starting up)

@@ -15,6 +15,9 @@ extern NSString * const LWEActiveTagDidChange;
 
 + (CurrentState *) sharedCurrentState;
 
+//! Sets the tag asynchronously, returning immediately after dispatching the work to a queue
+- (void) setActiveTag:(Tag*)tag completionHandler:(dispatch_block_t)completionBlock;
+
 //! Initialize the NSUserDefaults on first load
 - (void) initializeSettings;
 
