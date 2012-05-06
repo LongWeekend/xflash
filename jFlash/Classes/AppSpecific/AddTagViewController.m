@@ -14,15 +14,6 @@
 #import "ExampleSentencePeer.h"
 #import "DisplaySearchedSentenceViewController.h"
 
-enum AddTagSections
-{
-  kAddTagEntrySection = 0,
-  kAddTagExampleSentenceSection = 1,
-  kAddTagUserSection = 2,
-  kAddTagSystemSection = 3,
-  kAddTagSectionCount
-};
-
 enum EntrySectionRows
 {
   kEntrySectionInfoRow = 0,
@@ -32,11 +23,13 @@ enum EntrySectionRows
 // Private methods & properties
 @interface AddTagViewController ()
 - (void) _reloadTableData;
+- (NSArray*) sectionsArray;
 @property (retain) NSMutableArray *membershipCacheArray;
+@property (retain) NSArray* _sectionsArray;
 @end
 
 @implementation AddTagViewController
-@synthesize myTagArray,sysTagArray,membershipCacheArray,sentencesArray,currentCard,showExamplesCell;
+@synthesize myTagArray,sysTagArray,membershipCacheArray,sentencesArray,currentCard,showExamplesCell,_sectionsArray;
 
 #pragma mark - Initializer
 
@@ -84,7 +77,7 @@ enum EntrySectionRows
   {
     // Add the sentences for the card
     self.sentencesArray = [ExampleSentencePeer getExampleSentencesByCardId:card.cardId];
-    if (self.sentencesArray > 0) 
+    if ([self.sentencesArray count] > 0) 
     {
       self.showExamplesCell = YES;
     }
@@ -161,6 +154,22 @@ enum EntrySectionRows
 }
 
 #pragma mark - Private Methods
+
+//! Returns an array of sections for the table to use
+- (NSArray*) sectionsArray
+{
+  if (self._sectionsArray == nil)
+  {
+    NSMutableArray* sectionsArray = [NSMutableArray arrayWithObject:@"kAddTagEntrySection"];
+    if(self.showExamplesCell)
+    {
+      [sectionsArray addObject:@"kAddTagExampleSentenceSection"];
+    }
+    [sectionsArray addObjectsFromArray:[NSArray arrayWithObjects:@"kAddTagUserSection", @"kAddTagSystemSection", nil]];
+    self._sectionsArray = sectionsArray;
+  }
+  return self._sectionsArray;
+}
 
 /**
  * Recreates tag membership caches and reloads table view, if a table view is loaded.
@@ -247,25 +256,25 @@ enum EntrySectionRows
 //! Returns the total number of enum values in "Sections" enum
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return kAddTagSectionCount;
+  return [self.sectionsArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   NSInteger i = 0;
-  if (section == kAddTagUserSection)
+  if ([[self.sectionsArray objectAtIndex:section] isEqualToString:@"kAddTagUserSection"])
   {
     i = [self.myTagArray count];
   }
-  else if (section == kAddTagSystemSection)
+  else if ([[self.sectionsArray objectAtIndex:section] isEqualToString:@"kAddTagSystemSection"])
   {
     i = [self.sysTagArray count];  
   }
-  else if (section == kAddTagEntrySection)
+  else if ([[self.sectionsArray objectAtIndex:section] isEqualToString:@"kAddTagEntrySection"])
   {
     i = kEntrySectionCount;
   }
-  else if (section == kAddTagExampleSentenceSection)
+  else if ([[self.sectionsArray objectAtIndex:section] isEqualToString:@"kAddTagExampleSentenceSection"])
   {
     i = 0;
     if ([self.sentencesArray count] > 0)
@@ -279,11 +288,11 @@ enum EntrySectionRows
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = nil;
-  if (indexPath.section == kAddTagEntrySection)
+  if ([[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagEntrySection"])
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"entry" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   }
-  else if (indexPath.section == kAddTagExampleSentenceSection)
+  else if ([[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagExampleSentenceSection"])
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"exampleSentence" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   }
@@ -293,7 +302,7 @@ enum EntrySectionRows
   } 
   
   // setup the cell for the full entry
-  if (indexPath.section == kAddTagEntrySection)
+  if ([[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagEntrySection"])
   {
     // Cell attributes
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -322,7 +331,7 @@ enum EntrySectionRows
                          cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH
                         cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
   }
-  else if (indexPath.section == kAddTagExampleSentenceSection)
+  else if ([[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagExampleSentenceSection"])
   {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = NSLocalizedString(@"Example Sentences", @"Cell that displays example sentences");
@@ -332,7 +341,7 @@ enum EntrySectionRows
   {        
     // Get the tag arrays
     Tag *tmpTag = nil;
-    if (indexPath.section == kAddTagUserSection)
+    if ([[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagUserSection"])
     {
       tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -345,7 +354,7 @@ enum EntrySectionRows
         cell.accessoryType = UITableViewCellAccessoryNone;
       }
     }
-    else if (indexPath.section == kAddTagSystemSection)
+    else if ([[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagSystemSection"])
     {
       tmpTag = [self.sysTagArray objectAtIndex:indexPath.row];
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -362,7 +371,7 @@ enum EntrySectionRows
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-  if (section == kAddTagEntrySection)
+  if ([[self.sectionsArray objectAtIndex:section] isEqualToString:@"kAddTagEntrySection"])
   {
     UIView *containingView = [[[UIView alloc] init] autorelease];
     containingView.autoresizesSubviews = NO;
@@ -388,11 +397,11 @@ enum EntrySectionRows
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-  if (section == kAddTagEntrySection)
+  if ([[self.sectionsArray objectAtIndex:section] isEqualToString:@"kAddTagEntrySection"])
   {
     return 50.0f;
   }
-  else if (section == kAddTagExampleSentenceSection)
+  else if ([[self.sectionsArray objectAtIndex:section] isEqualToString:@"kAddTagExampleSentenceSection"])
   {
     if (self.showExamplesCell == YES)
     {
@@ -408,11 +417,11 @@ enum EntrySectionRows
 
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
 {
-  if (section == kAddTagUserSection)
+  if ([[self.sectionsArray objectAtIndex:section] isEqualToString:@"kAddTagUserSection"])
   {
     return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");
   }
-  else if (section == kAddTagSystemSection && ([self.sysTagArray count] > 0))
+  else if ([[self.sectionsArray objectAtIndex:section] isEqualToString:@"kAddTagSystemSection"] && ([self.sysTagArray count] > 0))
   {
     return NSLocalizedString(@"Other Sets with this Card",@"AddTagViewController.TableHeader_AllSets");
   }
@@ -424,12 +433,12 @@ enum EntrySectionRows
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-  if (indexPath.section == kAddTagEntrySection)
+  if ([[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagEntrySection"])
   {
     NSString *text = [NSString stringWithFormat:@"[%@]\n%@", [self.currentCard reading], [self.currentCard meaningWithoutMarkup]];
     return [LWEUITableUtils autosizeHeightForCellWithText:text];
   }
-  else if (self.showExamplesCell == NO && indexPath.section == kAddTagExampleSentenceSection)
+  else if (self.showExamplesCell == NO && [[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagExampleSentenceSection"])
   {
     return 0.0f;
   }
@@ -449,12 +458,12 @@ enum EntrySectionRows
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   
   // do nothing for the entry section or system tags
-  if (indexPath.section == kAddTagEntrySection || indexPath.section == kAddTagSystemSection)
+  if ([[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagEntrySection"] || [[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagSystemSection"])
   {
     return;
   }
   
-  if (indexPath.section == kAddTagExampleSentenceSection)
+  if ([[self.sectionsArray objectAtIndex:indexPath.section] isEqualToString:@"kAddTagExampleSentenceSection"])
   {
     DisplaySearchedSentenceViewController* sentenceVC = [[DisplaySearchedSentenceViewController alloc] initWithSentences:self.sentencesArray];
     [self.navigationController pushViewController:sentenceVC animated:YES];
@@ -465,7 +474,7 @@ enum EntrySectionRows
   Tag *tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
   [self _toggleMembershipForTag:tmpTag];
   
-  // MMA: TODO: we shouldn't reload the whole table, that's really lazy-- weshould change the row
+  // MMA: TODO: we shouldn't reload the whole table, that's really lazy-- we should change the row
   [lclTableView reloadData];
 }
 
@@ -485,6 +494,7 @@ enum EntrySectionRows
   self.currentCard = nil;
   self.membershipCacheArray = nil;
   self.sentencesArray = nil;
+  self._sectionsArray = nil;
   [super dealloc];
 }
 
