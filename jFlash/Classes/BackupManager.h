@@ -37,8 +37,6 @@ typedef enum {
 - (void) restoreUserData;
 //! Backs up the user's data to the api
 - (void) backupUserData;
-//! Helper method that returns the flashType string name used by the API
-- (NSString*) stringForFlashType;
 
 @property (retain) LWEJanrainLoginManager *loginManager;
 @property (assign) id<LWEBackupManagerDelegate> delegate;

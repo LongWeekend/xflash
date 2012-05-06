@@ -21,9 +21,12 @@ NSString * const BMBackupFilename = @"backupFile";
 NSString * const BMBackupUserHistory = @"userHistory";
 NSString * const BMBackupUserHistoryUserId = @"userId";
 NSString * const BMFlashType = @"flashType";
+NSString * const BMVersionKey = @"version";
 
 @interface BackupManager ()
 - (Tag *) _tagForName:(NSString *)tagName andId:(NSNumber *)key andGroupId:(NSNumber *)groupId;
+- (NSString *) _stringForFlashType;
+- (NSString *) _stringForBundleVersion;
 //! Returns an NSData containing the serialized associative array
 - (NSData*) _serializedDataForUserSets;
 //! Returns the NSData representation for a serialized array of all UserHistory objects for the current user
@@ -59,9 +62,14 @@ NSString * const BMFlashType = @"flashType";
 }
 
 //! Helper method that returns the flashType string name used by the API
-- (NSString*) stringForFlashType
+- (NSString*) _stringForFlashType
 {
   return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+}
+
+- (NSString *) _stringForBundleVersion
+{
+  return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
 }
 
 - (void) _updateProgress:(CGFloat)progress
@@ -135,7 +143,10 @@ NSString * const BMFlashType = @"flashType";
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
   
   //  download the userdate file - concatenate the URL depending if this is JFlash or CFlash
-  NSString *dataURL = [BackupManagerRestoreURL stringByAppendingFormat:@"?%@=%@",BMFlashType,[self stringForFlashType]];
+  NSString *dataURL = [BackupManagerRestoreURL stringByAppendingFormat:@"?%@=%@",BMFlashType,[self _stringForFlashType]];
+  
+  // Append a version number so that the remote API knows what we are capable of receiving
+  dataURL = [dataURL stringByAppendingFormat:@"&%@=%@",BMVersionKey,[self _stringForBundleVersion]];
   
   //This url will return the value of the 'ASIHTTPRequestTestCookie' cookie
   ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:dataURL]];
@@ -277,7 +288,7 @@ NSString * const BMFlashType = @"flashType";
   [request setUserInfo:[NSDictionary dictionaryWithObject:BMBackup forKey:BMRequestType]];
   [request setDelegate:self];
   // Is this JFlash or CFlash?
-  [request setPostValue:[self stringForFlashType] forKey:BMFlashType];
+  [request setPostValue:[self _stringForFlashType] forKey:BMFlashType];
   [request setData:[self _serializedDataForUserSets] forKey:BMBackupFilename];
   
   // Send the serialized user history + the user's ID
