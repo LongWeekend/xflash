@@ -36,17 +36,44 @@
   return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
 }
 
-#pragma mark Restore
+- (void) _updateProgress:(CGFloat)progress
+{
+  // Don't let this be called from the background as it could update the UI on the other side
+  if ([NSThread isMainThread] == NO)
+  {
+    [self performSelectorOnMainThread:@selector(_updateProgress:) withObject:[NSNumber numberWithFloat:progress] waitUntilDone:NO];
+    return;
+  }
+  
+  if (self.delegate && [self.delegate respondsToSelector:@selector(backupManager:currentProgress:)])
+  {
+    [self.delegate backupManager:self currentProgress:progress];
+  }
+}
+
+#pragma mark - Restore
 
 //! Delegate on success
 - (void)didRestoreUserData
 {
+  if ([NSThread isMainThread] == NO)
+  {
+    [self performSelectorOnMainThread:@selector(didRestoreUserData) withObject:nil waitUntilDone:NO];
+    return;
+  }
+  
   LWE_DELEGATE_CALL(@selector(backupManagerDidRestoreUserData:), self);
 }
 
 //! Delegate on failure
 - (void)didFailToRestoreUserDataWithError:(NSError *)error
 {
+  if ([NSThread isMainThread] == NO)
+  {
+    [self performSelectorOnMainThread:@selector(didFailToRestoreUserDataWithError:) withObject:error waitUntilDone:NO];
+    return;
+  }
+
   if (self.delegate && [self.delegate respondsToSelector:@selector(backupManager:didFailToRestoreUserDataWithError:)])
   {
     [self.delegate backupManager:self didFailToRestoreUserDataWithError:error];
@@ -95,7 +122,7 @@
  */
 - (void) restoreUserData
 {
-  if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated] == YES)
+  if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
   {
     [self _restoreUserDataFromWebService];
   }
@@ -130,8 +157,14 @@
 - (void) createUserSetsForData:(NSData*)data
 {
   NSDictionary *idsDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+  NSInteger totalSets = [idsDict count];
+  NSInteger i = 0;
   for (NSNumber *tagIdNum in idsDict)
   {
+    // Increment the counter and call back to the progress delegate
+    i++;
+    [self _updateProgress:((CGFloat)i/(CGFloat)totalSets)];
+
     LWE_ASSERT_EXC([tagIdNum isKindOfClass:[NSNumber class]], @"Must pass a dict where keys are NSNumbers");
     
     NSArray *cardIdsAndTagName = [idsDict objectForKey:tagIdNum];
@@ -162,6 +195,12 @@
 //! Delegate on success
 - (void)didBackupUserData
 {
+  if ([NSThread isMainThread] == NO)
+  {
+    [self performSelectorOnMainThread:@selector(didBackupUserData) withObject:nil waitUntilDone:NO];
+    return;
+  }
+
   if(self.delegate && [self.delegate respondsToSelector:@selector(backupManagerDidBackupUserData:)])
   {
     [self.delegate backupManagerDidBackupUserData:self];
@@ -171,6 +210,12 @@
 //! Delegate on failure
 - (void)didFailToBackupUserDataWithError:(NSError *)error
 {
+  if ([NSThread isMainThread] == NO)
+  {
+    [self performSelectorOnMainThread:@selector(didFailToBackupUserDataWithError:) withObject:error waitUntilDone:NO];
+    return;
+  }
+
   if(self.delegate && [self.delegate respondsToSelector:@selector(backupManager:didFailToBackupUserDataWithError:)])
   {
     [self.delegate backupManager:self didFailToBackupUserDataWithError:error];
@@ -199,7 +244,7 @@
 //! Backup the user's data to our API, currently set's and set membership only
 - (void) backupUserData
 {
-  if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated] == YES)
+  if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
   {
     [self _backupUserData];
   }
@@ -238,35 +283,30 @@
 {
   NSString *responseType = [[request userInfo] objectForKey:@"requestType"];
 
-  if(responseType == @"backup")
+  // Quick return with a status error if we didn't get a 200
+  if ([request responseStatusCode] != 200)
   {
-    if ([request responseStatusCode] != 200)
+    NSError *error = [NSError errorWithDomain:NetworkRequestErrorDomain
+                                         code:[request responseStatusCode] 
+                                     userInfo:[NSDictionary dictionaryWithObject:[request responseStatusMessage] forKey:NSLocalizedDescriptionKey]];
+    if ([responseType isEqualToString:@"backup"])
     {
-      NSError *error = [NSError errorWithDomain:NetworkRequestErrorDomain
-                                           code:[request responseStatusCode] 
-                                       userInfo:[NSDictionary dictionaryWithObject:[request responseStatusMessage] forKey:NSLocalizedDescriptionKey]];
-      
       [self didFailToBackupUserDataWithError:error];
     }
-    else 
+    else if ([responseType isEqualToString:@"restore"])
     {
-      [self didBackupUserData];
+      [self didFailToRestoreUserDataWithError:error];
     }
+    return;
   }
-  else if (responseType == @"restore")
+
+  if ([responseType isEqualToString:@"backup"])
   {
-    if ([request responseStatusCode] != 200)
-    {
-      NSError *error = [NSError errorWithDomain:NetworkRequestErrorDomain
-                                           code:[request responseStatusCode] 
-                                       userInfo:[NSDictionary dictionaryWithObject:[request responseStatusMessage] forKey:NSLocalizedDescriptionKey]];
-      
-      [self didFailToBackupUserDataWithError:error];
-    }
-    else
-    {
-      [self _installDataFromResponse: request];
-    }
+    [self didBackupUserData];
+  }
+  else if ([responseType isEqualToString:@"restore"])
+  {
+    [self _installDataFromResponse:request];
   }
 }
 
@@ -275,13 +315,13 @@
   NSString *responseType = [[request userInfo] objectForKey:@"requestType"];
   NSError *error = [request error];
   
-  if (responseType == @"backup")
+  if ([responseType isEqualToString:@"backup"])
   {
     [self didFailToBackupUserDataWithError:error];
   }
-  else if (responseType == @"restore")
+  else if ([responseType isEqualToString:@"restore"])
   {
-    [self didFailToRestoreUserDateWithError:error];
+    [self didFailToRestoreUserDataWithError:error];
   }
 }
 
