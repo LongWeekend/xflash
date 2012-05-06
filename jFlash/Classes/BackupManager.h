@@ -30,7 +30,12 @@ typedef enum {
 
 //! Backup Manager handles storing user sets to server, also restoring them
 //! Tightly coupled to jFlash and the jFlash API, orthagonality to come later
-@interface BackupManager : NSObject
+@interface BackupManager : NSObject <ASIHTTPRequestDelegate, ASIProgressDelegate, LWEJanrainLoginManagerDelegate>
+{
+  NSInteger progressSections;
+  NSInteger currentSection;
+  BOOL isBackingUp;       // Used for when we get delegate callback to determine whether to restore or backup
+}
 
 //! Initialize with a delegate
 - (BackupManager*) initWithDelegate:(id)aDelegate;

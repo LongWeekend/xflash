@@ -49,6 +49,7 @@ NSString * const BMVersionKey = @"version";
   {
     self.delegate = aDelegate;
     self.loginManager = [[[LWEJanrainLoginManager alloc] init] autorelease];
+    self.loginManager.delegate = self;
   }
   return self;
 }
@@ -56,8 +57,6 @@ NSString * const BMVersionKey = @"version";
 - (void) dealloc
 {
   [loginManager release];
-  // In case we get dealloc'ed while waiting on an observation
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [super dealloc];
 }
 
@@ -72,18 +71,32 @@ NSString * const BMVersionKey = @"version";
   return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
 }
 
-- (void) _updateProgress:(CGFloat)progress
+- (void) _updateProgress:(NSNumber *)progress
 {
   // Don't let this be called from the background as it could update the UI on the other side
   if ([NSThread isMainThread] == NO)
   {
-    [self performSelectorOnMainThread:@selector(_updateProgress:) withObject:[NSNumber numberWithFloat:progress] waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(_updateProgress:) withObject:progress waitUntilDone:NO];
     return;
   }
   
+  // Hack apart the progress that the individual steps are sending us -- they are sending us 0-100 of THEIR step, 
+  // but we want to average that out over the whole process.
+  CGFloat currentSectionPercent = (CGFloat)(currentSection) / (CGFloat)(progressSections);
+  CGFloat nextSectionPercent = (CGFloat)(currentSection + 1) / ((CGFloat)progressSections);
+  if (nextSectionPercent > 1.0f)
+  {
+    nextSectionPercent = 1.0f;
+  }
+  
+  // Now multiply THEIR progress by the difference and report that + the currentSectionPercent.
+  CGFloat difference = (nextSectionPercent - currentSectionPercent);
+  CGFloat diffProgress = [progress floatValue] * difference;
+  CGFloat actualProgress = currentSectionPercent + diffProgress;
+  
   if (self.delegate && [self.delegate respondsToSelector:@selector(backupManager:currentProgress:)])
   {
-    [self.delegate backupManager:self currentProgress:progress];
+    [self.delegate backupManager:self currentProgress:actualProgress];
   }
 }
 
@@ -95,6 +108,9 @@ NSString * const BMVersionKey = @"version";
     [self performSelectorOnMainThread:@selector(_updateStatus:) withObject:status waitUntilDone:NO];
     return;
   }
+
+  // Increment the progress section counter
+  currentSection++;
   
   if (self.delegate && [self.delegate respondsToSelector:@selector(backupManager:statusDidChange:)])
   {
@@ -108,13 +124,22 @@ NSString * const BMVersionKey = @"version";
 //! Backup the user's data to our API, currently set's and set membership only
 - (void) backupUserData
 {
+  // Reset the progress section counter
+  currentSection = 0;
+
+  // It's important to update this number to reflect the number of times you're going to call
+  // _updateStatus for a (potentially) long-running task
+  progressSections = 4;
+  
+  // For authentication callback
+  isBackingUp = YES;
+
   if ([self.loginManager isAuthenticated])
   {
-    [self _backupUserData];
+    [self performSelectorInBackground:@selector(_backupUserData) withObject:nil];
   }
   else
   {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_backupUserData) name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
     [self.loginManager login]; // need to be logged in for this
   }
 }
@@ -126,14 +151,49 @@ NSString * const BMVersionKey = @"version";
  */
 - (void) restoreUserData
 {
+  // Reset the progress section counter
+  currentSection = 0;
+  
+  // It's important to update this number to reflect the number of times you're going to call
+  // _updateStatus for a (potentially) long-running task
+  progressSections = 5;
+
+  // For authentication callback
+  isBackingUp = NO;
+  
   if ([self.loginManager isAuthenticated])
   {
-    [self _restoreUserDataFromWebService];
+    [self performSelectorInBackground:@selector(_restoreUserDataFromWebService) withObject:nil];
   }
   else
   {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_restoreUserDataFromWebService) name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
     [self.loginManager login]; // need to be logged in for this
+  }
+}
+
+#pragma mark - Login Manager Delegate
+
+-(void)loginManagerDidAuthenticate:(LWEJanrainLoginManager *)manager
+{
+  if (isBackingUp)
+  {
+    [self performSelectorInBackground:@selector(_backupUserData) withObject:nil];
+  }
+  else
+  {
+    [self performSelectorInBackground:@selector(_restoreUserDataFromWebService) withObject:nil];
+  }
+}
+
+-(void)loginManager:(LWEJanrainLoginManager *)manager didFailAuthenticationWithError:(NSError *)error
+{
+  if (isBackingUp)
+  {
+    [self _didFailToBackupUserDataWithError:error];
+  }
+  else
+  {
+    [self _didFailToRestoreUserDataWithError:error];
   }
 }
 
@@ -169,6 +229,10 @@ NSString * const BMVersionKey = @"version";
 //! Private method to really install the data.
 - (void) _installDataFromResponse:(ASIHTTPRequest *)request
 {
+  // Don't run this on the main thread
+  LWE_ASSERT_EXC(([NSThread isMainThread] == NO),@"This is a long-running task that sohuld not run on the main thread");
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  
   NSData *data = [request responseData];
   
   // Quick return if there's some sort of problem
@@ -193,6 +257,7 @@ NSString * const BMVersionKey = @"version";
   [self _updateStatus:NSLocalizedString(@"Finalizing",@"Finalizing by Recaching")];
   [TagPeer recacheCountsForUserTags];
   [self _didRestoreUserData];
+  [pool release];
 }
 
 /*!
@@ -201,8 +266,8 @@ NSString * const BMVersionKey = @"version";
  */
 - (void) _restoreUserDataFromWebService 
 {
-  // Stop listening for a login
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
+  LWE_ASSERT_EXC(([NSThread isMainThread] == NO),@"This method should be run from the BG.");
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   
   //  download the userdate file - concatenate the URL depending if this is JFlash or CFlash
   NSString *dataURL = [BackupManagerRestoreURL stringByAppendingFormat:@"?%@=%@",BMFlashType,[self _stringForFlashType]];
@@ -210,13 +275,15 @@ NSString * const BMVersionKey = @"version";
   // Append a version number so that the remote API knows what we are capable of receiving
   dataURL = [dataURL stringByAppendingFormat:@"&%@=%@",BMVersionKey,[self _stringForBundleVersion]];
   
-  [self _updateStatus:NSLocalizedString(@"Retrieving Backup...",@"Downloading Backup File")];
+  [self _updateStatus:NSLocalizedString(@"Retrieving Backup",@"Downloading Backup File")];
   
   //This url will return the value of the 'ASIHTTPRequestTestCookie' cookie
   ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:dataURL]];
-  [request setDelegate:self];
-  [request setUserInfo:[NSDictionary dictionaryWithObject:BMRestore forKey:BMRequestType]];
+  request.userInfo = [NSDictionary dictionaryWithObject:BMRestore forKey:BMRequestType];
+  request.delegate = self;
+  request.downloadProgressDelegate = self;
   [request startAsynchronous];
+  [pool release];
 }
 
 
@@ -249,7 +316,8 @@ NSString * const BMVersionKey = @"version";
   {
     // Increment the counter and call back to the progress delegate
     i++;
-    [self _updateProgress:((CGFloat)i/(CGFloat)totalSets)];
+    CGFloat progress = ((CGFloat)i/(CGFloat)totalSets);
+    [self _updateProgress:[NSNumber numberWithFloat:progress]];
 
     // In the "user histories", the key isn't a number, it's a string - skip those.
     if ([key isKindOfClass:[NSString class]])
@@ -308,7 +376,8 @@ NSString * const BMVersionKey = @"version";
       {
         // Update progress delegate
         i++;
-        [self _updateProgress:((CGFloat)i/(CGFloat)totalCount)];
+        CGFloat progress = ((CGFloat)i/(CGFloat)totalCount);
+        [self _updateProgress:[NSNumber numberWithFloat:progress]];
         
         LWE_ASSERT_EXC([history isKindOfClass:[UserHistory class]],@"This array should only contain UserHistory objs");
         [history saveToUserId:user.userId];
@@ -352,22 +421,30 @@ NSString * const BMVersionKey = @"version";
 //! Private backup method to be called directly or async
 - (void) _backupUserData 
 {
-  // Stop listening for a login
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
-  
+  LWE_ASSERT_EXC(([NSThread isMainThread] == NO),@"This method should be run from the BG.");
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
   // Make & serialized the dictionary
   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  [self _updateStatus:NSLocalizedString(@"Backing Up Sets",@"Backing Up Sets")];
   dict = [self _dictionaryForUserSetsWithDictionary:dict];
+  [self _updateStatus:NSLocalizedString(@"Backing Up Progress",@"Backing Up Progress")];
   dict = [self _dictionaryForUserHistoryWithDictionary:dict];
+  [self _updateStatus:NSLocalizedString(@"Compressing",@"Compressing")];
   NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:dict];
   
   // Perform the request
+  [self _updateStatus:NSLocalizedString(@"Sending",@"Sending")];
   ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:BackupManagerBackupURL]];
-  [request setUserInfo:[NSDictionary dictionaryWithObject:BMBackup forKey:BMRequestType]];
-  [request setDelegate:self];
+  request.userInfo = [NSDictionary dictionaryWithObject:BMBackup forKey:BMRequestType];
+  request.delegate = self;
+  request.downloadProgressDelegate = self;
+
   [request setPostValue:[self _stringForFlashType] forKey:BMFlashType];
   [request setData:archivedData forKey:BMBackupFilename];
   [request startAsynchronous];
+
+  [pool release];
 }
 
 //! Returns an NSData containing the serialized associative array
@@ -380,7 +457,8 @@ NSString * const BMVersionKey = @"version";
   {
     // Report the progress of the retrieve/serialize to the delegate
     i++;
-    [self _updateProgress:((CGFloat)i/(CGFloat)totalCount)];
+    CGFloat progress = ((CGFloat)i/(CGFloat)totalCount);
+    [self _updateProgress:[NSNumber numberWithFloat:progress]];
     
     // Faulted cards are Card objects but have not been retrieved/hydrated and have IDs only.
     NSArray *cards = [CardPeer retrieveFaultedCardsForTag:tag];
@@ -410,6 +488,13 @@ NSString * const BMVersionKey = @"version";
 
 #pragma mark - ASIHTTPRequest Response
 
+//! This is the ASIProgresssDelegate call for getting the status of the request
+- (void)setProgress:(float)newProgress
+{
+  // We just pass it on - our _updateProgress method is smart about how to show it.
+  [self _updateProgress:[NSNumber numberWithFloat:newProgress]];
+}
+
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
   NSString *responseType = [[request userInfo] objectForKey:BMRequestType];
@@ -437,7 +522,7 @@ NSString * const BMVersionKey = @"version";
   }
   else if ([responseType isEqualToString:BMRestore])
   {
-    [self _installDataFromResponse:request];
+    [self performSelectorInBackground:@selector(_installDataFromResponse:) withObject:request];
   }
 }
 

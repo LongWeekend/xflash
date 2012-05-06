@@ -679,11 +679,11 @@ NSInteger const kLWEBackupSection = 2;
 - (void)backupManager:(BackupManager *)manager didFailToBackupUserDataWithError:(NSError *)error
 {
   [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
-  NSString *errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
   
   // overwrite the default error message if it's from the server
   if ([error.domain isEqualToString:NetworkRequestErrorDomain])
   {
+    NSString *errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
     switch (error.code) // these should be http codes
     {
       case 503:
@@ -694,8 +694,15 @@ NSInteger const kLWEBackupSection = 2;
       default:
         break;
     }
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Failed", @"BackupFailed") message:errorMessage];
   }
-  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Failed", @"BackupFailed") message:errorMessage];
+  else if (error.code == 103)
+  {
+    // There was a problem communicating with the Janrain server while configuring authentication -
+    // probably no network
+    [LWEUIAlertView noNetworkAlert];
+  }
+
   [self.activityIndicator stopAnimating];  
 }
 
@@ -715,6 +722,12 @@ NSInteger const kLWEBackupSection = 2;
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Backup Found", @"DataNotFound") 
                                        message:NSLocalizedString(@"We couldn't find a backup for you! Please login with another account or create a backup first.", @"BackupManager_DataNotFoundBody")];
+  }
+  else if (error.code == 103)
+  {
+    // There was a problem communicating with the Janrain server while configuring authentication -
+    // probably no network
+    [LWEUIAlertView noNetworkAlert];
   }
   else // show the other error (we don't know what this will be)
   {
