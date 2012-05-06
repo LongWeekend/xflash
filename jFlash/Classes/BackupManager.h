@@ -14,14 +14,16 @@ typedef enum {
   kDataNotFound = 1,
 } LWEBackupManagerErrorCode;
 
+@class BackupManager;
+
 //! Informational Methods mostly for UX responses to success or failure
 @protocol LWEBackupManagerDelegate <NSObject>
 @optional
-- (void)didBackupUserData;
-- (void)didFailToBackupUserDataWithError:(NSError *)error;
-- (void)didRestoreUserData;
-- (void)didFailToRestoreUserDateWithError:(NSError *)error;
-
+- (void)backupManager:(BackupManager *)manager currentProgress:(CGFloat)progress;
+- (void)backupManagerDidBackupUserData:(BackupManager *)manager;
+- (void)backupManager:(BackupManager *)manager didFailToBackupUserDataWithError:(NSError *)error;
+- (void)backupManagerDidRestoreUserData:(BackupManager *)manager;
+- (void)backupManager:(BackupManager *)manager didFailToRestoreUserDataWithError:(NSError *)error;
 @end
 
 //! Backup Manager handles storing user sets to server, also restoring them

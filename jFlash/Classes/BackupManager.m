@@ -21,7 +21,7 @@
 @synthesize delegate;
 
 //! Init the BackupManager with a Delegate
-- (BackupManager*) initWithDelegate:(id)aDelegate
+- (BackupManager*) initWithDelegate:(id<LWEBackupManagerDelegate>)aDelegate
 {
   if ((self = [super init]))
   {
@@ -41,18 +41,15 @@
 //! Delegate on success
 - (void)didRestoreUserData
 {
-  if (self.delegate && [self.delegate respondsToSelector:@selector(didRestoreUserData)])
-  {
-    [self.delegate didRestoreUserData];
-  }
+  LWE_DELEGATE_CALL(@selector(backupManagerDidRestoreUserData:), self);
 }
 
 //! Delegate on failure
-- (void)didFailToRestoreUserDateWithError:(NSError *)error
+- (void)didFailToRestoreUserDataWithError:(NSError *)error
 {
-  if (self.delegate && [self.delegate respondsToSelector:@selector(didFailToRestoreUserDateWithError:)])
+  if (self.delegate && [self.delegate respondsToSelector:@selector(backupManager:didFailToRestoreUserDataWithError:)])
   {
-    [self.delegate didFailToRestoreUserDateWithError:error];
+    [self.delegate backupManager:self didFailToRestoreUserDataWithError:error];
   }
 }
 
@@ -69,7 +66,7 @@
   else
   {
     NSError *error = [NSError errorWithDomain:LWEBackupManagerErrorDomain code:kDataNotFound userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Could not find backup data on web sevice.",@"") forKey:NSLocalizedDescriptionKey]];
-    [self didFailToRestoreUserDateWithError:error];
+    [self didFailToRestoreUserDataWithError:error];
   }
 }
 
@@ -165,18 +162,18 @@
 //! Delegate on success
 - (void)didBackupUserData
 {
-  if(self.delegate && [self.delegate respondsToSelector:@selector(didBackupUserData)])
+  if(self.delegate && [self.delegate respondsToSelector:@selector(backupManagerDidBackupUserData:)])
   {
-    [self.delegate didBackupUserData];
+    [self.delegate backupManagerDidBackupUserData:self];
   }
 }
 
 //! Delegate on failure
 - (void)didFailToBackupUserDataWithError:(NSError *)error
 {
-  if(self.delegate && [self.delegate respondsToSelector:@selector(didFailToBackupUserDataWithError:)])
+  if(self.delegate && [self.delegate respondsToSelector:@selector(backupManager:didFailToBackupUserDataWithError:)])
   {
-    [self.delegate didFailToBackupUserDataWithError:error];
+    [self.delegate backupManager:self didFailToBackupUserDataWithError:error];
   }
 }
 

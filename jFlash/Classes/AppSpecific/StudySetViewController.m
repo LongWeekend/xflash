@@ -631,7 +631,7 @@ NSInteger const kLWEBackupSection = 2;
 
 #pragma mark - BackupManager Delegate
 
-- (void)didBackupUserData
+- (void)backupManagerDidBackupUserData:(BackupManager *)manager 
 {
   [DSBezelActivityView removeView];  
   NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
@@ -639,7 +639,7 @@ NSInteger const kLWEBackupSection = 2;
   [self.activityIndicator stopAnimating];
 }
 
-- (void)didFailToBackupUserDataWithError:(NSError *)error
+- (void)backupManager:(BackupManager *)manager didFailToBackupUserDataWithError:(NSError *)error
 {
   [DSBezelActivityView removeView];
   NSString *errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
@@ -662,7 +662,7 @@ NSInteger const kLWEBackupSection = 2;
   [self.activityIndicator stopAnimating];  
 }
 
-- (void)didRestoreUserData
+- (void)backupManagerDidRestoreUserData:(BackupManager *)manager
 {
   [DSBezelActivityView removeView];
   NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your data has been restored successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
@@ -671,7 +671,7 @@ NSInteger const kLWEBackupSection = 2;
   [self reloadTableData];
 }
 
-- (void)didFailToRestoreUserDateWithError:(NSError *)error
+- (void)backupManager:(BackupManager *)manager didFailToRestoreUserDataWithError:(NSError *)error
 {
   [DSBezelActivityView removeView];
   if (error.code == kDataNotFound && [error.domain isEqualToString:LWEBackupManagerErrorDomain])
@@ -687,8 +687,7 @@ NSInteger const kLWEBackupSection = 2;
   [self.activityIndicator stopAnimating];
 }
 
-#pragma mark -
-#pragma mark Search Bar delegate methods
+#pragma mark - Search Bar delegate methods
 
 /**
  * Sets up the controller for searching mode
