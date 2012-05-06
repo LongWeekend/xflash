@@ -107,6 +107,9 @@
 
 - (void) jrAuthenticationDidNotComplete
 {
+  // TODO: This is INCOMPLETE
+  [self forwardErrorToDelegate:nil];
+  
   // Tell anyone who might care
   NSNotification *aNotification = [NSNotification notificationWithName:LWEJanrainLoginManagerUserDidNotAuthenticate object:self.userIdentifier];
   [[NSNotificationCenter defaultCenter] postNotification:aNotification];  

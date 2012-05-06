@@ -636,7 +636,7 @@ NSInteger const kLWEBackupSection = 2;
 {
   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
   hud.mode = MBProgressHUDModeDeterminate;
-  hud.labelText = NSLocalizedString(@"Backing Up...",@"Starting Backup");
+  hud.labelText = NSLocalizedString(@"Authenticating",@"Starting Backup");
   
   // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
   [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3f];
@@ -646,7 +646,7 @@ NSInteger const kLWEBackupSection = 2;
 {
   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
   hud.mode = MBProgressHUDModeDeterminate;
-  hud.labelText = @"Restoring...";
+  hud.labelText = NSLocalizedString(@"Authenticating",@"Starting Restore");
 
   // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
   [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3f];  
