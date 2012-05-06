@@ -272,6 +272,8 @@
 		4922ED95155678E000645F61 /* cflash_11_to_111.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4922ED94155678E000645F61 /* cflash_11_to_111.sql */; };
 		4922ED9815567FBC00645F61 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED9715567FBC00645F61 /* MBProgressHUD.m */; };
 		4922ED9915567FBC00645F61 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED9715567FBC00645F61 /* MBProgressHUD.m */; };
+		492435D61556AD070059B203 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		492435D71556AD0F0059B203 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
 		4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EA01148FADDE00F55D09 /* CardPeerTest.m */; };
 		4927B83D1400A8400076EEED /* ChineseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83C1400A8400076EEED /* ChineseCard.m */; };
@@ -1226,6 +1228,7 @@
 		4922ED94155678E000645F61 /* cflash_11_to_111.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cflash_11_to_111.sql; path = Migrations/cflash_11_to_111.sql; sourceTree = "<group>"; };
 		4922ED9615567FBC00645F61 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = External/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		4922ED9715567FBC00645F61 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = External/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
+		492435D51556AD070059B203 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
 		4926EA00148FADDE00F55D09 /* CardPeerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardPeerTest.h; path = Tests/cFlashTests/CardPeerTest.h; sourceTree = SOURCE_ROOT; };
@@ -1644,6 +1647,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				492435D61556AD070059B203 /* Twitter.framework in Frameworks */,
 				499448D01472817000671849 /* libsqlite3.a in Frameworks */,
 				242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */,
 				242A17411461AB68002977E6 /* AVFoundation.framework in Frameworks */,
@@ -1711,6 +1715,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				492435D71556AD0F0059B203 /* Twitter.framework in Frameworks */,
 				499448D11472817800671849 /* libsqlite3.a in Frameworks */,
 				242A174814628AF4002977E6 /* AudioToolbox.framework in Frameworks */,
 				242A17401461AB60002977E6 /* AVFoundation.framework in Frameworks */,
@@ -1871,6 +1876,7 @@
 				91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */,
 				242A174714628AF4002977E6 /* AudioToolbox.framework */,
 				242A173F1461AB60002977E6 /* AVFoundation.framework */,
+				492435D51556AD070059B203 /* Twitter.framework */,
 				49C521DE144D2461002011BD /* CoreText.framework */,
 				4938F8C814027860001EB473 /* CFlash */,
 				4938F8C214027818001EB473 /* CoreText.framework */,
