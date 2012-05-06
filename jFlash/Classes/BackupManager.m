@@ -87,80 +87,38 @@ NSString * const BMVersionKey = @"version";
   }
 }
 
-#pragma mark - Restore
-
-//! Delegate on success
-- (void)didRestoreUserData
+- (void) _updateStatus:(NSString *)status
 {
+  // Don't let this be called from the background as it could update the UI on the other side
   if ([NSThread isMainThread] == NO)
   {
-    [self performSelectorOnMainThread:@selector(didRestoreUserData) withObject:nil waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(_updateStatus:) withObject:status waitUntilDone:NO];
     return;
   }
   
-  LWE_DELEGATE_CALL(@selector(backupManagerDidRestoreUserData:), self);
+  if (self.delegate && [self.delegate respondsToSelector:@selector(backupManager:statusDidChange:)])
+  {
+    [self.delegate backupManager:self statusDidChange:status];
+  }
+  
 }
 
-//! Delegate on failure
-- (void)didFailToRestoreUserDataWithError:(NSError *)error
+#pragma mark - Public Methods
+
+//! Backup the user's data to our API, currently set's and set membership only
+- (void) backupUserData
 {
-  if ([NSThread isMainThread] == NO)
+  if ([self.loginManager isAuthenticated])
   {
-    [self performSelectorOnMainThread:@selector(didFailToRestoreUserDataWithError:) withObject:error waitUntilDone:NO];
-    return;
-  }
-
-  if (self.delegate && [self.delegate respondsToSelector:@selector(backupManager:didFailToRestoreUserDataWithError:)])
-  {
-    [self.delegate backupManager:self didFailToRestoreUserDataWithError:error];
-  }
-}
-
-//! Private method to really install the data.
-- (void) _installDataFromResponse:(ASIHTTPRequest *)request
-{
-  NSData *data = [request responseData];
-  if (data)
-  {
-    NSDictionary *backupDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
-    // Create the user's sets out of the dictionary
-    [self _createUserSetsFromDictionary:backupDict];
-
-    // This is a "safe" call -- if the backupDict doesn't have any user history, nothing will happen.
-    [self _createUserHistoryFromDictionary:backupDict];
-
-    [TagPeer recacheCountsForUserTags];
-    [self didRestoreUserData];
+    [self _backupUserData];
   }
   else
   {
-    NSError *error = [NSError errorWithDomain:LWEBackupManagerErrorDomain code:kDataNotFound userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Could not find backup data on web sevice.",@"") forKey:NSLocalizedDescriptionKey]];
-    [self didFailToRestoreUserDataWithError:error];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_backupUserData) name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
+    [self.loginManager login]; // need to be logged in for this
   }
 }
 
-/*!
- @method     restoreUserData
- @abstract   downloads and installs the data file from the web service. Alerts for success or failure.
- */
-- (void) _restoreUserDataFromWebService 
-{
-  // Stop listening for a login
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
-  
-  //  download the userdate file - concatenate the URL depending if this is JFlash or CFlash
-  NSString *dataURL = [BackupManagerRestoreURL stringByAppendingFormat:@"?%@=%@",BMFlashType,[self _stringForFlashType]];
-  
-  // Append a version number so that the remote API knows what we are capable of receiving
-  dataURL = [dataURL stringByAppendingFormat:@"&%@=%@",BMVersionKey,[self _stringForBundleVersion]];
-  
-  //This url will return the value of the 'ASIHTTPRequestTestCookie' cookie
-  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:dataURL]];
-  [request setDelegate:self];
-  [request setUserInfo:[NSDictionary dictionaryWithObject:BMRestore forKey:BMRequestType]];
-  [request startAsynchronous];
-}
 
 /*!
  @method     restoreUserData
@@ -178,6 +136,89 @@ NSString * const BMVersionKey = @"version";
     [self.loginManager login]; // need to be logged in for this
   }
 }
+
+#pragma mark - Restore
+
+//! Delegate on success
+- (void)_didRestoreUserData
+{
+  if ([NSThread isMainThread] == NO)
+  {
+    [self performSelectorOnMainThread:@selector(_didRestoreUserData) withObject:nil waitUntilDone:NO];
+    return;
+  }
+  
+  LWE_DELEGATE_CALL(@selector(backupManagerDidRestoreUserData:), self);
+}
+
+//! Delegate on failure
+- (void)_didFailToRestoreUserDataWithError:(NSError *)error
+{
+  if ([NSThread isMainThread] == NO)
+  {
+    [self performSelectorOnMainThread:@selector(_didFailToRestoreUserDataWithError:) withObject:error waitUntilDone:NO];
+    return;
+  }
+
+  if (self.delegate && [self.delegate respondsToSelector:@selector(backupManager:didFailToRestoreUserDataWithError:)])
+  {
+    [self.delegate backupManager:self didFailToRestoreUserDataWithError:error];
+  }
+}
+
+//! Private method to really install the data.
+- (void) _installDataFromResponse:(ASIHTTPRequest *)request
+{
+  NSData *data = [request responseData];
+  
+  // Quick return if there's some sort of problem
+  if (data == nil)
+  {
+    NSError *error = [NSError errorWithDomain:LWEBackupManagerErrorDomain code:kDataNotFound userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Could not find backup data on web sevice.",@"") forKey:NSLocalizedDescriptionKey]];
+    [self _didFailToRestoreUserDataWithError:error];
+    return;
+  }
+  
+  [self _updateStatus:NSLocalizedString(@"Decompressing",@"Unarchiving Backup File")];
+  NSDictionary *backupDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+  
+  // Create the user's sets out of the dictionary
+  [self _updateStatus:NSLocalizedString(@"Restoring Sets",@"Restoring Sets")];
+  [self _createUserSetsFromDictionary:backupDict];
+
+  // This is a "safe" call -- if the backupDict doesn't have any user history, nothing will happen.
+  [self _updateStatus:NSLocalizedString(@"Restoring Progress",@"Restoring Progress")];
+  [self _createUserHistoryFromDictionary:backupDict];
+
+  [self _updateStatus:NSLocalizedString(@"Finalizing",@"Finalizing by Recaching")];
+  [TagPeer recacheCountsForUserTags];
+  [self _didRestoreUserData];
+}
+
+/*!
+ @method     restoreUserData
+ @abstract   downloads and installs the data file from the web service. Alerts for success or failure.
+ */
+- (void) _restoreUserDataFromWebService 
+{
+  // Stop listening for a login
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
+  
+  //  download the userdate file - concatenate the URL depending if this is JFlash or CFlash
+  NSString *dataURL = [BackupManagerRestoreURL stringByAppendingFormat:@"?%@=%@",BMFlashType,[self _stringForFlashType]];
+  
+  // Append a version number so that the remote API knows what we are capable of receiving
+  dataURL = [dataURL stringByAppendingFormat:@"&%@=%@",BMVersionKey,[self _stringForBundleVersion]];
+  
+  [self _updateStatus:NSLocalizedString(@"Retrieving Backup...",@"Downloading Backup File")];
+  
+  //This url will return the value of the 'ASIHTTPRequestTestCookie' cookie
+  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:dataURL]];
+  [request setDelegate:self];
+  [request setUserInfo:[NSDictionary dictionaryWithObject:BMRestore forKey:BMRequestType]];
+  [request startAsynchronous];
+}
+
 
 //! Gets or creates a tag for the given name. Uses an existing Id to handle the magic set
 - (Tag *) _tagForName:(NSString *)tagName andId:(NSNumber *)key andGroupId:(NSNumber *)groupId
@@ -262,11 +303,11 @@ NSString * const BMVersionKey = @"version";
 #pragma mark - Backup
 
 //! Delegate on success
-- (void)didBackupUserData
+- (void)_didBackupUserData
 {
   if ([NSThread isMainThread] == NO)
   {
-    [self performSelectorOnMainThread:@selector(didBackupUserData) withObject:nil waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(_didBackupUserData) withObject:nil waitUntilDone:NO];
     return;
   }
 
@@ -277,11 +318,11 @@ NSString * const BMVersionKey = @"version";
 }
 
 //! Delegate on failure
-- (void)didFailToBackupUserDataWithError:(NSError *)error
+- (void)_didFailToBackupUserDataWithError:(NSError *)error
 {
   if ([NSThread isMainThread] == NO)
   {
-    [self performSelectorOnMainThread:@selector(didFailToBackupUserDataWithError:) withObject:error waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(_didFailToBackupUserDataWithError:) withObject:error waitUntilDone:NO];
     return;
   }
 
@@ -310,20 +351,6 @@ NSString * const BMVersionKey = @"version";
   [request setPostValue:[self _stringForFlashType] forKey:BMFlashType];
   [request setData:archivedData forKey:BMBackupFilename];
   [request startAsynchronous];
-}
-
-//! Backup the user's data to our API, currently set's and set membership only
-- (void) backupUserData
-{
-  if ([self.loginManager isAuthenticated])
-  {
-    [self _backupUserData];
-  }
-  else
-  {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_backupUserData) name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
-    [self.loginManager login]; // need to be logged in for this
-  }
 }
 
 //! Returns an NSData containing the serialized associative array
@@ -378,18 +405,18 @@ NSString * const BMVersionKey = @"version";
                                      userInfo:[NSDictionary dictionaryWithObject:[request responseStatusMessage] forKey:NSLocalizedDescriptionKey]];
     if ([responseType isEqualToString:BMBackup])
     {
-      [self didFailToBackupUserDataWithError:error];
+      [self _didFailToBackupUserDataWithError:error];
     }
     else if ([responseType isEqualToString:BMRestore])
     {
-      [self didFailToRestoreUserDataWithError:error];
+      [self _didFailToRestoreUserDataWithError:error];
     }
     return;
   }
 
   if ([responseType isEqualToString:BMBackup])
   {
-    [self didBackupUserData];
+    [self _didBackupUserData];
   }
   else if ([responseType isEqualToString:BMRestore])
   {
@@ -404,11 +431,11 @@ NSString * const BMVersionKey = @"version";
   
   if ([responseType isEqualToString:BMBackup])
   {
-    [self didFailToBackupUserDataWithError:error];
+    [self _didFailToBackupUserDataWithError:error];
   }
   else if ([responseType isEqualToString:BMRestore])
   {
-    [self didFailToRestoreUserDataWithError:error];
+    [self _didFailToRestoreUserDataWithError:error];
   }
 }
 

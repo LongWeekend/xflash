@@ -20,6 +20,7 @@ typedef enum {
 //! Informational Methods mostly for UX responses to success or failure
 @protocol LWEBackupManagerDelegate <NSObject>
 @optional
+- (void)backupManager:(BackupManager *)manager statusDidChange:(NSString *)status;
 - (void)backupManager:(BackupManager *)manager currentProgress:(CGFloat)progress;
 - (void)backupManagerDidBackupUserData:(BackupManager *)manager;
 - (void)backupManager:(BackupManager *)manager didFailToBackupUserDataWithError:(NSError *)error;
