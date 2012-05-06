@@ -286,6 +286,19 @@ NSString * const BMVersionKey = @"version";
 - (void) _createUserHistoryFromDictionary:(NSDictionary *)historyDict
 {
   NSArray *users = [UserPeer allUsers];
+  
+  // Get the total count of records
+  NSInteger totalCount = 0;
+  for (User *user in users)
+  {
+    id historyArray = [historyDict objectForKey:[user historyArchiveKey]];
+    if (historyArray && [historyArray isKindOfClass:[NSArray class]])
+    {
+      totalCount = totalCount + [historyArray count];
+    }
+  }
+  
+  NSInteger i = 0;
   for (User *user in users)
   {
     id historyArray = [historyDict objectForKey:[user historyArchiveKey]];
@@ -293,6 +306,10 @@ NSString * const BMVersionKey = @"version";
     {
       for (UserHistory *history in historyArray)
       {
+        // Update progress delegate
+        i++;
+        [self _updateProgress:((CGFloat)i/(CGFloat)totalCount)];
+        
         LWE_ASSERT_EXC([history isKindOfClass:[UserHistory class]],@"This array should only contain UserHistory objs");
         [history saveToUserId:user.userId];
       }
