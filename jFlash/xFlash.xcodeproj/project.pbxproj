@@ -269,6 +269,7 @@
 		4922ED8C1556490200645F61 /* UserHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED8A1556490200645F61 /* UserHistory.m */; };
 		4922ED8D1556490200645F61 /* UserHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED8A1556490200645F61 /* UserHistory.m */; };
 		4922ED8E1556490200645F61 /* UserHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED8A1556490200645F61 /* UserHistory.m */; };
+		4922ED95155678E000645F61 /* cflash_11_to_111.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4922ED94155678E000645F61 /* cflash_11_to_111.sql */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
 		4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EA01148FADDE00F55D09 /* CardPeerTest.m */; };
 		4927B83D1400A8400076EEED /* ChineseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83C1400A8400076EEED /* ChineseCard.m */; };
@@ -1220,6 +1221,7 @@
 		491E276D14F5DA7B00C5243A /* ExternalAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExternalAppManager.m; path = AppSpecific/ExternalAppManager.m; sourceTree = "<group>"; };
 		4922ED891556490200645F61 /* UserHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserHistory.h; path = AppSpecific/UserHistory.h; sourceTree = "<group>"; };
 		4922ED8A1556490200645F61 /* UserHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserHistory.m; path = AppSpecific/UserHistory.m; sourceTree = "<group>"; };
+		4922ED94155678E000645F61 /* cflash_11_to_111.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cflash_11_to_111.sql; path = Migrations/cflash_11_to_111.sql; sourceTree = "<group>"; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
 		4926EA00148FADDE00F55D09 /* CardPeerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardPeerTest.h; path = Tests/cFlashTests/CardPeerTest.h; sourceTree = SOURCE_ROOT; };
@@ -2155,6 +2157,7 @@
 		49195075144F1ACD00DB81F7 /* CFlash */ = {
 			isa = PBXGroup;
 			children = (
+				4922ED94155678E000645F61 /* cflash_11_to_111.sql */,
 				498EBDB71489031A00BA6DE7 /* cFlash-available.plist */,
 				498EBDBF14890AAD00BA6DE7 /* cFlash-installed.plist */,
 				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
@@ -3532,6 +3535,7 @@
 				918EEB2914F5DACB00EF044C /* button_iosblue_280x40.png in Resources */,
 				49695845150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 				490D43F9153BAA670003EA47 /* LWETDefaultAuthenticationViewController.xib in Resources */,
+				4922ED95155678E000645F61 /* cflash_11_to_111.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

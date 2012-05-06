@@ -48,6 +48,10 @@
 + (BOOL) _needs10to11SettingsUpdate:(NSUserDefaults *)settings;
 + (void) _updateSettingsFrom10to11:(NSUserDefaults *)settings;
 
+// CFLASH 1.1 -> 1.1.1
++ (BOOL) _needs11to111SettingsUpdate:(NSUserDefaults *)settings;
++ (void) _updateSettingsFrom11to111:(NSUserDefaults *)settings;
+
 #endif
 @end
 
@@ -319,6 +323,24 @@
   [settings setObject:LWE_CF_VERSION_1_1 forKey:APP_SETTINGS_VERSION];
 }
 
+#pragma mark Version 1.1.1
+
++ (BOOL) _needs11to111SettingsUpdate:(NSUserDefaults *)settings
+{
+  return [[settings objectForKey:APP_SETTINGS_VERSION] isEqualToString:LWE_CF_VERSION_1_1];
+}
+
++ (void) _updateSettingsFrom11to111:(NSUserDefaults *)settings
+{
+  //New key for the user settings preference in version 1.6.2
+  [settings setObject:LWE_CF_VERSION_1_1_1 forKey:APP_SETTINGS_VERSION];
+  
+  // 1. Execute SQL update file for bad data fixes
+  [UpdateManager _upgradeDBtoVersion:LWE_CF_VERSION_1_1_1 withSQLStatements:LWE_CF_11_TO_111_SQL_FILENAME forSettings:settings];
+  [TagPeer recacheCountsForUserTags];
+}
+
+
 #endif
 
 #pragma mark - Shared Private Methods
@@ -467,6 +489,13 @@
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.1 version");
     [UpdateManager _updateSettingsFrom10to11:settings];
+    migrated = YES;
+  }
+
+  if ([UpdateManager _needs11to111SettingsUpdate:settings])
+  {
+    LWE_LOG(@"[Migration Log]YAY! Updating to 1.1.1 version");
+    [UpdateManager _updateSettingsFrom11to111:settings];
     migrated = YES;
   }
 #endif
