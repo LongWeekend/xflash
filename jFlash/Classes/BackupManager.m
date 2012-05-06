@@ -7,7 +7,8 @@
 //
 
 #import "BackupManager.h"
-#import "LWEJanrainLoginManager.h"
+#import "UserHistory.h"
+#import "UserHistoryPeer.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
@@ -17,14 +18,20 @@ NSString * const BMRequestType = @"requestType";
 NSString * const BMBackup = @"backup";
 NSString * const BMRestore = @"restore";
 NSString * const BMBackupFilename = @"backupFile";
+NSString * const BMBackupUserHistory = @"userHistory";
+NSString * const BMBackupUserHistoryUserId = @"userId";
 NSString * const BMFlashType = @"flashType";
 
 @interface BackupManager ()
 - (Tag *) _tagForName:(NSString *)tagName andId:(NSNumber *)key andGroupId:(NSNumber *)groupId;
 //! Returns an NSData containing the serialized associative array
 - (NSData*) _serializedDataForUserSets;
+//! Returns the NSData representation for a serialized array of all UserHistory objects for the current user
+- (NSData*)_serializedDataForUserHistoryWithUserId:(NSInteger)userId;
 //! Installs the sets for a serialized associative array of sets
 - (void) _createUserSetsForData:(NSData*)data;
+//! Installs the user history for a serialized array of UserHistory objects for the current user
+- (void) _createUserHistoryForData:(NSData *)data;
 @end
 
 @implementation BackupManager
@@ -211,6 +218,18 @@ NSString * const BMFlashType = @"flashType";
   }
 }
 
+- (void) _createUserHistoryForData:(NSData *)data
+{
+  NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:@"user_id"];
+  NSDictionary *userHistoriesDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+  NSArray *historyArray = [userHistoriesDict objectForKey:@"user_histories"];
+  for (UserHistory *history in historyArray)
+  {
+    LWE_ASSERT_EXC([history isKindOfClass:[UserHistory class]],@"This array should only contain UserHistory objs");
+    [history saveToUserId:userId];
+  }
+}
+
 #pragma mark - Backup
 
 //! Delegate on success
@@ -249,8 +268,9 @@ NSString * const BMFlashType = @"flashType";
   // Stop listening for a login
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
   
-  // Get the data
-  NSData *archivedData = [self _serializedDataForUserSets];
+  // Get the user ID
+  NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:@"user_id"]; 
+  NSData *userIdData = [NSData dataWithBytes:&userId length:sizeof(userId)];
   
   // Perform the request
   ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:BackupManagerBackupURL]];
@@ -258,7 +278,11 @@ NSString * const BMFlashType = @"flashType";
   [request setDelegate:self];
   // Is this JFlash or CFlash?
   [request setPostValue:[self stringForFlashType] forKey:BMFlashType];
-  [request setData:archivedData forKey:BMBackupFilename];
+  [request setData:[self _serializedDataForUserSets] forKey:BMBackupFilename];
+  
+  // Send the serialized user history + the user's ID
+  [request setPostValue:[self _serializedDataForUserHistoryWithUserId:userId] forKey:BMBackupUserHistory];
+  [request setPostValue:userIdData forKey:BMBackupUserHistoryUserId];
   [request startAsynchronous];
 }
 
@@ -302,6 +326,14 @@ NSString * const BMFlashType = @"flashType";
   }
   
   NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:cardDict]; // serialize the cardDict
+  return archivedData;
+}
+
+- (NSData*)_serializedDataForUserHistoryWithUserId:(NSInteger)userId
+{
+  NSArray *userHistories = [UserHistoryPeer userHistoriesForUserId:userId];
+  NSDictionary *userHistoriesDict = [NSDictionary dictionaryWithObject:userHistories forKey:@"user_histories"];
+  NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:userHistoriesDict];
   return archivedData;
 }
 
