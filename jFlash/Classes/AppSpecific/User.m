@@ -7,22 +7,24 @@
 //
 
 #import "User.h"
+#import "UserHistoryPeer.h"
+#import "UserPeer.h"
 
 NSInteger const kLWEUninitializedUserId = -1;
 
 @implementation User
-@synthesize userId, userNickname, avatarImagePath, dateCreated;
+@synthesize userId, userNickname, dateCreated;
+
++ (User *)defaultUser
+{
+  return [UserPeer userWithUserId:DEFAULT_USER_ID];
+}
 
 // Takes a sqlite result set and populates the properties of user
 - (void) hydrate:(FMResultSet*)rs
 {
   self.userId          = [rs intForColumn:@"user_id"];
   self.userNickname    = [rs stringForColumn:@"nickname"];
-  self.avatarImagePath = [rs stringForColumn:@"avatar_image_path"];
-  if ([self.avatarImagePath length] == 0)
-  {
-    self.avatarImagePath = DEFAULT_USER_AVATAR_PATH;
-  }
   self.dateCreated     = [rs stringForColumn:@"date_created"];
 }
 
@@ -31,19 +33,39 @@ NSInteger const kLWEUninitializedUserId = -1;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   if(self.userId != kLWEUninitializedUserId)
   {
-    [db.dao executeUpdate:@"UPDATE users SET nickname = ?, avatar_image_path = ? WHERE user_id = ?",self.userNickname,self.avatarImagePath,[NSNumber numberWithInt:self.userId]];
+    [db.dao executeUpdate:@"UPDATE users SET nickname = ? WHERE user_id = ?",self.userNickname,[NSNumber numberWithInt:self.userId]];
   }
   else
   {
-    [db.dao executeUpdate:@"INSERT INTO users (nickname, avatar_image_path) VALUES (?,?)",self.userNickname,self.avatarImagePath];
+    [db.dao executeUpdate:@"INSERT INTO users (nickname) VALUES (?,?)",self.userNickname];
   }
 }
 
-- (void) deleteUser
+- (BOOL) deleteUser:(NSError **)error
 {
+  LWE_ASSERT_EXC((self.userId != kLWEUninitializedUserId),@"Can't call this until -hydrate has been called.");
+  if (self.userId == DEFAULT_USER_ID)
+  {
+    *error = [NSError errorWithDomain:@"LWEErrorDomain" code:31337 userInfo:nil];
+    return NO;
+  }
+
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [db.dao executeUpdate:@"DELETE FROM users WHERE user_id = ?",[NSNumber numberWithInt:self.userId]];
   [db.dao executeUpdate:@"DELETE FROM user_history WHERE user_id = ?",[NSNumber numberWithInt:self.userId]];
+  return YES;
+}
+
+- (NSString *)historyArchiveKey
+{
+  LWE_ASSERT_EXC((self.userId != kLWEUninitializedUserId),@"Can't call this unless the user has been hydrated");
+  return [NSString stringWithFormat:@"history_for_user_id_%d",self.userId];  
+}
+
+- (NSArray *) studyHistories
+{
+  LWE_ASSERT_EXC((self.userId != kLWEUninitializedUserId),@"Can't call this unless the user has been hydrated");
+  return [UserHistoryPeer userHistoriesForUserId:self.userId];
 }
 
 #pragma mark - Class plumbing
@@ -54,7 +76,6 @@ NSInteger const kLWEUninitializedUserId = -1;
   if (self)
   {
     self.userId          = kLWEUninitializedUserId;
-    self.avatarImagePath = DEFAULT_USER_AVATAR_PATH;
   }
   return self;
 }
@@ -62,7 +83,6 @@ NSInteger const kLWEUninitializedUserId = -1;
 - (void) dealloc
 {
   [userNickname release];
-  [avatarImagePath release];
   [dateCreated release];
 	[super dealloc];
 }

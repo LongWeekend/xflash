@@ -11,8 +11,10 @@
 
 @interface UserPeer : NSObject
 
-+ (User*)createUserWithNickname:(NSString*)name avatarImagePath:(NSString*)path;
-+ (User*)getUserByPK: (NSInteger)userId;
-+ (NSMutableArray*)getUsers;
+//! Returns a User object based on its ID
++ (User *)userWithUserId:(NSInteger)userId;
+
+//! Returns all the users objects in the local database
++ (NSArray *)allUsers;
 
 @end
