@@ -7,8 +7,8 @@
 //
 
 #import "BackupManager.h"
+#import "UserPeer.h"
 #import "UserHistory.h"
-#import "UserHistoryPeer.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
@@ -27,14 +27,14 @@ NSString * const BMVersionKey = @"version";
 - (Tag *) _tagForName:(NSString *)tagName andId:(NSNumber *)key andGroupId:(NSNumber *)groupId;
 - (NSString *) _stringForFlashType;
 - (NSString *) _stringForBundleVersion;
-//! Returns an NSData containing the serialized associative array
-- (NSData*) _serializedDataForUserSets;
-//! Returns the NSData representation for a serialized array of all UserHistory objects for the current user
-- (NSData*)_serializedDataForUserHistoryWithUserId:(NSInteger)userId;
+//! Returns a dictionary with keys for each tag ID containing the relevant cards
+- (NSMutableDictionary*) _dictionaryForUserSetsWithDictionary:(NSMutableDictionary *)cardDict;
+//! Returns the dictionary with keys added for each user's UserHistory objects
+- (NSMutableDictionary *)_dictionaryForUserHistoryWithDictionary:(NSMutableDictionary *)dict;
 //! Installs the sets for a serialized associative array of sets
-- (void) _createUserSetsForData:(NSData*)data;
-//! Installs the user history for a serialized array of UserHistory objects for the current user
-- (void) _createUserHistoryForData:(NSData *)data;
+- (void) _createUserSetsFromDictionary:(NSDictionary*)setDict;
+//! Installs the user history for an array of UserHistory objects for each user
+- (void) _createUserHistoryFromDictionary:(NSDictionary *)historyDict;
 @end
 
 @implementation BackupManager
@@ -122,7 +122,14 @@ NSString * const BMVersionKey = @"version";
   NSData *data = [request responseData];
   if (data)
   {
-    [self _createUserSetsForData:data];
+    NSDictionary *backupDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    // Create the user's sets out of the dictionary
+    [self _createUserSetsFromDictionary:backupDict];
+
+    // This is a "safe" call -- if the backupDict doesn't have any user history, nothing will happen.
+    [self _createUserHistoryFromDictionary:backupDict];
+
     [TagPeer recacheCountsForUserTags];
     [self didRestoreUserData];
   }
@@ -192,18 +199,24 @@ NSString * const BMVersionKey = @"version";
   return tag;
 }
 
-//! Takes a NSData created by serializedDataForUserSets and populates the data tables
-- (void) _createUserSetsForData:(NSData*)data
+//! Takes a NSDictionary w/ Tag ID indexes and makes sets out of them
+- (void) _createUserSetsFromDictionary:(NSDictionary *)idsDict
 {
-  NSDictionary *idsDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
   NSInteger totalSets = [idsDict count];
   NSInteger i = 0;
-  for (NSNumber *tagIdNum in idsDict)
+  for (id key in idsDict)
   {
     // Increment the counter and call back to the progress delegate
     i++;
     [self _updateProgress:((CGFloat)i/(CGFloat)totalSets)];
 
+    // In the "user histories", the key isn't a number, it's a string - skip those.
+    if ([key isKindOfClass:[NSString class]])
+    {
+      continue;
+    }
+    
+    NSNumber *tagIdNum = key;
     LWE_ASSERT_EXC([tagIdNum isKindOfClass:[NSNumber class]], @"Must pass a dict where keys are NSNumbers");
     
     NSArray *cardIdsAndTagName = [idsDict objectForKey:tagIdNum];
@@ -229,15 +242,20 @@ NSString * const BMVersionKey = @"version";
   }
 }
 
-- (void) _createUserHistoryForData:(NSData *)data
+- (void) _createUserHistoryFromDictionary:(NSDictionary *)historyDict
 {
-  NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:@"user_id"];
-  NSDictionary *userHistoriesDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-  NSArray *historyArray = [userHistoriesDict objectForKey:@"user_histories"];
-  for (UserHistory *history in historyArray)
+  NSArray *users = [UserPeer allUsers];
+  for (User *user in users)
   {
-    LWE_ASSERT_EXC([history isKindOfClass:[UserHistory class]],@"This array should only contain UserHistory objs");
-    [history saveToUserId:userId];
+    id historyArray = [historyDict objectForKey:[user historyArchiveKey]];
+    if (historyArray && [historyArray isKindOfClass:[NSArray class]])
+    {
+      for (UserHistory *history in historyArray)
+      {
+        LWE_ASSERT_EXC([history isKindOfClass:[UserHistory class]],@"This array should only contain UserHistory objs");
+        [history saveToUserId:user.userId];
+      }
+    }
   }
 }
 
@@ -279,21 +297,18 @@ NSString * const BMVersionKey = @"version";
   // Stop listening for a login
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
   
-  // Get the user ID
-  NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:@"user_id"]; 
-  NSData *userIdData = [NSData dataWithBytes:&userId length:sizeof(userId)];
+  // Make & serialized the dictionary
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  dict = [self _dictionaryForUserSetsWithDictionary:dict];
+  dict = [self _dictionaryForUserHistoryWithDictionary:dict];
+  NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:dict];
   
   // Perform the request
   ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:BackupManagerBackupURL]];
   [request setUserInfo:[NSDictionary dictionaryWithObject:BMBackup forKey:BMRequestType]];
   [request setDelegate:self];
-  // Is this JFlash or CFlash?
   [request setPostValue:[self _stringForFlashType] forKey:BMFlashType];
-  [request setData:[self _serializedDataForUserSets] forKey:BMBackupFilename];
-  
-  // Send the serialized user history + the user's ID
-  [request setPostValue:[self _serializedDataForUserHistoryWithUserId:userId] forKey:BMBackupUserHistory];
-  [request setPostValue:userIdData forKey:BMBackupUserHistoryUserId];
+  [request setData:archivedData forKey:BMBackupFilename];
   [request startAsynchronous];
 }
 
@@ -312,9 +327,8 @@ NSString * const BMVersionKey = @"version";
 }
 
 //! Returns an NSData containing the serialized associative array
-- (NSData*) _serializedDataForUserSets
+- (NSMutableDictionary*) _dictionaryForUserSetsWithDictionary:(NSMutableDictionary *)cardDict
 {
-  NSMutableDictionary *cardDict = [NSMutableDictionary dictionary];
   NSArray *tags = [TagPeer retrieveUserTagList];
   NSInteger totalCount = [tags count];
   NSInteger i = 0;
@@ -335,17 +349,19 @@ NSString * const BMVersionKey = @"version";
     }
     [cardDict setObject:cardIdsAndTagName forKey:[NSNumber numberWithInt:tag.tagId]];
   }
-  
-  NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:cardDict]; // serialize the cardDict
-  return archivedData;
+
+  return cardDict;
 }
 
-- (NSData*)_serializedDataForUserHistoryWithUserId:(NSInteger)userId
+- (NSMutableDictionary *)_dictionaryForUserHistoryWithDictionary:(NSMutableDictionary *)dict
 {
-  NSArray *userHistories = [UserHistoryPeer userHistoriesForUserId:userId];
-  NSDictionary *userHistoriesDict = [NSDictionary dictionaryWithObject:userHistories forKey:@"user_histories"];
-  NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:userHistoriesDict];
-  return archivedData;
+  // Get all users, then iterate each's UserHistory and add it as another key to the dictionary
+  NSArray *users = [UserPeer allUsers];
+  for (User *user in users)
+  {
+    [dict setObject:[user studyHistories] forKey:[user historyArchiveKey]];
+  }
+  return dict;
 }
 
 #pragma mark - ASIHTTPRequest Response
