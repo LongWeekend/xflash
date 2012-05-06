@@ -192,6 +192,11 @@
 	self.passwordTxt.text = @"";
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  [DSBezelActivityView removeViewAnimated:NO];
+}
 
 - (void)viewDidUnload 
 {
