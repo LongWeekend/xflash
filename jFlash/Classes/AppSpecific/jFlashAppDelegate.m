@@ -14,10 +14,6 @@
 #import "SettingsViewController.h"
 #import "SearchViewController.h"
 
-#if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
-#import "FlurryAPI.h"
-#endif
-
 @interface jFlashAppDelegate ()
 - (void) _registerObservers;
 - (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
