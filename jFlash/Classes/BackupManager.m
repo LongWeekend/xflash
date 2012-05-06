@@ -21,6 +21,10 @@ NSString * const BMFlashType = @"flashType";
 
 @interface BackupManager ()
 - (Tag *) _tagForName:(NSString *)tagName andId:(NSNumber *)key andGroupId:(NSNumber *)groupId;
+//! Returns an NSData containing the serialized associative array
+- (NSData*) _serializedDataForUserSets;
+//! Installs the sets for a serialized associative array of sets
+- (void) _createUserSetsForData:(NSData*)data;
 @end
 
 @implementation BackupManager
@@ -103,7 +107,7 @@ NSString * const BMFlashType = @"flashType";
   NSData *data = [request responseData];
   if (data)
   {
-    [self createUserSetsForData:data];
+    [self _createUserSetsForData:data];
     [TagPeer recacheCountsForUserTags];
     [self didRestoreUserData];
   }
@@ -171,7 +175,7 @@ NSString * const BMFlashType = @"flashType";
 }
 
 //! Takes a NSData created by serializedDataForUserSets and populates the data tables
-- (void) createUserSetsForData:(NSData*)data
+- (void) _createUserSetsForData:(NSData*)data
 {
   NSDictionary *idsDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
   NSInteger totalSets = [idsDict count];
@@ -246,7 +250,7 @@ NSString * const BMFlashType = @"flashType";
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
   
   // Get the data
-  NSData *archivedData = [self serializedDataForUserSets];
+  NSData *archivedData = [self _serializedDataForUserSets];
   
   // Perform the request
   ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:BackupManagerBackupURL]];
@@ -273,11 +277,18 @@ NSString * const BMFlashType = @"flashType";
 }
 
 //! Returns an NSData containing the serialized associative array
-- (NSData*) serializedDataForUserSets
+- (NSData*) _serializedDataForUserSets
 {
   NSMutableDictionary *cardDict = [NSMutableDictionary dictionary];
-  for (Tag *tag in [TagPeer retrieveUserTagList])
+  NSArray *tags = [TagPeer retrieveUserTagList];
+  NSInteger totalCount = [tags count];
+  NSInteger i = 0;
+  for (Tag *tag in tags)
   {
+    // Report the progress of the retrieve/serialize to the delegate
+    i++;
+    [self _updateProgress:((CGFloat)i/(CGFloat)totalCount)];
+    
     // Faulted cards are Card objects but have not been retrieved/hydrated and have IDs only.
     NSArray *cards = [CardPeer retrieveFaultedCardsForTag:tag];
     NSMutableArray *cardIdsAndTagName = [NSMutableArray array];

@@ -35,10 +35,6 @@ typedef enum {
 - (BackupManager*) initWithDelegate:(id)aDelegate;
 //! Downloads the restore file and adds it
 - (void) restoreUserData;
-//! Returns an NSData containing the serialized associative array
-- (NSData*) serializedDataForUserSets;
-//! Installs the sets for a serialized associative array of sets
-- (void) createUserSetsForData:(NSData*)data;
 //! Backs up the user's data to the api
 - (void) backupUserData;
 //! Helper method that returns the flashType string name used by the API
