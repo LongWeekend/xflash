@@ -265,6 +265,10 @@
 		491E276F14F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
 		491E277014F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
 		491E277114F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
+		4922ED8B1556490200645F61 /* UserHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED8A1556490200645F61 /* UserHistory.m */; };
+		4922ED8C1556490200645F61 /* UserHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED8A1556490200645F61 /* UserHistory.m */; };
+		4922ED8D1556490200645F61 /* UserHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED8A1556490200645F61 /* UserHistory.m */; };
+		4922ED8E1556490200645F61 /* UserHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED8A1556490200645F61 /* UserHistory.m */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
 		4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EA01148FADDE00F55D09 /* CardPeerTest.m */; };
 		4927B83D1400A8400076EEED /* ChineseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83C1400A8400076EEED /* ChineseCard.m */; };
@@ -1214,6 +1218,8 @@
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
 		491E276C14F5DA7B00C5243A /* ExternalAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExternalAppManager.h; path = AppSpecific/ExternalAppManager.h; sourceTree = "<group>"; };
 		491E276D14F5DA7B00C5243A /* ExternalAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExternalAppManager.m; path = AppSpecific/ExternalAppManager.m; sourceTree = "<group>"; };
+		4922ED891556490200645F61 /* UserHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserHistory.h; path = AppSpecific/UserHistory.h; sourceTree = "<group>"; };
+		4922ED8A1556490200645F61 /* UserHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserHistory.m; path = AppSpecific/UserHistory.m; sourceTree = "<group>"; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
 		4926EA00148FADDE00F55D09 /* CardPeerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardPeerTest.h; path = Tests/cFlashTests/CardPeerTest.h; sourceTree = SOURCE_ROOT; };
@@ -2971,6 +2977,8 @@
 				917A5BF711AB7CD700016BD2 /* User.m */,
 				491D7B2711C4776C00BF8323 /* UserPeer.h */,
 				491D7B2811C4776C00BF8323 /* UserPeer.m */,
+				4922ED891556490200645F61 /* UserHistory.h */,
+				4922ED8A1556490200645F61 /* UserHistory.m */,
 				917A5BF811AB7CD700016BD2 /* UserHistoryPeer.h */,
 				917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */,
 				91CBA6BD11BB6AC0004BD0D0 /* ExampleSentence.h */,
@@ -3720,6 +3728,7 @@
 				490D453E153BAB3B0003EA47 /* SBJsonBase.m in Sources */,
 				490D4542153BAB3B0003EA47 /* SBJsonParser.m in Sources */,
 				490D4546153BAB3B0003EA47 /* SBJsonWriter.m in Sources */,
+				4922ED8B1556490200645F61 /* UserHistory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3849,6 +3858,7 @@
 				490D4540153BAB3B0003EA47 /* SBJsonBase.m in Sources */,
 				490D4544153BAB3B0003EA47 /* SBJsonParser.m in Sources */,
 				490D4548153BAB3B0003EA47 /* SBJsonWriter.m in Sources */,
+				4922ED8D1556490200645F61 /* UserHistory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3981,6 +3991,7 @@
 				490D4541153BAB3B0003EA47 /* SBJsonBase.m in Sources */,
 				490D4545153BAB3B0003EA47 /* SBJsonParser.m in Sources */,
 				490D4549153BAB3B0003EA47 /* SBJsonWriter.m in Sources */,
+				4922ED8E1556490200645F61 /* UserHistory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4146,6 +4157,7 @@
 				490D453F153BAB3B0003EA47 /* SBJsonBase.m in Sources */,
 				490D4543153BAB3B0003EA47 /* SBJsonParser.m in Sources */,
 				490D4547153BAB3B0003EA47 /* SBJsonWriter.m in Sources */,
+				4922ED8C1556490200645F61 /* UserHistory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
