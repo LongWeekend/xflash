@@ -310,24 +310,33 @@ NSString * const BMVersionKey = @"version";
 //! Takes a NSDictionary w/ Tag ID indexes and makes sets out of them
 - (void) _createUserSetsFromDictionary:(NSDictionary *)idsDict
 {
-  NSInteger totalSets = [idsDict count];
+  NSInteger totalCardsAndSets = 0;
   NSInteger i = 0;
+  
+  // First, get all the numeric keys -- those are the ones we want.
+  NSMutableDictionary *tagIdsDict = [NSMutableDictionary dictionary];
   for (id key in idsDict)
+  {
+    // For legacy reasons (everything is in one data dump), we have mixed keys - we only want the numbers.
+    if ([key isKindOfClass:[NSNumber class]])
+    {
+      NSArray *thisTag = [idsDict objectForKey:key];
+      [tagIdsDict setObject:thisTag forKey:key];
+      totalCardsAndSets++;
+
+      // While we are here, get the count of cards - we can use that for updating the progress.
+      // We subtract 2 because the first 2 indexes of the array are metadata, not cards.
+      totalCardsAndSets = totalCardsAndSets + ([thisTag count] - 2);
+    }
+  }
+  
+  for (NSNumber *tagIdNum in tagIdsDict)
   {
     // Increment the counter and call back to the progress delegate
     i++;
-    CGFloat progress = ((CGFloat)i/(CGFloat)totalSets);
+    CGFloat progress = ((CGFloat)i/(CGFloat)totalCardsAndSets);
     [self _updateProgress:[NSNumber numberWithFloat:progress]];
 
-    // In the "user histories", the key isn't a number, it's a string - skip those.
-    if ([key isKindOfClass:[NSString class]])
-    {
-      continue;
-    }
-    
-    NSNumber *tagIdNum = key;
-    LWE_ASSERT_EXC([tagIdNum isKindOfClass:[NSNumber class]], @"Must pass a dict where keys are NSNumbers");
-    
     NSArray *cardIdsAndTagName = [idsDict objectForKey:tagIdNum];
     LWE_ASSERT_EXC([cardIdsAndTagName count] > 1, @"Tag info must be an array of at least 2 values");
     
@@ -344,7 +353,14 @@ NSString * const BMVersionKey = @"version";
     {
       Card *newCard = [CardPeer blankCardWithId:[newCardId integerValue]];
       if ([currentCards containsObject:newCard] == NO)
-      {
+      {  
+        i++;
+        // We don't need to update the progress EVERY time.
+        if ((i % 10) == 0)
+        {
+          CGFloat progress = ((CGFloat)i/(CGFloat)totalCardsAndSets);
+          [self _updateProgress:[NSNumber numberWithFloat:progress]];
+        }
         [TagPeer subscribeCard:newCard toTag:userTag];
       }
     }
