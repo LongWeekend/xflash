@@ -10,9 +10,6 @@
 
 
 @interface UserPeer : NSObject
-{
-
-}
 
 + (User*)createUserWithNickname:(NSString*)name avatarImagePath:(NSString*)path;
 + (User*)getUserByPK: (NSInteger)userId;
