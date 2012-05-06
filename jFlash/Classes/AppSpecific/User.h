@@ -31,6 +31,5 @@ extern NSInteger const kLWEUninitializedUserId;
 
 @property (nonatomic) NSInteger userId;
 @property (nonatomic,retain) NSString *userNickname;
-@property (nonatomic,retain) NSString *dateCreated;
 
 @end

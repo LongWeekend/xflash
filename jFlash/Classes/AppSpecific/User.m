@@ -13,7 +13,7 @@
 NSInteger const kLWEUninitializedUserId = -1;
 
 @implementation User
-@synthesize userId, userNickname, dateCreated;
+@synthesize userId, userNickname;
 
 + (User *)defaultUser
 {
@@ -25,19 +25,18 @@ NSInteger const kLWEUninitializedUserId = -1;
 {
   self.userId          = [rs intForColumn:@"user_id"];
   self.userNickname    = [rs stringForColumn:@"nickname"];
-  self.dateCreated     = [rs stringForColumn:@"date_created"];
 }
 
 - (void) save
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  if(self.userId != kLWEUninitializedUserId)
+  if (self.userId != kLWEUninitializedUserId)
   {
     [db.dao executeUpdate:@"UPDATE users SET nickname = ? WHERE user_id = ?",self.userNickname,[NSNumber numberWithInt:self.userId]];
   }
   else
   {
-    [db.dao executeUpdate:@"INSERT INTO users (nickname) VALUES (?,?)",self.userNickname];
+    [db.dao executeUpdate:@"INSERT INTO users (nickname) VALUES (?)",self.userNickname];
   }
 }
 
@@ -75,7 +74,7 @@ NSInteger const kLWEUninitializedUserId = -1;
   self = [super init];
   if (self)
   {
-    self.userId          = kLWEUninitializedUserId;
+    self.userId = kLWEUninitializedUserId;
   }
   return self;
 }
@@ -83,7 +82,6 @@ NSInteger const kLWEUninitializedUserId = -1;
 - (void) dealloc
 {
   [userNickname release];
-  [dateCreated release];
 	[super dealloc];
 }
 
