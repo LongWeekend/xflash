@@ -26,7 +26,7 @@ NSInteger const kLWEBackupSection = 2;
 @end
 
 @implementation StudySetViewController
-@synthesize subgroupArray,tagArray,selectedTagId,group,activityIndicator,searchBar,backupManager,activityView;
+@synthesize subgroupArray,tagArray,selectedTagId,group,activityIndicator,searchBar,backupManager;
 /** 
  * Customized initializer - returns UITableView group as self.view
  * Also creates tab bar image and sets nav bar title
@@ -82,11 +82,6 @@ NSInteger const kLWEBackupSection = 2;
   _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet:)];
   self.navigationItem.rightBarButtonItem = _addButton;
   
-  [[NSNotificationCenter defaultCenter] addObserverForName:LWEJanrainLoginManagerUserDidNotAuthenticate
-                                                    object:nil
-                                                     queue:nil
-                                                usingBlock:^(NSNotification *notif) { [DSBezelActivityView removeView]; }];
-
   self.tagArray = [[self.group.childTags mutableCopy] autorelease];
   self.activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
 }
@@ -670,10 +665,8 @@ NSInteger const kLWEBackupSection = 2;
 {
   [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
   
-  //  [DSBezelActivityView removeView];  
-  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
+  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your sets & progress have been backed up successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") message:alertMessage];
-  [self.activityIndicator stopAnimating];
 }
 
 - (void)backupManager:(BackupManager *)manager didFailToBackupUserDataWithError:(NSError *)error
@@ -702,17 +695,19 @@ NSInteger const kLWEBackupSection = 2;
     // probably no network
     [LWEUIAlertView noNetworkAlert];
   }
-
-  [self.activityIndicator stopAnimating];  
 }
 
 - (void)backupManagerDidRestoreUserData:(BackupManager *)manager
 {
   [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
-  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your data has been restored successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
+  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your sets & progress have been restored successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") message:alertMessage]; 
-  [self.activityIndicator stopAnimating];
   [self reloadTableData];
+
+  // Reload the current tag so that the progress details are correct - otherwise the progress bar is out of whack after restore.
+  // TODO: there's probably a better way to do this with a notification or something.
+  CurrentState *appSettings = [CurrentState sharedCurrentState];
+  [appSettings setActiveTag:[appSettings activeTag]];
 }
 
 - (void)backupManager:(BackupManager *)manager didFailToRestoreUserDataWithError:(NSError *)error
@@ -844,7 +839,6 @@ NSInteger const kLWEBackupSection = 2;
   [activityIndicator release];
   [searchBar release];
   [backupManager release];
-  [activityView release];
   [super dealloc];
 }
 
