@@ -10,11 +10,6 @@
 #import "AddTagViewController.h"
 #import "Constants.h"
 #import "jFlashAppDelegate.h"
-#import "TweetWordViewController.h"
-#import "LWETwitterEngine.h"
-#import "LWETUser.h"
-#import "LWETRequestDelegate.h"
-#import "TweetWordXAuthController.h"
 #import <MessageUI/MessageUI.h>
 #import "StudyViewProtocols.h"
 
