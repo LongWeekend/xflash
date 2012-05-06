@@ -7,17 +7,16 @@
 //
 
 #import "ActionBarViewController.h"
-#import "LWETwitterEngine.h"
+#import <Twitter/Twitter.h>
 
 @interface ActionBarViewController ()
 - (void) _reportBadData;
-- (void) _initTwitterEngine;
 @end
 
 @implementation ActionBarViewController
 @synthesize delegate, currentCard;
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn;
-@synthesize cardMeaningBtnHint, twitterEngine, tweetWordViewController;
+@synthesize cardMeaningBtnHint;
 
 // MMA: 11/14/2011 -- this method appears to be unused...
 //Give the delegate a chance to not reveal the card
@@ -173,154 +172,48 @@
 //! Called when dismissing email composer
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
-  // remove the mail modal
-  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  [appDelegate.tabBarController dismissModalViewControllerAnimated:YES];
+  [controller dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - UIAlertView delegate methods
-
-/**
- * If the user tapped OK, Follow Long WEekend on Twitter
- */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  if (buttonIndex == LWE_ALERT_OK_BTN)
-  {
-    LWE_LOG(@"Following long weekend (twitter ID 65012024)");
-    [self _initTwitterEngine];
-		[self.twitterEngine performSelectorInBackground:@selector(follow:) withObject:@"65012024"];
-  }
-}
-
-#pragma mark - Tweet Word Features
-
-/**
- * Initialize the twitter engine class if not already done
- * If called twice, this method is pretty much a NOOP
- * However, tweet and any twitter "action" will nil out the Twitter Engine, so you have to call again
- */
-- (void) _initTwitterEngine
-{
-	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-	NSString *idCurrentUser = [NSString stringWithFormat:@"%d", [settings integerForKey:@"user_id"]];
-  
-  // Init twitter engine if not already done
-	if (self.twitterEngine == nil)
-	{
-    TweetWordXAuthController *controller = [[TweetWordXAuthController alloc] initWithNibName:@"TweetWordXAuthController" bundle:nil];
-		self.twitterEngine = [[[LWETwitterEngine alloc] initWithConsumerKey:LWE_TWITTER_CONSUMER_KEY privateKey:LWE_TWITTER_PRIVATE_KEY authenticationView:controller] autorelease];
-    [controller release];
-	}
-
-  // TODO: fix this so it doesn't use App Delegate - use notifications instead
-	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
-	UIViewController *vc = (UIViewController *)appDelegate.tabBarController;
-	self.twitterEngine.parentForUserAuthenticationView = vc;
-	LWE_LOG(@"changed the user for twitter with user id %@", idCurrentUser);
-	[self.twitterEngine setLoggedUser:[LWETUser userWithID:idCurrentUser] authMode:LWET_AUTH_XAUTH];
-	self.twitterEngine.delegate = self;
-}
 
 /**
  * Tweets the current word.
  */
 - (void)tweet
 {
-  [self _initTwitterEngine];
-	
-	if ((self.twitterEngine.loggedUser != nil) && (self.twitterEngine.loggedUser.isAuthenticated))
-	{
-		LWE_LOG(@"It tries to open up the tweet this words controller");
-		//Set all of the data 
-		NSString *tweetWord = [self getTweetWord];
-		self.tweetWordViewController = [[[TweetWordViewController alloc] initWithNibName:@"TweetWordViewController"  
-                                                                       twitterEngine:self.twitterEngine 
-                                                                           tweetWord:tweetWord] autorelease];
-    
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.tweetWordViewController, @"controller", nil];
-		[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
-		[dict release];
-	}
-}
-
-#pragma mark - LWETRequestDelegate
-
-/**
- * Callback - LWETRequestDelegate - processes result data
- */
-- (void)didFinishProcessWithData:(NSData *)data
-{
-  [self.tweetWordViewController dismissModalViewControllerAnimated:YES];
-  self.tweetWordViewController = nil;
-	
-  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Tweeted", @"ActionBarViewController.TweetSuccessAlertTitle") 
-                                     message:NSLocalizedString(@"Successfully added to your Twitter feed!", @"ActionBarViewController.TweetSuccessAlertMsg")];
-  self.twitterEngine = nil;
-}
-
-/**
- * Callback - LWETRequestDelegate - processes error data
- */
-- (void) didFailedWithError:(NSError *)error
-{
-  [self.tweetWordViewController dismissModalViewControllerAnimated:YES];
-  self.tweetWordViewController = nil;
-
-  if (error.domain == LWETwitterErrorDomain && error.code == LWETwitterErrorUnableToSendTweet)
+  Class tweetClass = NSClassFromString(@"TWTweetComposeViewController");
+  if (tweetClass == nil)
   {
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to Tweet", @"ActionBarViewController.TweetFailureAlertTitle")
-                                       message:NSLocalizedString(@"Did you tweet the same thing twice in a row?  Twitter doesn't let us.", @"ActionBarViewController.TweetFailureAlertMsg")];    
-  }
-  else if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
-  {
-    [LWEUIAlertView noNetworkAlert];
+    // This would be iOS4, ladies & gentlemen
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"iOS5 Required", @"Cannot Tweet Title - iOS4")
+                                       message:NSLocalizedString(@"Look, we're really sorry.  Apple added Twitter support into iOS5 - might we recommend you upgrade?", @"Cannot Tweet Msg - iOS4")];
+    return;
   }
   
-  self.twitterEngine = nil;
-}
+  // OK, now let's see if they CAN tweet
+  BOOL canTweet = [TWTweetComposeViewController canSendTweet];
+  if (canTweet == NO)
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Twitter Not Set Up", @"Cannot Tweet Title - iOS5")
+                                       message:NSLocalizedString(@"Seems like Twitter isn't set up.   Visit the Apple Settings app, and scroll down to 'Twitter'.", @"Cannot Tweet Msg - iOS5")];
+    return;
+  }
 
-/**
- * Did successfully auth - now see if they are following long_weekend
- */
-- (void)didFinishAuth
-{
-	NSString *tweetWord = [self getTweetWord];
-	self.tweetWordViewController = [[[TweetWordViewController alloc] initWithNibName:@"TweetWordViewController"  
-                                                                     twitterEngine:self.twitterEngine
-                                                                         tweetWord:tweetWord] autorelease];
-	
-  // Show an alert view asking if they want to follow LWE
-  [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Follow Long Weekend?",@"ActionBarViewController.FollowLWEAlertTitle")
-                                     message:NSLocalizedString(@"Great, you're logged in.  Want to follow us?  We tweet interesting stuff.",@"ActionBarViewController.FollowLWEAlertMsg")
-                                          ok:NSLocalizedString(@"Sure",@"Global.Sure")
-                                      cancel:NSLocalizedString(@"No Thanks",@"Global.NoThanks")
-                                    delegate:self];
-  
-  // TODO: Why is this here?  MMA - 11/14/2011
-	[self performSelector:@selector(presentModal:) withObject:self.tweetWordViewController afterDelay:0.1f];
-}
+  // OK, tweet
+  TWTweetComposeViewController *tweetVC = [[TWTweetComposeViewController alloc] init];
+  NSString *tweet = [NSString stringWithFormat:@"%@ %@",[self getTweetWord],LWE_TWITTER_HASH_TAG];
+  [tweetVC setInitialText:tweet];
+  tweetVC.completionHandler = ^(TWTweetComposeViewControllerResult result){
+    if (result == TWTweetComposeViewControllerResultDone)
+    {
+      // OK, they tweeted.
+    }
+  };
 
-- (void)didFailedAuth:(NSError *)error
-{
-	if (error)
-	{
-		LWE_LOG(@"Did failed auth.");
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to Login",@"ActionBarViewController.TweetLoginFailureAlertTitle")
-                                       message:NSLocalizedString(@"We were unable to log in to the Twitter server.  Do you have a network connection?",@"ActionBarViewController.TweetLoginFailureAlertMsg")];
-	}
-  self.twitterEngine = nil;
-}
-
-
--(void) presentModal:(UIViewController*)modalNavController
-{
-	LWE_LOG(@"Presenting the modal");
-	NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:modalNavController, @"controller", nil];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
-	[dict release];
-	LWE_LOG(@"Done Sending the notification");
+  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+  [appDelegate.tabBarController presentModalViewController:tweetVC animated:YES];
+  [tweetVC release];
 }
 
 #pragma mark - TweetWordMethod
@@ -402,12 +295,6 @@
 
 #pragma mark - Class Plumbing
 
-- (void)didReceiveMemoryWarning
-{
-	[super didReceiveMemoryWarning];
-  self.twitterEngine = nil;
-}
-
 - (void)viewDidUnload
 {
 	[super viewDidUnload];
@@ -424,9 +311,7 @@
 - (void)dealloc
 {
 	[currentCard release];
-  [tweetWordViewController release];
   [cardMeaningBtnHint release];
-  [twitterEngine release];
   [addBtn release];
   [buryCardBtn release];
   [nextCardBtn release];
