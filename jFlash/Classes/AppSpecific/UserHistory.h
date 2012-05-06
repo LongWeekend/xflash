@@ -9,15 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "FMResultSet.h"
 
-@interface UserHistory : NSObject
+@interface UserHistory : NSObject <NSCoding>
 
 +(UserHistory *)userHistoryWithResultSet:(FMResultSet *)rs;
+- (BOOL) saveToUserId:(NSInteger)userId;
 
-@property NSInteger cardId;
-@property NSInteger rightCount;
-@property NSInteger wrongCount;
-@property NSInteger cardLevel;
-@property NSDate *lastUpdated;
-@property NSDate *createdAt;
+@property (assign, nonatomic) NSInteger cardId;
+@property (assign, nonatomic) NSInteger rightCount;
+@property (assign, nonatomic) NSInteger wrongCount;
+@property (assign, nonatomic) NSInteger cardLevel;
+@property (retain, nonatomic) NSDate *lastUpdated;
+@property (retain, nonatomic) NSDate *createdAt;
 
 @end
