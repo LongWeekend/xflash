@@ -76,7 +76,7 @@
 - (IBAction) doActivateUser
 {
   // Dismiss this VC
-  [self.navigationController popToRootViewControllerAnimated:YES];
+  [self.navigationController popViewControllerAnimated:YES];
 
   // Activate
   if (self.delegate && [self.delegate respondsToSelector:@selector(activateUser:)])

@@ -62,7 +62,18 @@
 
 - (void) activateUser:(User*)user
 {
-  [self activateUserWithModal:user];
+  [DSBezelActivityView newActivityViewForView:self.tableView
+                                    withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
+  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setInteger:user.userId forKey:@"user_id"];
+  
+  CurrentState *currentStateSingleton = [CurrentState sharedCurrentState];
+  [currentStateSingleton resetActiveTagWithCompletionHandler:^{
+    // post notification and dismiss view
+    [DSActivityView removeView];
+    [self.navigationController popViewControllerAnimated:YES];
+  }];
 }
 
 #pragma mark Table view methods
@@ -137,20 +148,22 @@
   }
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   self.selectedUserInArray = [self.usersArray objectAtIndex:indexPath.row];
-  NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Set the active user to %@?",@"UserViewController.ChangeUser_AlertViewMessage"), [selectedUserInArray userNickname]];
-  [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Activate User",@"UserViewController.ChangeUser_AlertViewTitle") message:message delegate:self];
+  NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Set the active user to %@?",@"UserViewController.ChangeUser_AlertViewMessage"),self.selectedUserInArray.userNickname];
+  [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Activate User",@"UserViewController.ChangeUser_AlertViewTitle")
+                                     message:message
+                                    delegate:self];
 }
 
+#pragma mark - UIAlertViewDelegate
 
 - (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
   // user activation confirmed 
   if (buttonIndex == LWE_ALERT_OK_BTN)
   {
-    [self activateUserWithModal:self.selectedUserInArray];
+    [self activateUser:self.selectedUserInArray];
   }
 }
-
 
 /**
  * Load UserDetailsViewController onto the navigation controller stack
@@ -190,7 +203,7 @@
   NSInteger currentUserId = [[NSUserDefaults standardUserDefaults] integerForKey:@"user_id"];
   if (tmpUser.userId == currentUserId)
   {
-    [self activateUserWithModal:[User defaultUser]];
+    [self activateUser:[User defaultUser]];
   }
   
   // Reset the source data for the table before animating
@@ -203,35 +216,6 @@
 }
 
 # pragma mark UI Responders
-
-/** Takes a user objects and activates it, calling notifications appropriately */
-- (void) activateUserWithModal:(User*) user
-{
-  [DSBezelActivityView newActivityViewForView:self.tableView withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
-
-  // Now do it after a delay so we can get the modal loading view to pop up
-  [self performSelector:@selector(_activateUser:) withObject:user afterDelay:0.0];
-}
-
-
-/**
- * Called exclusively by activateUserWithModal
- * Completes the activation and dismisses the modal set up by
- * activateUserWithModal
- */
-- (void) _activateUser:(User*) user 
-{
-  // User activation code here 
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setInteger:user.userId forKey:@"user_id"];
-  CurrentState *currentStateSingleton = [CurrentState sharedCurrentState];
-  [currentStateSingleton resetActiveTag];
-
-  // post notification and dismiss view
-  [DSActivityView removeView];
-  [self.navigationController popViewControllerAnimated:YES];
-}
-
 
 /** Pushs the user details view controller onto the nav controller stack */
 - (void) showUserDetailsView
