@@ -631,6 +631,11 @@ NSInteger const kLWEBackupSection = 2;
 
 #pragma mark - BackupManager Delegate
 
+- (void)backupManager:(BackupManager *)manager currentProgress:(CGFloat)progress
+{
+  LWE_LOG(@"Progress updated to: %f",progress);
+}
+
 - (void)backupManagerDidBackupUserData:(BackupManager *)manager 
 {
   [DSBezelActivityView removeView];  
