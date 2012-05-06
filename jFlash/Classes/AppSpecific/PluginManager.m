@@ -15,7 +15,7 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
 - (void)_initDownloadablePluginsDict;
 - (void) _registerPlugin:(Plugin *)plugin;
 - (BOOL) _loadDatabasePlugin:(Plugin *)plugin error:(NSError **)error;
-- (void) _retrievePlistFromServer;
+- (BOOL) _retrievePlistFromServer;
 @end
 
 @implementation PluginManager
@@ -350,23 +350,17 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
  * \param asynch If YES, the URL retrieve will happen on a background thread (the processing afterward will remain on the main thread)
  * \param notifyOnNetworkFail If YES, and network is not available, will prompt a LWEUIAlertView noNetwork alert
  */
-- (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail
+- (BOOL)checkNewPluginsAsynchronous:(BOOL)asynch
 {	
   // Check if they have network first, if so, start the background thread
-	if ([LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER])
-	{
-    if (asynch)
-    {
-      [self performSelectorInBackground:@selector(_retrievePlistFromServer) withObject:nil];
-    }
-    else
-    {
-      [self _retrievePlistFromServer];
-    }
-  }
-  else if (notifyOnNetworkFail)
+  if (asynch)
   {
-    [LWEUIAlertView noNetworkAlert];
+    [self performSelectorInBackground:@selector(_retrievePlistFromServer) withObject:nil];
+    return YES;
+  }
+  else
+  {
+    return [self _retrievePlistFromServer];
   }
 }
 
@@ -396,10 +390,13 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
 
 
 /**
- * Intended to be run in the background so we don't lock the main thread
+ * Intended to be run in the background so we don't lock the main thread, but can be run
+ * synchronously.
  */
-- (void)_retrievePlistFromServer
+- (BOOL)_retrievePlistFromServer
 {
+  BOOL success = NO;
+  
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   NSString *urlStr = [LWE_PLUGIN_SERVER stringByAppendingString:LWE_PLUGIN_LIST_REL_URL];
   NSDictionary *plist = [[NSDictionary alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr]];
@@ -407,14 +404,17 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
   {
     // Ask the plugin manager to deal with it. Wait until done because it needs the plist var to stay around
     [self performSelectorOnMainThread:@selector(processPlistHash:) withObject:plist waitUntilDone:YES];
+    
+    // Yep, we got a PLIST
+    success = YES;
+
+    // Now update the settings so we record that we checked
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    [settings setValue:[NSDate date] forKey:PLUGIN_LAST_UPDATE];
   }
   [plist release];
-  
-  // Now update the settings so we record that we checked
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setValue:[NSDate date] forKey:PLUGIN_LAST_UPDATE];
-  
   [pool release];
+  return success;
 }
 
 #pragma mark - Memory Management

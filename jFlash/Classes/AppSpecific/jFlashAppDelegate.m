@@ -97,7 +97,7 @@
   // 2. Check for plugin updates if it's time for that
 	if ([self.pluginManager isTimeForCheckingUpdate])
 	{
-    [self.pluginManager checkNewPluginsAsynchronous:YES notifyOnNetworkFail:NO];
+    [self.pluginManager checkNewPluginsAsynchronous:YES];
 	}
   
   // 3. Initialize audio session manager - start with audio session "playback" first

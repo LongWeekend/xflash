@@ -56,7 +56,12 @@
 {
 	
 	[self _changeLastUpdateLabel];
-	[self.pluginManager checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
+	BOOL success = [self.pluginManager checkNewPluginsAsynchronous:NO];
+  if (success == NO)
+  {
+    // If we failed to check for plugins, we probably have no network connectivity.
+    [LWEUIAlertView noNetworkAlert];
+  }
 	[self _reloadTableData];
   
   [DSBezelActivityView removeViewAnimated:YES];
