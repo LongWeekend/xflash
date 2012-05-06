@@ -13,6 +13,7 @@
 #import "LWEJanrainLoginManager.h"
 #import "SettingsViewController.h"
 #import "Constants.h"
+#import "MBProgressHUD.h"
 
 NSInteger const kBackupConfirmationAlertTag = 10;
 NSInteger const kRestoreConfirmationAlertTag = 11;
@@ -593,56 +594,83 @@ NSInteger const kLWEBackupSection = 2;
 /** Alert view delegate - initiates the "study set change" if they pressed OK */
 - (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  // This is the OK button
-  if (buttonIndex == LWE_ALERT_OK_BTN)
+  // Quick return on anything but OK
+  if (buttonIndex != LWE_ALERT_OK_BTN)
   {
-    [self.activityIndicator startAnimating];
-    if (alertView.tag == kBackupConfirmationAlertTag)
-    {
-      [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Backing Up...", @"StudySetViewController.BackingUp")];
-      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3f];
-    }
-    else if (alertView.tag == kRestoreConfirmationAlertTag)
-    {
-      [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Restoring...", @"StudySetViewController.Restoring")];
-      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3f];
-    }
-    else 
-    {
-      // Cache this value and re-set it, the animation messes it up by resetting it to zero
-      CGPoint offset = self.tableView.contentOffset;
-      
-      // We want to reload the selected row because it will now say "loading cards"
-      [self.tableView beginUpdates];
-      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedTagId inSection:kLWETagsSection];
-      [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-      [self.tableView endUpdates];
-      
-      // For some unknown reason, the above calls (but not -reloadData) reset the table offset.  We don't want that.
-      self.tableView.contentOffset = offset;
-
-      [self performSelector:@selector(activateTag:) withObject:[self.tagArray objectAtIndex:self.selectedTagId] afterDelay:0.1];
-    }
+    self.selectedTagId = kLWEUninitializedTagId;
     return;
+  }
+  
+  if (alertView.tag == kBackupConfirmationAlertTag)
+  {
+    [self backup];
+  }
+  else if (alertView.tag == kRestoreConfirmationAlertTag)
+  {
+    [self restore];
   }
   else 
   {
-    self.selectedTagId = kLWEUninitializedTagId;
+    // This is the alert view that warns users they are about to start a new tag.
+    
+    // Cache this value and re-set it, the animation messes it up by resetting it to zero
+    CGPoint offset = self.tableView.contentOffset;
+    
+    // We want to reload the selected row because it will now say "loading cards"
+    [self.tableView beginUpdates];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedTagId inSection:kLWETagsSection];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
+    
+    // For some unknown reason, the above calls (but not -reloadData) reset the table offset.  We don't want that.
+    self.tableView.contentOffset = offset;
+
+    [self.activityIndicator startAnimating];
+    [self performSelector:@selector(activateTag:) withObject:[self.tagArray objectAtIndex:self.selectedTagId] afterDelay:0.1];
   }
+}
+
+#pragma mark - Backup Methods
+
+- (void) backup
+{
+  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
+  hud.mode = MBProgressHUDModeDeterminate;
+  hud.labelText = NSLocalizedString(@"Backing Up...",@"Starting Backup");
+  
+  // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
+  [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3f];
+}
+
+- (void) restore
+{
+  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
+  hud.mode = MBProgressHUDModeDeterminate;
+  hud.labelText = @"Restoring...";
+
+  // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
+  [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3f];  
 }
 
 #pragma mark - BackupManager Delegate
 
+- (void)backupManager:(BackupManager *)manager statusDidChange:(NSString *)status
+{
+  MBProgressHUD *hud = [MBProgressHUD HUDForView:self.parentViewController.view];
+  hud.labelText = status;
+}
+
 - (void)backupManager:(BackupManager *)manager currentProgress:(CGFloat)progress
 {
-  LWE_LOG(@"Progress updated to: %f",progress);
+  MBProgressHUD *hud = [MBProgressHUD HUDForView:self.parentViewController.view];
+  hud.progress = progress;
 }
 
 - (void)backupManagerDidBackupUserData:(BackupManager *)manager 
 {
-  [DSBezelActivityView removeView];  
+  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
+  
+  //  [DSBezelActivityView removeView];  
   NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") message:alertMessage];
   [self.activityIndicator stopAnimating];
@@ -650,7 +678,7 @@ NSInteger const kLWEBackupSection = 2;
 
 - (void)backupManager:(BackupManager *)manager didFailToBackupUserDataWithError:(NSError *)error
 {
-  [DSBezelActivityView removeView];
+  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
   NSString *errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
   
   // overwrite the default error message if it's from the server
@@ -673,7 +701,7 @@ NSInteger const kLWEBackupSection = 2;
 
 - (void)backupManagerDidRestoreUserData:(BackupManager *)manager
 {
-  [DSBezelActivityView removeView];
+  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
   NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your data has been restored successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") message:alertMessage]; 
   [self.activityIndicator stopAnimating];
@@ -682,7 +710,7 @@ NSInteger const kLWEBackupSection = 2;
 
 - (void)backupManager:(BackupManager *)manager didFailToRestoreUserDataWithError:(NSError *)error
 {
-  [DSBezelActivityView removeView];
+  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
   if (error.code == kDataNotFound && [error.domain isEqualToString:LWEBackupManagerErrorDomain])
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Backup Found", @"DataNotFound") 
