@@ -58,15 +58,17 @@
   }
   
   UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Card Actions",@"ActionBarViewController.ActionSheetTitle") delegate:self
-                                         cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel") destructiveButtonTitle:nil
-                                         otherButtonTitles:
-                       favoriteString,
-                       NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
-											 NSLocalizedString(@"Tweet Card",@"ActionBarViewController.ActionSheetTweet"),
-                       NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),nil];
+                                         cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel")
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:favoriteString,
+                                                           NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
+                                                           NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),
+                                                           NSLocalizedString(@"Tweet This Card",@"ActionBarViewController.ActionSheetTweet"),nil];
   
+  // Yes, there is a showInTabBar: which seems like it might be good, but it makes the BG of the action sheet
+  // REALLY black.  You don't want it, trust me - MMA
   jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  [as showInView:[[appDelegate tabBarController]view]]; 
+  [as showInView:appDelegate.tabBarController.view];
   [as release];
 }
 
@@ -85,7 +87,7 @@
   LWE_DELEGATE_CALL(@selector(actionBarDidReveal:), self);
 }
 
-#pragma mark UIActionSheetDelegate methods - for "add to set" or "report bad data" action sheet
+#pragma mark - UIActionSheetDelegate methods
 
 //! UIActionSheet delegate method - which modal do we load when the user taps "add to set" or "report bad data"
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -116,18 +118,14 @@
     {
       // First of all, do it
       NSError *error = nil;
-      BOOL cancelled = [TagPeer cancelMembership:self.currentCard fromTag:favoritesTag error:&error];
-      if (!cancelled)
+      BOOL removed = [TagPeer cancelMembership:self.currentCard fromTag:favoritesTag error:&error];
+      if (removed == NO)
       {
-        if ([error code] == kRemoveLastCardOnATagError)
+        if (error.code == kRemoveLastCardOnATagError)
         {
           NSString *errorMessage = [error localizedDescription];
           [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
                                              message:errorMessage];
-        }
-        else
-        {
-          LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
         }
         return;
       }
