@@ -18,3 +18,7 @@ UPDATE card_tag_link SET card_id = '133486' WHERE tag_id = '63' AND card_id = '1
 DELETE FROM card_tag_link where card_id = '142050' AND tag_id IN (92,93,94,95);
 UPDATE card_tag_link SET card_id = '56859' WHERE tag_id = 94 AND card_id = '146962';
 DELETE FROM card_tag_link where card_id = '146962' AND tag_id IN (92,93);
+CREATE TABLE users_new (user_id INTEGER PRIMARY KEY, nickname TEXT);
+INSERT INTO users_new SELECT user_id, nickname FROM users;
+DROP TABLE users;
+ALTER TABLE users_new RENAME TO users;
