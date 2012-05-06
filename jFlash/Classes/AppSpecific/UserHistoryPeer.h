@@ -12,4 +12,6 @@
 + (void) recordCorrectForCard:(Card *)card inTag:(Tag *)tag;
 + (void) recordWrongForCard:(Card *)card inTag:(Tag *)tag;
 
++ (NSArray *) userHistoriesForUserId:(NSInteger)userId;
+
 @end
