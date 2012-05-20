@@ -91,7 +91,7 @@ public class XflashSplash extends Activity
         }
         else
         {
-            splashTime = 1500;
+            splashTime = 1200;
         } 
 
         turnOnReceiver();
@@ -460,7 +460,7 @@ public class XflashSplash extends Activity
             
                         tempView = new TextView(myContext);
                         tempView.setTextSize((float)16);
-                        tempView.setTextColor(0xFF000000);
+                        tempView.setTextColor(0xFFFFFFFF);
             
                         tempView.setText("Database Available!");
                         DBupdateLayout.addView(tempView);
