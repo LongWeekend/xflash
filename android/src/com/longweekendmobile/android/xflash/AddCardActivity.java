@@ -31,6 +31,8 @@ public class AddCardActivity extends FragmentActivity
     {
         super.onResume();
         overridePendingTransition(R.anim.slidein_bottom,R.anim.hold);
+
+        AddCardToTagFragment.setModal(true,this);
     }
 
     @Override
@@ -38,6 +40,8 @@ public class AddCardActivity extends FragmentActivity
     {
         super.onPause();
         overridePendingTransition(R.anim.hold,R.anim.slideout_bottom);
+        
+        AddCardToTagFragment.setModal(false,null);
     }
 
 

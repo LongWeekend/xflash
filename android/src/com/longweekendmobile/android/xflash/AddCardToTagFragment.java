@@ -9,6 +9,7 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
 //  public static void loadCard(int  )
+//  public static void setModal(boolean,  Context  )
 //  public static void dumpObservers()
 //
 //  private void toggleWord(View  )
@@ -25,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +53,8 @@ public class AddCardToTagFragment extends Fragment
     private static JapaneseCard tagCard = null;
     private static JapaneseCard searchCard = null;
     private static JapaneseCard currentCard = null;
+    private static boolean isModal = false;
+    private static FragmentActivity modalContext = null;
 
     private LinearLayout userTagList = null;
     private static Observer newTagObserver = null;
@@ -185,6 +189,11 @@ public class AddCardToTagFragment extends Fragment
 
     }  // end loadCard()
    
+    public static void setModal(boolean inModal,FragmentActivity inContext)
+    {
+        isModal = inModal;
+        modalContext = inContext;
+    }
     
     public static void dumpObservers()
     {
@@ -210,6 +219,28 @@ public class AddCardToTagFragment extends Fragment
             {
                 // only adjust view if remove is successful
                 tempImage.setVisibility(View.GONE);
+            }
+            else
+            {
+                if( isModal )
+                {
+                    // if the cancel fails, we are on the last card
+                    // if we are currently modal, they are attemping to remove
+                    // the last card via AddCardActivity.  Force-close the Activity
+                    // so they can see the AlertDialog.
+
+                    // this is kind of a workaround--because manging to get the
+                    // modal Context all the way through to show the Dialog on
+                    // top of the modal Activity would require undesirable modifications
+                    // to the model itself.
+
+                    // The issue is that TagPeer.cancelMembership() was designed with
+                    // only the single FragmentActivity context in mind, and calls
+                    // it directly.  Could be rememdied by implementing yet ANOTHER
+                    // observer/listener, so TagPeer only fires a broadcast, rather than
+                    // showing the dialog itself.  Complex to implement.
+                    modalContext.finish();
+                }
             }
         }
         else
