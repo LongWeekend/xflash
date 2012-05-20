@@ -53,6 +53,9 @@ public class AddCardToTagFragment extends Fragment
     private static JapaneseCard tagCard = null;
     private static JapaneseCard searchCard = null;
     private static JapaneseCard currentCard = null;
+    
+    // to be used only by AddCardActivity, to notify its own Fragment 
+    // whether it is running inline via main FragmentActivity, or modally
     private static boolean isModal = false;
     private static FragmentActivity modalContext = null;
 
