@@ -16,7 +16,7 @@
 
     <item android:id="@+id/pm_fix"
         android:title="@string/pm_fixcard"
-        android:icon="@drawable/star_deselected" />
+        android:icon="@drawable/wrench_icon" />
 
 </menu>
 
