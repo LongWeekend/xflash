@@ -56,7 +56,7 @@ public class XflashSplash extends Activity
 {
     private static final String MYTAG = "XFlash XflashSpalsh";
 
-    private static final boolean isDebugging = true;
+    private static final boolean isDebugging = false;
     private static final int XFLASH_COPY_FAIL = 0;
     private static final int XFLASH_ATTACH_FAIL = 1;
     private static final int XFLASH_NO_SDCARD = 2;
@@ -91,7 +91,7 @@ public class XflashSplash extends Activity
         }
         else
         {
-            splashTime = 2000;
+            splashTime = 1500;
         } 
 
         turnOnReceiver();
@@ -298,14 +298,28 @@ public class XflashSplash extends Activity
         // reset splash background to splash2 (Xflash label)
         RelativeLayout myLayout = (RelativeLayout)findViewById(R.id.splashback);
         myLayout.setBackgroundResource(R.drawable.splash2);
-       
-        // nab the debuggin view 
-        DBupdateLayout = (LinearLayout)findViewById(R.id.debug_splash_frame);
-        DBupdateLayout.setVisibility(View.VISIBLE);
+      
+        boolean databaseIsInstalled = XFApplication.getDao().checkDatabase();
+
+        // only display the loading screen if we need to copy databases
+        if( !databaseIsInstalled )
+        {
+            // nab the loading view 
+            RelativeLayout loadBack = (RelativeLayout)findViewById(R.id.loading_splash_frame);
+            loadBack.setVisibility(View.VISIBLE);
+
+            // pull a layout for our Receiver to add views to as it
+            // gets updates from the DAO copy
+            DBupdateLayout = (LinearLayout)findViewById(R.id.load_messages);
             
-        // check if our databases have been copied,
-        // copy them if they haven't
-        XFApplication.getDao().asynchCopyDatabaseFromAPK();
+            // check if our databases have been copied,
+            // copy them if they haven't
+            XFApplication.getDao().asynchCopyDatabaseFromAPK();
+        }
+        else
+        {
+            wrapUp();
+        }
 
     }  // end showSplash2()
 
@@ -395,7 +409,7 @@ public class XflashSplash extends Activity
         {
             TextView tempView = new TextView(myContext);
             tempView.setTextSize((float)16);
-            tempView.setTextColor(0xFF000000);
+            tempView.setTextColor(0xFFFFFFFF);
         
             if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START))
             {
