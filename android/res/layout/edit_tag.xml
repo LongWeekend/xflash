@@ -48,8 +48,8 @@
             <EditText android:id="@+id/edit_tag_descriptiontext"
                 style="@style/default_edittext"
                 android:layout_marginTop="4dp"
-                android:lines="2"
-                android:minLines="2"
+                android:inputType="textMultiLine" 
+                android:lines="3"
                 android:gravity="top|left"
                 android:imeOptions="actionDone"
                 android:hint="@string/edittag_description_hint" />
