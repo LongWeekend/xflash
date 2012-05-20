@@ -39,6 +39,7 @@
             <!-- the word block -->
             <TextView android:id="@+id/addcard_word"
                 style="@style/display_heading_layout"
+                android:textSize="26sp"
                 android:textColor="#FF000000" />
 
             <LinearLayout style="@style/background_with_size"
