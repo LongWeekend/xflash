@@ -67,7 +67,7 @@
 //! Returns title based on section - if sentence section, none, if cards, show "Linked Cards" or something similar
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"";
+  return @"";
 }
 
 
@@ -132,7 +132,7 @@
     NSArray* cardArray = [self.cards objectAtIndex:indexPath.section];
     card = [cardArray objectAtIndex:indexPath.row - 1];
     // Is a search result record
-    cell.textLabel.text = [card headword];
+    cell.textLabel.text = [card headwordIgnoringMode:YES];
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
     cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
