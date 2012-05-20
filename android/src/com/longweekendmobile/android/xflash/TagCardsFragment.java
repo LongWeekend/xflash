@@ -101,7 +101,13 @@ public class TagCardsFragment extends Fragment
         {
             public void onClick(View v)
             {
-                XflashAlert.startStudying(v);
+                // XflashAlert.startStudying(v);
+
+                int tagId = (Integer)v.getTag();
+                Tag tempTag = TagPeer.retrieveTagById(tagId);
+
+                XflashSettings.setActiveTag(tempTag);
+                Xflash.getTabHost().setCurrentTabByTag("practice");
             }
         });
 
