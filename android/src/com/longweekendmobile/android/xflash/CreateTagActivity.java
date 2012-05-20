@@ -14,8 +14,8 @@ package com.longweekendmobile.android.xflash;
 //
 //  private void keyboardDone()
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 public class CreateTagActivity extends FragmentActivity
 {
