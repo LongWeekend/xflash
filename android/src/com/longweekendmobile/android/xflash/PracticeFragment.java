@@ -83,7 +83,7 @@ public class PracticeFragment extends Fragment
     private static Tag currentTag = null;
     private static JapaneseCard currentCard = null;
 
-    private static boolean launchLoad = false;
+    private static boolean needToReloadCard = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -198,13 +198,13 @@ public class PracticeFragment extends Fragment
     {
         super.onResume();
 
-        if( launchLoad )
+        if( needToReloadCard )
         {
             // IF the currently active card was removed from the currently
             // active set in a modal AddCardActivity -> AddCardToTagFragment
             // THEN we need to reload the card page after the fragment
             // resumes
-            launchLoad = false;
+            needToReloadCard = false;
 
             // exact same code as can be found in updateFromSubscritpionObserver
             practiceViewStatus = PracticeScreen.PRACTICE_VIEW_BLANK;
@@ -584,7 +584,7 @@ public class PracticeFragment extends Fragment
                             // and as such must reset to a new card after the fragment
                             // has been resumed--i.e. after the user hits 'back' to exit
                             // the AddCardActivity
-                            launchLoad = true;
+                            needToReloadCard = true;
                         }
                     }
                 }

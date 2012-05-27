@@ -19,6 +19,7 @@ package com.longweekendmobile.android.xflash;
 //  private void goUpdate()
 //  private void launchSettingsWeb(View  )
 //
+//  private void setClickBackgrounds()
 //  private void setClickListeners()
 
 import android.os.Bundle;
@@ -86,6 +87,7 @@ public class SettingsFragment extends Fragment
         tempView.setText( tempUser.getUserNickname() ); 
      
         // set click listeners for all of our views
+        setClickBackgrounds();
         setClickListeners();
         
         return settingsLayout;
@@ -262,7 +264,33 @@ public class SettingsFragment extends Fragment
         Xflash.getActivity().onScreenTransition("settings_web",XflashScreen.DIRECTION_OPEN);
     }
 
+   
+    // set the click-backgrounds for all relevant views
+    private void setClickBackgrounds()
+    {
+        // difficult row
+        RelativeLayout tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.godifficulty_block);
+        tempLayout.setBackgroundResource( XflashSettings.getBottomByColor() );
     
+        // study reminder row
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.reminder_block);
+        tempLayout.setBackgroundResource( XflashSettings.getMiddleByColor() );
+    
+        // active user row
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.activeuser_block);
+        tempLayout.setBackgroundResource( XflashSettings.getBottomByColor() );
+    
+        // Twitter row
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.settings_launch_twitter);
+        tempLayout.setBackgroundResource( XflashSettings.getTopByColor() );
+    
+        // Facebook row
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.settings_launch_facebook);
+        tempLayout.setBackgroundResource( XflashSettings.getBottomByColor() );
+    
+    }  // end setClickBackgrounds()
+
+
     // set click listeners for all views
     private void setClickListeners()
     {
@@ -329,6 +357,7 @@ public class SettingsFragment extends Fragment
             public void onClick(View v)
             {
                 advanceColorScheme();
+                setClickBackgrounds();
             }
         });
 

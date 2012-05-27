@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="gradient_red_startcolor">#FFD79785</color>
+    <color name="gradient_red_endcolor">#FF961803</color>
+    <color name="gradient_blue_startcolor">#FF8DADC3</color>
+    <color name="gradient_blue_endcolor">#FF0C3F8C</color>
+    <color name="gradient_tame_startcolor">#FFB8CBD9</color>
+    <color name="gradient_tame_endcolor">#FF384859</color>
+    <color name="red_click_startcolor">#FFEAD5D1</color>
+    <color name="red_click_endcolor">#FFD96E5D</color>
+    <color name="blue_click_startcolor">#FFD1D7FF</color>
+    <color name="blue_click_endcolor">#FF6989FF</color>
+    <color name="tame_click_startcolor">#FFCDD2D5</color>
+    <color name="tame_click_endcolor">#FFA0A0A0</color>
     <color name="button_red_startcolor">#FFE5B0A9</color>
     <color name="button_red_endcolor">#FF881C11</color>
     <color name="button_red_strokecolor">#FF992F2F</color>

@@ -23,6 +23,9 @@ package com.longweekendmobile.android.xflash;
 //  public static void dumpObservers()
 //
 //  public int getColorScheme()
+//  public int getTopByColor()
+//  public int getMiddleByColor()
+//  public int getBottomByColor()
 //  public String getColorSchemeName()
 //  public String getThemeCSS()
 //  public void setColorScheme(int  )
@@ -461,6 +464,42 @@ public class XflashSettings
         return colorScheme;
     }
 
+    
+    // return a reference to a state list drawable for row backgrounds
+    public static int getTopByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_top_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_top_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_top_row;
+            default:                return R.drawable.tame_top_row;
+        }
+    }
+    
+    // return a reference to a state list drawable for row backgrounds
+    public static int getMiddleByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_middle_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_middle_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_middle_row;
+            default:                return R.drawable.tame_middle_row;
+        }
+    }
+    
+    // return a reference to a state list drawable for row backgrounds
+    public static int getBottomByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_bottom_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_bottom_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_bottom_row;
+            default:                return R.drawable.tame_bottom_row;
+        }
+    }
     
     // return a String for the name of the current theme
     public static String getColorSchemeName()
