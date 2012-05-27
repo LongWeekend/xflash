@@ -68,8 +68,8 @@ public class XflashSplash extends Activity
     private int splashTime;
     
     // also for debugging
-    private LinearLayout DBupdateLayout; 
-    private LinearLayout DBtargetLayout;
+    private LinearLayout DBupdateLayout = null;
+    private LinearLayout DBtargetLayout = null;;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -298,7 +298,7 @@ public class XflashSplash extends Activity
         // reset splash background to splash2 (Xflash label)
         RelativeLayout myLayout = (RelativeLayout)findViewById(R.id.splashback);
         myLayout.setBackgroundResource(R.drawable.splash2);
-      
+
         boolean databaseIsInstalled = XFApplication.getDao().checkDatabase();
 
         // only display the loading screen if we need to copy databases
@@ -318,7 +318,10 @@ public class XflashSplash extends Activity
         }
         else
         {
-            wrapUp();
+            // if we're already installed, trip XflashSplash's own 
+            // DATABASE_READY receiver to finalize and launch app
+            Intent myIntent = new Intent(LWEDatabase.DATABASE_READY);
+            this.sendBroadcast(myIntent);
         }
 
     }  // end showSplash2()
@@ -455,15 +458,19 @@ public class XflashSplash extends Activity
    
                     if( firedUp )
                     {
-                        tempView.setText("Database attached");
-                        DBupdateLayout.addView(tempView);
+                        // only display views if we have a layout visible
+                        if( DBupdateLayout != null )
+                        {
+                            tempView.setText("Database attached");
+                            DBupdateLayout.addView(tempView);
             
-                        tempView = new TextView(myContext);
-                        tempView.setTextSize((float)16);
-                        tempView.setTextColor(0xFFFFFFFF);
+                            tempView = new TextView(myContext);
+                            tempView.setTextSize((float)16);
+                            tempView.setTextColor(0xFFFFFFFF);
             
-                        tempView.setText("Database Available!");
-                        DBupdateLayout.addView(tempView);
+                            tempView.setText("Database Available!");
+                            DBupdateLayout.addView(tempView);
+                        }
                 
                         // THIS IS WHERE WE ARE ACTUALLY EXITING THE SPLASH
                         // SCREEN SUCCESSFULLY AND STARTING THE APP
@@ -554,7 +561,7 @@ public class XflashSplash extends Activity
             finally
             {
                 // without a specific override, Android chooses the animation
-                // to use as this activity closese and Xflash.class opens
+                // to use as this activity closes and Xflash.class opens;
                 // may or may not be unpredictable and require manual override
                 myContext.unregisterReceiver(myReceiver);
                 finish();
