@@ -31,8 +31,7 @@
     <LinearLayout android:id="@+id/user_list"
         style="@style/frame_block"
         android:orientation="vertical"
-        android:layout_marginTop="10dp" 
-        android:background="@drawable/default_background" >
+        android:layout_marginTop="10dp" >
 
     </LinearLayout>
 

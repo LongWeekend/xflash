@@ -306,7 +306,7 @@ public class SearchFragment extends Fragment
             }
 
             RelativeLayout clickFrame = (RelativeLayout)row.findViewById(R.id.search_row_whole);
-            clickFrame.setBackgroundResource( XflashSettings.getFullMiddleByColor() );
+            clickFrame.setBackgroundResource( XflashSettings.getMiddleByColor() );
             
             JapaneseCard tempCard = (JapaneseCard)searchResults.get(position);
 

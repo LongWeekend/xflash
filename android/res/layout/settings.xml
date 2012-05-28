@@ -142,8 +142,10 @@
                 style="@style/display_heading_layout"
                 android:text="@string/settings_follow_block_title" />
 
-            <LinearLayout style="@style/background_with_size"
-                android:orientation="vertical" >
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
                 <RelativeLayout android:id="@+id/settings_launch_twitter"
                     style="@style/default_display_block" >
                     <TextView 

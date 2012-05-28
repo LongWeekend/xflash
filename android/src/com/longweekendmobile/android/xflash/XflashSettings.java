@@ -23,17 +23,14 @@ package com.longweekendmobile.android.xflash;
 //  public static void dumpObservers()
 //
 //  public int getColorScheme()
+//  public void setColorScheme(int  )
+//  public String getColorSchemeName()
+//  public String getThemeCSS()
 //  public int getTopByColor()
 //  public int getMiddleByColor()
 //  public int getBottomByColor()
 //  public int getSmallByColor()
 //  public int getSingleByColor()
-//  public int getFullTopByColor()
-//  public int getFullMiddleByColor()
-//  public int getFullBottomByColor()
-//  public String getColorSchemeName()
-//  public String getThemeCSS()
-//  public void setColorScheme(int  )
 //  public void setupPracticeBack(RelativeLayout  )
 //  public void setupColorScheme(RelativeLayout  )
 //  public void setupColorScheme(RelativeLayout  ,View  )
@@ -468,108 +465,27 @@ public class XflashSettings
     {
         return colorScheme;
     }
+    
+    // sets the color scheme and saves for persistence
+    public static void setColorScheme(int inColor)
+    {
+        // if the passed value is out of range
+        if( ( colorScheme < LWE_THEME_RED ) || ( colorScheme > LWE_THEME_TAME ) )
+        {
+            throwBadValue("setColorScheme",inColor);
+        }
+    
+        colorScheme = inColor;
+        
+        // set the new color in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
 
-    
-    // return a reference to a state list drawable for row backgrounds
-    public static int getTopByColor()
-    {
-        switch(colorScheme)
-        {
-            case LWE_THEME_RED:     return R.drawable.red_top_row;
-            case LWE_THEME_BLUE:    return R.drawable.blue_top_row;
-            case LWE_THEME_TAME:    return R.drawable.tame_top_row;
-            default:                return R.drawable.tame_top_row;
-        }
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("colorScheme",colorScheme);
+        editor.commit();
     }
-    
-    // return a reference to a state list drawable for row backgrounds
-    public static int getMiddleByColor()
-    {
-        switch(colorScheme)
-        {
-            case LWE_THEME_RED:     return R.drawable.red_middle_row;
-            case LWE_THEME_BLUE:    return R.drawable.blue_middle_row;
-            case LWE_THEME_TAME:    return R.drawable.tame_middle_row;
-            default:                return R.drawable.tame_middle_row;
-        }
-    }
-    
-    // return a reference to a state list drawable for row backgrounds
-    public static int getBottomByColor()
-    {
-        switch(colorScheme)
-        {
-            case LWE_THEME_RED:     return R.drawable.red_bottom_row;
-            case LWE_THEME_BLUE:    return R.drawable.blue_bottom_row;
-            case LWE_THEME_TAME:    return R.drawable.tame_bottom_row;
-            default:                return R.drawable.tame_bottom_row;
-        }
-    }
-    
-    // return a String for the name of the current theme
-    // return a reference to a state list drawable for row backgrounds
-    public static int getSmallByColor()
-    {
-        switch(colorScheme)
-        {
-            case LWE_THEME_RED:     return R.drawable.red_small_row;
-            case LWE_THEME_BLUE:    return R.drawable.blue_small_row;
-            case LWE_THEME_TAME:    return R.drawable.tame_small_row;
-            default:                return R.drawable.tame_small_row;
-        }
-    }
-    
-    // return a String for the name of the current theme
-    // return a reference to a state list drawable for row backgrounds
-    public static int getSingleByColor()
-    {
-        switch(colorScheme)
-        {
-            case LWE_THEME_RED:     return R.drawable.red_single_row;
-            case LWE_THEME_BLUE:    return R.drawable.blue_single_row;
-            case LWE_THEME_TAME:    return R.drawable.tame_single_row;
-            default:                return R.drawable.tame_single_row;
-        }
-    }
-    
-    // return a String for the name of the current theme
-    // return a reference to a state list drawable for row backgrounds
-    public static int getFullTopByColor()
-    {
-        switch(colorScheme)
-        {
-            case LWE_THEME_RED:     return R.drawable.red_fulltop_row;
-            case LWE_THEME_BLUE:    return R.drawable.blue_fulltop_row;
-            case LWE_THEME_TAME:    return R.drawable.tame_fulltop_row;
-            default:                return R.drawable.tame_fulltop_row;
-        }
-    }
-    
-    // return a String for the name of the current theme
-    // return a reference to a state list drawable for row backgrounds
-    public static int getFullMiddleByColor()
-    {
-        switch(colorScheme)
-        {
-            case LWE_THEME_RED:     return R.drawable.red_fullmiddle_row;
-            case LWE_THEME_BLUE:    return R.drawable.blue_fullmiddle_row;
-            case LWE_THEME_TAME:    return R.drawable.tame_fullmiddle_row;
-            default:                return R.drawable.tame_fullmiddle_row;
-        }
-    }
-    
-    // return a String for the name of the current theme
-    // return a reference to a state list drawable for row backgrounds
-    public static int getFullBottomByColor()
-    {
-        switch(colorScheme)
-        {
-            case LWE_THEME_RED:     return R.drawable.red_fullbottom_row;
-            case LWE_THEME_BLUE:    return R.drawable.blue_fullbottom_row;
-            case LWE_THEME_TAME:    return R.drawable.tame_fullbottom_row;
-            default:                return R.drawable.tame_fullbottom_row;
-        }
-    }
+
     
     // return a String for the name of the current theme
     public static String getColorSchemeName()
@@ -599,26 +515,66 @@ public class XflashSettings
     }  // end getThemeCSS()
     
     
-    // sets the color scheme and saves for persistence
-    public static void setColorScheme(int inColor)
+    // return a reference to a state list drawable for top row backgrounds
+    public static int getTopByColor()
     {
-        // if the passed value is out of range
-        if( ( colorScheme < LWE_THEME_RED ) || ( colorScheme > LWE_THEME_TAME ) )
+        switch(colorScheme)
         {
-            throwBadValue("setColorScheme",inColor);
+            case LWE_THEME_RED:     return R.drawable.red_top_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_top_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_top_row;
+            default:                return R.drawable.tame_top_row;
         }
-    
-        colorScheme = inColor;
-        
-        // set the new color in the Preferences
-        XFApplication tempInstance = XFApplication.getInstance();
-        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
-
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("colorScheme",colorScheme);
-        editor.commit();
     }
-
+    
+    // return a reference to a state list drawable for middle row backgrounds
+    public static int getMiddleByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_middle_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_middle_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_middle_row;
+            default:                return R.drawable.tame_middle_row;
+        }
+    }
+    
+    // return a reference to a state list drawable for bottom row backgrounds
+    public static int getBottomByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_bottom_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_bottom_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_bottom_row;
+            default:                return R.drawable.tame_bottom_row;
+        }
+    }
+    
+    // return a reference to a state list drawable for 'edit' and/or small backgrounds
+    public static int getSmallByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_small_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_small_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_small_row;
+            default:                return R.drawable.tame_small_row;
+        }
+    }
+    
+    // return a reference to a state list drawable for row single backgrounds
+    public static int getSingleByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_single_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_single_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_single_row;
+            default:                return R.drawable.tame_single_row;
+        }
+    }
+    
     
     // sets the background image for the PracticeActivity
     public static void setupPracticeBack(RelativeLayout inLayout)

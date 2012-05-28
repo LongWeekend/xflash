@@ -2,4 +2,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true"
           android:drawable="@drawable/tame_middle_bg" /> <!-- pressed -->
+    <item android:drawable="@drawable/white_middle_bg" />
 </selector>

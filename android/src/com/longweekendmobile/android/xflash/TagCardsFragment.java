@@ -290,17 +290,17 @@ public class TagCardsFragment extends Fragment
             else if( position == 0 )
             {
                 // top row, top corners rounded
-                row.setBackgroundResource( XflashSettings.getFullTopByColor() );
+                row.setBackgroundResource( XflashSettings.getTopByColor() );
             }
             else if( position == ( cardArray.size() - 1 ) )
             {
                 // bottom row, bottom corners rounded
-                row.setBackgroundResource( XflashSettings.getFullBottomByColor() );
+                row.setBackgroundResource( XflashSettings.getBottomByColor() );
             }
             else
             {
                 // middle row, no corners
-                row.setBackgroundResource( XflashSettings.getFullMiddleByColor() );
+                row.setBackgroundResource( XflashSettings.getMiddleByColor() );
             }
             
             Card tempCard = cardArray.get(position);
