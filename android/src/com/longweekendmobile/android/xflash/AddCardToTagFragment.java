@@ -291,6 +291,19 @@ public class AddCardToTagFragment extends Fragment
             // get a view for each row, tag it with the Tag it represents
             RelativeLayout tempRow = (RelativeLayout)inflater.inflate(R.layout.addcard_row,null);
             tempRow.setTag(tempTag);
+            
+            if( i == 0 )
+            {
+                tempRow.setBackgroundResource( XflashSettings.getTopByColor() );
+            }
+            else if( i == ( rowCount - 1 ) )
+            {
+                tempRow.setBackgroundResource( XflashSettings.getBottomByColor() );
+            }
+            else
+            {
+                tempRow.setBackgroundResource( XflashSettings.getMiddleByColor() );
+            }
 
             // set the tag title
             TextView tempView = (TextView)tempRow.findViewById(R.id.addcard_row_tagname);

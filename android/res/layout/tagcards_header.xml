@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/tagcards_header_row" >
+        android:background="@drawable/default_background" >
     
         <!-- start studying -->
         <RelativeLayout android:id="@+id/tagcards_header_startstudying"
@@ -24,7 +24,7 @@
 
         <View style="@style/generic_divider" />
         
-        <!-- start studying -->
+        <!-- edit set -->
         <RelativeLayout android:id="@+id/tagcards_header_editset"
             style="@style/default_display_block" >
             <TextView 

@@ -470,7 +470,11 @@ public class TagFragment extends Fragment
             tempRow.setTag( tempTag.getId() );
             
             // set the background click by row position
-            if( i == 0 )
+            if( rowCount == 1 )
+            {
+                tempRow.setBackgroundResource( XflashSettings.getSingleByColor() );
+            }
+            else if( i == 0 )
             {
                 tempRow.setBackgroundResource( XflashSettings.getTopByColor() );
             }

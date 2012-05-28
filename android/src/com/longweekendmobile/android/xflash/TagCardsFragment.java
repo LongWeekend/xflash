@@ -94,10 +94,10 @@ public class TagCardsFragment extends Fragment
         LinearLayout header = (LinearLayout)inflater.inflate(R.layout.tagcards_header,cardList,false);
         
         // tag the 'start studying' header with the currentTag id, add a click listener
-        RelativeLayout tempHeader = (RelativeLayout)header.findViewById(R.id.tagcards_header_startstudying);
+        RelativeLayout studyHeader = (RelativeLayout)header.findViewById(R.id.tagcards_header_startstudying);
         
-        tempHeader.setTag( currentTag.getId() );
-        tempHeader.setOnClickListener( new View.OnClickListener()
+        studyHeader.setTag( currentTag.getId() );
+        studyHeader.setOnClickListener( new View.OnClickListener()
         {
             public void onClick(View v)
             {
@@ -112,24 +112,28 @@ public class TagCardsFragment extends Fragment
         });
 
         // get the 'edit set details' header
-        tempHeader = (RelativeLayout)header.findViewById(R.id.tagcards_header_editset);
+        RelativeLayout editHeader = (RelativeLayout)header.findViewById(R.id.tagcards_header_editset);
         
         // if we're looking at a use tag, set a click listener to cue the EditTagDetailsFragment
         // else, hide the view
         if( currentTag.isEditable() )
         {
-            tempHeader.setTag( currentTag.getId() );
-            tempHeader.setOnClickListener( new View.OnClickListener()
+            editHeader.setTag( currentTag.getId() );
+            editHeader.setOnClickListener( new View.OnClickListener()
             {
                 public void onClick(View v)
                 {
                     editTag();
                 }
             });
+
+            studyHeader.setBackgroundResource( XflashSettings.getTopByColor() );
+            editHeader.setBackgroundResource( XflashSettings.getBottomByColor() );
         }
         else
         {
-            tempHeader.setVisibility(View.GONE);
+            editHeader.setVisibility(View.GONE);
+            studyHeader.setBackgroundResource( XflashSettings.getSingleByColor() );
         }
 
         // assign the header to our ListView of cards
@@ -281,17 +285,17 @@ public class TagCardsFragment extends Fragment
             if( cardArray.size() == 1 )
             {
                 // if they're only one card, round all corners
-                row.setBackgroundResource(R.drawable.tagcards_rowback_single);
+                row.setBackgroundResource( XflashSettings.getSingleByColor() );
             }
             else if( position == 0 )
             {
                 // top row, top corners rounded
-                row.setBackgroundResource(R.drawable.tagcards_rowback_top);
+                row.setBackgroundResource( XflashSettings.getFullTopByColor() );
             }
             else if( position == ( cardArray.size() - 1 ) )
             {
                 // bottom row, bottom corners rounded
-                row.setBackgroundResource(R.drawable.tagcards_rowback_bottom);
+                row.setBackgroundResource( XflashSettings.getFullBottomByColor() );
             }
             else
             {

@@ -27,7 +27,10 @@ package com.longweekendmobile.android.xflash;
 //  public int getMiddleByColor()
 //  public int getBottomByColor()
 //  public int getSmallByColor()
-//  public static int getFullMiddleByColor()
+//  public int getSingleByColor()
+//  public int getFullTopByColor()
+//  public int getFullMiddleByColor()
+//  public int getFullBottomByColor()
 //  public String getColorSchemeName()
 //  public String getThemeCSS()
 //  public void setColorScheme(int  )
@@ -518,14 +521,53 @@ public class XflashSettings
     
     // return a String for the name of the current theme
     // return a reference to a state list drawable for row backgrounds
+    public static int getSingleByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_single_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_single_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_single_row;
+            default:                return R.drawable.tame_single_row;
+        }
+    }
+    
+    // return a String for the name of the current theme
+    // return a reference to a state list drawable for row backgrounds
+    public static int getFullTopByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_fulltop_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_fulltop_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_fulltop_row;
+            default:                return R.drawable.tame_fulltop_row;
+        }
+    }
+    
+    // return a String for the name of the current theme
+    // return a reference to a state list drawable for row backgrounds
     public static int getFullMiddleByColor()
     {
         switch(colorScheme)
         {
-            case LWE_THEME_RED:     return R.drawable.red_full_row;
-            case LWE_THEME_BLUE:    return R.drawable.blue_full_row;
-            case LWE_THEME_TAME:    return R.drawable.tame_full_row;
-            default:                return R.drawable.tame_full_row;
+            case LWE_THEME_RED:     return R.drawable.red_fullmiddle_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_fullmiddle_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_fullmiddle_row;
+            default:                return R.drawable.tame_fullmiddle_row;
+        }
+    }
+    
+    // return a String for the name of the current theme
+    // return a reference to a state list drawable for row backgrounds
+    public static int getFullBottomByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_fullbottom_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_fullbottom_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_fullbottom_row;
+            default:                return R.drawable.tame_fullbottom_row;
         }
     }
     
