@@ -93,12 +93,25 @@ public class UserFragment extends Fragment
 
             // inflate our exiting row resource
             RelativeLayout userRow = (RelativeLayout)myInflater.inflate(R.layout.user_row,null);
+            
+            if( i == 0 )
+            {
+                userRow.setBackgroundResource( XflashSettings.getTopByColor() );
+            }
+            else if( i == ( numUsers - 1 ) )
+            {
+                userRow.setBackgroundResource( XflashSettings.getBottomByColor() );
+            }
+            else
+            {
+                userRow.setBackgroundResource( XflashSettings.getMiddleByColor() );
+            }
 
             // set the label, tag it with our display row id, and set a click listener
             TextView tempView = (TextView)userRow.findViewById(R.id.user_label);
             tempView.setTag(i);
             tempView.setText( userList.get(i).getUserNickname() );
-
+            
             tempView.setOnClickListener(activateListener);
             tempView.setOnLongClickListener(userLongClick);
        
@@ -107,6 +120,9 @@ public class UserFragment extends Fragment
             tempView.setTag(tempId);
             tempView.setOnClickListener(editListener); 
             
+            // asdf
+            tempView.setBackgroundResource( XflashSettings.getSmallByColor() );
+
             // set the background/edit button based on whether this is our active user
             if( tempId == tempCurrentUser )
             {

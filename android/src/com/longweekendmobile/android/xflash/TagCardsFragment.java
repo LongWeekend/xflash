@@ -296,7 +296,7 @@ public class TagCardsFragment extends Fragment
             else
             {
                 // middle row, no corners
-                row.setBackgroundResource(R.drawable.tagcards_rowback);
+                row.setBackgroundResource( XflashSettings.getFullMiddleByColor() );
             }
             
             Card tempCard = cardArray.get(position);

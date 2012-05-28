@@ -161,7 +161,20 @@ public class TagFragment extends Fragment
             
             tempRow = (RelativeLayout)inflater.inflate(R.layout.group_row,null);
             tempRow.setTag( tempGroup.getGroupId() );
-      
+
+            if( i == 0 )
+            {
+                tempRow.setBackgroundResource( XflashSettings.getTopByColor() );
+            }
+            else if( i == ( rowCount - 1 ) )
+            {
+                tempRow.setBackgroundResource( XflashSettings.getBottomByColor() );
+            }
+            else
+            {
+                tempRow.setBackgroundResource( XflashSettings.getMiddleByColor() );
+            }
+
             // set the group image
             tempRowImage = (ImageView)tempRow.findViewById(R.id.group_row_image);
             if( tempGroup.getRecommended() == 1 )
@@ -455,6 +468,20 @@ public class TagFragment extends Fragment
             
             RelativeLayout tempRow = (RelativeLayout)inflater.inflate(R.layout.tag_row,null);
             tempRow.setTag( tempTag.getId() );
+            
+            // set the background click by row position
+            if( i == 0 )
+            {
+                tempRow.setBackgroundResource( XflashSettings.getTopByColor() );
+            }
+            else if( i == ( rowCount - 1 ) )
+            {
+                tempRow.setBackgroundResource( XflashSettings.getBottomByColor() );
+            }
+            else
+            {
+                tempRow.setBackgroundResource( XflashSettings.getMiddleByColor() );
+            }
      
             // if this is a user tag, set a long-click listener for deletion
             if( tempTag.isEditable() )
@@ -501,6 +528,7 @@ public class TagFragment extends Fragment
             else
             {
                 viewTagCards.setTag( tempTag.getId() ); 
+                viewTagCards.setBackgroundResource( XflashSettings.getSmallByColor() );
             }
 
             // add a divider before all except the first

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/default_display_block"
-    android:background="#FFFFFFFF" >
+    android:id="@+id/search_row_whole"
+    style="@style/default_display_block" >
 
     <ImageView android:id="@+id/search_row_image"
         android:layout_width="wrap_content"

@@ -86,6 +86,19 @@ public class HelpFragment extends Fragment
             // row and tag the view with the row number of each particular help topic
             RelativeLayout toInflate = (RelativeLayout)inflater.inflate(R.layout.help_row,null);
             toInflate.setTag(i);
+
+            if( i == 0 )
+            {
+                toInflate.setBackgroundResource( XflashSettings.getTopByColor() );
+            }
+            else if( i == ( totalTopics - 1 ) )
+            {
+                toInflate.setBackgroundResource( XflashSettings.getBottomByColor() );
+            }
+            else
+            {
+                toInflate.setBackgroundResource( XflashSettings.getMiddleByColor() );
+            }
             
             // set the label
             TextView tempView = (TextView)toInflate.findViewById(R.id.help_label);

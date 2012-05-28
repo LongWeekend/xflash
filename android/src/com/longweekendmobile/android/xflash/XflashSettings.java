@@ -26,6 +26,8 @@ package com.longweekendmobile.android.xflash;
 //  public int getTopByColor()
 //  public int getMiddleByColor()
 //  public int getBottomByColor()
+//  public int getSmallByColor()
+//  public static int getFullMiddleByColor()
 //  public String getColorSchemeName()
 //  public String getThemeCSS()
 //  public void setColorScheme(int  )
@@ -498,6 +500,32 @@ public class XflashSettings
             case LWE_THEME_BLUE:    return R.drawable.blue_bottom_row;
             case LWE_THEME_TAME:    return R.drawable.tame_bottom_row;
             default:                return R.drawable.tame_bottom_row;
+        }
+    }
+    
+    // return a String for the name of the current theme
+    // return a reference to a state list drawable for row backgrounds
+    public static int getSmallByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_small_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_small_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_small_row;
+            default:                return R.drawable.tame_small_row;
+        }
+    }
+    
+    // return a String for the name of the current theme
+    // return a reference to a state list drawable for row backgrounds
+    public static int getFullMiddleByColor()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return R.drawable.red_full_row;
+            case LWE_THEME_BLUE:    return R.drawable.blue_full_row;
+            case LWE_THEME_TAME:    return R.drawable.tame_full_row;
+            default:                return R.drawable.tame_full_row;
         }
     }
     
