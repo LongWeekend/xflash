@@ -347,6 +347,22 @@ public class AddCardToTagFragment extends Fragment
     // method to set all relevant Observers
     private void setupObservers()
     {
+        // TODO - damn dirty hack
+        //      -
+        //      - for reasons as yet unknown, this Observer becomes 'detached' after
+        //      - its initial-round use.  It still executes properly, but does NOT
+        //      - update the view currently being rendered on the screen
+        //      -
+        //      - removing and re-adding the same Observer does not fix the problem,
+        //      - however removing and then adding a NEW Observer does.
+        //      -
+        //      - ultimate cause not yet clear 
+        if( newTagObserver != null ) 
+        {
+            XFApplication.getNotifier().deleteNewTagObserver(newTagObserver);
+            newTagObserver = null;
+        }
+        
         if( newTagObserver == null )
         {
             // create and define behavior for newTagObserver
@@ -364,33 +380,13 @@ public class AddCardToTagFragment extends Fragment
             };
 
             XFApplication.getNotifier().addNewTagObserver(newTagObserver);
-        
-        }  // end if( newTagObserver == null )
+        }  
 
         // a subscriptionObserver is not necessary for this fragment, as we do not
         // have a local cache for check marks and the view is redrawn on attachment
         
     }  // end setupObservers()
     
-
-    // TODO - BUG update:
-    //      - it works the first time the fragment is launched, in any
-    //      - location, and works as many times as CreateTagActivity is called.
-    //      - however, after user navigates away from AddCardToTagFragment
-    //      - and then back to it (again, in any location) the view of user
-    //      - tags now longer updates.
-    //      -
-    //      - we know for certain:  the fragment IS receiving the notification
-    //      - and the refreshTagList() code IS executing.  We also know
-    //      - the data has updated correctly:  refreshTagList() iterates
-    //      - for an appropriate number of rows and DOES HAVE ACCESS to the
-    //      - new tag that was just added
-    //      -
-    //      - However, for some reason yet to be determined, the view itself is
-    //      - not refreshing.  (if the whole fragment is forced to refresh, then
-    //      - the added data is visible)
-    //  
-    //      - what the crap.
 
     private void updateFromNewTagObserver(Object passedObject)
     {
