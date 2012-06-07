@@ -710,6 +710,7 @@
 		913EEF93130800F300EBCF87 /* toxxx.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF82130800F300EBCF87 /* toxxx.c */; };
 		913EEF94130800F300EBCF87 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF84130800F300EBCF87 /* util.c */; };
 		913EEF95130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */; };
+		915FEC5115807BF300BEDF5F /* jFlashJr.db in Resources */ = {isa = PBXBuildFile; fileRef = 915FEC4F15807B9100BEDF5F /* jFlashJr.db */; };
 		9175396C1310AA5C00B34EDF /* jflash_13_to_14.sql in Resources */ = {isa = PBXBuildFile; fileRef = 9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */; };
 		917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
 		9179E4261384FFB000A7739B /* form-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9179E4251384FFB000A7739B /* form-background.jpg */; };
@@ -945,7 +946,6 @@
 		91D3F9441580294F00CB8F1E /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
 		91D3F9451580294F00CB8F1E /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		91D3F9461580294F00CB8F1E /* practice-btn-actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */; };
-		91D3F9471580294F00CB8F1E /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		91D3F9481580294F00CB8F1E /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 		91D3F9491580294F00CB8F1E /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
 		91D3F94A1580294F00CB8F1E /* TweetWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112011F6F48100D535D7 /* TweetWordViewController.xib */; };
@@ -1652,6 +1652,7 @@
 		913EEF87130800F300EBCF87 /* xcode_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcode_config.h; sourceTree = "<group>"; };
 		913EEF88130800F300EBCF87 /* NSURL+IFUnicodeURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+IFUnicodeURL.h"; sourceTree = "<group>"; };
 		913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+IFUnicodeURL.m"; sourceTree = "<group>"; };
+		915FEC4F15807B9100BEDF5F /* jFlashJr.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlashJr.db; path = sql/jFlashJr.db; sourceTree = "<group>"; };
 		9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_13_to_14.sql; path = Migrations/jflash_13_to_14.sql; sourceTree = "<group>"; };
 		917728E011C0CA9600A90071 /* dropped-text-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropped-text-box.png"; path = "Assets/dropped-text-box.png"; sourceTree = "<group>"; };
 		9179E4251384FFB000A7739B /* form-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "form-background.jpg"; path = "Assets/form-background.jpg"; sourceTree = "<group>"; };
@@ -2309,6 +2310,7 @@
 		49195074144F1AB300DB81F7 /* JFlash */ = {
 			isa = PBXGroup;
 			children = (
+				915FEC4F15807B9100BEDF5F /* jFlashJr.db */,
 				4919507A144F1BFE00DB81F7 /* jFlash-available.plist */,
 				498EBDBC148909CF00BA6DE7 /* jFlash-installed.plist */,
 				49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */,
@@ -3762,7 +3764,6 @@
 				91D3F9441580294F00CB8F1E /* ExamplesUnavailable.xib in Resources */,
 				91D3F9451580294F00CB8F1E /* SentenceView.xib in Resources */,
 				91D3F9461580294F00CB8F1E /* practice-btn-actions.png in Resources */,
-				91D3F9471580294F00CB8F1E /* jFlash.db in Resources */,
 				91D3F9481580294F00CB8F1E /* jFlash-CARD-1.1.db in Resources */,
 				91D3F9491580294F00CB8F1E /* plugin-resources in Resources */,
 				91D3F94A1580294F00CB8F1E /* TweetWordViewController.xib in Resources */,
@@ -3899,6 +3900,7 @@
 				91D3F9CD1580294F00CB8F1E /* MainWindow-iPad.xib in Resources */,
 				91D3F9CE1580294F00CB8F1E /* jflash_162_to_17.sql in Resources */,
 				499F07E915802FC1006B7A14 /* UpgradeAdViewController.xib in Resources */,
+				915FEC5115807BF300BEDF5F /* jFlashJr.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

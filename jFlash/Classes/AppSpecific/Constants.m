@@ -68,10 +68,15 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       // Tapjoy
       NSString * const LWE_TAPJOY_APP_ID         = @"6f0f78d1-f4bf-437b-befc-977b317f7b04";
 
+#if defined(LWE_JFLASH)
+      NSString * const LWE_CURRENT_VERSION       = @"1.0";
+      NSString * const LWE_CURRENT_USER_DATABASE = @"jFlashJr.db";
+#else
       // These constants are general to the flashes
       NSString * const LWE_CURRENT_VERSION       = @"1.7";
-      NSString * const LWE_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
       NSString * const LWE_CURRENT_USER_DATABASE = @"jFlash.db";
+#endif
+      NSString * const LWE_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
 
       // These constants are JF specific
       NSString * const LWE_JF_10_USER_DATABASE       = @"jFlash.db";
@@ -99,7 +104,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 
       // This is here for legacy migration only, as of JFLash 1.6.
       NSString * const LWE_DOWNLOADED_PLUGIN_PLIST  = @"downloadedPlugin.plist";
-
 // Don't use Cloudfront in development
 #if defined(LWE_DEBUG)
       NSString * const LWE_PLUGIN_SERVER            = @"https://s3.amazonaws.com";
