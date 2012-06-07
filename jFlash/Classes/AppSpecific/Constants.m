@@ -30,9 +30,9 @@ NSString * const SET_HEADWORD_TYPE_TRAD   = @"TRAD";
 NSString * const SET_HEADWORD_TYPE_SIMP   = @"SIMP";
 
 NSString * const APP_TEXT_SIZE            = @"text_size";
-NSString * const SET_TEXT_NORMAL          = @"normal";
-NSString * const SET_TEXT_LARGE           = @"large";
-NSString * const SET_TEXT_HUGE            = @"huge";
+NSString * const SET_TEXT_NORMAL          = @"16px";
+NSString * const SET_TEXT_LARGE           = @"20px";
+NSString * const SET_TEXT_HUGE            = @"24px";
 
 // These setting types do not have discrete set values, their setting values are
 // determined in code.
