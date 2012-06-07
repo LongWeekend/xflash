@@ -7,10 +7,6 @@
 //
 #import "Constants.h"
 
-// Constants to determine what app version we are building
-#define APP_TARGET_JFLASH 0
-#define APP_TARGET_CFLASH 1
-
 NSString * const LWETableBackgroundImage = @"/table-background.jpg";
 
 // Settings (also defined in header Constants.h)
