@@ -56,6 +56,10 @@
 + (BOOL) _needs11to111SettingsUpdate:(NSUserDefaults *)settings;
 + (void) _updateSettingsFrom11to111:(NSUserDefaults *)settings;
 
+// CFLASH 1.1.1 -> 1.2
++ (BOOL) _needs111to12SettingsUpdate:(NSUserDefaults *)settings;
++ (void) _updateSettingsFrom111to12:(NSUserDefaults *)settings;
+
 #endif
 @end
 
@@ -360,6 +364,22 @@
   [TagPeer recacheCountsForUserTags];
 }
 
+#pragma mark Version 1.2
+
++ (BOOL) _needs111to12SettingsUpdate:(NSUserDefaults *)settings
+{
+  return [[settings objectForKey:APP_SETTINGS_VERSION] isEqualToString:LWE_CF_VERSION_1_1_1];
+}
+
++ (void) _updateSettingsFrom111to12:(NSUserDefaults *)settings
+{
+  // Set the new key for text size
+  [settings setObject:SET_TEXT_NORMAL forKey:APP_TEXT_SIZE];
+  
+  [settings setObject:LWE_CF_VERSION_1_2 forKey:APP_SETTINGS_VERSION];
+  [settings setObject:LWE_CF_VERSION_1_2 forKey:APP_DATA_VERSION];
+}
+
 
 #endif
 
@@ -523,6 +543,13 @@
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.1.1 version");
     [UpdateManager _updateSettingsFrom11to111:settings];
+    migrated = YES;
+  }
+  
+  if ([UpdateManager _needs111to12SettingsUpdate:settings])
+  {
+    LWE_LOG(@"[Migration Log]YAY! Updating to 1.2 version");
+    [UpdateManager _updateSettingsFrom111to12:settings];
     migrated = YES;
   }
 #endif
