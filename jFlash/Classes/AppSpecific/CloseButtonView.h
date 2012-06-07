@@ -24,6 +24,14 @@
 // Stroke width of the "X"
 #define CLOSE_BUTTON_X_WIDTH 3.0f
 
+@class CloseButtonView;
+
+@protocol CloseButtonViewDelegate <NSObject>
+-(void)closeButtonViewShouldDismiss:(CloseButtonView *)view;
+@end
+
 @interface CloseButtonView : UIView
+
+@property id<CloseButtonViewDelegate> IBOutlet delegate;
 
 @end

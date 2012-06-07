@@ -135,6 +135,11 @@
   [self dismiss];
 }
 
+- (void) closeButtonViewShouldDismiss:(CloseButtonView *)view
+{
+  [self dismiss];
+}
+
 - (IBAction) dismiss
 {
   [self.view removeFromSuperview];

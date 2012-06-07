@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Tag.h"
 #import "PDColoredProgressView.h"
+#import "CloseButtonView.h"
 
-@interface ProgressDetailsViewController : UIViewController
+@interface ProgressDetailsViewController : UIViewController <CloseButtonViewDelegate>
 
 - (IBAction) dismiss;
 - (IBAction)switchToSettings:(id)sender;
