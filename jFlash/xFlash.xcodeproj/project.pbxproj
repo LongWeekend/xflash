@@ -1709,8 +1709,8 @@
 		917A5C6E11AB844300016BD2 /* StudyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyView.xib; path = XIBs/StudyView.xib; sourceTree = "<group>"; };
 		917A5C6F11AB844300016BD2 /* UserDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserDetailsView.xib; path = XIBs/UserDetailsView.xib; sourceTree = "<group>"; };
 		917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthesizeSingleton.h; path = Reusable/SynthesizeSingleton/SynthesizeSingleton.h; sourceTree = "<group>"; };
-		917A5C7B11AB84EE00016BD2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = AppSpecific/Constants.h; sourceTree = "<group>"; };
-		917A5C7C11AB84EE00016BD2 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = AppSpecific/Constants.m; sourceTree = "<group>"; };
+		917A5C7B11AB84EE00016BD2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Classes/AppSpecific/Constants.h; sourceTree = "<group>"; };
+		917A5C7C11AB84EE00016BD2 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = Classes/AppSpecific/Constants.m; sourceTree = "<group>"; };
 		917A5C7D11AB84EE00016BD2 /* CurrentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentState.h; path = AppSpecific/CurrentState.h; sourceTree = "<group>"; };
 		917A5C7E11AB84EE00016BD2 /* CurrentState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentState.m; path = AppSpecific/CurrentState.m; sourceTree = "<group>"; };
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -2036,6 +2036,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				917A5C7B11AB84EE00016BD2 /* Constants.h */,
+				917A5C7C11AB84EE00016BD2 /* Constants.m */,
 				28A0AB4B0D9B1048005BE974 /* jFlash_Prefix.pch */,
 				496C7B9C12632F2E004B6B90 /* cFlash_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
@@ -2420,8 +2422,6 @@
 				917A5BA611AB7B1C00016BD2 /* sqlite */,
 				911D195D137A56C8005C9B55 /* TapjoyConnect */,
 				49AD17B2148476080017EFB4 /* ZipArchive */,
-				917A5C7B11AB84EE00016BD2 /* Constants.h */,
-				917A5C7C11AB84EE00016BD2 /* Constants.m */,
 				4922ED9615567FBC00645F61 /* MBProgressHUD.h */,
 				4922ED9715567FBC00645F61 /* MBProgressHUD.m */,
 				917B2DBA146CC756007C77B1 /* DSActivityView.h */,
