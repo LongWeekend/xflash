@@ -23,7 +23,7 @@
 
 @interface ExampleSentencesViewController ()
 - (void)_showAddToSetWithCardID:(NSString *)cardID;
-- (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(NSString *)open webView:(UIWebView *)webView;
+- (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(BOOL)isOpen webView:(UIWebView *)webView;
 - (NSString *)_generateCardCompositionStringWithSentenceId:(NSInteger)sentenceId;
 @end
 
@@ -96,7 +96,7 @@
     // Only put this stuff in HTML if we have example sentences 1.2
     if (_useOldPluginMethods == NO)
     {
-      [sentencesHTML appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='http://xflash.com/%d?id=%d&open=0'><span class='button'>%@</span></a></div>",
+      [sentencesHTML appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='http://xflash.com/%@?id=%d&open=0'><span class='button'>%@</span></a></div>",
         sentence.sentenceId,TOKENIZE_SAMPLE_SENTENCE,sentence.sentenceId,SHOW_BUTTON_TITLE];
     }
     [sentencesHTML appendFormat:@"%@<br />",sentence.sentenceJa];
@@ -146,7 +146,8 @@
   // Decide what to do based on the URL's ID
   if ([url isEqualToString:TOKENIZE_SAMPLE_SENTENCE])
   {
-    [self _showCardsForSentences:[dict objectForKey:@"id"] isOpen:[dict objectForKey:@"open"] webView:webView];
+    BOOL isOpen = [[dict objectForKey:@"open"] isEqualToString:@"1"];
+    [self _showCardsForSentences:[dict objectForKey:@"id"] isOpen:isOpen webView:webView];
   }
   else if ([url isEqualToString:ADD_CARD_TO_SET])
   {
@@ -175,15 +176,15 @@
 	[dict release];
 }
 
-- (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(NSString *)open webView:(UIWebView *)webView
+- (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(BOOL)isOpen webView:(UIWebView *)webView
 {
 	NSString *js = nil;
-	if ([open isEqualToString:TOKENIZE_SAMPLE_SENTENCE])
+	if (isOpen)
 	{
 		//Close the expanded div. Return back the status of the expaned button
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ",sentenceIDStr];
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@'; ",sentenceIDStr,SHOW_BUTTON_TITLE];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = 'http://xflash.com/%d?id=%@&open=0'; ",sentenceIDStr,TOKENIZE_SAMPLE_SENTENCE,sentenceIDStr];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = 'http://xflash.com/%@?id=%@&open=0'; ",sentenceIDStr,TOKENIZE_SAMPLE_SENTENCE,sentenceIDStr];
 		[webView stringByEvaluatingJavaScriptFromString:js];
 	}
 	else
@@ -202,7 +203,7 @@
 		//then tries to change the anchor value, and the href query string. 
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = \"%@\";",sentenceIDStr,cardHTML];
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@';",sentenceIDStr,CLOSE_BUTTON_TITLE];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = 'http://xflash.com/%d?id=%@&open=1';",sentenceIDStr,TOKENIZE_SAMPLE_SENTENCE,sentenceIDStr];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = 'http://xflash.com/%@?id=%@&open=1';",sentenceIDStr,TOKENIZE_SAMPLE_SENTENCE,sentenceIDStr];
 		
 		[webView stringByEvaluatingJavaScriptFromString:js];
 	}
@@ -257,8 +258,8 @@
 
 @end
 
-NSString * const TOKENIZE_SAMPLE_SENTENCE = @"1";
-NSString * const ADD_CARD_TO_SET = @"2";
+NSString * const TOKENIZE_SAMPLE_SENTENCE = @"0";
+NSString * const ADD_CARD_TO_SET = @"1";
 
 NSString * const LWESentencesHTML = @""
 "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>"
