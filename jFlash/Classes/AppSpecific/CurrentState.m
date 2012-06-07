@@ -139,6 +139,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
   // STEP 1 - Migrations for settings for different versions of JFlash - returns YES if something changed
+  // Note: Our targets should be set up to include the proper category to allow us to run the right
+  // code for performMigrations:.  The default behavior (base class) is nothing; we override
+  // (monkey patch) the implementation with the appropriate category based on which app this is.
   self.isFirstLaunchAfterUpdate = [UpdateManager performMigrations:settings];
   
   // STEP 2 - is this first run after a fresh install?  Do we need to freshly create settings?
