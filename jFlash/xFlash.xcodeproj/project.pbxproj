@@ -1811,7 +1811,7 @@
 		91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencePeer.m; path = AppSpecific/ExampleSentencePeer.m; sourceTree = "<group>"; };
 		91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions.png"; path = "Assets/practice-btn-actions.png"; sourceTree = "<group>"; };
 		91D3FA701580294F00CB8F1E /* jFlash copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jFlash copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		91D3FA721580295000CB8F1E /* jFlash copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "jFlash copy2-Info.plist"; path = "/Users/Ross/iPhone/jflash/jFlash/jFlash copy2-Info.plist"; sourceTree = "<absolute>"; };
+		91D3FA721580295000CB8F1E /* jFlashJr-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "jFlashJr-Info.plist"; path = "/Users/Ross/iPhone/jflash/jFlash/jFlashJr-Info.plist"; sourceTree = "<absolute>"; };
 		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
 		91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressBarViewController.m; path = AppSpecific/ProgressBarViewController.m; sourceTree = "<group>"; };
 		91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressBarViewController.xib; path = Classes/AppSpecific/ProgressBarViewController.xib; sourceTree = "<group>"; };
@@ -2024,7 +2024,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				91D3FA721580295000CB8F1E /* jFlash copy2-Info.plist */,
 			);
 			name = jFlash;
 			sourceTree = "<group>";
@@ -2306,6 +2305,7 @@
 				4919507A144F1BFE00DB81F7 /* jFlash-available.plist */,
 				498EBDBC148909CF00BA6DE7 /* jFlash-installed.plist */,
 				49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */,
+				91D3FA721580295000CB8F1E /* jFlashJr-Info.plist */,
 				49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */,
 				9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */,
 				49E797FD14A8598F009B505A /* jflash_15_to_16.sql */,
