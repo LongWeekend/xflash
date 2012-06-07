@@ -9,19 +9,36 @@
 
 NSString * const LWETableBackgroundImage = @"/table-background.jpg";
 
-// Settings (also defined in header Constants.h)
+/*
+ WARNING: Do not change any of the values of these strings.  It will break
+ backwards compatibility.  The only way you would ever be allowed to do so
+ is if you wrote a migration that migrated the user's setting(s) that you 
+ changed.
+
+ Note: JFlash and CFlash-specific constants are in their respective sections.
+ */
+NSString * const APP_MODE            = @"mode";
 NSString * const SET_MODE_QUIZ       = @"QUIZ";
 NSString * const SET_MODE_BROWSE     = @"BROWSE";
+
+NSString * const APP_HEADWORD        = @"headword";
 NSString * const SET_J_TO_E          = @"JPN";
 NSString * const SET_E_TO_J          = @"ENG";
 
-// IF YOU CHANGE THESE VALUES, DEMONS WILL FLY OUT OF YOUR CD-ROM DRIVE AND EAT YOUR SOUL.  INSTANTLY.
-// It will COMPLETELY mess up the ability of our users to upgrade versions.
-NSString * const APP_MODE                 = @"mode";
+NSString * const APP_HEADWORD_TYPE        = @"headword_type";
+NSString * const SET_HEADWORD_TYPE_TRAD   = @"TRAD";
+NSString * const SET_HEADWORD_TYPE_SIMP   = @"SIMP";
+
+NSString * const APP_TEXT_SIZE            = @"text_size";
+NSString * const SET_TEXT_NORMAL          = @"normal";
+NSString * const SET_TEXT_LARGE           = @"large";
+NSString * const SET_TEXT_HUGE            = @"huge";
+
+// These setting types do not have discrete set values, their setting values are
+// determined in code.
 NSString * const APP_THEME                = @"theme";
 NSString * const APP_ALGORITHM            = @"algorithm";
 NSString * const APP_USER                 = @"user_id";
-NSString * const APP_HEADWORD             = @"headword";
 NSString * const APP_PLUGIN               = @"plugin";
 NSString * const APP_REMINDER             = @"reminder";
 NSString * const APP_MAX_STUDYING         = @"maxStudying";
@@ -30,10 +47,6 @@ NSString * const APP_DIFFICULTY           = @"app_difficulty";
 NSString * const APP_DATA_VERSION         = @"data_version";
 NSString * const APP_SETTINGS_VERSION     = @"settings_version";
 NSString * const APP_HIDE_BURIED_CARDS    = @"app_hide_buried_cards";
-NSString * const APP_HEADWORD_TYPE        = @"headword_type";
-NSString * const SET_HEADWORD_TYPE_TRAD   = @"TRAD";
-NSString * const SET_HEADWORD_TYPE_SIMP   = @"SIMP";
-
 
 NSString * const LWEShouldSwitchTab           = @"LWEShouldSwitchTab";
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
@@ -68,12 +81,12 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       // Tapjoy
       NSString * const LWE_TAPJOY_APP_ID         = @"6f0f78d1-f4bf-437b-befc-977b317f7b04";
 
-#if defined(LWE_JFLASH)
+#if defined(LWE_JUNIOR)
       NSString * const LWE_CURRENT_VERSION       = @"1.0";
       NSString * const LWE_CURRENT_USER_DATABASE = @"jFlashJr.db";
 #else
       // These constants are general to the flashes
-      NSString * const LWE_CURRENT_VERSION       = @"1.7";
+      NSString * const LWE_CURRENT_VERSION       = @"1.8";
       NSString * const LWE_CURRENT_USER_DATABASE = @"jFlash.db";
 #endif
       NSString * const LWE_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
@@ -97,6 +110,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_JF_VERSION_1_6_1         = @"1.6.1";
       NSString * const LWE_JF_VERSION_1_6_2         = @"1.6.2";
       NSString * const LWE_JF_VERSION_1_7           = @"1.7";
+      NSString * const LWE_JF_VERSION_1_8           = @"1.8";
 
       // This pertains to the plugin manager
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"jFlash-available.plist";
@@ -137,7 +151,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 
 
       // These constants are general to the flashes
-      NSString * const LWE_CURRENT_VERSION          = @"1.1.1";
+      NSString * const LWE_CURRENT_VERSION          = @"1.2";
       NSString * const LWE_CURRENT_CARD_DATABASE    = @"cFlash-CARD-1.0.db";
       NSString * const LWE_CURRENT_USER_DATABASE    = @"cFlash.db";
 
@@ -145,6 +159,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_CF_VERSION_1_0           = @"1.0";
       NSString * const LWE_CF_VERSION_1_1           = @"1.1";
       NSString * const LWE_CF_VERSION_1_1_1         = @"1.1.1";
+      NSString * const LWE_CF_VERSION_1_2           = @"1.2";
 
       // Migration files
       NSString * const LWE_CF_11_TO_111_SQL_FILENAME = @"cflash_11_to_111.sql";

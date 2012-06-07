@@ -42,6 +42,10 @@
 + (BOOL) _needs162to17SettingsUpdate:(NSUserDefaults *) settings;
 + (void) _updateSettingsFrom162to17:(NSUserDefaults *)settings;
 
+// JFLASH 1.7 -> 1.8
++ (BOOL) _needs17to18SettingsUpdate:(NSUserDefaults *) settings;
++ (void) _updateSettingsFrom17to18:(NSUserDefaults *)settings;
+
 #elif defined (LWE_CFLASH)
 
 // CFLASH 1.0.x -> 1.1
@@ -303,6 +307,22 @@
   [TagPeer recacheCountsForUserTags];
 }
 
+#pragma mark Version 1.8
+
++ (BOOL) _needs17to18SettingsUpdate:(NSUserDefaults *) settings
+{
+  return [[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_7];
+}
+
++ (void) _updateSettingsFrom17to18:(NSUserDefaults *)settings
+{
+  // Create a default setting that wasn't there before
+  [settings setObject:SET_TEXT_NORMAL forKey:APP_TEXT_SIZE];
+  
+  [settings setObject:LWE_JF_VERSION_1_8 forKey:APP_DATA_VERSION];
+  [settings setObject:LWE_JF_VERSION_1_8 forKey:APP_SETTINGS_VERSION];
+}
+
 
 #elif defined (LWE_CFLASH)
 #pragma mark - CFLASH
@@ -480,6 +500,13 @@
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.7 version");
     [UpdateManager _updateSettingsFrom162to17:settings];
+    migrated = YES;
+  }
+  
+  if ([UpdateManager _needs17to18SettingsUpdate:settings])
+  {
+    LWE_LOG(@"[Migration Log]YAY! Updating to 1.8 version");
+    [UpdateManager _updateSettingsFrom17to18:settings];
     migrated = YES;
   }
   

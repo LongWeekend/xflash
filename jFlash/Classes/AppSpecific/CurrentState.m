@@ -177,6 +177,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setInteger:DEFAULT_REMINDER_DAYS forKey:APP_REMINDER];
   [settings setValue:DEFAULT_THEME forKey:APP_THEME];
   [settings setValue:SET_MODE_QUIZ forKey:APP_MODE];
+  [settings setValue:SET_TEXT_NORMAL forKey:APP_TEXT_SIZE];
   [settings setValue:SET_J_TO_E forKey:APP_HEADWORD];
   [settings setValue:LWE_CURRENT_VERSION forKey:APP_DATA_VERSION];
   [settings setValue:LWE_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];
