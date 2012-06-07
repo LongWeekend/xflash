@@ -25,9 +25,9 @@
     self.cards = [NSMutableArray array];
 
     // get the related cards
-    for (ExampleSentence* sentence in self.sentenceArray)
+    for (ExampleSentence *sentence in self.sentenceArray)
     {
-      NSArray* relatedCards = [CardPeer retrieveCardSetForExampleSentenceId:[sentence sentenceId]];
+      NSArray *relatedCards = [CardPeer retrieveCardSetForExampleSentenceId:[sentence sentenceId]];
       [self.cards addObject:relatedCards];
     }
     [self setTitle:NSLocalizedString(@"Examples",@"DisplaySearchedSentenceViewController.NavBarTitle")];
@@ -47,17 +47,14 @@
   self.tableView.backgroundColor = [UIColor clearColor];
 }
 
-#pragma mark -
-#pragma mark UITableView delegates
+#pragma mark - UITableView delegates
 
-//! Hardcoded to 2 - header & card list
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
   return [self.sentenceArray count];
 }
 
-
-//! Returns number based on section - if sentence, hardcode to 1, if cards, count of cards array
+// Show number of cards + 1 row for the sentence itself
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   return [[self.cards objectAtIndex:section] count] + 1;
@@ -67,6 +64,7 @@
 //! Returns title based on section - if sentence section, none, if cards, show "Linked Cards" or something similar
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
 {
+  // TODO: Determine if this method implementation is even necessary - MMA - 6/7/2012
   return @"";
 }
 
@@ -76,8 +74,8 @@
 {
   if (indexPath.row == SENTENCE_ROW)
   {
-    ExampleSentence* sentence = [[self sentenceArray] objectAtIndex:indexPath.section];
-    NSString* text = [NSString stringWithFormat:@"%@\n%@", [sentence sentenceJa], [sentence sentenceEn]];
+    ExampleSentence *sentence = [self.sentenceArray objectAtIndex:indexPath.section];
+    NSString *text = [NSString stringWithFormat:@"%@\n%@", [sentence sentenceJa], [sentence sentenceEn]];
     return [LWEUITableUtils autosizeHeightForCellWithText:text];
   }
   else
@@ -128,8 +126,8 @@
   // the cells for either tag type look the same
   else
   {
-    Card *card;
-    NSArray* cardArray = [self.cards objectAtIndex:indexPath.section];
+    Card *card = nil;
+    NSArray *cardArray = [self.cards objectAtIndex:indexPath.section];
     card = [cardArray objectAtIndex:indexPath.row - 1];
     // Is a search result record
     cell.textLabel.text = [card headwordIgnoringMode:YES];
@@ -142,7 +140,7 @@
     
     if (readingStr.length > 0)
     {
-      cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", readingStr];
+      cell.detailTextLabel.text = readingStr;
     }
   }
   return cell;
@@ -152,19 +150,20 @@
 //! Loads AddTagViewController for any card (not sentence)     
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.row == SENTENCE_ROW) return; // do nothing for the entry
+  if (indexPath.row == SENTENCE_ROW)
+  {
+    return; // do nothing for the entry
+  }
   
   // Launch AddTagViewController for this card
-  Card* card = [[self.cards objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+  Card *card = [[self.cards objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
   [card hydrate]; // need to fill the meaning field
   AddTagViewController *tagController = [[AddTagViewController alloc] initForExampleSentencesWithCard:card];
-  [[self navigationController] pushViewController:tagController animated:YES];
+  [self.navigationController pushViewController:tagController animated:YES];
   [tagController release];
 }
 
-#pragma mark -
-#pragma mark Class plumbing
-
+#pragma mark - Class plumbing
 
 //! Standard dealloc
 - (void)dealloc
