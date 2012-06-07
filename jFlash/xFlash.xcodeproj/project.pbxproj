@@ -561,6 +561,8 @@
 		499E56B714972A7200088BD3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E56B514972A7200088BD3 /* TTTAttributedLabel.m */; };
 		499E56B814972A7200088BD3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E56B514972A7200088BD3 /* TTTAttributedLabel.m */; };
 		499E56B914972A7200088BD3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E56B514972A7200088BD3 /* TTTAttributedLabel.m */; };
+		499F07E815802FC1006B7A14 /* UpgradeAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499F07E615802FC1006B7A14 /* UpgradeAdViewController.m */; };
+		499F07E915802FC1006B7A14 /* UpgradeAdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 499F07E715802FC1006B7A14 /* UpgradeAdViewController.xib */; };
 		49A3EC1514DB99C800621183 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C214027818001EB473 /* CoreText.framework */; };
 		49A465B314FCF50B00CF5C44 /* ChineseCardTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A465B214FCF50B00CF5C44 /* ChineseCardTest.m */; };
 		49A465B414FD04D500CF5C44 /* PracticeModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */; };
@@ -1517,6 +1519,9 @@
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
 		499E56B414972A7200088BD3 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = External/TTTAttributedLabel/TTTAttributedLabel.h; sourceTree = "<group>"; };
 		499E56B514972A7200088BD3 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = External/TTTAttributedLabel/TTTAttributedLabel.m; sourceTree = "<group>"; };
+		499F07E515802FC1006B7A14 /* UpgradeAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpgradeAdViewController.h; path = AppSpecific/UpgradeAdViewController.h; sourceTree = "<group>"; };
+		499F07E615802FC1006B7A14 /* UpgradeAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpgradeAdViewController.m; path = AppSpecific/UpgradeAdViewController.m; sourceTree = "<group>"; };
+		499F07E715802FC1006B7A14 /* UpgradeAdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpgradeAdViewController.xib; path = AppSpecific/UpgradeAdViewController.xib; sourceTree = "<group>"; };
 		49A465B114FCF50B00CF5C44 /* ChineseCardTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseCardTest.h; path = Tests/cFlashTests/ChineseCardTest.h; sourceTree = SOURCE_ROOT; };
 		49A465B214FCF50B00CF5C44 /* ChineseCardTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseCardTest.m; path = Tests/cFlashTests/ChineseCardTest.m; sourceTree = SOURCE_ROOT; };
 		49A942601263AF4500086F4C /* star-deselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-deselected.png"; path = "Assets/star-deselected.png"; sourceTree = "<group>"; };
@@ -2428,6 +2433,16 @@
 			name = External;
 			sourceTree = "<group>";
 		};
+		499F07EA15803012006B7A14 /* Junior */ = {
+			isa = PBXGroup;
+			children = (
+				499F07E515802FC1006B7A14 /* UpgradeAdViewController.h */,
+				499F07E615802FC1006B7A14 /* UpgradeAdViewController.m */,
+				499F07E715802FC1006B7A14 /* UpgradeAdViewController.xib */,
+			);
+			name = Junior;
+			sourceTree = "<group>";
+		};
 		49AAB8861470DB210015D64B /* LWEChineseSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -3104,6 +3119,7 @@
 				49C5BC1E11C51AE300A595D6 /* Search */,
 				91DDB0A811C1F57700E8B962 /* Settings */,
 				4993AFBF1278103E00872875 /* Help */,
+				499F07EA15803012006B7A14 /* Junior */,
 				49F9692511AF680700DFC3C9 /* jFlashAppDelegate.h */,
 				49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */,
 				4925735111C12619006FA4E1 /* ModalTaskViewController.h */,
@@ -3882,6 +3898,7 @@
 				91D3F9CC1580294F00CB8F1E /* jflash_161_to_162.sql in Resources */,
 				91D3F9CD1580294F00CB8F1E /* MainWindow-iPad.xib in Resources */,
 				91D3F9CE1580294F00CB8F1E /* jflash_162_to_17.sql in Resources */,
+				499F07E915802FC1006B7A14 /* UpgradeAdViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4581,6 +4598,7 @@
 				91D3FA571580294F00CB8F1E /* SBJsonWriter.m in Sources */,
 				91D3FA581580294F00CB8F1E /* UserHistory.m in Sources */,
 				91D3FA591580294F00CB8F1E /* MBProgressHUD.m in Sources */,
+				499F07E815802FC1006B7A14 /* UpgradeAdViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
