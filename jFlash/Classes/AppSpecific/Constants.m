@@ -9,19 +9,36 @@
 
 NSString * const LWETableBackgroundImage = @"/table-background.jpg";
 
-// Settings (also defined in header Constants.h)
+/*
+ WARNING: Do not change any of the values of these strings.  It will break
+ backwards compatibility.  The only way you would ever be allowed to do so
+ is if you wrote a migration that migrated the user's setting(s) that you 
+ changed.
+
+ Note: JFlash and CFlash-specific constants are in their respective sections.
+ */
+NSString * const APP_MODE            = @"mode";
 NSString * const SET_MODE_QUIZ       = @"QUIZ";
 NSString * const SET_MODE_BROWSE     = @"BROWSE";
+
+NSString * const APP_HEADWORD        = @"headword";
 NSString * const SET_J_TO_E          = @"JPN";
 NSString * const SET_E_TO_J          = @"ENG";
 
-// IF YOU CHANGE THESE VALUES, DEMONS WILL FLY OUT OF YOUR CD-ROM DRIVE AND EAT YOUR SOUL.  INSTANTLY.
-// It will COMPLETELY mess up the ability of our users to upgrade versions.
-NSString * const APP_MODE                 = @"mode";
+NSString * const APP_HEADWORD_TYPE        = @"headword_type";
+NSString * const SET_HEADWORD_TYPE_TRAD   = @"TRAD";
+NSString * const SET_HEADWORD_TYPE_SIMP   = @"SIMP";
+
+NSString * const APP_TEXT_SIZE            = @"text_size";
+NSString * const SET_TEXT_NORMAL          = @"normal";
+NSString * const SET_TEXT_LARGE           = @"large";
+NSString * const SET_TEXT_HUGE            = @"huge";
+
+// These setting types do not have discrete set values, their setting values are
+// determined in code.
 NSString * const APP_THEME                = @"theme";
 NSString * const APP_ALGORITHM            = @"algorithm";
 NSString * const APP_USER                 = @"user_id";
-NSString * const APP_HEADWORD             = @"headword";
 NSString * const APP_PLUGIN               = @"plugin";
 NSString * const APP_REMINDER             = @"reminder";
 NSString * const APP_MAX_STUDYING         = @"maxStudying";
@@ -30,10 +47,6 @@ NSString * const APP_DIFFICULTY           = @"app_difficulty";
 NSString * const APP_DATA_VERSION         = @"data_version";
 NSString * const APP_SETTINGS_VERSION     = @"settings_version";
 NSString * const APP_HIDE_BURIED_CARDS    = @"app_hide_buried_cards";
-NSString * const APP_HEADWORD_TYPE        = @"headword_type";
-NSString * const SET_HEADWORD_TYPE_TRAD   = @"TRAD";
-NSString * const SET_HEADWORD_TYPE_SIMP   = @"SIMP";
-
 
 NSString * const LWEShouldSwitchTab           = @"LWEShouldSwitchTab";
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";

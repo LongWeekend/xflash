@@ -41,18 +41,27 @@ extern NSString * const LWEShouldShowDownloadModal;
 
 
 // Settings - do not change
+// JFlash and CFlash-specific constants are in their respective sections.
+extern NSString * const APP_MODE;
 extern NSString * const SET_MODE_QUIZ;
 extern NSString * const SET_MODE_BROWSE;
+
+extern NSString * const APP_HEADWORD;
 extern NSString * const SET_J_TO_E;
 extern NSString * const SET_E_TO_J;
 
-// Different setting types
-// DO NOT edit these
-extern NSString * const APP_MODE;
+extern NSString * const APP_TEXT_SIZE;
+extern NSString * const SET_TEXT_NORMAL;
+extern NSString * const SET_TEXT_LARGE;
+extern NSString * const SET_TEXT_HUGE;
+
+extern NSString * const APP_HEADWORD_TYPE;
+extern NSString * const SET_HEADWORD_TYPE_TRAD;
+extern NSString * const SET_HEADWORD_TYPE_SIMP;
+
 extern NSString * const APP_THEME;
 extern NSString * const APP_ALGORITHM;
 extern NSString * const APP_USER;
-extern NSString * const APP_HEADWORD;
 extern NSString * const APP_PLUGIN;
 extern NSString * const APP_REMINDER;
 extern NSString * const APP_FREQUENCY_MULTIPLIER;
@@ -61,9 +70,6 @@ extern NSString * const APP_DIFFICULTY;
 extern NSString * const APP_DATA_VERSION;
 extern NSString * const APP_SETTINGS_VERSION;
 extern NSString * const APP_HIDE_BURIED_CARDS;
-extern NSString * const APP_HEADWORD_TYPE;
-extern NSString * const SET_HEADWORD_TYPE_TRAD;
-extern NSString * const SET_HEADWORD_TYPE_SIMP;
 
 extern NSString * const PLUGIN_LAST_UPDATE;
 
