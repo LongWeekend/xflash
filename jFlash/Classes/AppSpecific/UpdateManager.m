@@ -83,11 +83,20 @@
 
 + (BOOL) performMigrations:(NSUserDefaults*)settings
 {
-  return NO;
+#if defined (LWE_JFLASH)
+  return [JFlashUpdateManager performMigrations:settings];
+#elif defined (LWE_CFLASH)
+  return [CFlashUpdateManager performMigrations:settings];
+#endif
 }
 
 + (void) showUpgradeAlertView:(NSUserDefaults *)settings delegate:(id<UIAlertViewDelegate>)alertDelegate
 {
+#if defined (LWE_JFLASH)
+  return [JFlashUpdateManager showUpgradeAlertView:settings delegate:alertDelegate];
+#elif defined (LWE_CFLASH)
+  return [CFlashUpdateManager showUpgradeAlertView:settings delegate:alertDelegate];
+#endif
 }
 
 @end

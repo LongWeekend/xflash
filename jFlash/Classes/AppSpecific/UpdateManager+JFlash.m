@@ -8,7 +8,7 @@
 
 #import "UpdateManager+JFlash.h"
 
-@interface UpdateManager ()
+@interface JFlashUpdateManager ()
 // JFLASH 1.1 -> 1.2
 + (void) _createDefaultSettingsFor11:(NSUserDefaults *)settings;
 + (void) _updateSettingsFrom11to12:(NSUserDefaults *)settings;
@@ -46,7 +46,7 @@
 @end
 
 
-@implementation UpdateManager (JFlash)
+@implementation JFlashUpdateManager
 
 #pragma mark - JFLASH 
 #pragma mark Version 1.1

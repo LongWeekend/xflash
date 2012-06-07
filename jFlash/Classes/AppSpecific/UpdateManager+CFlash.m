@@ -8,7 +8,7 @@
 
 #import "UpdateManager+CFlash.h"
 
-@interface UpdateManager ()
+@interface CFlashUpdateManager ()
 // CFLASH 1.0.x -> 1.1
 + (BOOL) _needs10to11SettingsUpdate:(NSUserDefaults *)settings;
 + (void) _updateSettingsFrom10to11:(NSUserDefaults *)settings;
@@ -22,7 +22,7 @@
 + (void) _updateSettingsFrom111to12:(NSUserDefaults *)settings;
 @end
 
-@implementation UpdateManager (CFlash)
+@implementation CFlashUpdateManager
 
 #pragma mark - CFLASH
 

@@ -8,6 +8,6 @@
 
 #import "UpdateManager.h"
 
-@interface UpdateManager (JFlash)
+@interface JFlashUpdateManager : UpdateManager
 
 @end

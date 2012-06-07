@@ -8,6 +8,6 @@
 
 #import "UpdateManager.h"
 
-@interface UpdateManager (CFlash)
+@interface CFlashUpdateManager : UpdateManager
 
 @end
