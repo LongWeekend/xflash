@@ -274,6 +274,10 @@
 		494C530D1516163100F12BA9 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494C530C1516163100F12BA9 /* libFlurryAnalytics.a */; };
 		494C530E1516163100F12BA9 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494C530C1516163100F12BA9 /* libFlurryAnalytics.a */; };
 		4950C25311B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
+		496461B01580835100C3AB80 /* UpdateManager+CFlash.m in Sources */ = {isa = PBXBuildFile; fileRef = 496461AF1580835100C3AB80 /* UpdateManager+CFlash.m */; };
+		496461B11580835100C3AB80 /* UpdateManager+CFlash.m in Sources */ = {isa = PBXBuildFile; fileRef = 496461AF1580835100C3AB80 /* UpdateManager+CFlash.m */; };
+		496461B4158084AB00C3AB80 /* UpdateManager+JFlash.m in Sources */ = {isa = PBXBuildFile; fileRef = 496461B3158084AB00C3AB80 /* UpdateManager+JFlash.m */; };
+		496461B5158084AB00C3AB80 /* UpdateManager+JFlash.m in Sources */ = {isa = PBXBuildFile; fileRef = 496461B3158084AB00C3AB80 /* UpdateManager+JFlash.m */; };
 		4964E53E14A959EB00683A58 /* PracticeCardSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4964E53D14A959EB00683A58 /* PracticeCardSelector.m */; };
 		4964E53F14A959EB00683A58 /* PracticeCardSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4964E53D14A959EB00683A58 /* PracticeCardSelector.m */; };
 		4964E54014A959EB00683A58 /* PracticeCardSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4964E53D14A959EB00683A58 /* PracticeCardSelector.m */; };
@@ -1462,6 +1466,10 @@
 		494F7FA4138B8E6400094AE2 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
 		4950C25111B764B200B70EE9 /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginManager.h; path = AppSpecific/PluginManager.h; sourceTree = "<group>"; };
 		4950C25211B764B200B70EE9 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginManager.m; path = AppSpecific/PluginManager.m; sourceTree = "<group>"; };
+		496461AE1580835100C3AB80 /* UpdateManager+CFlash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UpdateManager+CFlash.h"; sourceTree = "<group>"; };
+		496461AF1580835100C3AB80 /* UpdateManager+CFlash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UpdateManager+CFlash.m"; sourceTree = "<group>"; };
+		496461B2158084AB00C3AB80 /* UpdateManager+JFlash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UpdateManager+JFlash.h"; path = "AppSpecific/UpdateManager+JFlash.h"; sourceTree = "<group>"; };
+		496461B3158084AB00C3AB80 /* UpdateManager+JFlash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UpdateManager+JFlash.m"; path = "AppSpecific/UpdateManager+JFlash.m"; sourceTree = "<group>"; };
 		4964E53C14A959EB00683A58 /* PracticeCardSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PracticeCardSelector.h; path = AppSpecific/PracticeCardSelector.h; sourceTree = "<group>"; };
 		4964E53D14A959EB00683A58 /* PracticeCardSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PracticeCardSelector.m; path = AppSpecific/PracticeCardSelector.m; sourceTree = "<group>"; };
 		4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions@2x.png"; path = "Assets/practice-btn-actions@2x.png"; sourceTree = "<group>"; };
@@ -2358,6 +2366,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		496461B6158085B600C3AB80 /* Updates */ = {
+			isa = PBXGroup;
+			children = (
+				49AF3D331265EDCD00CEAA52 /* UpdateManager.h */,
+				49AF3D341265EDCD00CEAA52 /* UpdateManager.m */,
+				496461B2158084AB00C3AB80 /* UpdateManager+JFlash.h */,
+				496461B3158084AB00C3AB80 /* UpdateManager+JFlash.m */,
+				496461AE1580835100C3AB80 /* UpdateManager+CFlash.h */,
+				496461AF1580835100C3AB80 /* UpdateManager+CFlash.m */,
+			);
+			name = Updates;
+			sourceTree = "<group>";
+		};
 		4965FD39126F6422000AC280 /* Action Bar */ = {
 			isa = PBXGroup;
 			children = (
@@ -2767,6 +2788,7 @@
 		917A5C8611AB851E00016BD2 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				496461B6158085B600C3AB80 /* Updates */,
 				242A17421462893E002977E6 /* AudioSessionManager.h */,
 				242A17431462893E002977E6 /* AudioSessionManager.m */,
 				917A5C7D11AB84EE00016BD2 /* CurrentState.h */,
@@ -2775,8 +2797,6 @@
 				498229501491D02A009EC2CD /* DownloadManager.m */,
 				491E276C14F5DA7B00C5243A /* ExternalAppManager.h */,
 				491E276D14F5DA7B00C5243A /* ExternalAppManager.m */,
-				49AF3D331265EDCD00CEAA52 /* UpdateManager.h */,
-				49AF3D341265EDCD00CEAA52 /* UpdateManager.m */,
 				498EBDA51488B96800BA6DE7 /* Plugin.h */,
 				498EBDA61488B96800BA6DE7 /* Plugin.m */,
 				4950C25111B764B200B70EE9 /* PluginManager.h */,
@@ -4076,6 +4096,7 @@
 				490D4546153BAB3B0003EA47 /* SBJsonWriter.m in Sources */,
 				4922ED8B1556490200645F61 /* UserHistory.m in Sources */,
 				4922ED9815567FBC00645F61 /* MBProgressHUD.m in Sources */,
+				496461B4158084AB00C3AB80 /* UpdateManager+JFlash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4190,6 +4211,7 @@
 				490D4544153BAB3B0003EA47 /* SBJsonParser.m in Sources */,
 				490D4548153BAB3B0003EA47 /* SBJsonWriter.m in Sources */,
 				4922ED8D1556490200645F61 /* UserHistory.m in Sources */,
+				496461B5158084AB00C3AB80 /* UpdateManager+JFlash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4307,6 +4329,7 @@
 				490D4545153BAB3B0003EA47 /* SBJsonParser.m in Sources */,
 				490D4549153BAB3B0003EA47 /* SBJsonWriter.m in Sources */,
 				4922ED8E1556490200645F61 /* UserHistory.m in Sources */,
+				496461B11580835100C3AB80 /* UpdateManager+CFlash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4453,6 +4476,7 @@
 				490D4547153BAB3B0003EA47 /* SBJsonWriter.m in Sources */,
 				4922ED8C1556490200645F61 /* UserHistory.m in Sources */,
 				4922ED9915567FBC00645F61 /* MBProgressHUD.m in Sources */,
+				496461B01580835100C3AB80 /* UpdateManager+CFlash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

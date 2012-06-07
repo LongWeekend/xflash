@@ -89,14 +89,6 @@
                                       NSLocalizedString(@"Active User",@"SettingsViewController.SettingNames_ActiveUser"),
                                       NSLocalizedString(@"Updates",@"SettingsViewController.SettingNames_DownloadExtras"),nil];
   NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_REMINDER,APP_USER,APP_PLUGIN,nil];
-  
-  // Can we upgrade at all?  If so, hide the plugins
-  if ([UpdateManager databaseIsUpdatable:[NSUserDefaults standardUserDefaults]])
-  {
-    [userSettingNames removeLastObject];
-    [userSettingKeys removeLastObject];
-  }
-  
   NSMutableArray *userSettingArray = [NSMutableArray arrayWithObjects:userSettingNames,userSettingKeys,NSLocalizedString(@"Application",@"SettingsViewController.TableHeader_Application"),nil];
   
   NSArray *socialNames = [NSArray arrayWithObjects:NSLocalizedString(@"Follow us on Twitter",@"SettingsViewController.SettingNames_Twitter"),

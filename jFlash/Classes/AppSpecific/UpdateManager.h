@@ -23,13 +23,14 @@
 + (BOOL) performMigrations:(NSUserDefaults*)settings;
 
 /**
- * Determine's if the user's database is lagging behind the current version
- */
-+ (BOOL) databaseIsUpdatable:(NSUserDefaults*)settings;
-
-/**
  * Prompts a UIAlertView to show with a message pertaining to this update
  */
 + (void) showUpgradeAlertView:(NSUserDefaults *)settings delegate:(id<UIAlertViewDelegate>)alertDelegate;
+
+/**
+ TODO: This should be changed to a block-based implementation and this method should
+ be deprecated
+ */
++ (void) _upgradeDBtoVersion:(NSString*)newVersionName withSQLStatements:(NSString*)pathToSQL forSettings:(NSUserDefaults *)settings;
 
 @end
