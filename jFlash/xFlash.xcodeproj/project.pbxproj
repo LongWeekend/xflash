@@ -4905,7 +4905,7 @@
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
-				INFOPLIST_FILE = "jFlash copy2-Info.plist";
+				INFOPLIST_FILE = "jFlashJr-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
@@ -4928,7 +4928,7 @@
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
-				INFOPLIST_FILE = "jFlash copy2-Info.plist";
+				INFOPLIST_FILE = "jFlashJr-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
@@ -4951,7 +4951,7 @@
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
-				INFOPLIST_FILE = "jFlash copy2-Info.plist";
+				INFOPLIST_FILE = "jFlashJr-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
