@@ -32,6 +32,6 @@
 
 @interface CloseButtonView : UIView
 
-@property id<CloseButtonViewDelegate> IBOutlet delegate;
+@property (assign) id<CloseButtonViewDelegate> IBOutlet delegate;
 
 @end
