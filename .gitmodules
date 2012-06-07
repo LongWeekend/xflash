@@ -22,3 +22,6 @@
 [submodule "jFlash/Classes/External/LWEGradientButton"]
 	path = jFlash/Classes/External/LWEGradientButton
 	url = git@github.com:LongWeekend/LWEGradientButton.git
+[submodule "jFlash/Classes/External/MBProgressHUD"]
+	path = jFlash/Classes/External/MBProgressHUD
+	url = git://github.com/matej/MBProgressHUD.git

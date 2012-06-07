@@ -10,18 +10,13 @@
 #import "AddTagViewController.h"
 #import "Constants.h"
 #import "jFlashAppDelegate.h"
-#import "TweetWordViewController.h"
-#import "LWETwitterEngine.h"
-#import "LWETUser.h"
-#import "LWETRequestDelegate.h"
-#import "TweetWordXAuthController.h"
 #import <MessageUI/MessageUI.h>
 #import "StudyViewProtocols.h"
 
 #define SVC_ACTION_ADDTOSET_BUTTON 1
 #define SVC_ACTION_ADDTOFAV_BUTTON 0
-#define SVC_ACTION_TWEET_BUTTON 2
-#define SVC_ACTION_REPORT_BUTTON 3
+#define SVC_ACTION_REPORT_BUTTON 2
+#define SVC_ACTION_TWEET_BUTTON 3
 
 @class ActionBarViewController;
 
@@ -42,22 +37,14 @@
 @interface ActionBarViewController : UIViewController <UIActionSheetDelegate,
                                                        UIAlertViewDelegate,
                                                        MFMailComposeViewControllerDelegate,
-                                                       StudyViewSubcontrollerProtocol,
-                                                       LWETRequestDelegate>
+                                                       StudyViewSubcontrollerProtocol>
 
 - (NSString *)getTweetWord;
-
-// core methods
-- (void)tweet;
 
 // action sheet
 - (IBAction)showCardActionSheet;
 
 @property (assign) IBOutlet id<ActionBarViewControllerDelegate> delegate;
-
-@property (retain) LWETwitterEngine *twitterEngine;
-
-@property (retain, nonatomic) IBOutlet UIViewController *tweetWordViewController;
 
 @property (nonatomic, retain) Card *currentCard;
 

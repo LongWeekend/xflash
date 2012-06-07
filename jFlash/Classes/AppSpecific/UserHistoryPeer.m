@@ -6,6 +6,7 @@
 //  Copyright 2009 LONG WEEKEND INC. All rights reserved.
 //
 #import "UserHistoryPeer.h"
+#import "UserHistory.h"
 #import "CardPeer.h"
 
 @interface UserHistoryPeer ()
@@ -14,6 +15,22 @@
 @end
 
 @implementation UserHistoryPeer
+
++ (NSArray *) userHistoriesForUserId:(NSInteger)userId
+{
+  NSMutableArray *historyArray = [NSMutableArray array];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  NSString *sql = @"SELECT card_id, created_on, timestamp, right_count, wrong_count, card_level FROM user_history WHERE user_id = ?";
+  FMResultSet *rs = [db.dao executeQuery:sql,[NSNumber numberWithInt:userId]];
+  
+	while ([rs next])
+  {
+    UserHistory *history = [UserHistory userHistoryWithResultSet:rs];
+    [historyArray addObject:history];
+	}
+	[rs close];
+  return (NSArray *)historyArray;
+}
 
 //! Returns what the next level should be based on the user's answer
 + (NSInteger) _nextAfterLevel:(int)level gotItRight:(BOOL)gotItRight

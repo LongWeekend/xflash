@@ -73,7 +73,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_TAPJOY_APP_ID         = @"6f0f78d1-f4bf-437b-befc-977b317f7b04";
 
       // These constants are general to the flashes
-      NSString * const LWE_CURRENT_VERSION       = @"1.6.2";
+      NSString * const LWE_CURRENT_VERSION       = @"1.7";
       NSString * const LWE_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
       NSString * const LWE_CURRENT_USER_DATABASE = @"jFlash.db";
 
@@ -85,6 +85,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_JF_15_TO_16_SQL_FILENAME  = @"jflash_15_to_16.sql";
       NSString * const LWE_JF_16_TO_161_SQL_FILENAME = @"jflash_16_to_161.sql";
       NSString * const LWE_JF_161_TO_162_SQL_FILENAME = @"jflash_161_to_162.sql";
+      NSString * const LWE_JF_162_TO_17_SQL_FILENAME = @"jflash_162_to_17.sql";
       NSString * const LWE_JF_VERSION_1_0           = @"1.0";
       NSString * const LWE_JF_VERSION_1_1           = @"1.1"; 
       NSString * const LWE_JF_VERSION_1_2           = @"1.2";
@@ -94,6 +95,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_JF_VERSION_1_6           = @"1.6";
       NSString * const LWE_JF_VERSION_1_6_1         = @"1.6.1";
       NSString * const LWE_JF_VERSION_1_6_2         = @"1.6.2";
+      NSString * const LWE_JF_VERSION_1_7           = @"1.7";
 
       // This pertains to the plugin manager
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"jFlash-available.plist";
@@ -135,13 +137,17 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 
 
       // These constants are general to the flashes
-      NSString * const LWE_CURRENT_VERSION          = @"1.1";
+      NSString * const LWE_CURRENT_VERSION          = @"1.1.1";
       NSString * const LWE_CURRENT_CARD_DATABASE    = @"cFlash-CARD-1.0.db";
       NSString * const LWE_CURRENT_USER_DATABASE    = @"cFlash.db";
 
       // These constants are CF specific
       NSString * const LWE_CF_VERSION_1_0           = @"1.0";
       NSString * const LWE_CF_VERSION_1_1           = @"1.1";
+      NSString * const LWE_CF_VERSION_1_1_1         = @"1.1.1";
+
+      // Migration files
+      NSString * const LWE_CF_11_TO_111_SQL_FILENAME = @"cflash_11_to_111.sql";
 
       //CFlash specific plugins
       NSString * const AUDIO_HSK_KEY = @"AUDIO_HSK";

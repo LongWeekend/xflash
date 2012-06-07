@@ -104,6 +104,7 @@ extern NSString * const LWE_TWITTER_HASH_TAG;
   extern NSString * const LWE_JF_VERSION_1_6;
   extern NSString * const LWE_JF_VERSION_1_6_1;
   extern NSString * const LWE_JF_VERSION_1_6_2;
+  extern NSString * const LWE_JF_VERSION_1_7;
   extern NSString * const LWE_JF_10_USER_DATABASE;
   extern NSString * const LWE_JF_10_TO_11_SQL_FILENAME;
   extern NSString * const LWE_JF_12_TO_13_SQL_FILENAME;
@@ -111,6 +112,7 @@ extern NSString * const LWE_TWITTER_HASH_TAG;
   extern NSString * const LWE_JF_15_TO_16_SQL_FILENAME;
   extern NSString * const LWE_JF_16_TO_161_SQL_FILENAME;
   extern NSString * const LWE_JF_161_TO_162_SQL_FILENAME;
+  extern NSString * const LWE_JF_162_TO_17_SQL_FILENAME;
 
   // This is here for legacy JFlash reasons - before v1.6 this was used.  Used for upgrade path now.
   extern NSString * const LWE_DOWNLOADED_PLUGIN_PLIST;
@@ -130,6 +132,9 @@ extern NSString * const LWE_TWITTER_HASH_TAG;
 
   extern NSString * const LWE_CF_VERSION_1_0;
   extern NSString * const LWE_CF_VERSION_1_1;
+  extern NSString * const LWE_CF_VERSION_1_1_1;
+
+  extern NSString * const LWE_CF_11_TO_111_SQL_FILENAME;
 
   // Plugins - CFlash
   extern NSString * const AUDIO_PINYIN_KEY;  //! Key for referring to the Pinyin Audio plugin

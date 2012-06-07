@@ -13,6 +13,7 @@
 #import "LWEJanrainLoginManager.h"
 #import "SettingsViewController.h"
 #import "Constants.h"
+#import "MBProgressHUD.h"
 
 NSInteger const kBackupConfirmationAlertTag = 10;
 NSInteger const kRestoreConfirmationAlertTag = 11;
@@ -25,7 +26,7 @@ NSInteger const kLWEBackupSection = 2;
 @end
 
 @implementation StudySetViewController
-@synthesize subgroupArray,tagArray,selectedTagId,group,activityIndicator,searchBar,backupManager,activityView;
+@synthesize subgroupArray,tagArray,selectedTagId,group,activityIndicator,searchBar,backupManager;
 /** 
  * Customized initializer - returns UITableView group as self.view
  * Also creates tab bar image and sets nav bar title
@@ -81,8 +82,6 @@ NSInteger const kLWEBackupSection = 2;
   _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet:)];
   self.navigationItem.rightBarButtonItem = _addButton;
   
-  [[NSNotificationCenter defaultCenter] addObserverForName:LWEJanrainLoginManagerUserDidNotAuthenticate object:nil queue:nil usingBlock:^(NSNotification *notif) { [DSBezelActivityView removeView]; }];
-
   self.tagArray = [[self.group.childTags mutableCopy] autorelease];
   self.activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
 }
@@ -183,18 +182,21 @@ NSInteger const kLWEBackupSection = 2;
  */
 - (void) activateTag:(Tag*) tag
 {
+  [self.activityIndicator startAnimating];
+  
+  // Put this on a queue so we are updating the UI
   CurrentState *appSettings = [CurrentState sharedCurrentState];
-  [appSettings setActiveTag:tag];
-  
-  // Tell the tab bar to switch to the SVC
-  NSNumber *index = [NSNumber numberWithInt:STUDY_VIEW_CONTROLLER_TAB_INDEX];
-  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:index forKey:@"index"];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:nil userInfo:userInfo];
-  
-  // Stop the animator
-  self.selectedTagId = kLWEUninitializedTagId;
-  [self.activityIndicator stopAnimating];
-  [self.tableView reloadData];
+  [appSettings setActiveTag:tag completionHandler:^{
+    // Tell the tab bar to switch to the SVC
+    NSNumber *index = [NSNumber numberWithInt:STUDY_VIEW_CONTROLLER_TAB_INDEX];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:index forKey:@"index"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:nil userInfo:userInfo];
+    
+    // Stop the animator & reset the table
+    self.selectedTagId = kLWEUninitializedTagId;
+    [self.activityIndicator stopAnimating];
+    [self.tableView reloadData];
+  }];
 }
 
 /** Pops up AddStudySetInputViewController modal to create a new set */
@@ -261,8 +263,9 @@ NSInteger const kLWEBackupSection = 2;
     }
     else if (section == kLWEBackupSection)
     {
-      if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
+      if ([self.backupManager.loginManager isAuthenticated])
       {
+        // One extra row for the "logout" button
         return 3;
       }
       return 2;
@@ -353,7 +356,7 @@ NSInteger const kLWEBackupSection = 2;
     }
     else
     {
-      if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
+      if ([self.backupManager.loginManager isAuthenticated])
       {
         cell.textLabel.text = NSLocalizedString(@"Logout", @"StudyViewController.backupLogot");
       }
@@ -430,7 +433,7 @@ NSInteger const kLWEBackupSection = 2;
 {
   if (section == kLWEBackupSection && [self.group isTopLevelGroup])
   {
-    return NSLocalizedString(@"Backup Custom Sets",@"StudySetVC.BackupCustomSetsTitle");
+    return NSLocalizedString(@"Backup Sets & Study Progress",@"StudySetVC.BackupCustomSetsTitle");
   }
   else
   {
@@ -528,7 +531,7 @@ NSInteger const kLWEBackupSection = 2;
     }
     else if (indexPath.row == 2)
     {
-      [[LWEJanrainLoginManager sharedLWEJanrainLoginManager] logout];
+      [self.backupManager.loginManager logout];
     }
     
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -589,64 +592,94 @@ NSInteger const kLWEBackupSection = 2;
 /** Alert view delegate - initiates the "study set change" if they pressed OK */
 - (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  // This is the OK button
-  if (buttonIndex == LWE_ALERT_OK_BTN)
+  // Quick return on anything but OK
+  if (buttonIndex != LWE_ALERT_OK_BTN)
   {
-    [self.activityIndicator startAnimating];
-    if (alertView.tag == kBackupConfirmationAlertTag)
-    {
-      [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Backing Up...", @"StudySetViewController.BackingUp")];
-      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3f];
-    }
-    else if (alertView.tag == kRestoreConfirmationAlertTag)
-    {
-      [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Restoring...", @"StudySetViewController.Restoring")];
-      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3f];
-    }
-    else 
-    {
-      // Cache this value and re-set it, the animation messes it up by resetting it to zero
-      CGPoint offset = self.tableView.contentOffset;
-      
-      // We want to reload the selected row because it will now say "loading cards"
-      [self.tableView beginUpdates];
-      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedTagId inSection:kLWETagsSection];
-      [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-      [self.tableView endUpdates];
-      
-      // For some unknown reason, the above calls (but not -reloadData) reset the table offset.  We don't want that.
-      self.tableView.contentOffset = offset;
-
-      [self performSelector:@selector(activateTag:) withObject:[self.tagArray objectAtIndex:self.selectedTagId] afterDelay:0.1];
-    }
+    self.selectedTagId = kLWEUninitializedTagId;
     return;
+  }
+  
+  if (alertView.tag == kBackupConfirmationAlertTag)
+  {
+    [self backup];
+  }
+  else if (alertView.tag == kRestoreConfirmationAlertTag)
+  {
+    [self restore];
   }
   else 
   {
-    self.selectedTagId = kLWEUninitializedTagId;
+    // This is the alert view that warns users they are about to start a new tag.
+    
+    // Cache this value and re-set it, the animation messes it up by resetting it to zero
+    CGPoint offset = self.tableView.contentOffset;
+    
+    // We want to reload the selected row because it will now say "loading cards"
+    [self.tableView beginUpdates];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedTagId inSection:kLWETagsSection];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
+    
+    // For some unknown reason, the above calls (but not -reloadData) reset the table offset.  We don't want that.
+    self.tableView.contentOffset = offset;
+
+    // Activate the tag!
+    [self activateTag:[self.tagArray objectAtIndex:self.selectedTagId]]; 
   }
+}
+
+#pragma mark - Backup Methods
+
+- (void) backup
+{
+  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
+  hud.mode = MBProgressHUDModeDeterminate;
+  hud.labelText = NSLocalizedString(@"Authenticating",@"Starting Backup");
+  
+  // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
+  [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3f];
+}
+
+- (void) restore
+{
+  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
+  hud.mode = MBProgressHUDModeDeterminate;
+  hud.labelText = NSLocalizedString(@"Authenticating",@"Starting Restore");
+
+  // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
+  [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3f];  
 }
 
 #pragma mark - BackupManager Delegate
 
-- (void)didBackupUserData
+- (void)backupManager:(BackupManager *)manager statusDidChange:(NSString *)status
 {
-  [DSBezelActivityView removeView];  
-  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
-  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") message:alertMessage];
-  [self.activityIndicator stopAnimating];
+  MBProgressHUD *hud = [MBProgressHUD HUDForView:self.parentViewController.view];
+  hud.labelText = status;
 }
 
-- (void)didFailToBackupUserDataWithError:(NSError *)error
+- (void)backupManager:(BackupManager *)manager currentProgress:(CGFloat)progress
 {
-  [DSBezelActivityView removeView];
-  NSString *errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
+  MBProgressHUD *hud = [MBProgressHUD HUDForView:self.parentViewController.view];
+  hud.progress = progress;
+}
+
+- (void)backupManagerDidBackupUserData:(BackupManager *)manager 
+{
+  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
+  
+  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your sets & progress have been backed up successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
+  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") message:alertMessage];
+}
+
+- (void)backupManager:(BackupManager *)manager didFailToBackupUserDataWithError:(NSError *)error
+{
+  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
   
   // overwrite the default error message if it's from the server
   if ([error.domain isEqualToString:NetworkRequestErrorDomain])
   {
+    NSString *errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
     switch (error.code) // these should be http codes
     {
       case 503:
@@ -657,27 +690,41 @@ NSInteger const kLWEBackupSection = 2;
       default:
         break;
     }
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Failed", @"BackupFailed") message:errorMessage];
   }
-  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Failed", @"BackupFailed") message:errorMessage];
-  [self.activityIndicator stopAnimating];  
+  else if (error.code == 103)
+  {
+    // There was a problem communicating with the Janrain server while configuring authentication -
+    // probably no network
+    [LWEUIAlertView noNetworkAlert];
+  }
 }
 
-- (void)didRestoreUserData
+- (void)backupManagerDidRestoreUserData:(BackupManager *)manager
 {
-  [DSBezelActivityView removeView];
-  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your data has been restored successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
+  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
+  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your sets & progress have been restored successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") message:alertMessage]; 
-  [self.activityIndicator stopAnimating];
   [self reloadTableData];
+
+  // Reload the current tag so that the progress details are correct - otherwise the progress bar can be
+  // out of whack after restore because we have different progress.
+  [self activateTag:[[CurrentState sharedCurrentState] activeTag]];
 }
 
-- (void)didFailToRestoreUserDateWithError:(NSError *)error
+- (void)backupManager:(BackupManager *)manager didFailToRestoreUserDataWithError:(NSError *)error
 {
-  [DSBezelActivityView removeView];
+  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
   if (error.code == kDataNotFound && [error.domain isEqualToString:LWEBackupManagerErrorDomain])
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Backup Found", @"DataNotFound") 
                                        message:NSLocalizedString(@"We couldn't find a backup for you! Please login with another account or create a backup first.", @"BackupManager_DataNotFoundBody")];
+  }
+  else if (error.code == 103)
+  {
+    // There was a problem communicating with the Janrain server while configuring authentication -
+    // probably no network
+    [LWEUIAlertView noNetworkAlert];
   }
   else // show the other error (we don't know what this will be)
   {
@@ -687,8 +734,7 @@ NSInteger const kLWEBackupSection = 2;
   [self.activityIndicator stopAnimating];
 }
 
-#pragma mark -
-#pragma mark Search Bar delegate methods
+#pragma mark - Search Bar delegate methods
 
 /**
  * Sets up the controller for searching mode
@@ -795,7 +841,6 @@ NSInteger const kLWEBackupSection = 2;
   [activityIndicator release];
   [searchBar release];
   [backupManager release];
-  [activityView release];
   [super dealloc];
 }
 

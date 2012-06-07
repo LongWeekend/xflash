@@ -12,7 +12,6 @@
 #import "TagPeer.h"
 #import "GroupPeer.h"
 #import "BackupManager.h"
-#import "DSActivityView.h"
 
 @interface StudySetViewController : UITableViewController <UISearchBarDelegate, LWEBackupManagerDelegate>
 {
@@ -38,6 +37,5 @@
 @property (nonatomic, retain) NSArray *subgroupArray;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (retain) BackupManager *backupManager;
-@property (retain) DSActivityView *activityView;
 
 @end

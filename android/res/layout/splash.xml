@@ -7,24 +7,32 @@
     android:background="@drawable/splash1" >
 
     <!-- debug database install frame -->
-    <LinearLayout android:id="@+id/debug_splash_frame"
-        android:orientation="vertical"
+    <RelativeLayout android:id="@+id/loading_splash_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="170dp"
         android:layout_centerInParent="true"
-        android:background="#BBFFFFFF"
-        android:padding="6dp"
+        android:background="@drawable/select_db_background"
+        android:padding="8dp"
         android:visibility="gone" >
 
-        <TextView
+        <ProgressBar android:id="@+id/loading_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFCC0000"
-            android:textStyle="bold"
-            android:text="  --== DEBUG DISPLAY ==--  " />
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
 
-    </LinearLayout>
+        <!-- layout for the Receiver to add lines to -->
+        <LinearLayout android:id="@+id/load_messages"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/loading_progress"
+            android:layout_marginLeft="4dp" >
+
+        </LinearLayout>
+    
+    </RelativeLayout>
         
     <!-- database phone/SD card selection frame -->
     <LinearLayout android:id="@+id/select_db_target"

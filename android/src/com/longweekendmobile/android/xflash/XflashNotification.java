@@ -16,6 +16,7 @@ package com.longweekendmobile.android.xflash;
 //  public int getTagIdPassed()
 //
 //  public void addNewTagObserver(Observer  )
+//  public void deleteNewTagObserver(Observer  )
 //  public void newTagBroadcast(Tag  )
 //  public void addActiveTagObserver(Observer  )
 //  public void activeTagBroadcast()
@@ -53,6 +54,7 @@ public class XflashNotification
     private SubscriptionNotifier subscriptionObserver = null;
     private TagSearchNotifier tagSearchObserver = null;
     private OnStopNotifier onStopObserver = null;
+   
     
     public XflashNotification()
     {
@@ -100,6 +102,10 @@ public class XflashNotification
     public void addNewTagObserver(Observer inObserver)
     {
         newTagObserver.addObserver(inObserver);
+    }
+    public void deleteNewTagObserver(Observer inObserver)
+    {
+        newTagObserver.deleteObserver(inObserver);
     }
     public void newTagBroadcast(Tag inTag)
     {

@@ -305,6 +305,9 @@ public class SearchFragment extends Fragment
                 row = myInflater.inflate(R.layout.search_row, parent, false);
             }
 
+            RelativeLayout clickFrame = (RelativeLayout)row.findViewById(R.id.search_row_whole);
+            clickFrame.setBackgroundResource( XflashSettings.getMiddleByColor() );
+            
             JapaneseCard tempCard = (JapaneseCard)searchResults.get(position);
 
             if( tempCard.isFault )

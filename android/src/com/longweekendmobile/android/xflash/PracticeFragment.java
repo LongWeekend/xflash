@@ -83,7 +83,8 @@ public class PracticeFragment extends Fragment
     private static Tag currentTag = null;
     private static JapaneseCard currentCard = null;
 
-    
+    private static boolean needToReloadCard = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -190,6 +191,27 @@ public class PracticeFragment extends Fragment
         return( super.onOptionsItemSelected(item) );
 
     }  // end onOptionsItemSelected()
+
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        if( needToReloadCard )
+        {
+            // IF the currently active card was removed from the currently
+            // active set in a modal AddCardActivity -> AddCardToTagFragment
+            // THEN we need to reload the card page after the fragment
+            // resumes
+            needToReloadCard = false;
+
+            // exact same code as can be found in updateFromSubscritpionObserver
+            practiceViewStatus = PracticeScreen.PRACTICE_VIEW_BLANK;
+            XflashScreen.setPracticeOverride();
+            Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+        }
+    }
 
 
     // called by ExampleSentenceFragment to reset the view
@@ -545,10 +567,25 @@ public class PracticeFragment extends Fragment
                     // reload of new card
                     if( practiceLayout != null )
                     {
-                        practiceViewStatus = PracticeScreen.PRACTICE_VIEW_BLANK;
+                        if( this.isResumed() )
+                        {
+                            // if we're resumed, that means we're un-starring a presently
+                            // acctive card in "My Starred Words" and as such, should
+                            // reload the card/screen immediately
+                            practiceViewStatus = PracticeScreen.PRACTICE_VIEW_BLANK;
         
-                        XflashScreen.setPracticeOverride();
-                        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+                            XflashScreen.setPracticeOverride();
+                            Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+                        }
+                        else
+                        {
+                            // if we are NOT resumed, that means we have unsubscribed
+                            // the active card in the active Tag modally via AddCardActivity,
+                            // and as such must reset to a new card after the fragment
+                            // has been resumed--i.e. after the user hits 'back' to exit
+                            // the AddCardActivity
+                            needToReloadCard = true;
+                        }
                     }
                 }
             } 

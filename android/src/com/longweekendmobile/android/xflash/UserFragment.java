@@ -93,25 +93,26 @@ public class UserFragment extends Fragment
 
             // inflate our exiting row resource
             RelativeLayout userRow = (RelativeLayout)myInflater.inflate(R.layout.user_row,null);
-
+            
             // set the label, tag it with our display row id, and set a click listener
             TextView tempView = (TextView)userRow.findViewById(R.id.user_label);
             tempView.setTag(i);
             tempView.setText( userList.get(i).getUserNickname() );
-
+            
             tempView.setOnClickListener(activateListener);
             tempView.setOnLongClickListener(userLongClick);
        
             // tag the edit button with the user id, set a click listener
-            tempView = (TextView)userRow.findViewById(R.id.user_editbutton);
-            tempView.setTag(tempId);
-            tempView.setOnClickListener(editListener); 
+            TextView editButton = (TextView)userRow.findViewById(R.id.user_editbutton);
+            editButton.setTag(tempId);
+            editButton.setOnClickListener(editListener); 
             
             // set the background/edit button based on whether this is our active user
             if( tempId == tempCurrentUser )
             {
-                tempView.setTextColor(0xFFFFFFFF);
-                
+                editButton.setTextColor(0xFFFFFFFF);
+                editButton.setBackgroundResource(R.drawable.activeuser_small_row);
+
                 // set background based on row
                 if( i == 0 )
                 {
@@ -126,11 +127,29 @@ public class UserFragment extends Fragment
                 else
                 {
                     // middle row, no corners rounded
-                    userRow.setBackgroundResource(R.drawable.userrow_selected);
+                    userRow.setBackgroundResource(R.drawable.userrow_selected_middle);
                 }
             
-            }  // end if( this is the current user )
-            
+            }
+            else
+            {
+                // if we are not on the current user 
+                editButton.setBackgroundResource( XflashSettings.getSmallByColor() );
+                
+                if( i == 0 )
+                {
+                    userRow.setBackgroundResource( XflashSettings.getTopByColor() );
+                }
+                else if( i == ( numUsers - 1 ) )
+                {
+                    userRow.setBackgroundResource( XflashSettings.getBottomByColor() );
+                }
+                else
+                {
+                    userRow.setBackgroundResource( XflashSettings.getMiddleByColor() );
+                }
+            } 
+
             // add a divider before all except the first
             if( i > 0 )
             {

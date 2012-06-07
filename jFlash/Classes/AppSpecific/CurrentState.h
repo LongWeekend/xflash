@@ -15,11 +15,17 @@ extern NSString * const LWEActiveTagDidChange;
 
 + (CurrentState *) sharedCurrentState;
 
+//! Sets the tag asynchronously, returning immediately after dispatching the work to a queue
+- (void) setActiveTag:(Tag*)tag completionHandler:(dispatch_block_t)completionBlock;
+
 //! Initialize the NSUserDefaults on first load
 - (void) initializeSettings;
 
 //! Keeps the same tag active, but resets it.  Useful for changing the user
 - (void) resetActiveTag;
+
+//! Keeps the same tag active, but resets it.  Useful for changing the user
+- (void) resetActiveTagWithCompletionHandler:(dispatch_block_t)completionBlock;
 
 //! returns YES if this is the first time we have launched this app, ever
 @property BOOL isFirstLoad;

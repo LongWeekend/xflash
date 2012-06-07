@@ -171,7 +171,7 @@ NSString * const APP_NEW_UPDATE = @"new_update";
   if (key == APP_USER)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_USER onTable:lclTableView usingStyle:UITableViewCellStyleValue1];
-    cell.detailTextLabel.text = [[UserPeer getUserByPK:[settings integerForKey:APP_USER]] userNickname];
+    cell.detailTextLabel.text = [[UserPeer userWithUserId:[settings integerForKey:APP_USER]] userNickname];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }

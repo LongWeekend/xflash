@@ -218,10 +218,118 @@
 
 - (NSString *) sandhiReading
 {
-  // First analyze if we need to make any changes
+  // Tone state variable - we'll soon assign to last pinyin #
+  ToneStates lastState = noToneState;
+  
+  // Hold the temp reading string
+  NSMutableString *sandhiString = [NSMutableString stringWithCapacity:self.reading.length];
+  NSMutableArray *sandhiArray = [NSMutableArray arrayWithCapacity:self._headword.length];
+  
+  // Create headword array - each character in a separate element.  Use _headword because we *always* want
+  // the Chinese character version, no funny stuff
+  NSInteger numChars = [self._headword length];
+  NSMutableArray *headwordPieces = [NSMutableArray arrayWithCapacity:numChars];
+  for (NSInteger i = 0; i < numChars; i++)
+  {
+    unichar headwordPiece = [self._headword characterAtIndex:i];
+    [headwordPieces addObject:[NSString stringWithFormat:@"%C",headwordPiece]];
+  }
+  
+  NSArray *pinyinSegments = [self.reading componentsSeparatedByString:@" "];
+  LWE_ASSERT_EXC([headwordPieces count] == [pinyinSegments count], @"do i have a bold assumption wrong here?");
+  for (NSInteger i = ([pinyinSegments count]-1); i >= 0; i--)
+  {
+    NSString *pinyin = [pinyinSegments objectAtIndex:i];
+    NSString *hanzi = [headwordPieces objectAtIndex:i];
+    NSInteger toneNumber = [[pinyin substringFromIndex:([pinyin length]-1)] integerValue];
+    
+    // By default, mark that no rules have been triggered with this pass.
+    BOOL ruleTriggered = NO;
+    
+    // If we have no state, this is the first (er, last) pinyin.
+    if (lastState == noToneState)
+    {
+      // In this case, we note if it is 3rd or 4th tone, otherwise just change the state to "other".
+      if (toneNumber == toneIsThird || toneNumber == toneIsFourth)
+      {
+        lastState = toneNumber;
+      }
+      else
+      {
+        // Note we always assign "other" -- even if it is tone 2 (for starting state)
+        lastState = toneIsOther;
+      }
+    }
+    else if (lastState == toneIsThird)
+    {
+      // Just change the state to the current tone number
+      lastState = toneNumber;
+
+      // 2 thirds in a row triggers the rule
+      if (toneNumber == toneIsThird)
+      {
+        ruleTriggered = YES;
+        toneNumber = 2;
+      }
+    }
+    else if (lastState == toneIsFourth)
+    {
+      // Just remember the state
+      lastState = toneNumber;
+
+      // The 2 special headwords trigger the rule
+      if ([hanzi isEqualToString:@"一"] || [hanzi isEqualToString:@"不"])
+      {
+        ruleTriggered = YES;
+        toneNumber = 2;
+      }
+    }
+    // Previously the state was other, now see if will catch any rules
+    else if (lastState == toneIsOther)
+    {
+      lastState = toneNumber;
+    }
+    // If the state matched this pattern, we have a hit if the tone is 
+    else if (lastState == toneIsSecondAfterOther)
+    {
+      lastState = toneNumber;
+    }
+
+    // Now, if we triggered a rule, replace it
+    if (ruleTriggered)
+    {
+      pinyin = [NSString stringWithFormat:@"%@%d",[pinyin substringToIndex:(pinyin.length-1)],toneNumber];
+    }
+    [sandhiArray addObject:pinyin];
+  }
+  
+  // Now reverse the sandhi array to get it back normal again
+  NSArray *finalArray = [[sandhiArray reverseObjectEnumerator] allObjects];
+  for (NSString *sandhiPiece in finalArray)
+  {
+    sandhiPiece = [self _pinyinForNumberedPinyin:sandhiPiece];
+    [sandhiString appendFormat:@"%@ ",sandhiPiece];
+  }
+  return [sandhiString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+  
+  /*  noToneState,
+  toneIsSecondAfterOther,
+  toneIsThird,
+  toneIsFourth,*/
+  
+  
+  // Reset the state machine to the last tone value
+  
+  // Iterate backwards to the next-to-last tone.  
+  
+  // Run state transition logic
+  
+  // Set current state to next-to-last tone and iterate until finished
   
   // Then update the numbers and run it through the normal processor
-  return [self pinyinReading];
+  //return [self _pinyinForNumberedPinyin:finalString];
+  //  return [self pinyinReading];
 }
 
 #pragma mark - Audio Related

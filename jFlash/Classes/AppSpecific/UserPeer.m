@@ -14,7 +14,7 @@
 @implementation UserPeer
 
 /** Gets all users from the DB into an array of User objects */
-+ (NSMutableArray *) getUsers
++ (NSArray *)allUsers
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   FMResultSet *rs = [db executeQuery:@"SELECT * FROM users ORDER by user_id ASC"];
@@ -29,32 +29,11 @@
     [tmpUser release];
   }
   [rs close];
-  return userList;
+  return (NSArray *)userList;
 }
-
-
-/** Creates a new user in the database */
-+ (User *)createUserWithNickname:(NSString*)name avatarImagePath:(NSString*)path
-{  
-  User *tmpUser = [[[User alloc] init] autorelease];
-  tmpUser.userNickname = name;
-  tmpUser.avatarImagePath = path;
-  
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  BOOL success = [db.dao executeUpdate:@"INSERT INTO users (nickname, avatar_image_path, date_created) VALUES (?,?,NOW())", name, path];
-  if (success)
-  {
-    return tmpUser;
-  }
-  else
-  {
-    return nil;
-  }
-}
-
 
 /** Gets a user by user Id */
-+ (User *) getUserByPK: (NSInteger)userId
++ (User *)userWithUserId:(NSInteger)userId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM users WHERE user_id = ?",[NSNumber numberWithInt:userId]];

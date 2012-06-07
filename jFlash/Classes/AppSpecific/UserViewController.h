@@ -17,10 +17,10 @@
 @interface UserViewController : UITableViewController <UITableViewDelegate, UserDetailsViewControllerDelegate>
 
 - (void) showUserDetailsView;
-- (void) activateUserWithModal:(User*) user;
+- (void) activateUser:(User*) user;
 
 //! Holds an array of all users
-@property (nonatomic, retain) NSMutableArray *usersArray;
+@property (nonatomic, retain) NSArray *usersArray;
 
 //! Holds the User object of the currently selected user
 @property (nonatomic, retain) User *selectedUserInArray;

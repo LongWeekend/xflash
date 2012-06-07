@@ -39,6 +39,7 @@
             <!-- the word block -->
             <TextView android:id="@+id/addcard_word"
                 style="@style/display_heading_layout"
+                android:textSize="26sp"
                 android:textColor="#FF000000" />
 
             <LinearLayout style="@style/background_with_size"
@@ -57,7 +58,6 @@
                 style="@style/display_heading_layout"
                 android:text="@string/addcard_mysets" />
             <LinearLayout android:id="@+id/addcard_usertags_list"
-                style="@style/default_block_background"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >

@@ -9,6 +9,7 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
 //  public static void loadCard(int  )
+//  public static void setModal(boolean,  Context  )
 //  public static void dumpObservers()
 //
 //  private void toggleWord(View  )
@@ -25,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +53,11 @@ public class AddCardToTagFragment extends Fragment
     private static JapaneseCard tagCard = null;
     private static JapaneseCard searchCard = null;
     private static JapaneseCard currentCard = null;
+    
+    // to be used only by AddCardActivity, to notify its own Fragment 
+    // whether it is running inline via main FragmentActivity, or modally
+    private static boolean isModal = false;
+    private static FragmentActivity modalContext = null;
 
     private LinearLayout userTagList = null;
     private static Observer newTagObserver = null;
@@ -185,6 +192,11 @@ public class AddCardToTagFragment extends Fragment
 
     }  // end loadCard()
    
+    public static void setModal(boolean inModal,FragmentActivity inContext)
+    {
+        isModal = inModal;
+        modalContext = inContext;
+    }
     
     public static void dumpObservers()
     {
@@ -210,6 +222,28 @@ public class AddCardToTagFragment extends Fragment
             {
                 // only adjust view if remove is successful
                 tempImage.setVisibility(View.GONE);
+            }
+            else
+            {
+                if( isModal )
+                {
+                    // if the cancel fails, we are on the last card
+                    // if we are currently modal, they are attemping to remove
+                    // the last card via AddCardActivity.  Force-close the Activity
+                    // so they can see the AlertDialog.
+
+                    // this is kind of a workaround--because manging to get the
+                    // modal Context all the way through to show the Dialog on
+                    // top of the modal Activity would require undesirable modifications
+                    // to the model itself.
+
+                    // The issue is that TagPeer.cancelMembership() was designed with
+                    // only the single FragmentActivity context in mind, and calls
+                    // it directly.  Could be rememdied by implementing yet ANOTHER
+                    // observer/listener, so TagPeer only fires a broadcast, rather than
+                    // showing the dialog itself.  Complex to implement.
+                    modalContext.finish();
+                }
             }
         }
         else
@@ -257,6 +291,19 @@ public class AddCardToTagFragment extends Fragment
             // get a view for each row, tag it with the Tag it represents
             RelativeLayout tempRow = (RelativeLayout)inflater.inflate(R.layout.addcard_row,null);
             tempRow.setTag(tempTag);
+            
+            if( i == 0 )
+            {
+                tempRow.setBackgroundResource( XflashSettings.getTopByColor() );
+            }
+            else if( i == ( rowCount - 1 ) )
+            {
+                tempRow.setBackgroundResource( XflashSettings.getBottomByColor() );
+            }
+            else
+            {
+                tempRow.setBackgroundResource( XflashSettings.getMiddleByColor() );
+            }
 
             // set the tag title
             TextView tempView = (TextView)tempRow.findViewById(R.id.addcard_row_tagname);
@@ -300,6 +347,22 @@ public class AddCardToTagFragment extends Fragment
     // method to set all relevant Observers
     private void setupObservers()
     {
+        // TODO - damn dirty hack
+        //      -
+        //      - for reasons as yet unknown, this Observer becomes 'detached' after
+        //      - its initial-round use.  It still executes properly, but does NOT
+        //      - update the view currently being rendered on the screen
+        //      -
+        //      - removing and re-adding the same Observer does not fix the problem,
+        //      - however removing and then adding a NEW Observer does.
+        //      -
+        //      - ultimate cause not yet clear 
+        if( newTagObserver != null ) 
+        {
+            XFApplication.getNotifier().deleteNewTagObserver(newTagObserver);
+            newTagObserver = null;
+        }
+        
         if( newTagObserver == null )
         {
             // create and define behavior for newTagObserver
@@ -317,33 +380,13 @@ public class AddCardToTagFragment extends Fragment
             };
 
             XFApplication.getNotifier().addNewTagObserver(newTagObserver);
-        
-        }  // end if( newTagObserver == null )
+        }  
 
         // a subscriptionObserver is not necessary for this fragment, as we do not
         // have a local cache for check marks and the view is redrawn on attachment
         
     }  // end setupObservers()
     
-
-    // TODO - BUG update:
-    //      - it works the first time the fragment is launched, in any
-    //      - location, and works as many times as CreateTagActivity is called.
-    //      - however, after user navigates away from AddCardToTagFragment
-    //      - and then back to it (again, in any location) the view of user
-    //      - tags now longer updates.
-    //      -
-    //      - we know for certain:  the fragment IS receiving the notification
-    //      - and the refreshTagList() code IS executing.  We also know
-    //      - the data has updated correctly:  refreshTagList() iterates
-    //      - for an appropriate number of rows and DOES HAVE ACCESS to the
-    //      - new tag that was just added
-    //      -
-    //      - However, for some reason yet to be determined, the view itself is
-    //      - not refreshing.  (if the whole fragment is forced to refresh, then
-    //      - the added data is visible)
-    //  
-    //      - what the crap.
 
     private void updateFromNewTagObserver(Object passedObject)
     {

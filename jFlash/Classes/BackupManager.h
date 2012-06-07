@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LWEJanrainLoginManager.h"
 
 //! Error information sent by backup manager
 extern NSString *const LWEBackupManagerErrorDomain;
@@ -14,33 +15,36 @@ typedef enum {
   kDataNotFound = 1,
 } LWEBackupManagerErrorCode;
 
+@class BackupManager;
+
 //! Informational Methods mostly for UX responses to success or failure
 @protocol LWEBackupManagerDelegate <NSObject>
 @optional
-- (void)didBackupUserData;
-- (void)didFailToBackupUserDataWithError:(NSError *)error;
-- (void)didRestoreUserData;
-- (void)didFailToRestoreUserDateWithError:(NSError *)error;
-
+- (void)backupManager:(BackupManager *)manager statusDidChange:(NSString *)status;
+- (void)backupManager:(BackupManager *)manager currentProgress:(CGFloat)progress;
+- (void)backupManagerDidBackupUserData:(BackupManager *)manager;
+- (void)backupManager:(BackupManager *)manager didFailToBackupUserDataWithError:(NSError *)error;
+- (void)backupManagerDidRestoreUserData:(BackupManager *)manager;
+- (void)backupManager:(BackupManager *)manager didFailToRestoreUserDataWithError:(NSError *)error;
 @end
 
 //! Backup Manager handles storing user sets to server, also restoring them
 //! Tightly coupled to jFlash and the jFlash API, orthagonality to come later
-@interface BackupManager : NSObject
+@interface BackupManager : NSObject <ASIHTTPRequestDelegate, ASIProgressDelegate, LWEJanrainLoginManagerDelegate>
+{
+  NSInteger progressSections;
+  NSInteger currentSection;
+  BOOL isBackingUp;       // Used for when we get delegate callback to determine whether to restore or backup
+}
 
 //! Initialize with a delegate
 - (BackupManager*) initWithDelegate:(id)aDelegate;
 //! Downloads the restore file and adds it
 - (void) restoreUserData;
-//! Returns an NSData containing the serialized associative array
-- (NSData*) serializedDataForUserSets;
-//! Installs the sets for a serialized associative array of sets
-- (void) createUserSetsForData:(NSData*)data;
 //! Backs up the user's data to the api
 - (void) backupUserData;
-//! Helper method that returns the flashType string name used by the API
-- (NSString*) stringForFlashType;
 
+@property (retain) LWEJanrainLoginManager *loginManager;
 @property (assign) id<LWEBackupManagerDelegate> delegate;
 
 @end

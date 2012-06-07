@@ -38,11 +38,19 @@
 + (BOOL) _needs161to162SettingsUpdate:(NSUserDefaults *) settings;
 + (void) _updateSettingsFrom161to162:(NSUserDefaults *)settings;
 
+// JFLASH 1.6.2 -> 1.7
++ (BOOL) _needs162to17SettingsUpdate:(NSUserDefaults *) settings;
++ (void) _updateSettingsFrom162to17:(NSUserDefaults *)settings;
+
 #elif defined (LWE_CFLASH)
 
 // CFLASH 1.0.x -> 1.1
 + (BOOL) _needs10to11SettingsUpdate:(NSUserDefaults *)settings;
 + (void) _updateSettingsFrom10to11:(NSUserDefaults *)settings;
+
+// CFLASH 1.1 -> 1.1.1
++ (BOOL) _needs11to111SettingsUpdate:(NSUserDefaults *)settings;
++ (void) _updateSettingsFrom11to111:(NSUserDefaults *)settings;
 
 #endif
 @end
@@ -277,6 +285,25 @@
   [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_6_2 withSQLStatements:LWE_JF_161_TO_162_SQL_FILENAME forSettings:settings];
   [TagPeer recacheCountsForUserTags];
 }
+
+#pragma mark Version 1.7
+
++ (BOOL) _needs162to17SettingsUpdate:(NSUserDefaults *) settings
+{
+  return [[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_6_2];
+}
+
++ (void) _updateSettingsFrom162to17:(NSUserDefaults *)settings
+{
+  //New key for the user settings preference in version 1.6.2
+  [settings setObject:LWE_JF_VERSION_1_7 forKey:APP_SETTINGS_VERSION];
+  
+  // 1. Execute SQL update file for bad data fixes
+  [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_7 withSQLStatements:LWE_JF_162_TO_17_SQL_FILENAME forSettings:settings];
+  [TagPeer recacheCountsForUserTags];
+}
+
+
 #elif defined (LWE_CFLASH)
 #pragma mark - CFLASH
 
@@ -295,6 +322,24 @@
   // Now update the version
   [settings setObject:LWE_CF_VERSION_1_1 forKey:APP_SETTINGS_VERSION];
 }
+
+#pragma mark Version 1.1.1
+
++ (BOOL) _needs11to111SettingsUpdate:(NSUserDefaults *)settings
+{
+  return [[settings objectForKey:APP_SETTINGS_VERSION] isEqualToString:LWE_CF_VERSION_1_1];
+}
+
++ (void) _updateSettingsFrom11to111:(NSUserDefaults *)settings
+{
+  //New key for the user settings preference in version 1.6.2
+  [settings setObject:LWE_CF_VERSION_1_1_1 forKey:APP_SETTINGS_VERSION];
+  
+  // 1. Execute SQL update file for bad data fixes
+  [UpdateManager _upgradeDBtoVersion:LWE_CF_VERSION_1_1_1 withSQLStatements:LWE_CF_11_TO_111_SQL_FILENAME forSettings:settings];
+  [TagPeer recacheCountsForUserTags];
+}
+
 
 #endif
 
@@ -431,11 +476,26 @@
     migrated = YES;
   }
   
+  if ([UpdateManager _needs162to17SettingsUpdate:settings])
+  {
+    LWE_LOG(@"[Migration Log]YAY! Updating to 1.7 version");
+    [UpdateManager _updateSettingsFrom162to17:settings];
+    migrated = YES;
+  }
+  
+  
 #elif defined (LWE_CFLASH)
   if ([UpdateManager _needs10to11SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.1 version");
     [UpdateManager _updateSettingsFrom10to11:settings];
+    migrated = YES;
+  }
+
+  if ([UpdateManager _needs11to111SettingsUpdate:settings])
+  {
+    LWE_LOG(@"[Migration Log]YAY! Updating to 1.1.1 version");
+    [UpdateManager _updateSettingsFrom11to111:settings];
     migrated = YES;
   }
 #endif
@@ -471,6 +531,11 @@
                                             ok:NSLocalizedString(@"No Thanks", @"StudyViewController.Later")
                                         cancel:NSLocalizedString(@"Get Rikai", @"WebViewController.RikaiAppStore")
                                       delegate:alertDelegate];
+  }
+  else if ([version isEqualToString:LWE_JF_VERSION_1_7])
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Updated to JFlash 1.7",@"JFlash1.7 upgrade alert title")
+                                       message:NSLocalizedString(@"Thanks for updating!  Cool new feature: you can browse example sentences for a card within the Search feature.  Also, thanks to Kobe and Murray, who helped us update about 8 dictionary entries.",@"JFlash1.7 upgrade alert msg")];
   }
 #elif defined (LWE_CFLASH)
   if ([version isEqualToString:LWE_CF_VERSION_1_1])

@@ -7,14 +7,11 @@
 //
 
 #import "LWEJanrainLoginManager.h"
-#import "SynthesizeSingleton.h"
 
 @implementation LWEJanrainLoginManager
-@synthesize jrEngage, userIdentifier, profile;
+@synthesize jrEngage, userIdentifier, profile, delegate;
 
 #pragma mark - Constructors
-
-SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 
 - (id) init
 {
@@ -23,7 +20,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
   {
     static NSString *appId = @"mhbbfdgbbdndhjlcnkfd"; // <-- This is your app ID
     static NSString *tokenURL = @"http://lweflash.appspot.com/api/authorize";
-    self.jrEngage = [JREngage jrEngageWithAppId:appId andTokenUrl:tokenURL delegate:self]; // TODO: add the appengine url
+    // TODO: add the appengine url
+    self.jrEngage = [JREngage jrEngageWithAppId:appId andTokenUrl:tokenURL delegate:self];
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
   }
@@ -45,7 +43,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 //! Determines if we already know who the user is
 - (BOOL) isAuthenticated
 {
-  if (self.userIdentifier != nil)
+  if (self.userIdentifier)
   {
     return YES;
   }
@@ -95,15 +93,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
       [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
     }
     
+    // Delegate callback
+    if (self.delegate && [self.delegate respondsToSelector:@selector(loginManagerDidAuthenticate:)])
+    {
+      [self.delegate loginManagerDidAuthenticate:self];
+    }
+    
     // Tell anyone who might care
     NSNotification *aNotification = [NSNotification notificationWithName:LWEJanrainLoginManagerUserDidAuthenticate object:self.userIdentifier];
     [[NSNotificationCenter defaultCenter] postNotification:aNotification];
   }
-  LWE_LOG(@"Provider: %@", provider);
 }
 
 - (void) jrAuthenticationDidNotComplete
 {
+  // TODO: This is INCOMPLETE
+  [self forwardErrorToDelegate:nil];
+  
   // Tell anyone who might care
   NSNotification *aNotification = [NSNotification notificationWithName:LWEJanrainLoginManagerUserDidNotAuthenticate object:self.userIdentifier];
   [[NSNotificationCenter defaultCenter] postNotification:aNotification];  
@@ -111,19 +117,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 
 #pragma mark - Failure Delegate
 
+- (void) forwardErrorToDelegate:(NSError *)error
+{
+  // Just forward messages
+  if (self.delegate && [self.delegate respondsToSelector:@selector(loginManager:didFailAuthenticationWithError:)])
+  {
+    [self.delegate loginManager:self didFailAuthenticationWithError:error];
+  }
+}
+
 - (void) jrEngageDialogDidFailToShowWithError:(NSError *)error	
 {
-  LWE_LOG(@"Got to jrEngageDialogDidFailToShowWithError");
-  if ([error code] == 103) // There was a problem communicating with the Janrain server while configuring authentication.
-  {
-    [LWEUIAlertView noNetworkAlert];
-  }
+  [self forwardErrorToDelegate:error];
 }
 
 - (void) jrAuthenticationDidFailWithError:(NSError *)error forProvider:(NSString *)provider
 {
-  [LWEAnalytics logError:[NSString stringWithFormat:@"Error code: %i",error.code] message:@"Error in jrAuthenticationDidFailWithError"];
-  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Login Failed",@"LWEJanrainLoginManager.authfailed") message:[error localizedDescription]];
+  [self forwardErrorToDelegate:error];
 }
 
 #pragma mark - Sharing

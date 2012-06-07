@@ -20,7 +20,7 @@ package com.longweekendmobile.android.xflash;
 //  private void toggleHHbubble()
 //  private void refreshCountBar()
 //  private void loadMeaning()
-//  private int getHHResource(int  )
+//  private int  getHHResource(int  )
 //  private void setClickListeners()
 //
 //  TODO - this works, but could probably use some refactoring. Also, it feels
@@ -254,10 +254,16 @@ public class PracticeScreen
                 
             // only display the arrow if example sentences exist
             XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
+
             if( ExampleSentencePeer.sentencesExistForCardId( currentCard.getCardId() ) )
             {
                 rightArrow.setVisibility(View.VISIBLE);
             }
+            else
+            {
+                rightArrow.setVisibility(View.GONE);
+            }
+
             XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
 
             // set and display the answer
