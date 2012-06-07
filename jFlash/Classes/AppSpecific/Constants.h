@@ -153,6 +153,3 @@ extern NSString * const EXAMPLE_DB_KEY;     //! Dictionary key to refer to examp
 
 extern NSString * const LWE_FLURRY_API_KEY;   // FLurry key for this app
 extern NSString * const LWE_APP_SPLASH_IMAGE; // App splash image - different between the flashes
-
-extern NSString * const SENTENCES_HTML_HEADER;
-

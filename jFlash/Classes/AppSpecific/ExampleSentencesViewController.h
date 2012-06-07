@@ -16,6 +16,8 @@ typedef enum
 	ADD_CARD_TO_SET
 } SampleSentenceMethods;
 
+extern NSString * const SENTENCES_HTML_HEADER;
+
 @interface ExampleSentencesViewController : UIViewController <UIWebViewDelegate>
 {
   BOOL _useOldPluginMethods;
