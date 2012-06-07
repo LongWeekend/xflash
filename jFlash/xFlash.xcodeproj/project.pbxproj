@@ -1810,7 +1810,7 @@
 		91CBA6E811BB787A004BD0D0 /* ExampleSentencePeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSentencePeer.h; path = AppSpecific/ExampleSentencePeer.h; sourceTree = "<group>"; };
 		91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencePeer.m; path = AppSpecific/ExampleSentencePeer.m; sourceTree = "<group>"; };
 		91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions.png"; path = "Assets/practice-btn-actions.png"; sourceTree = "<group>"; };
-		91D3FA701580294F00CB8F1E /* jFlash copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jFlash copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		91D3FA701580294F00CB8F1E /* jFlash Junior.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jFlash Junior.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91D3FA721580295000CB8F1E /* jFlash copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "jFlash copy2-Info.plist"; path = "/Users/Ross/iPhone/jflash/jFlash/jFlash copy2-Info.plist"; sourceTree = "<absolute>"; };
 		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
 		91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressBarViewController.m; path = AppSpecific/ProgressBarViewController.m; sourceTree = "<group>"; };
@@ -1981,7 +1981,7 @@
 				496C7A6C126325FD004B6B90 /* cFlash.app */,
 				24B5660013CF656100BEE166 /* jFlashTest.octest */,
 				4904664514727835004C44E2 /* cFlashTest.octest */,
-				91D3FA701580294F00CB8F1E /* jFlash copy.app */,
+				91D3FA701580294F00CB8F1E /* jFlash Junior.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3236,7 +3236,7 @@
 			);
 			name = jFlashJr;
 			productName = jFlash;
-			productReference = 91D3FA701580294F00CB8F1E /* jFlash copy.app */;
+			productReference = 91D3FA701580294F00CB8F1E /* jFlash Junior.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -4838,7 +4838,6 @@
 					LWE_CFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "cFlash-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				LIBRARY_SEARCH_PATHS = (
@@ -4861,7 +4860,6 @@
 					LWE_CFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "cFlash-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				LIBRARY_SEARCH_PATHS = (
@@ -4884,7 +4882,6 @@
 					LWE_CFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "cFlash-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				LIBRARY_SEARCH_PATHS = (
@@ -4903,18 +4900,18 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					LWE_DEBUG,
+					"$(inherited)",
+					LWE_JUNIOR,
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlash copy2-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
-				PRODUCT_NAME = "jFlash copy";
+				PRODUCT_NAME = "jFlash Junior";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -4926,18 +4923,18 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Long Weekend";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					LWE_RELEASE_AD_HOC,
+					"$(inherited)",
+					LWE_JUNIOR,
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlash copy2-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
-				PRODUCT_NAME = "jFlash copy";
+				PRODUCT_NAME = "jFlash Junior";
 				PROVISIONING_PROFILE = "8ADEF10E-FDC8-45B0-85DB-C04AD3A660F4";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -4949,18 +4946,18 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Long Weekend";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					LWE_RELEASE_APP_STORE,
+					"$(inherited)",
+					LWE_JUNIOR,
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlash copy2-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
-				PRODUCT_NAME = "jFlash copy";
+				PRODUCT_NAME = "jFlash Junior";
 				PROVISIONING_PROFILE = "8ADEF10E-FDC8-45B0-85DB-C04AD3A660F4";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
