@@ -202,12 +202,17 @@ NSInteger const kLWEBackupSection = 2;
 /** Pops up AddStudySetInputViewController modal to create a new set */
 - (IBAction)addStudySet:(id)sender
 {
+#if defined (LWE_JUNIOR)
+  // For JFlash & CFlash Junior, we don't let them add a new study set, so show the Coffee modal instead.
+  // TODO: make coffee modal!
+#else
   // TODO: iPad customization?
   AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:nil inGroup:self.group];
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
   [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
 	[tmpVC release];
+#endif
 }
 
 
