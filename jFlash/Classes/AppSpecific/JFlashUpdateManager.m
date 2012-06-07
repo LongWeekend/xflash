@@ -1,12 +1,12 @@
 //
-//  UpdateManager+JFlash.m
+//  JFlashUpdateManager.m
 //  xFlash
 //
 //  Created by Mark Makdad on 6/7/12.
 //  Copyright (c) 2012 Long Weekend LLC. All rights reserved.
 //
 
-#import "UpdateManager+JFlash.h"
+#import "JFlashUpdateManager.h"
 
 @interface JFlashUpdateManager ()
 // JFLASH 1.1 -> 1.2
@@ -158,9 +158,9 @@
 	LWE_LOG(@"Update from 1.2 to 1.3 - we need to make a tag for favorites!");
   
   // Now do the PLIST as well
-  [UpdateManager _updatePlistFrom12to13];
+  [JFlashUpdateManager _updatePlistFrom12to13];
   
-  [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_3 withSQLStatements:LWE_JF_12_TO_13_SQL_FILENAME forSettings:settings];
+  [JFlashUpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_3 withSQLStatements:LWE_JF_12_TO_13_SQL_FILENAME forSettings:settings];
 }
 
 
@@ -322,68 +322,68 @@
 	
   //In the jFlash 1.2, jFlash included some new features, and it requires the plugin manager to be updated.
   //The plugin manager will have to look at the last time it gets updated, there is the list of the data
-  if ([UpdateManager _needs11to12SettingsUpdate:settings])
+  if ([JFlashUpdateManager _needs11to12SettingsUpdate:settings])
   {
 		LWE_LOG(@"[Migration Log]Oops, we need update to 1.2 version");
-	  [UpdateManager _updateSettingsFrom11to12:settings];
+	  [JFlashUpdateManager _updateSettingsFrom11to12:settings];
     migrated = YES;
   }
   
   // JFlash 1.3 - does small database migration for favorites!
-  if ([UpdateManager _needs12to13SettingsUpdate:settings])
+  if ([JFlashUpdateManager _needs12to13SettingsUpdate:settings])
   {
 		LWE_LOG(@"[Migration Log]Oops, we need update to 1.3 version");
-	  [UpdateManager _updateSettingsFrom12to13:settings];
+	  [JFlashUpdateManager _updateSettingsFrom12to13:settings];
     migrated = YES;
   }
   
-  if ([UpdateManager _needs13to14SettingsUpdate:settings])
+  if ([JFlashUpdateManager _needs13to14SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]Updating to 1.4 version");
-    [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_4 withSQLStatements:LWE_JF_13_TO_14_SQL_FILENAME forSettings:settings];
+    [JFlashUpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_4 withSQLStatements:LWE_JF_13_TO_14_SQL_FILENAME forSettings:settings];
     [TagPeer recacheCountsForUserTags];
     migrated = YES;
   }
   
-  if ([UpdateManager _needs14to15SettingsUpdate:settings])
+  if ([JFlashUpdateManager _needs14to15SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.5 version");
-    [UpdateManager _updateSettingsFrom14to15:settings];
+    [JFlashUpdateManager _updateSettingsFrom14to15:settings];
     migrated = YES;
   }
   
-  if ([UpdateManager _needs15to16SettingsUpdate:settings])
+  if ([JFlashUpdateManager _needs15to16SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.6 version");
-    [UpdateManager _updateSettingsFrom15to16:settings];
+    [JFlashUpdateManager _updateSettingsFrom15to16:settings];
     migrated = YES;
   }
   
-  if ([UpdateManager _needs16to161SettingsUpdate:settings])
+  if ([JFlashUpdateManager _needs16to161SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.6.1 version");
-    [UpdateManager _updateSettingsFrom16to161:settings];
+    [JFlashUpdateManager _updateSettingsFrom16to161:settings];
     migrated = YES;
   }
   
-  if ([UpdateManager _needs161to162SettingsUpdate:settings])
+  if ([JFlashUpdateManager _needs161to162SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.6.2 version");
-    [UpdateManager _updateSettingsFrom161to162:settings];
+    [JFlashUpdateManager _updateSettingsFrom161to162:settings];
     migrated = YES;
   }
   
-  if ([UpdateManager _needs162to17SettingsUpdate:settings])
+  if ([JFlashUpdateManager _needs162to17SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.7 version");
-    [UpdateManager _updateSettingsFrom162to17:settings];
+    [JFlashUpdateManager _updateSettingsFrom162to17:settings];
     migrated = YES;
   }
   
-  if ([UpdateManager _needs17to18SettingsUpdate:settings])
+  if ([JFlashUpdateManager _needs17to18SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.8 version");
-    [UpdateManager _updateSettingsFrom17to18:settings];
+    [JFlashUpdateManager _updateSettingsFrom17to18:settings];
     migrated = YES;
   }
   return migrated;

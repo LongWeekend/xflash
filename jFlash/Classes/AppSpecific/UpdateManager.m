@@ -7,6 +7,8 @@
 //
 
 #import "UpdateManager.h"
+#import "JFlashUpdateManager.h"
+#import "CFlashUpdateManager.h"
 
 @implementation UpdateManager
 

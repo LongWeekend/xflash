@@ -1,12 +1,12 @@
 //
-//  UpdateManager+CFlash.m
+//  CFlashUpdateManager.m
 //  xFlash
 //
 //  Created by Mark Makdad on 6/7/12.
 //  Copyright (c) 2012 Long Weekend LLC. All rights reserved.
 //
 
-#import "UpdateManager+CFlash.h"
+#import "CFlashUpdateManager.h"
 
 @interface CFlashUpdateManager ()
 // CFLASH 1.0.x -> 1.1
@@ -80,24 +80,24 @@
 + (BOOL) performMigrations:(NSUserDefaults *)settings
 {
   BOOL migrated = NO;
-  if ([UpdateManager _needs10to11SettingsUpdate:settings])
+  if ([CFlashUpdateManager _needs10to11SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.1 version");
-    [UpdateManager _updateSettingsFrom10to11:settings];
+    [CFlashUpdateManager _updateSettingsFrom10to11:settings];
     migrated = YES;
   }
   
-  if ([UpdateManager _needs11to111SettingsUpdate:settings])
+  if ([CFlashUpdateManager _needs11to111SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.1.1 version");
-    [UpdateManager _updateSettingsFrom11to111:settings];
+    [CFlashUpdateManager _updateSettingsFrom11to111:settings];
     migrated = YES;
   }
   
-  if ([UpdateManager _needs111to12SettingsUpdate:settings])
+  if ([CFlashUpdateManager _needs111to12SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.2 version");
-    [UpdateManager _updateSettingsFrom111to12:settings];
+    [CFlashUpdateManager _updateSettingsFrom111to12:settings];
     migrated = YES;
   }
   return migrated;
@@ -112,4 +112,5 @@
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Updated to CFlash 1.1",@"CFlash1.1 upgrade alert title")
                                        message:NSLocalizedString(@"We added Pinyin tone sandhi!  Now, you can also show the pronounciation after taking tone changes into account.  You can turn this feature on in Settings (it's off by default).",@"CFlash1.1 upgrade alert msg")];    
   }
+}
 @end
