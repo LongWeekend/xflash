@@ -72,25 +72,34 @@
 
 - (id) initDisplayMainHeadword:(BOOL)displayMainHeadword
 {
+  // First get the appropriate NIB name & HTML to display
   NSString *nibName = nil;
-  NSString *htmlHeader = nil;
-  NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
+  NSString *html = nil;
   if (displayMainHeadword)
   {
     // Main headword, so don't do anything differently.
-    htmlHeader = [LWECardHtmlHeader stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
+    html = LWECardHTMLTemplate;
     nibName = @"CardViewController";
   }
   else
   {
     // Prepare the view for displaying in E-to-J mode
-    htmlHeader = [LWECardHtmlHeader_EtoJ stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
+    html = LWECardHTMLTemplate_EtoJ;
     nibName = @"CardViewController-EtoJ";
   }
+    
+  // Now initialize the class with this information
   self = [super initWithNibName:nibName bundle:nil];
   if (self)
   {
-    self.baseHtml = [NSString stringWithFormat:@"%@%@",htmlHeader,LWECardHtmlFooter];
+    // Replace out the CSS to match the current theme
+    NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
+    html = [html stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];
+    
+    // Replace the font tag with the current setting
+    // TODO:
+    
+    self.baseHtml = html;
   }
   return self;
 }
@@ -293,7 +302,8 @@
 
 @end
 
-NSString * const LWECardHtmlHeader = @""
+// HTML Header content that will be displayed in the meaning UIWebView before the actual meaning
+NSString * const LWECardHTMLTemplate = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<style>"
 "body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
@@ -303,9 +313,10 @@ NSString * const LWECardHtmlHeader = @""
 "li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} "
 "##THEMECSS##"
 "</style></head>"
-"<body><div id='container'>";
+"<body><div id='container'>"
+"</div></body></html>";
 
-NSString * const LWECardHtmlHeader_EtoJ = @""
+NSString * const LWECardHTMLTemplate_EtoJ = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<style>"
 "body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
@@ -315,6 +326,5 @@ NSString * const LWECardHtmlHeader_EtoJ = @""
 "li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} "
 "##THEMECSS##"
 "</style></head>"
-"<body><div id='container'>";
-
-NSString * const LWECardHtmlFooter = @"</div></body></html>";
+"<body><div id='container'>"
+"</div></body></html>";
