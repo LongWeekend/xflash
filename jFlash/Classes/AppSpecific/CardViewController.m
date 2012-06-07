@@ -97,7 +97,8 @@
     html = [html stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];
     
     // Replace the font tag with the current setting
-    // TODO:
+    NSString *textSize = [[NSUserDefaults standardUserDefaults] objectForKey:APP_TEXT_SIZE];
+    html = [html stringByReplacingOccurrencesOfString:@"##TEXTSIZE##" withString:textSize];
     
     self.baseHtml = html;
   }
@@ -306,11 +307,11 @@
 NSString * const LWECardHTMLTemplate = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<style>"
-"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
 "dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
 "#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;} "
 "ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
-"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} "
+"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px;} "
 "##THEMECSS##"
 "</style></head>"
 "<body><div id='container'>"
@@ -319,11 +320,11 @@ NSString * const LWECardHTMLTemplate = @""
 NSString * const LWECardHTMLTemplate_EtoJ = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<style>"
-"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
 "dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
 "#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;font-size:34px; padding-left:3px; line-height:32px;} "
 "ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
-"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} "
+"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px;} "
 "##THEMECSS##"
 "</style></head>"
 "<body><div id='container'>"
