@@ -10,13 +10,10 @@
 #import "Card.h"
 #import "Plugin.h"
 
-typedef enum 
-{
-	TOKENIZE_SAMPLE_SENTENCE,
-	ADD_CARD_TO_SET
-} SampleSentenceMethods;
+extern NSString * const TOKENIZE_SAMPLE_SENTENCE;
+extern NSString * const ADD_CARD_TO_SET;
 
-extern NSString * const SENTENCES_HTML_HEADER;
+extern NSString * const LWESentencesHTML;
 
 @interface ExampleSentencesViewController : UIViewController <UIWebViewDelegate>
 {

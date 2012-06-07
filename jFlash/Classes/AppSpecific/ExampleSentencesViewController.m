@@ -24,6 +24,7 @@
 @interface ExampleSentencesViewController ()
 - (void)_showAddToSetWithCardID:(NSString *)cardID;
 - (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(NSString *)open webView:(UIWebView *)webView;
+- (NSString *)_generateCardCompositionStringWithSentenceId:(NSInteger)sentenceId;
 @end
 
 @implementation ExampleSentencesViewController
@@ -85,41 +86,42 @@
 //* setup the example sentences view with information from the datasource
 - (void) setupWithCard:(Card *)card
 {
-  NSMutableString *html = [[NSMutableString alloc] initWithFormat:@"<div class='readingLabel'>%@</div><h2 class='headwordLabel'>%@</h2><ol>",card.reading,card.headword];
+  NSMutableString *sentencesHTML = [[NSMutableString alloc] initWithFormat:@"<div class='readingLabel'>%@</div><h2 class='headwordLabel'>%@</h2><ol>",card.reading,card.headword];
 
   // Get all sentences out - extract this
   NSMutableArray *sentences = [ExampleSentencePeer getExampleSentencesByCardId:card.cardId];
   for (ExampleSentence *sentence in sentences) 
   {
-    [html appendFormat:@"<li>"];
+    [sentencesHTML appendFormat:@"<li>"];
     // Only put this stuff in HTML if we have example sentences 1.2
     if (_useOldPluginMethods == NO)
     {
-      [html appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='http://xflash.com/%d?id=%d&open=0'><span class='button'>%@</span></a></div>",
+      [sentencesHTML appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='http://xflash.com/%d?id=%d&open=0'><span class='button'>%@</span></a></div>",
         sentence.sentenceId,TOKENIZE_SAMPLE_SENTENCE,sentence.sentenceId,SHOW_BUTTON_TITLE];
     }
-    [html appendFormat:@"%@<br />",sentence.sentenceJa];
+    [sentencesHTML appendFormat:@"%@<br />",sentence.sentenceJa];
     
     // Only put this stuff in HTML if we have example sentences 1.2
     if (_useOldPluginMethods == NO)
     {
-      [html appendFormat:@"<div id='detailedCards%d'></div>",sentence.sentenceId];
+      [sentencesHTML appendFormat:@"<div id='detailedCards%d'></div>",sentence.sentenceId];
     }
-    [html appendFormat:@"<div class='lowlight'>%@</div></li>",sentence.sentenceEn];
+    [sentencesHTML appendFormat:@"<div class='lowlight'>%@</div></li>",sentence.sentenceEn];
   }
-  [html appendFormat:@"</ol>"];
+  [sentencesHTML appendFormat:@"</ol>"];
   
   if ([self.sampleDecomposition count] > 0)
   {
     [self.sampleDecomposition removeAllObjects];
   }
 
-  // Modify the inline CSS for current theme
+  // Replace the CSS & the sentences to create the full HTML string
   NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
-  NSString *htmlHeader = [SENTENCES_HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader]; 
-  [self.sentencesWebView loadHTMLString:[NSString stringWithFormat:@"%@<span>%@</span>%@",htmlHeader,html,LWECardHtmlFooter] baseURL:nil];
+  NSString *html = [LWESentencesHTML stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];
+  html = [html stringByReplacingOccurrencesOfString:@"##EXAMPLES##" withString:sentencesHTML];
+  [self.sentencesWebView loadHTMLString:html baseURL:nil];
 
-  [html release];
+  [sentencesHTML release];
 }
 
 #pragma mark - UIWebViewDelegate
@@ -141,23 +143,21 @@
     url = [url substringFromIndex:slashPosition.location+1];
   }
   
-  switch ([url intValue]) 
+  // Decide what to do based on the URL's ID
+  if ([url isEqualToString:TOKENIZE_SAMPLE_SENTENCE])
   {
-    case TOKENIZE_SAMPLE_SENTENCE:
-      [self _showCardsForSentences:[dict objectForKey:@"id"] isOpen:[dict objectForKey:@"open"] webView:webView];
-			break;
-    case ADD_CARD_TO_SET:
-      [self _showAddToSetWithCardID:[dict objectForKey:@"id"]];
-      break;
-    default:
-      break;
+    [self _showCardsForSentences:[dict objectForKey:@"id"] isOpen:[dict objectForKey:@"open"] webView:webView];
   }
+  else if ([url isEqualToString:ADD_CARD_TO_SET])
+  {
+    [self _showAddToSetWithCardID:[dict objectForKey:@"id"]];
+  }
+  
   return NO;
 }
 
 - (void)_showAddToSetWithCardID:(NSString *)cardID
 {
-	LWE_LOG(@"Add to set with card ID : %@", cardID);
 	AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[CardPeer retrieveCardByPK:[cardID intValue]]];
 
 	// Set up DONE button
@@ -178,8 +178,7 @@
 - (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(NSString *)open webView:(UIWebView *)webView
 {
 	NSString *js = nil;
-  // TODO: WTF is this
-	if ([open isEqualToString:@"1"])
+	if ([open isEqualToString:TOKENIZE_SAMPLE_SENTENCE])
 	{
 		//Close the expanded div. Return back the status of the expaned button
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ",sentenceIDStr];
@@ -195,31 +194,7 @@
 		NSString *cardHTML = [self.sampleDecomposition objectForKey:sentenceIDStr];
 		if (cardHTML == nil)
 		{
-			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceId:[sentenceIDStr intValue]];
-			cardHTML = @"<table class='ExpandedSentencesTable' cellpadding='5'>";
-			NSString *lastHeadword = @"";
-			for (Card *c in arrayOfCards)
-			{
-				cardHTML = [cardHTML stringByAppendingFormat:@"<tr class='HeadwordRow'>"];
-
-        // This block keeps us from showing the same headword over and over when it just has multiple meanings
-        NSString *cardHeadword = [c headwordIgnoringMode:YES];
-				if ([cardHeadword isEqualToString:lastHeadword] == NO)
-				{
-					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'>%@</td>",cardHeadword]; 
-					lastHeadword = cardHeadword;
-				}
-				else 
-				{
-					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'></td>"]; 
-				}
-				
-				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>%@ </td><td><a href='http://xflash.com/%d?id=%d' class='AddToSetAnchor'><span class='button'>%@</span></a></td>", 
-										c.reading,ADD_CARD_TO_SET,c.cardId,ADD_BUTTON_TITLE];
-				cardHTML = [cardHTML stringByAppendingFormat:@"</tr>"];
-			}
-			
-			cardHTML = [cardHTML stringByAppendingFormat:@"</table>"];
+      cardHTML = [self _generateCardCompositionStringWithSentenceId:[sentenceIDStr intValue]];
 			[self.sampleDecomposition setObject:cardHTML forKey:sentenceIDStr];
 		}
 		
@@ -231,6 +206,37 @@
 		
 		[webView stringByEvaluatingJavaScriptFromString:js];
 	}
+}
+
+- (NSString *)_generateCardCompositionStringWithSentenceId:(NSInteger)sentenceId
+{
+  NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceId:sentenceId];
+  NSMutableString *cardHTML = [NSMutableString string];
+  [cardHTML appendString: @"<table class='ExpandedSentencesTable' cellpadding='5'>"];
+
+  NSString *lastHeadword = nil;
+  for (Card *c in arrayOfCards)
+  {
+    [cardHTML appendString:@"<tr class='HeadwordRow'>"];
+    
+    // This block keeps us from showing the same headword over and over when it just has multiple meanings
+    NSString *cardHeadword = [c headwordIgnoringMode:YES];
+    if ([cardHeadword isEqualToString:lastHeadword] == NO)
+    {
+      [cardHTML appendFormat:@"<td class='HeadwordCell'>%@</td>",cardHeadword]; 
+      lastHeadword = cardHeadword;
+    }
+    else 
+    {
+      [cardHTML appendString:@"<td class='HeadwordCell'></td>"]; 
+    }
+    
+    [cardHTML appendFormat:@"<td class='ContentCell'>%@</td><td><a href='http://xflash.com/%@?id=%d' class='AddToSetAnchor'><span class='button'>%@</span></a></td>",c.reading,ADD_CARD_TO_SET,c.cardId,ADD_BUTTON_TITLE];
+    [cardHTML appendString:@"</tr>"];
+  }
+  
+  [cardHTML appendString:@"</table>"];
+  return (NSString *)cardHTML;
 }
 
 #pragma mark - Class Plumbing
@@ -251,7 +257,10 @@
 
 @end
 
-NSString * const SENTENCES_HTML_HEADER = @""
+NSString * const TOKENIZE_SAMPLE_SENTENCE = @"1";
+NSString * const ADD_CARD_TO_SET = @"2";
+
+NSString * const LWESentencesHTML = @""
 "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>"
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /><style>"
 "body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:left; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
@@ -272,4 +281,6 @@ NSString * const SENTENCES_HTML_HEADER = @""
 ".ContentCell { vertical-align:middle; border-left:none; font-size:14px; width:100px; } "
 " a {text-decoration: none; } "
 "##THEMECSS##</style></head>"
-"<body><div id='container'>";
+"<body><div id='container'><span>"
+"##EXAMPLES##"
+"</span></div></body></html>";
