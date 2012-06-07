@@ -9,6 +9,8 @@
 #import "StudySetViewController.h"
 #import "StudySetWordsViewController.h"
 #import "AddStudySetInputViewController.h"
+#import "UpgradeAdViewController.h"
+
 #import "CustomCellBackgroundView.h"
 #import "LWEJanrainLoginManager.h"
 #import "SettingsViewController.h"
@@ -204,15 +206,15 @@ NSInteger const kLWEBackupSection = 2;
 {
 #if defined (LWE_JUNIOR)
   // For JFlash & CFlash Junior, we don't let them add a new study set, so show the Coffee modal instead.
-  // TODO: make coffee modal!
+  UpgradeAdViewController *tmpVC = [[UpgradeAdViewController alloc] initWithNibName:@"UpgradeAdViewController" bundle:nil];
 #else
   // TODO: iPad customization?
   AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:nil inGroup:self.group];
+#endif
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
   [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
 	[tmpVC release];
-#endif
 }
 
 

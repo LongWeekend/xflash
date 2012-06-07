@@ -7,33 +7,39 @@
 //
 
 #import "UpgradeAdViewController.h"
+#import "LWENetworkUtils.h"
 
 @interface UpgradeAdViewController ()
-
 @end
 
 @implementation UpgradeAdViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+#pragma mark - IBAction Methods
+
+// Default action for when the "Go to the App Store" or equivalent button is pressed
+- (IBAction)appStoreBtnPressed:(id)sender
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+  LWENetworkUtils *tmpNet = [[LWENetworkUtils alloc] init];
+  [tmpNet followLinkshareURL:@"http://click.linksynergy.com/fs-bin/stat?id=qGx1VSppku4&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fus%252Fapp%252Fid380853144%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30&u1=JFLASH_APP_WELCOME_MESSAGE"];
+  [tmpNet release];
 }
+
+// When we want this VC to disappear
+- (IBAction)dismissBtnPressed:(id)sender
+{
+  [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - UIViewController Methods
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+  [super viewDidLoad];
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+  [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
