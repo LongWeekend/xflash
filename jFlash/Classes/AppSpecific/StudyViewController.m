@@ -398,6 +398,9 @@
   frame.origin = CGPointMake(0, 20);
   self.progressDetailsViewController.view.frame = frame;
   
+  // Tell the modal to update its details
+  [self.progressDetailsViewController updateView];
+  
   // The parent is a nav bar controller, (tab bar in this case), so it will cover the whole view
   // We could use presentModalViewController, but then we lose the "see-through" ability with the views underneath.
   // There is a call to -removeFromSuperview inside the progress VC on dismiss.

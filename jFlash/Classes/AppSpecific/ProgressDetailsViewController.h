@@ -18,6 +18,11 @@
 - (void) drawProgressBars;
 - (void) setStreakLabel;
 
+/**
+ Call this to tell the progress detail VC to update all its data.
+ */
+- (void)updateView;
+
 @property (nonatomic, retain) Tag *tag;
 
 @property (nonatomic, retain) IBOutlet UIView *bgView;
