@@ -81,7 +81,7 @@ public class ExampleSentenceFragment extends Fragment
         tempView.setText( currentCard.getHeadword() );
         
         // get the view body to add our example sentence rows
-        exampleBody = (LinearLayout)ESlayout.findViewById(R.id.es_body);
+        exampleBody = (LinearLayout)ESlayout.findViewById(R.id.es_body_old);
         
         // only reload the ArrayList via database if our card has changed
         XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);

@@ -148,7 +148,7 @@
             android:layout_above="@id/example_sentence_answerbutton_frame" >
 
         <!-- single child of the scroll view -->
-        <LinearLayout android:id="@+id/es_body"
+        <LinearLayout android:id="@+id/es_body_old"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >

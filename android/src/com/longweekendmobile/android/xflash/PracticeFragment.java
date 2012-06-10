@@ -311,7 +311,8 @@ public class PracticeFragment extends Fragment
     public static void goRight()
     {
         // load the ExampleSentenceFragment to the fragment tab manager
-        Xflash.getActivity().onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
+        // Xflash.getActivity().onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
+        Log.d(MYTAG,">>>  >>>  PracticeFragment  ->  here we used to transition");
     }
 
 
