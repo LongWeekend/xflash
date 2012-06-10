@@ -31,7 +31,6 @@ package com.longweekendmobile.android.xflash;
 //  public void detachExtras(FragmentTransaction  )
 //  public String goBack(String  )
 //
-//  public static boolean getExampleSentenceOn()
 //  public static boolean getTagCardsOn()
 //  public static boolean getEditTagOn()
 //  public static boolean getAddCardToTagOn()
@@ -92,7 +91,6 @@ public class XflashScreen
     // practice = 0, tag = 1, search = 2, settings = 3, help = 4
     // used solely to determine what to detach during Xflash.onTabChanged
     private static boolean[] extraScreensOn;
-    private static boolean exampleSentenceOn;
     private static boolean tagCardsOn;
     private static boolean editTagOn;
     private static boolean addCardToTagOn;
@@ -117,7 +115,6 @@ public class XflashScreen
         
         // initialize extra screens to null
         extraScreensOn = new boolean[] { false, false, false, false, false };
-        exampleSentenceOn = false;
         tagCardsOn = false;
         editTagOn = false;
         addCardToTagOn= false;
@@ -134,14 +131,6 @@ public class XflashScreen
     }
 
     
-    // remove an example sentence view from the stack
-    public static void cancelExampleSentence()
-    {
-        popBackPractice();
-        extraScreensOn[LWE_PRACTICE_TAB] = false;
-    }
-
-
     // called after scoring a card - sets flag to open a practice window WITHOUT
     // adding it to the 'backstack'
     public static void setPracticeOverride()
@@ -154,32 +143,14 @@ public class XflashScreen
     // (called for both  Xflash.onTabChanged()  and  Xflash.onScreenTransition()
     public static void setScreenValues(String inTag,int direction)
     {
-        if( inTag == "practice" || inTag == "example_sentence" )
+        if( inTag == "practice" )
         {
-            // the practice and example sentence screen can scroll in either direction
-            if( ( direction == DIRECTION_OPEN ) && !overridePracticeCount )
-            {
-                ++currentPracticeScreen;
-            }
-            else if( ( direction == DIRECTION_CLOSE ) && !overridePracticeCount )
-            {
-                --currentPracticeScreen;
-            }
-            else if( overridePracticeCount )
+            if( overridePracticeCount )
             {
                 overridePracticeCount = false;
             }
 
-            if( ( currentPracticeScreen != 0 ) && ( inTag == "example_sentence" ) )
-            {
-                extraScreensOn[LWE_PRACTICE_TAB] = true;
-                exampleSentenceOn = true;
-            }
-            else
-            {
-                extraScreensOn[LWE_PRACTICE_TAB] = false;
-                exampleSentenceOn = false;
-            }
+            extraScreensOn[LWE_PRACTICE_TAB] = false;
         }
         else if( inTag == "tag" )
         {
@@ -295,15 +266,6 @@ public class XflashScreen
     // screens is held and controlled by Xflash.class and the tab host
     public static TabInfo getTransitionFragment(String inTag)
     {
-        if( inTag == "example_sentence" )
-        {
-            if( extraFragments[LWE_PRACTICE_TAB] == null ) 
-            {    
-                extraFragments[LWE_PRACTICE_TAB] = new TabInfo("example_sentence", ExampleSentenceFragment.class, null);
-            }
-
-            return extraFragments[LWE_PRACTICE_TAB];
-        }
         if( inTag == "tag_cards" )
         {
             if( ( extraFragments[LWE_TAG_TAB] == null ) ||
@@ -482,14 +444,7 @@ public class XflashScreen
         // check each tab for which we have extra screens
         // if we aren't on the root screen for that tab, return
         // the new screen in line, otherwise do nothing to return null
-        if( currentTab == "practice" )
-        { 
-            if( ( currentPracticeScreen != 0 ) && ( exampleSentenceOn ) )
-            {
-                return "practice";
-            }     
-        }
-        else if( currentTab == "tag" )
+        if( currentTab == "tag" )
         { 
             if( currentTagScreen != 0 )
             {
@@ -556,11 +511,6 @@ public class XflashScreen
 
     }  // end goBack()
 
-
-    public static boolean getExampleSentenceOn()
-    {
-        return exampleSentenceOn;
-    }
 
     public static boolean getTagCardsOn()
     {

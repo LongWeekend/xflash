@@ -338,24 +338,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     // if there IS a secondary screen, it is loaded into switchTab and
                     // used.  If not, switchTab remains null and we default back 
                     // to newTab
-                    if( inTabTagname == "practice" )
-                    {
-                        if( XflashScreen.getExampleSentenceOn() )
-                        {
-                            // only tab into the example sentence view in practice
-                            if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_PRACTICE )
-                            {
-                                switchTab = XflashScreen.getTransitionFragment("example_sentence");
-                            }
-                            else
-                            {
-                                // we're bypassing an open example sentence view, so
-                                // remove it from the stack
-                                XflashScreen.cancelExampleSentence();
-                            }
-                        }
-                    }
-                    else if( inTabTagname == "tag" )
+                    if( inTabTagname == "tag" )
                     {
                         // if we are in the card view of the tag tab
                         if( XflashScreen.getTagCardsOn() )
