@@ -20,7 +20,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/default_block_padding"
-        android:background="#33000000"
+        android:background="@drawable/gray_small_row"
         android:paddingLeft="@dimen/default_block_padding"
         android:paddingRight="@dimen/default_block_padding"
         android:paddingTop="@dimen/short_block_padding"
