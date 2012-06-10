@@ -131,6 +131,7 @@
   [settings addObserver:self forKeyPath:APP_THEME options:NSKeyValueObservingOptionNew context:NULL];
   [settings addObserver:self forKeyPath:APP_HEADWORD options:NSKeyValueObservingOptionNew context:NULL];
   [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
+  [settings addObserver:self forKeyPath:APP_TEXT_SIZE options:NSKeyValueObservingOptionNew context:NULL];
 #if defined (LWE_CFLASH)
   [settings addObserver:self forKeyPath:APP_PINYIN_COLOR options:NSKeyValueObservingOptionNew context:NULL];
 #elif defined (LWE_JFLASH)
@@ -239,7 +240,7 @@
     [self _setupSubviews];
     [self doChangeCard:self.currentCard direction:nil];
   }
-  else if ([keyPath isEqualToString:APP_HEADWORD])
+  else if ([keyPath isEqualToString:APP_TEXT_SIZE] || [keyPath isEqualToString:APP_HEADWORD])
   {
     // We need to setup the card view controller again
     [self _setupSubviews];
@@ -396,6 +397,9 @@
   CGRect frame = self.progressDetailsViewController.view.frame;
   frame.origin = CGPointMake(0, 20);
   self.progressDetailsViewController.view.frame = frame;
+  
+  // Tell the modal to update its details
+  [self.progressDetailsViewController updateView];
   
   // The parent is a nav bar controller, (tab bar in this case), so it will cover the whole view
   // We could use presentModalViewController, but then we lose the "see-through" ability with the views underneath.

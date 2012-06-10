@@ -7,8 +7,11 @@
 //
 
 #import "CurrentState.h"
-#import "UpdateManager.h"
 #import "SynthesizeSingleton.h"
+
+#import "JFlashUpdateManager.h"
+#import "CFlashUpdateManager.h"
+
 
 // For private methods
 @interface CurrentState ()
@@ -140,12 +143,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   
   // STEP 1 - Migrations for settings for different versions of JFlash - returns YES if something changed
   self.isFirstLaunchAfterUpdate = [UpdateManager performMigrations:settings];
-
-  // STEP 2 - is the database update-able?  Let the update manager tell us
-  // TODO: we should entirely deprecate JFlash 1.0 if we ever touch this code again.
-  self.isUpdatable = [UpdateManager databaseIsUpdatable:settings];
   
-  // STEP 3 - is this first run after a fresh install?  Do we need to freshly create settings?
+  // STEP 2 - is this first run after a fresh install?  Do we need to freshly create settings?
   if ([settings objectForKey:@"settings_already_created"] == nil)
   {
     [self _createDefaultSettings];
@@ -177,6 +176,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setInteger:DEFAULT_REMINDER_DAYS forKey:APP_REMINDER];
   [settings setValue:DEFAULT_THEME forKey:APP_THEME];
   [settings setValue:SET_MODE_QUIZ forKey:APP_MODE];
+  [settings setValue:SET_TEXT_NORMAL forKey:APP_TEXT_SIZE];
   [settings setValue:SET_J_TO_E forKey:APP_HEADWORD];
   [settings setValue:LWE_CURRENT_VERSION forKey:APP_DATA_VERSION];
   [settings setValue:LWE_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];

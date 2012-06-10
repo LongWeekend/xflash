@@ -12,9 +12,10 @@
 #import "MoodIcon.h"
 #import "StudyViewProtocols.h"
 
-extern NSString * const LWECardHtmlHeader;
-extern NSString * const LWECardHtmlHeader_EtoJ;
-extern NSString * const LWECardHtmlFooter;
+// These strings define the HTML that expresses how the card's meeting will be 
+// displayed in each study direction.
+extern NSString * const LWECardHTMLTemplate;
+extern NSString * const LWECardHTMLTemplate_EtoJ;
 
 @class CardViewController;
 

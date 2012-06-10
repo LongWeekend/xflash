@@ -32,25 +32,7 @@
   self.bgView.layer.borderWidth = 2.0f;
   self.bgView.layer.borderColor = [[UIColor whiteColor] CGColor];
 
-  [self drawProgressBars];
-  [self setStreakLabel];
-  
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSInteger maxStudying = [settings integerForKey:APP_MAX_STUDYING];
-  NSInteger totalWords = tag.cardCount;
-  if (totalWords > maxStudying)
-  {
-    self.currentNumberOfWords.text = [NSString stringWithFormat:@"%d*",maxStudying];
-    self.totalNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
-  }
-  else
-  {
-    self.currentNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
-    self.totalNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
-  }    
-
-  self.cardsViewedAllTime.text = [NSString stringWithFormat:@"%d",(tag.cardCount - [[tag.cardLevelCounts objectAtIndex:kLWEUnseenCardLevel] integerValue])];
-  self.currentStudySet.text = tag.tagName;
+  [self updateView];
 }
 
 
@@ -78,6 +60,29 @@
 }
 
 #pragma mark -
+
+- (void)updateView
+{
+  [self drawProgressBars];
+  [self setStreakLabel];
+  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSInteger maxStudying = [settings integerForKey:APP_MAX_STUDYING];
+  NSInteger totalWords = tag.cardCount;
+  if (totalWords > maxStudying)
+  {
+    self.currentNumberOfWords.text = [NSString stringWithFormat:@"%d*",maxStudying];
+    self.totalNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
+  }
+  else
+  {
+    self.currentNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
+    self.totalNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
+  }    
+  
+  self.cardsViewedAllTime.text = [NSString stringWithFormat:@"%d",(tag.cardCount - [[tag.cardLevelCounts objectAtIndex:kLWEUnseenCardLevel] integerValue])];
+  self.currentStudySet.text = tag.tagName;
+}
 
 - (void)setStreakLabel
 {
@@ -132,6 +137,11 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:self userInfo:userInfo];
   
   // Make sure to call this last
+  [self dismiss];
+}
+
+- (void) closeButtonViewShouldDismiss:(CloseButtonView *)view
+{
   [self dismiss];
 }
 

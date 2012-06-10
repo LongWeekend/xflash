@@ -150,13 +150,7 @@ const NSInteger KSegmentedTableHeader = 100;
   
   // Fire off a notification to bring up the downloader?  If we are on the old data version, let them use search!
   BOOL hasFTS = [self.pluginManager pluginKeyIsLoaded:FTS_DB_KEY];
-#if defined(LWE_JFLASH)
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; 
-  BOOL isFirstVersion = [[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_0];
-#else
-  BOOL isFirstVersion = NO;
-#endif
-  if (!(hasFTS || isFirstVersion))
+  if (!hasFTS)
   {
     Plugin *ftsPlugin = [self.pluginManager.downloadablePlugins objectForKey:FTS_DB_KEY];
     [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:ftsPlugin userInfo:nil];
@@ -290,14 +284,7 @@ const NSInteger KSegmentedTableHeader = 100;
 {
   BOOL hasFTS = [self.pluginManager pluginKeyIsLoaded:FTS_DB_KEY];
   
-#if defined(LWE_JFLASH)
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; 
-  BOOL isFirstVersion = [[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_0];
-#else
-  BOOL isFirstVersion = NO;
-#endif
-  
-  if (hasFTS || isFirstVersion)
+  if (hasFTS)
   {
     return YES;
   }

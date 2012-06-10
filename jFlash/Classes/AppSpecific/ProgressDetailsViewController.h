@@ -9,13 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "Tag.h"
 #import "PDColoredProgressView.h"
+#import "CloseButtonView.h"
 
-@interface ProgressDetailsViewController : UIViewController
+@interface ProgressDetailsViewController : UIViewController <CloseButtonViewDelegate>
 
 - (IBAction) dismiss;
 - (IBAction)switchToSettings:(id)sender;
 - (void) drawProgressBars;
 - (void) setStreakLabel;
+
+/**
+ Call this to tell the progress detail VC to update all its data.
+ */
+- (void)updateView;
 
 @property (nonatomic, retain) Tag *tag;
 

@@ -40,7 +40,7 @@
 {
   // TODO: iPad customization
   NSInteger pbOrigin = 7;
-  NSInteger thisLevelCount = tag.seenCardCount;
+  NSInteger thisLevelCount = self.tag.seenCardCount;
   
   // For levels 1-5
   for (NSInteger i = 1; i < 6; i++)
@@ -50,10 +50,10 @@
 
     if (i > 1)
     {
-      thisLevelCount -= [[tag.cardLevelCounts objectAtIndex:i-1] intValue];
+      thisLevelCount -= [[self.tag.cardLevelCounts objectAtIndex:i-1] intValue];
     }
     CGFloat progress = 0.0f;
-    if (tag.seenCardCount > 0)
+    if (self.tag.seenCardCount > 0)
     {
       progress = ((CGFloat)thisLevelCount / (CGFloat)tag.seenCardCount);
     }
@@ -72,7 +72,7 @@
     UILabel *progressLabel = (UILabel*)[self.view viewWithTag:(i+PROGRESS_LABEL_TAG)];
     if (progressLabel)
     {
-      progressLabel.text = [NSString stringWithFormat:@"%d",[[tag.cardLevelCounts objectAtIndex:i] integerValue]];
+      progressLabel.text = [NSString stringWithFormat:@"%d",[[self.tag.cardLevelCounts objectAtIndex:i] integerValue]];
       [self.view bringSubviewToFront:progressLabel];
     }
   }

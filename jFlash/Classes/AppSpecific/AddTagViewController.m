@@ -9,10 +9,15 @@
 #import "AddTagViewController.h"
 #import "AddStudySetInputViewController.h"
 #import "SettingsViewController.h"
-#import "TagPeer.h"
-#import "ChineseCard.h"
-#import "ExampleSentencePeer.h"
 #import "DisplaySearchedSentenceViewController.h"
+#import "UpgradeAdViewController.h"
+
+#import "TagPeer.h"
+#import "ExampleSentencePeer.h"
+
+#if defined (LWE_CFLASH)
+  #import "ChineseCard.h"
+#endif
 
 enum EntrySectionRows
 {
@@ -146,7 +151,12 @@ enum EntrySectionRows
 /** Target action for the Nav Bar "Add" button, launches AddStudySetInputViewController in a modal */
 - (IBAction) addStudySet
 {
+#if defined (LWE_JUNIOR)
+  // In JFlash & CFlash Junior we don't let them add their own study sets.  Instead we show the coffee modal.
+  UpgradeAdViewController *tmpVC = [[UpgradeAdViewController alloc] initWithNibName:@"UpgradeAdViewController" bundle:nil];
+#else
   AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:self.currentCard inGroup:nil];
+#endif
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
 	[tmpVC release];
   [self.navigationController presentModalViewController:modalNavController animated:YES];

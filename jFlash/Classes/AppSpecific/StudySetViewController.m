@@ -9,6 +9,8 @@
 #import "StudySetViewController.h"
 #import "StudySetWordsViewController.h"
 #import "AddStudySetInputViewController.h"
+#import "UpgradeAdViewController.h"
+
 #import "CustomCellBackgroundView.h"
 #import "LWEJanrainLoginManager.h"
 #import "SettingsViewController.h"
@@ -17,9 +19,26 @@
 
 NSInteger const kBackupConfirmationAlertTag = 10;
 NSInteger const kRestoreConfirmationAlertTag = 11;
-NSInteger const kLWEGroupsSection = 0;
-NSInteger const kLWETagsSection = 1;
-NSInteger const kLWEBackupSection = 2;
+
+#if defined (LWE_JUNIOR)
+enum Sections {
+  kLWEGroupsSection = 0,
+  kLWETagsSection = 1,
+  kLWEPremiumTagsSection = 2,
+  kLWEBackupSection = 3,
+  NUM_SECTIONS
+};
+#else
+enum Sections {
+  kLWEGroupsSection = 0,
+  kLWETagsSection = 1,
+  kLWEBackupSection = 2,
+  NUM_SECTIONS
+};
+
+// trash implementation which is never called to avoid compile error and scattering LWE_JUNIOR in more places
+NSInteger const kLWEPremiumTagsSection = INT32_MAX;
+#endif
 
 @interface StudySetViewController ()
 - (void) _commonInit;
@@ -202,8 +221,13 @@ NSInteger const kLWEBackupSection = 2;
 /** Pops up AddStudySetInputViewController modal to create a new set */
 - (IBAction)addStudySet:(id)sender
 {
+#if defined (LWE_JUNIOR)
+  // For JFlash & CFlash Junior, we don't let them add a new study set, so show the Coffee modal instead.
+  UpgradeAdViewController *tmpVC = [[UpgradeAdViewController alloc] initWithNibName:@"UpgradeAdViewController" bundle:nil];
+#else
   // TODO: iPad customization?
   AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:nil inGroup:self.group];
+#endif
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
   [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
@@ -227,8 +251,8 @@ NSInteger const kLWEBackupSection = 2;
   }
   else if ([self.group isTopLevelGroup])
   {
-    // Groups + Tags + Backup
-    return 3;
+    // Full list defined in enum at top of file
+    return NUM_SECTIONS;
   }
   else
   {
@@ -260,6 +284,10 @@ NSInteger const kLWEBackupSection = 2;
     if (section == kLWETagsSection)
     {
       return [self.tagArray count];
+    }
+    else if (section == kLWEPremiumTagsSection)
+    {
+      return 1;
     }
     else if (section == kLWEBackupSection)
     {
@@ -361,6 +389,17 @@ NSInteger const kLWEBackupSection = 2;
         cell.textLabel.text = NSLocalizedString(@"Logout", @"StudyViewController.backupLogot");
       }
     }
+  }
+  else if (indexPath.section == kLWEPremiumTagsSection)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+    cell.textLabel.text = NSLocalizedString(@"Get More Sets", @"StudySetViewController.premiumSets");
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
+    cell.detailTextLabel.text = NSLocalizedString(@"Tap For Details",@"StudySetViewController.details");;
+    UIImageView *tmpView = cell.imageView;
+    tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-starred-icon.png"]];
+    cell.accessoryView = nil;
   }
   // Group Cells
   else
@@ -536,6 +575,17 @@ NSInteger const kLWEBackupSection = 2;
     
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
     [self reloadTableData];
+  }
+  else if (indexPath.section == kLWEPremiumTagsSection)
+  {
+    #if defined (LWE_JUNIOR)
+      // For JFlash & CFlash Junior, we don't let them add a new study set, so show the Coffee modal instead.
+      UpgradeAdViewController *tmpVC = [[UpgradeAdViewController alloc] initWithNibName:@"UpgradeAdViewController" bundle:nil];
+      UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
+      [self.navigationController presentModalViewController:modalNavController animated:YES];
+      [modalNavController release];
+      [tmpVC release];
+    #endif
   }
   else
   {
