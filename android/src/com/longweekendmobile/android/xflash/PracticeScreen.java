@@ -13,8 +13,13 @@ package com.longweekendmobile.android.xflash;
 //  public void initialize(RelativeLayout  )
 //  public void dump()
 //  public void setupPracticeView(int  )
-//  public void loadExampleSentences()
 //  public void showSummary()
+//
+//  private void loadExampleSentences()
+//  private void addExampleSentenceRow(int  ,ArrayList<ExampleSentence>  )
+//  private void toggleSentenceCards(View  )
+//  private void loadSentenceCardList(Button  ,int  ,LinearLayout  )
+//  private void addCard(View  )
 //
 //  private void setAnswerBar(int  )
 //  private void toggleReading()
@@ -77,7 +82,6 @@ public class PracticeScreen
         
     // all of the layout views
     private static ImageButton blankButton = null;
-    private static ImageButton rightArrow = null;
     private static ImageButton showReadingButton = null;
     private static ImageView hhBubble = null;
     private static ImageView hhImage = null;
@@ -138,7 +142,6 @@ public class PracticeScreen
         // load the resources for the answer bar
         blankButton = (ImageButton)practiceLayout.findViewById(R.id.practice_answerbutton);
         browseFrame = (RelativeLayout)practiceLayout.findViewById(R.id.browse_options_block);
-        rightArrow = (ImageButton)practiceLayout.findViewById(R.id.practice_rightbutton);
         showFrame = (RelativeLayout)practiceLayout.findViewById(R.id.practice_options_block);
        
         // load the tag name
@@ -179,7 +182,6 @@ public class PracticeScreen
     {
         practiceLayout = null;
         blankButton = null;
-        rightArrow = null;
         showReadingButton = null;
         hhBubble = null;
         hhImage = null;
@@ -207,7 +209,6 @@ public class PracticeScreen
             hhBubble.setVisibility(View.VISIBLE);
             hhPercent.setText( Integer.toString( percentageRight ) + "%" );
             hhPercent.setVisibility(View.VISIBLE);
-            rightArrow.setVisibility(View.GONE);
             showReadingButton.setVisibility(View.VISIBLE);
             if( readingTextVisible )
             {
@@ -235,7 +236,6 @@ public class PracticeScreen
             hhBubble.setVisibility(View.GONE);
             hhPercent.setVisibility(View.GONE);
             miniAnswerImage.setVisibility(View.GONE);
-            rightArrow.setVisibility(View.GONE);
             showReadingButton.setVisibility(View.GONE);
             if( readingTextVisible )
             {
@@ -271,15 +271,7 @@ public class PracticeScreen
 
             if( ExampleSentencePeer.sentencesExistForCardId( currentCard.getCardId() ) )
             {
-                // TODO - this right here is where we load the sentences?
-                // rightArrow.setVisibility(View.VISIBLE);
-                rightArrow.setVisibility(View.GONE);
-
                 loadExampleSentences();
-            }
-            else
-            {
-                rightArrow.setVisibility(View.GONE);
             }
 
             XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
@@ -306,191 +298,6 @@ public class PracticeScreen
     }  // end PracticeScreen.setupPracticeView()
     
     
-    // show the example sentences for a card
-    public static void loadExampleSentences()
-    {
-        // hide the hot head so we can see the sentences
-        hhImage.setVisibility(View.GONE);
-        hhPercent.setVisibility(View.GONE);
-        hhBubble.setVisibility(View.GONE);
-        
-        // only reload the ArrayList via database if our card has changed
-        XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
-        ArrayList<ExampleSentence> esList = ExampleSentencePeer.getExampleSentencesByCardId( currentCard.getCardId() );
-        XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
-
-        int answerTextSize = XflashSettings.getAnswerTextSize();
-
-        // load each of the present sentences 
-        int numSentences = esList.size();
-        for(int i = 0; i < numSentences; i++)
-        {
-            ExampleSentence tempSentence = esList.get(i);
-            int tempSentenceId = tempSentence.getSentenceId();
-
-            // inflate a row for each sentence and tag with the sentence id
-            LayoutInflater inflater = (LayoutInflater)Xflash.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            RelativeLayout esRow = (RelativeLayout)inflater.inflate(R.layout.es_row, null, false);
-            esRow.setTag(tempSentenceId);
-
-            // set the number
-            TextView tempView = (TextView)esRow.findViewById(R.id.es_row_number);
-            tempView.setText( Integer.toString( i + 1 ) + "." );
-
-            // set the Japanese sentence
-            tempView = (TextView)esRow.findViewById(R.id.es_sentence_jp);
-            tempView.setText( tempSentence.getJa() );
-            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
-            {
-                tempView.setTextSize(16.0f);
-            }
-
-            // set the English sentence 
-            tempView = (TextView)esRow.findViewById(R.id.es_sentence_en);
-            tempView.setText( tempSentence.getEn() );
-            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
-            {
-                tempView.setTextSize(16.0f);
-            }
-
-            // tag the 'read' button with the sentence id
-            Button tempReadButton = (Button)esRow.findViewById(R.id.es_readbutton);
-            tempReadButton.setTag(tempSentenceId);
-
-            // set a click listener for the read button of each row
-            tempReadButton.setOnClickListener( new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    toggleRead(v);
-                }
-            });
-
-            exampleBody.addView(esRow);
-
-        }  // end for loop
-
-    }  // end loadExampleSentences()
-
-
-    // open or close the view containing all cards in any
-    // given example sentence
-    private static void toggleRead(View v)
-    {
-        Button tempReadButton = (Button)v;
-        int tempSentenceId = (Integer)v.getTag();
-
-        // pull the relevant row
-        RelativeLayout tempRow = (RelativeLayout)exampleBody.findViewWithTag(tempSentenceId);
-
-        // pull the LinearLayout word block to populate
-        LinearLayout cardBlock = (LinearLayout)tempRow.findViewById(R.id.es_card_block);
-
-        if( cardBlock.getVisibility() == View.VISIBLE )
-        {
-            // if the word block is shown, hide it
-            tempReadButton.setText("Read");
-            cardBlock.setVisibility(View.GONE);
-        }
-        else
-        {
-            loadExampleSentenceBlock(tempReadButton,tempSentenceId,cardBlock);
-        }
-
-    }  // end toggleRead()
-
-
-    private static void loadExampleSentenceBlock(Button tempReadButton,int tempSentenceId,LinearLayout cardBlock)
-    {
-        LayoutInflater inflater = (LayoutInflater)Xflash.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        FrameLayout tempDivider = (FrameLayout)inflater.inflate(R.layout.divider,null);
-        cardBlock.addView(tempDivider);
-
-        // load our cards
-        XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
-        ArrayList<Card> tempCardArray = CardPeer.retrieveCardSetForExampleSentenceId(tempSentenceId);
-        XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
-
-        int numCards = tempCardArray.size();
-        for(int i = 0; i < numCards; i++)
-        {
-            JapaneseCard tempCard = (JapaneseCard)tempCardArray.get(i);
-
-            // inflate a new word/card row
-            RelativeLayout tempWordRow = (RelativeLayout)inflater.inflate(R.layout.es_card_row,null);
-
-            int answerTextSize = XflashSettings.getAnswerTextSize();
-            
-            // headword
-            TextView tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_headword);
-            tempView.setText( tempCard.headwordIgnoringMode(true) );
-            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
-            {
-                tempView.setTextSize(16.0f);
-            }
-
-
-            // reading
-            tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_reading);
-            tempView.setText( tempCard.reading() );
-            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
-            {
-                tempView.setTextSize(16.0f);
-            }
-
-            // tag the button for addCard() with the card id
-            Button tempAddButton = (Button)tempWordRow.findViewById(R.id.es_cardrow_button);
-            tempAddButton.setTag( tempCard.getCardId() );
-
-            // set a click listener for the 'add card' button for each card/word
-            tempAddButton.setOnClickListener( new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    addCard(v);
-                }
-            });
-
-            // add the word/card row
-            cardBlock.addView(tempWordRow);
-
-            // add a divider at the end
-            tempDivider = (FrameLayout)inflater.inflate(R.layout.divider,null);
-            cardBlock.addView(tempDivider);
-        }
-
-        // add the bottom margin layout
-        tempDivider = (FrameLayout)inflater.inflate(R.layout.es_word_margin,null);
-        cardBlock.addView(tempDivider);
-
-        // change the button and show the cards
-        tempReadButton.setText("Close");
-        cardBlock.setVisibility(View.VISIBLE);
-
-    }  // end loadExampleSentenceBlock()
-
-
-    // launch AddCardToTagFragment as a modal Activity
-    private static void addCard(View v)
-    {
-        int tempInt = (Integer)v.getTag();
-
-        // load the card to AddCardToTagFragment, as it is the layout
-        // and functionality for AddCardActivity
-        AddCardToTagFragment.loadCard(tempInt);
-
-        Xflash myContext = Xflash.getActivity();
-
-        // launch the Activity - modal
-        Intent myIntent = new Intent(myContext,AddCardActivity.class);
-        myContext.startActivity(myIntent);
-
-    }  // end addCard()
-
-
     // show the big summary dialog
     public static void showSummary()
     {
@@ -651,6 +458,199 @@ public class PracticeScreen
             
     }  // end showSummary()
   
+
+    // show the example sentences for a card
+    private static void loadExampleSentences()
+    {
+        // hide the hot head so we can see the sentences
+        hhImage.setVisibility(View.GONE);
+        hhPercent.setVisibility(View.GONE);
+        hhBubble.setVisibility(View.GONE);
+        
+        // only reload the ArrayList via database if our card has changed
+        XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
+        ArrayList<ExampleSentence> esList = ExampleSentencePeer.getExampleSentencesByCardId( currentCard.getCardId() );
+        XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
+
+        // load each of the present sentences 
+        int numSentences = esList.size();
+        for(int i = 0; i < numSentences; i++)
+        {
+            addExampleSentenceRow(i,esList);
+
+        }  // end for loop
+
+    }  // end loadExampleSentences()
+
+
+    // parses an example sentence and adds it to the view
+    private static void addExampleSentenceRow(int rowNumber,ArrayList<ExampleSentence> esList)
+    {
+        ExampleSentence tempSentence = esList.get(rowNumber);
+        int tempSentenceId = tempSentence.getSentenceId();
+        int answerTextSize = XflashSettings.getAnswerTextSize();
+
+        // inflate a row for each sentence and tag with the sentence id
+        LayoutInflater inflater = (LayoutInflater)Xflash.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        RelativeLayout esRow = (RelativeLayout)inflater.inflate(R.layout.es_row, null, false);
+        esRow.setTag(tempSentenceId);
+
+        // set the number
+        TextView tempView = (TextView)esRow.findViewById(R.id.es_row_number);
+        tempView.setText( Integer.toString( rowNumber + 1 ) + "." );
+
+        // set the Japanese sentence
+        tempView = (TextView)esRow.findViewById(R.id.es_sentence_jp);
+        tempView.setText( tempSentence.getJa() );
+        if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+        {
+            tempView.setTextSize(16.0f);
+        }
+
+        // set the English sentence 
+        tempView = (TextView)esRow.findViewById(R.id.es_sentence_en);
+        tempView.setText( tempSentence.getEn() );
+        if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+        {
+            tempView.setTextSize(16.0f);
+        }
+
+        // tag the 'read' button with the sentence id
+        Button tempReadButton = (Button)esRow.findViewById(R.id.es_readbutton);
+        tempReadButton.setTag(tempSentenceId);
+
+        // set a click listener for the read button of each row
+        tempReadButton.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                toggleSentenceCards(v);
+            }
+        });
+
+        exampleBody.addView(esRow);
+
+    }  // end addExampleSentenceRow()
+
+    
+    // open or close the view containing all cards in any
+    // given example sentence
+    private static void toggleSentenceCards(View v)
+    {
+        Button tempReadButton = (Button)v;
+        int tempSentenceId = (Integer)v.getTag();
+
+        // pull the relevant row
+        RelativeLayout tempRow = (RelativeLayout)exampleBody.findViewWithTag(tempSentenceId);
+
+        // pull the LinearLayout word block to populate
+        LinearLayout cardBlock = (LinearLayout)tempRow.findViewById(R.id.es_card_block);
+
+        if( cardBlock.getVisibility() == View.VISIBLE )
+        {
+            // if the word block is shown, hide it
+            tempReadButton.setText("Read");
+            cardBlock.setVisibility(View.GONE);
+        }
+        else
+        {
+            loadSentenceCardList(tempReadButton,tempSentenceId,cardBlock);
+        }
+
+    }  // end toggleSentenceCards()
+
+
+    // loads and displays the view for all cards in any given example sentence
+    private static void loadSentenceCardList(Button tempReadButton,int tempSentenceId,LinearLayout cardBlock)
+    {
+        LayoutInflater inflater = (LayoutInflater)Xflash.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        FrameLayout tempDivider = (FrameLayout)inflater.inflate(R.layout.divider,null);
+        cardBlock.addView(tempDivider);
+
+        // load our cards
+        XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
+        ArrayList<Card> tempCardArray = CardPeer.retrieveCardSetForExampleSentenceId(tempSentenceId);
+        XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
+
+        int numCards = tempCardArray.size();
+        for(int i = 0; i < numCards; i++)
+        {
+            JapaneseCard tempCard = (JapaneseCard)tempCardArray.get(i);
+
+            // inflate a new word/card row
+            RelativeLayout tempWordRow = (RelativeLayout)inflater.inflate(R.layout.es_card_row,null);
+
+            int answerTextSize = XflashSettings.getAnswerTextSize();
+            
+            // headword
+            TextView tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_headword);
+            tempView.setText( tempCard.headwordIgnoringMode(true) );
+            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+            {
+                tempView.setTextSize(16.0f);
+            }
+
+
+            // reading
+            tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_reading);
+            tempView.setText( tempCard.reading() );
+            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+            {
+                tempView.setTextSize(16.0f);
+            }
+
+            // tag the button for addCard() with the card id
+            Button tempAddButton = (Button)tempWordRow.findViewById(R.id.es_cardrow_button);
+            tempAddButton.setTag( tempCard.getCardId() );
+
+            // set a click listener for the 'add card' button for each card/word
+            tempAddButton.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    addCard(v);
+                }
+            });
+
+            // add the word/card row
+            cardBlock.addView(tempWordRow);
+
+            // add a divider at the end
+            tempDivider = (FrameLayout)inflater.inflate(R.layout.divider,null);
+            cardBlock.addView(tempDivider);
+        }
+
+        // add the bottom margin layout
+        tempDivider = (FrameLayout)inflater.inflate(R.layout.es_word_margin,null);
+        cardBlock.addView(tempDivider);
+
+        // change the button and show the cards
+        tempReadButton.setText("Close");
+        cardBlock.setVisibility(View.VISIBLE);
+
+    }  // end loadExampleSentenceBlock()
+
+
+    // launch AddCardToTagFragment as a modal Activity
+    private static void addCard(View v)
+    {
+        int tempInt = (Integer)v.getTag();
+
+        // load the card to AddCardToTagFragment, as it is the layout
+        // and functionality for AddCardActivity
+        AddCardToTagFragment.loadCard(tempInt);
+
+        Xflash myContext = Xflash.getActivity();
+
+        // launch the Activity - modal
+        Intent myIntent = new Intent(myContext,AddCardActivity.class);
+        myContext.startActivity(myIntent);
+
+    }  // end addCard()
+
 
     // method called when user taps to reveal the answer
     private static void setAnswerBar(int inMode)
@@ -929,16 +929,6 @@ public class PracticeScreen
             public void onClick(View v)
             {
                 PracticeScreen.toggleHHbubble();
-            }
-        });
-
-        // listener for 'go right' button to example sentences
-        rightArrow.setOnClickListener( new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                PracticeFragment.goRight();
             }
         });
 
