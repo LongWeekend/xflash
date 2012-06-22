@@ -45,7 +45,7 @@ import com.longweekendmobile.android.xflash.XFApplication;
 public class LWEDatabase extends SQLiteOpenHelper
 {
     // debug log tag
-    private final String MYTAG = "XFlash LWEDatabase";
+    private static final String MYTAG = "XFlash LWEDatabase";
 
     // database status constants
     public static final int DATABASE_NO_EXIST = 0;
@@ -64,11 +64,16 @@ public class LWEDatabase extends SQLiteOpenHelper
     // the Android default onboard database location
     private static final String PHONE_PATH = "/data/data/com.longweekendmobile.android.xflash/databases/";
     
-    // TODO change these from mp3 when files are cut up
-    public static final String DB_NAME = "jFlash.mp3";
-    public static final String DB_CARD = "jFlash-CARD-1.1.mp3";
-    public static final String DB_FTS = "jFlash-FTS-1.1.mp3";
-    public static final String DB_EX= "jFlash-EX-1.2.mp3";
+    public static final String DB_NAME = "jFlash.db";
+    public static final String DB_CARD = "jFlash-CARD-1.1.db";
+    public static final String DB_FTS = "jFlash-FTS-1.1.db";
+    public static final String DB_EX= "jFlash-EX-1.2.db";
+    
+    public static final String DB_SPLIT_NAME = "jSplit";
+    public static final String CARD_SPLIT_NAME = "jCardSplit";
+    public static final String FTS_SPLIT_NAME = "jSearchSplit";
+    public static final String EX_SPLIT_NAME = "jExampleSplit";
+    
     private static final String CARD_ATTACH_NAME = "LWEDATABASETMP";
     private static final String FTS_ATTACH_NAME = "LWEDATABASEFTS"; 
     private static final String EX_ATTACH_NAME = "LWEDATABASEEX"; 
@@ -433,6 +438,65 @@ public class LWEDatabase extends SQLiteOpenHelper
     }
 
 
+    // method for copying and assembling individual databases -- called by AsyncCopy
+    private boolean copySplit(String splitName,String outFileName,int numSplits)
+    {
+        // necessary variables
+        InputStream myInput;
+        OutputStream myOutput;
+        byte[] buffer = null;
+        int length = 0;
+       
+        // the actual copy operation
+        try
+        {
+            // open the output file that will be the full database on the phone
+            myOutput = new FileOutputStream(outFileName);
+        
+            // iterate based on how many 1MB blocks we have
+            for(int i = 0; i <= numSplits; i++)
+            {
+                // put together the filename of our current block
+                String currentFile = splitName;
+                if( i < 10 )
+                {
+                    currentFile = currentFile + "0";
+                }
+                currentFile = currentFile + Integer.toString(i);
+            
+                // open said block for reading
+                myInput = myContext.getAssets().open(currentFile);
+    
+                // transfer bytes from the inputfile to the outputfile
+                buffer = new byte[1024];
+                while ( ( length = myInput.read(buffer) ) > 0 )
+                {
+                    myOutput.write(buffer,0,length);
+                }
+
+                // close the current input block 
+                myInput.close();
+
+            }  // end for loop
+            
+            // close the final output file on the phone
+            myOutput.flush();
+            myOutput.close();
+        }
+        catch ( Throwable t )
+        {
+            Log.d(MYTAG,"asyncCopy fail");
+            Log.d(MYTAG,t.toString());
+
+            // return false on fail
+            return false;
+        }
+
+        return true;
+            
+    }  // end copySplit()
+
+
     // our Async class for copying the database files across
     // in the background
     private class AsyncCopy extends AsyncTask<Void, Void, Boolean>
@@ -443,115 +507,96 @@ public class LWEDatabase extends SQLiteOpenHelper
             // variable to return to onPostExecute(boolen didWork)
             boolean didWork = false;
 
-            // variables necessary for copy operation
-            InputStream myInput;
+            int copyBlockNum;
             String outFileName;
-            OutputStream myOutput;
-            byte[] buffer;
-            int length;
+            String copyBlockName;
             Intent myIntent;
-
             File sdRoot = myContext.getExternalFilesDir(null);
         
-            // this is the actual copy process
-            try
+            // go through four times, once for each database
+            for(int dbCycle = 0; dbCycle < 4; dbCycle++)
             {
-                // go through twice, once for each database
-                for(int dbCycle = 0; dbCycle < 4; dbCycle++)
+                // set the right file names and block counts,
+                // fire Intent for UI update
+                if( dbCycle == 0 )
                 {
-                    // pick the right filename to open
-                    // fire Intent for UI update
-                    if( dbCycle == 0 )
-                    {
-                        myIntent = new Intent(COPY_START);
-                        myContext.sendBroadcast(myIntent);
+                    myIntent = new Intent(COPY_START);
+                    myContext.sendBroadcast(myIntent);
             
-                        // open an empty db to fill
-                        myInput = myContext.getAssets().open(DB_NAME);
-
-                        if( DBlocation == DATABASE_PHONE )
-                        {
-                            outFileName = PHONE_PATH + DB_NAME;
-                        }
-                        else
-                        {
-                            outFileName = sdRoot + "/" + DB_NAME;
-                        }
-                    }
-                    else if( dbCycle == 1 )
+                    if( DBlocation == DATABASE_PHONE )
                     {
-                        myIntent = new Intent(COPY_START2);
-                        myContext.sendBroadcast(myIntent);
-                        myInput = myContext.getAssets().open(DB_CARD);
-                        
-                        if( DBlocation == DATABASE_PHONE )
-                        {
-                            outFileName = PHONE_PATH + DB_CARD;
-                        }
-                        else
-                        {
-                            outFileName = sdRoot + "/" + DB_CARD;
-                        }
-                    }
-                    else if( dbCycle == 2 )
-                    {
-                        myIntent = new Intent(COPY_START3);
-                        myContext.sendBroadcast(myIntent);
-                        myInput = myContext.getAssets().open(DB_FTS);
-                        
-                        if( DBlocation == DATABASE_PHONE )
-                        {
-                            outFileName = PHONE_PATH + DB_FTS;
-                        }
-                        else
-                        {
-                            outFileName = sdRoot + "/" + DB_FTS;
-                        }
+                        outFileName = PHONE_PATH + DB_NAME;
                     }
                     else
                     {
-                        myIntent = new Intent(COPY_START4);
-                        myContext.sendBroadcast(myIntent);
-                        myInput = myContext.getAssets().open(DB_EX);
+                        outFileName = sdRoot + "/" + DB_NAME;
+                    }
+
+                    copyBlockName = DB_SPLIT_NAME;
+                    copyBlockNum = 9;
+                }
+                else if( dbCycle == 1 )
+                {
+                    myIntent = new Intent(COPY_START2);
+                    myContext.sendBroadcast(myIntent);
                         
-                        if( DBlocation == DATABASE_PHONE )
-                        {
-                            outFileName = PHONE_PATH + DB_EX;
-                        }
-                        else
-                        {
-                            outFileName = sdRoot + "/" + DB_EX;
-                        }
-                    }
-
-                    // open the empty db as the output stream
-                    myOutput = new FileOutputStream(outFileName);
-
-                    // transfer bytes from the inputfile to the outputfile
-                    buffer = new byte[1024];
-                    while ( ( length = myInput.read(buffer) ) > 0 )
+                    if( DBlocation == DATABASE_PHONE )
                     {
-                        myOutput.write(buffer,0,length);
+                        outFileName = PHONE_PATH + DB_CARD;
                     }
+                    else
+                    {
+                        outFileName = sdRoot + "/" + DB_CARD;
+                    }
+                        
+                    copyBlockName = CARD_SPLIT_NAME;
+                    copyBlockNum = 21;
+                }
+                else if( dbCycle == 2 )
+                {
+                    myIntent = new Intent(COPY_START3);
+                    myContext.sendBroadcast(myIntent);
+                        
+                    if( DBlocation == DATABASE_PHONE )
+                    {
+                        outFileName = PHONE_PATH + DB_FTS;
+                    }
+                    else
+                    {
+                        outFileName = sdRoot + "/" + DB_FTS;
+                    }
+                        
+                    copyBlockName = FTS_SPLIT_NAME;
+                    copyBlockNum = 29;
+                }
+                else
+                {
+                    myIntent = new Intent(COPY_START4);
+                    myContext.sendBroadcast(myIntent);
+                        
+                    if( DBlocation == DATABASE_PHONE )
+                    {
+                        outFileName = PHONE_PATH + DB_EX;
+                    }
+                    else
+                    {
+                        outFileName = sdRoot + "/" + DB_EX;
+                    }
+                        
+                    copyBlockName = EX_SPLIT_NAME;
+                    copyBlockNum = 52;
+                }
 
-                    // close the streams
-                    myOutput.flush();
-                    myOutput.close();
-                    myInput.close();
-                
-                }  // end for loop
-
-                // if we made it here we went through both
-                // files without throwing an exception
-                didWork = true;
-            } 
-            catch ( Throwable t )
-            {
-                Log.d(MYTAG,"asyncCopy fail");
-                Log.d(MYTAG,t.toString());
-            }
+                // copy each file, check for errors
+                didWork = copySplit(copyBlockName,outFileName,copyBlockNum);
+                if( !didWork )
+                {
+                    return false;
+                }
             
-            return didWork;
+            }  // end for loop
+
+            return true;
 
         }  // end doInBackground()
 
