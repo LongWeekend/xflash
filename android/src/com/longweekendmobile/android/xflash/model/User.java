@@ -17,8 +17,6 @@ package com.longweekendmobile.android.xflash.model;
 //  public int getUserId()
 //  public void setUserNickname(String  )
 //  public String getUserNickname()
-//  public void setDateCrated(String  )
-//  public String getDateCreated()
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -35,13 +33,11 @@ public class User
 
     private int userId;
     private String userNickname;
-    private String dateCreated;
 
     public User()
     {
         userId = kLWEUninitializedUserId;
         userNickname = null;
-        dateCreated = null;
     }
 
     // takes a sqlite result and populates the properties of user
@@ -61,9 +57,6 @@ public class User
         tempColumn = inCursor.getColumnIndex("nickname");
         userNickname = inCursor.getString(tempColumn);
         
-        tempColumn = inCursor.getColumnIndex("date_created");
-        dateCreated = inCursor.getString(tempColumn);
-
         // assume the Cursor will be closed by the calling method
         // we don't know if they're done with it yet
 
@@ -78,7 +71,6 @@ public class User
         // set our values for either insert or update
         ContentValues updateValues = new ContentValues();
         updateValues.put("nickname",userNickname);
-        updateValues.put("avatar_image_path",DEFAULT_USER_AVATAR_PATH);
         
         // if it's an existing user, UPDATE
         if( userId != kLWEUninitializedUserId )
@@ -133,16 +125,6 @@ public class User
     public void setUserNickname(String inName)
     {
         userNickname = inName;
-    }
-
-    public String getDateCreated()
-    {
-        return dateCreated;
-    }
-    
-    public void setDateCreated(String inDate)
-    {
-        dateCreated = inDate;
     }
 
 }  // end User class declaration

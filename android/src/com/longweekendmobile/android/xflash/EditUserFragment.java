@@ -193,10 +193,10 @@ public class EditUserFragment extends Fragment
         activeTag.populateCards();
         activeTag.setCurrentIndex(0);
                 
-        // TODO - kind of a hack, we're using an active tag broadcast to
-        //      - get practice to reset its current study counts.  But 
-        //      - that shouldn't be a problem, because no no else is
-        //      - listening for that notification
+        // kind of a hack, we're using an active tag broadcast to
+        // get practice to reset its current study counts.  But 
+        // that shouldn't be a problem, because no no else is
+        // listening for that notification
         XFApplication.getNotifier().activeTagBroadcast();
         
         save();

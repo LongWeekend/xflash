@@ -113,11 +113,6 @@ public class SearchFragment extends Fragment
     {
         super.onPause();
 
-        // TODO - this forces the adapter to reload the starred words tag into
-        //        the cache array when the user returns to this view. Is it 
-        //        necessary/desirable to eliminate this forced refresh and rely 
-        //        on Observer notifications to maintain the cacheArray instead?
-        
         // flush the cache array when the search fragment is paused
         membershipCacheArray = null;
 

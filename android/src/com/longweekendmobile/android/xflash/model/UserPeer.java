@@ -78,7 +78,7 @@ public class UserPeer
         User tempUser = new User();
         tempUser.setUserNickname(inName);
 
-        String query = "INSERT INTO users (nickname,avatar_image_path,date_created) VALUES ('" + inName + "','" + User.DEFAULT_USER_AVATAR_PATH + "',date('now'))";
+        String query = "INSERT INTO users (nickname) VALUES ('" + inName + "')";
 
         try
         {

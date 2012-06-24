@@ -216,85 +216,9 @@ public class Tag
     }  // end recacheCardCountForEachLevel() 
    
 
-/*
-    // loads a serialized copy of cardsByLevel from a file 'ids.plist'
-    // TODO - performance on ObjectInputStream is horrible, hand-code 
-    //        a serialization or don't worry about it?
-    @SuppressWarnings("unchecked")
-    public ArrayList<ArrayList<Card>> thawCards()
-    {
-        String cacheFile = "ids.plist";
-
-        try
-        {
-            // open file, open serialized reader, read our list
-            FileInputStream fis = XFApplication.getInstance().openFileInput(cacheFile); 
-            ObjectInputStream in = new ObjectInputStream(fis); 
-            
-            // the following line causes the compiler to complain about
-            // unsafe operations (i.e. an unspecified List)
-            //      - CANNOT BE HELPED, SUPPRESS WARNING
-            cardsByLevel = (ArrayList<ArrayList<Card>>)in.readObject();
-            
-            in.close(); 
-            fis.close();
-        
-            return cardsByLevel;
-        } 
-        catch(Throwable t)
-        {
-            // return null if the file doesn't exist
-            return null;
-        }
-
-    }  // end thawCards()
-
-
-    // saves a serialized copy of cardsByLevel to a file 'ids.plist'
-    // TODO - performance on ObjectOutputStream is terrible, consider
-    //        hand-writing serialization?
-    public void freezeCards()
-    {
-        String cacheFile = "ids.plist";
-
-        try
-        {
-            // open file, open serialized writer, write our list
-            FileOutputStream fos = XFApplication.getInstance().openFileOutput(cacheFile,Context.MODE_PRIVATE); 
-            ObjectOutputStream out = new ObjectOutputStream(fos); 
-            out.writeObject(cardsByLevel);
-            out.close(); 
-            fos.close();
-        } 
-        catch(Throwable t)
-        {
-            Log.d(MYTAG,"ERROR: caught -- " + t.toString() );
-        }
-
-    }  // end freezeCards()
-
-*/
-    
     // executed when loading a new set on app load
     public void populateCards()
     {
-/*
-        ArrayList<ArrayList<Card>> tempCardsArray = thawCards();
-
-        if( tempCardsArray != null)
-        {
-            // delete the PLIST now that we have it in memory
-            String tempFile = "ids.plist";
-            XFApplication.getInstance().deleteFile(tempFile);         
-        }
-        else
-        {
-            // no PLIST, generate new cardsByLevel array
-            tempCardsArray = CardPeer.retrieveCardsSortedByLevelForTag(this);
-        }
-        
-        cardsByLevel = tempCardsArray;
-*/
         cardsByLevel = CardPeer.retrieveCardsSortedByLevelForTag(this);
         flattenedCardArray = flattenCardArrays();
         

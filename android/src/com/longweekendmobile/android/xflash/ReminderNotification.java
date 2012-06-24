@@ -22,6 +22,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
 
 public class ReminderNotification
 {
@@ -41,7 +42,9 @@ public class ReminderNotification
     public void setupReminder()
     {
         Resources res = myContext.getResources();
-        
+       
+        SharedPreferences settings = myContext.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
         // create our PendingIntent to launch Xflash if clicked in
         // the expanded notification
         Intent xflashIntent = new Intent( myContext, XflashSplash.class);
@@ -56,8 +59,9 @@ public class ReminderNotification
         String title = res.getString(R.string.reminder_title);
         String content = res.getString(R.string.reminder_content);
         
-        // TODO - insert code to change to user-defined number of days to wait
-        content = content.replace("##NUMDAYS##","4");
+        // set the notification to the user-defined wait period
+        int reminderDayCount = settings.getInt("reminderCount",0);
+        content = content.replace("##NUMDAYS##", Integer.toString(reminderDayCount) );
 
         // define the expanded notification behavior - see note above
         reminderNotification.setLatestEventInfo(myContext, title, content, launchXflash);

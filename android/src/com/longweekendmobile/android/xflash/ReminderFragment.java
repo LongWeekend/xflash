@@ -114,8 +114,6 @@ public class ReminderFragment extends Fragment
         {
             int countToSet = (int)( id + 1 );
             
-            Log.d(MYTAG,">>> SpinnerListener count to set: " + countToSet);
-            
             XflashSettings.setReminderCount(countToSet);
         }
 

@@ -136,8 +136,6 @@ public class PracticeFragment extends Fragment
         super.onDestroyView();
 
         // free static layout resources
-        // TODO - temporary fix, would be preferable to refactor 
-        //      - PracticeScreen to use no static layout varables
         practiceLayout = null;
         PracticeScreen.dump();
 

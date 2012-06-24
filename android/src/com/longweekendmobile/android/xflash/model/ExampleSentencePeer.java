@@ -118,7 +118,6 @@ public class ExampleSentencePeer
 
         // TODO - for reasons not fully understood, this ALWYAS returns 0 rows when
         //        used with selectionArgs rather than manually inserting inId
-        // query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? AND should_show = '1' LIMIT 1";
         query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = " + inId + " AND should_show = '1' LIMIT 1";
 
         try

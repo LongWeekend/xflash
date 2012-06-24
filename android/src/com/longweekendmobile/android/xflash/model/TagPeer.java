@@ -148,9 +148,6 @@ public class TagPeer
         // first check whether the removed card is in the active tag
         if( tagIsActive )
         {
-            // TODO - keep an eye on this: in Obj C this is an SQL call to
-            //      - get the card count, but I don't think it's required
-            
             // if we're downt to the last card
             if( inTag.getCardCount() <= 1 )
             {
@@ -166,8 +163,6 @@ public class TagPeer
         tempArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( inTag.getId() ) };
         tempDB.delete("card_tag_link","card_id = ? AND tag_id = ?",tempArgs);
         
-        // TODO - keep an eye on this: used to be conditional on inTag not
-        //      - being active, but doesn't seem to be necessary
         tempArgs = new String[] { Integer.toString( inTag.getId() ) };
         String query = "UPDATE tags SET count = (count - 1) WHERE tag_id = ?";
 

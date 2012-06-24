@@ -28,12 +28,6 @@ package com.longweekendmobile.android.xflash;
 //  private void loadMeaning()
 //  private int  getHHResource(int  )
 //  private void setClickListeners()
-//
-//  TODO - this works, but could probably use some refactoring. Also, it feels
-//       - wrong to declare the click listeners here, then have them call
-//       - methods back in PracticeFragment. But it'd be worse to move all of
-//       - the business logic from PracticeFragment to PracticeScreen (I think?)
-//       - and all the views we're setting the listeners TO are here so...
 
 import java.util.ArrayList;
 

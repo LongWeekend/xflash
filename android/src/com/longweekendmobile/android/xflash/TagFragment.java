@@ -274,9 +274,6 @@ public class TagFragment extends Fragment
     {
         super.onDestroyView();
 
-        // TODO - temporary fix, would be perferable to refactor TagSearch
-        //      - to use no static layout variables
-        
         // free static layout resources
         tagLayout = null;
         tagList = null;
