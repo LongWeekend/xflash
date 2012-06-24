@@ -12,6 +12,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  private class SpinnerListener implements AdapterView.OnItemSelectedListener 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -32,10 +34,14 @@ public class ReminderFragment extends Fragment
     private TextView reminderValue = null;
     private Spinner daySpinner = null;
 
+    private LayoutInflater myInflater = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        myInflater = inflater;
+
         // inflate our layout for the Reminder fragment
         LinearLayout reminderLayout = (LinearLayout)inflater.inflate(R.layout.reminder, container, false);
 
@@ -66,7 +72,7 @@ public class ReminderFragment extends Fragment
         }
 
         // create the adapter for our spinner to use
-        ArrayAdapter<String> aa = new ArrayAdapter<String>( Xflash.getActivity(), android.R.layout.simple_spinner_item, spinnerValues);
+        ReminderAdapter aa = new ReminderAdapter( Xflash.getActivity(), android.R.layout.simple_spinner_item, spinnerValues);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         
         // get the spinner
@@ -124,6 +130,58 @@ public class ReminderFragment extends Fragment
 
     }  // end SpinnerListener class declaration
 
+
+    // custom adapter to display the words "day/days" on the reminder selection
+    private class ReminderAdapter extends ArrayAdapter<String>
+    {
+        ReminderAdapter(Context context,int textViewResourceId,String[] inputValues)
+        {
+            super( context, textViewResourceId, inputValues);
+        }
+
+        // return default view for the spinner itself
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            return super.getView(position,convertView,parent);
+        }
+
+        // return a custom view for the spinner dropdown items
+        public View getDropDownView(int position, View convertView, ViewGroup parent)
+        {
+            // try to pull a recycled view
+            View row = convertView;
+            if( row == null )
+            {
+                row = myInflater.inflate(R.layout.reminder_row, parent, false);
+            }
+
+            // set the radio button image based on whether this view represents
+            // the current selection
+            ImageView reminderButton = (ImageView)row.findViewById(R.id.reminder_row_button);
+            if( position == ( XflashSettings.getReminderCount() - 1 ) )
+            {
+                reminderButton.setImageResource(R.drawable.radio_on);
+            }
+            else
+            {
+                reminderButton.setImageResource(R.drawable.radio_off);
+            }
+
+            // set up a string
+            String tempString = getItem(position) + " day";
+            if( position > 0 )
+            {
+                tempString = tempString + "s";
+            }
+            
+            // set the text content for the spinner selection
+            TextView reminderText = (TextView)row.findViewById(R.id.reminder_row_text); 
+            reminderText.setText(tempString);
+
+            return row;
+        }
+
+    }  // end ReminderAdapter class declaration
 
 }  // end ReminderFragment class declaration
 
