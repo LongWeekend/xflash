@@ -158,11 +158,10 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       // These constants are CF specific
       NSString * const LWE_CF_VERSION_1_0           = @"1.0";
       NSString * const LWE_CF_VERSION_1_1           = @"1.1";
-      NSString * const LWE_CF_VERSION_1_1_1         = @"1.1.1";
       NSString * const LWE_CF_VERSION_1_2           = @"1.2";
 
       // Migration files
-      NSString * const LWE_CF_11_TO_111_SQL_FILENAME = @"cflash_11_to_111.sql";
+      NSString * const LWE_CF_11_TO_12_SQL_FILENAME = @"cflash_11_to_12.sql";
 
       //CFlash specific plugins
       NSString * const AUDIO_HSK_KEY = @"AUDIO_HSK";

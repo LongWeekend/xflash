@@ -142,7 +142,7 @@ extern NSString * const LWE_TWITTER_HASH_TAG;
   extern NSString * const LWE_CF_VERSION_1_1_1;
   extern NSString * const LWE_CF_VERSION_1_2;
 
-  extern NSString * const LWE_CF_11_TO_111_SQL_FILENAME;
+  extern NSString * const LWE_CF_11_TO_12_SQL_FILENAME;
 
   // Plugins - CFlash
   extern NSString * const AUDIO_PINYIN_KEY;  //! Key for referring to the Pinyin Audio plugin

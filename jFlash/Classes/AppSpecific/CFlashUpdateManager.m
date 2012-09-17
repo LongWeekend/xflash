@@ -55,7 +55,7 @@
   [settings setObject:LWE_CF_VERSION_1_1_1 forKey:APP_SETTINGS_VERSION];
   
   // 1. Execute SQL update file for bad data fixes
-  [UpdateManager _upgradeDBtoVersion:LWE_CF_VERSION_1_1_1 withSQLStatements:LWE_CF_11_TO_111_SQL_FILENAME forSettings:settings];
+  [UpdateManager _upgradeDBtoVersion:LWE_CF_VERSION_1_1_1 withSQLStatements:LWE_CF_11_TO_12_SQL_FILENAME forSettings:settings];
   [TagPeer recacheCountsForUserTags];
 }
 
