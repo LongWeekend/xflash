@@ -14,6 +14,7 @@
 
 #import "TagPeer.h"
 #import "ExampleSentencePeer.h"
+#import "GroupPeer.h"
 
 #if defined (LWE_CFLASH)
   #import "ChineseCard.h"
@@ -155,7 +156,8 @@ enum EntrySectionRows
   // In JFlash & CFlash Junior we don't let them add their own study sets.  Instead we show the coffee modal.
   UpgradeAdViewController *tmpVC = [[UpgradeAdViewController alloc] initWithNibName:@"UpgradeAdViewController" bundle:nil];
 #else
-  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:self.currentCard inGroup:nil];
+  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:self.currentCard
+                                                                                              inGroup:[GroupPeer topLevelGroup]];
 #endif
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
 	[tmpVC release];
