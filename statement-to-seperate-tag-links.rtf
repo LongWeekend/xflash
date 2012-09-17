@@ -6,11 +6,13 @@
 
 \f0\fs24 \cf0 SELECT * from card_tag_link c WHERE c.tag_id IN (SELECT tag_id FROM tags WHERE editable = 0 AND tag_id != 0)\
 \
+###### PROCESS ########\
+\
 CREATE TABLE \
 \
 DELETE from card_tag_link WHERE tag_id IN (SELECT tag_id FROM tags WHERE editable = 0 AND tag_id != 0)\
 \
 DELETE from system_card_tag_link WHERE tag_id IN (SELECT tag_id FROM tags WHERE editable = 1 AND tag_id = 0)\
 \
-DELETE from card_tag_link WHERE tag_id NOT IN (SELECT tag_id FROM tags\
+DELETE from card_tag_link WHERE tag_id NOT IN (SELECT tag_id FROM tags)\
 DELETE from system_card_tag_link WHERE tag_id NOT IN (SELECT tag_id FROM tags)}
