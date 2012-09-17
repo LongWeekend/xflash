@@ -56,9 +56,6 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
   self = [super initWithCoder:aDecoder];
   if (self)
   {
-    self.selectedTagId = kLWEUninitializedTagId;
-    // This cast is necessary to prevent a stupid compiler warning about not knowing which -initWithDelegate to call
-    self.backupManager = [[(BackupManager*)[BackupManager alloc] initWithDelegate:self] autorelease];
     [self _commonInit];
   }
   return self;
@@ -69,7 +66,6 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
   self = [self initWithNibName:@"StudySetView" bundle:nil];
   if (self)
   {
-    self.selectedTagId = kLWEUninitializedTagId;
     self.group = aGroup;
     self.title = aGroup.groupName;
     [self _commonInit];
@@ -79,6 +75,9 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
 
 - (void) _commonInit
 {
+  self.selectedTagId = kLWEUninitializedTagId;
+  self.backupManager = [[[BackupManager alloc] initWithDelegate:self] autorelease];
+
   // Register observers to reload table data on other events
   [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kSetWasAddedOrUpdated object:nil];

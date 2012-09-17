@@ -55,6 +55,8 @@
 	<true/>
 	<key>UTExportedTypeDeclarations</key>
 	<array/>
+	<key>UIStatusBarHidden</key>
+	<false/>
 	<key>UTImportedTypeDeclarations</key>
 	<array/>
 </dict>

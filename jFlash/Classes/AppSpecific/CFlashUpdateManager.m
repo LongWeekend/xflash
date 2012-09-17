@@ -13,13 +13,9 @@
 + (BOOL) _needs10to11SettingsUpdate:(NSUserDefaults *)settings;
 + (void) _updateSettingsFrom10to11:(NSUserDefaults *)settings;
 
-// CFLASH 1.1 -> 1.1.1
-+ (BOOL) _needs11to111SettingsUpdate:(NSUserDefaults *)settings;
-+ (void) _updateSettingsFrom11to111:(NSUserDefaults *)settings;
-
-// CFLASH 1.1.1 -> 1.2
-+ (BOOL) _needs111to12SettingsUpdate:(NSUserDefaults *)settings;
-+ (void) _updateSettingsFrom111to12:(NSUserDefaults *)settings;
+// CFLASH 1.1 -> 1.2
++ (BOOL) _needs11to12SettingsUpdate:(NSUserDefaults *)settings;
++ (void) _updateSettingsFrom11to12:(NSUserDefaults *)settings;
 @end
 
 @implementation CFlashUpdateManager
@@ -42,37 +38,24 @@
   [settings setObject:LWE_CF_VERSION_1_1 forKey:APP_SETTINGS_VERSION];
 }
 
-#pragma mark Version 1.1.1
+#pragma mark Version 1.2
 
-+ (BOOL) _needs11to111SettingsUpdate:(NSUserDefaults *)settings
++ (BOOL) _needs11to12SettingsUpdate:(NSUserDefaults *)settings
 {
   return [[settings objectForKey:APP_SETTINGS_VERSION] isEqualToString:LWE_CF_VERSION_1_1];
 }
 
-+ (void) _updateSettingsFrom11to111:(NSUserDefaults *)settings
-{
-  //New key for the user settings preference in version 1.6.2
-  [settings setObject:LWE_CF_VERSION_1_1_1 forKey:APP_SETTINGS_VERSION];
-  
-  // 1. Execute SQL update file for bad data fixes
-  [UpdateManager _upgradeDBtoVersion:LWE_CF_VERSION_1_1_1 withSQLStatements:LWE_CF_11_TO_111_SQL_FILENAME forSettings:settings];
-  [TagPeer recacheCountsForUserTags];
-}
-
-#pragma mark Version 1.2
-
-+ (BOOL) _needs111to12SettingsUpdate:(NSUserDefaults *)settings
-{
-  return [[settings objectForKey:APP_SETTINGS_VERSION] isEqualToString:LWE_CF_VERSION_1_1_1];
-}
-
-+ (void) _updateSettingsFrom111to12:(NSUserDefaults *)settings
++ (void) _updateSettingsFrom11to12:(NSUserDefaults *)settings
 {
   // Set the new key for text size
   [settings setObject:SET_TEXT_NORMAL forKey:APP_TEXT_SIZE];
   
+  //New key for the user settings preference in version 1.6.2
   [settings setObject:LWE_CF_VERSION_1_2 forKey:APP_SETTINGS_VERSION];
-  [settings setObject:LWE_CF_VERSION_1_2 forKey:APP_DATA_VERSION];
+
+  // 1. Execute SQL update file for bad data fixes
+  [UpdateManager _upgradeDBtoVersion:LWE_CF_VERSION_1_2 withSQLStatements:LWE_CF_11_TO_12_SQL_FILENAME forSettings:settings];
+  [TagPeer recacheCountsForUserTags];
 }
 
 #pragma mark - 
@@ -87,17 +70,10 @@
     migrated = YES;
   }
   
-  if ([CFlashUpdateManager _needs11to111SettingsUpdate:settings])
-  {
-    LWE_LOG(@"[Migration Log]YAY! Updating to 1.1.1 version");
-    [CFlashUpdateManager _updateSettingsFrom11to111:settings];
-    migrated = YES;
-  }
-  
-  if ([CFlashUpdateManager _needs111to12SettingsUpdate:settings])
+  if ([CFlashUpdateManager _needs11to12SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.2 version");
-    [CFlashUpdateManager _updateSettingsFrom111to12:settings];
+    [CFlashUpdateManager _updateSettingsFrom11to12:settings];
     migrated = YES;
   }
   return migrated;
