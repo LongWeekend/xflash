@@ -78,6 +78,8 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_TWITTER_PRIVATE_KEY  = @"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU";
       NSString * const LWE_TWITTER_HASH_TAG     = @"#jflash";
 
+      NSString * const LWE_XFLASH_HOMEPAGE       = @"http://www.japaneseflash.com";
+
       // Tapjoy
       NSString * const LWE_TAPJOY_APP_ID         = @"6f0f78d1-f4bf-437b-befc-977b317f7b04";
 
@@ -149,6 +151,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_TWITTER_PRIVATE_KEY  = @"AKst54TeQWdQssmKL9PZrDTmm0DyIO48iEnaZIbFmc";
       NSString * const LWE_TWITTER_HASH_TAG     = @"#cflash";
 
+      NSString * const LWE_XFLASH_HOMEPAGE       = @"http://www.chineseflashapp.com";
 
       // These constants are general to the flashes
       NSString * const LWE_CURRENT_VERSION          = @"1.2";

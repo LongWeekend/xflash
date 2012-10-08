@@ -230,7 +230,6 @@
 		4922ED95155678E000645F61 /* cflash_11_to_12.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4922ED94155678E000645F61 /* cflash_11_to_12.sql */; };
 		4922ED9815567FBC00645F61 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED9715567FBC00645F61 /* MBProgressHUD.m */; };
 		4922ED9915567FBC00645F61 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED9715567FBC00645F61 /* MBProgressHUD.m */; };
-		492435D61556AD070059B203 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		492435D71556AD0F0059B203 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
 		4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EA01148FADDE00F55D09 /* CardPeerTest.m */; };
@@ -769,6 +768,9 @@
 		919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
 		91910156148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
 		91910157148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
+		919FBDBB1622E9D2001FD77B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919FBDBA1622E9D2001FD77B /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		919FBDBC1622EA76001FD77B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		919FBDBD16230000001FD77B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919FBDBA1622E9D2001FD77B /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
 		91CA712D133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
 		91CA712E133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
@@ -1738,6 +1740,7 @@
 		91910155148992EC003E9A19 /* TagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagTest.m; path = Tests/TagTest.m; sourceTree = SOURCE_ROOT; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
+		919FBDBA1622E9D2001FD77B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		91CA712B133BDE7B008A89A8 /* BackupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackupManager.h; sourceTree = "<group>"; };
 		91CA712C133BDE7B008A89A8 /* BackupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackupManager.m; sourceTree = "<group>"; };
@@ -1858,7 +1861,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				492435D61556AD070059B203 /* Twitter.framework in Frameworks */,
+				919FBDBC1622EA76001FD77B /* Twitter.framework in Frameworks */,
+				919FBDBB1622E9D2001FD77B /* Social.framework in Frameworks */,
 				499448D01472817000671849 /* libsqlite3.a in Frameworks */,
 				242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */,
 				242A17411461AB68002977E6 /* AVFoundation.framework in Frameworks */,
@@ -1950,6 +1954,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				919FBDBD16230000001FD77B /* Social.framework in Frameworks */,
 				91D3FA5B1580294F00CB8F1E /* Twitter.framework in Frameworks */,
 				91D3FA5C1580294F00CB8F1E /* libsqlite3.a in Frameworks */,
 				91D3FA5D1580294F00CB8F1E /* AudioToolbox.framework in Frameworks */,
@@ -2028,6 +2033,7 @@
 		29B97314FDCFA39411CA2CEA /* jFlash */ = {
 			isa = PBXGroup;
 			children = (
+				919FBDBA1622E9D2001FD77B /* Social.framework */,
 				916A89CA101C681800D7917D /* Assets */,
 				24B5660413CF656100BEE166 /* Tests */,
 				080E96DDFE201D6D7F000001 /* Classes */,

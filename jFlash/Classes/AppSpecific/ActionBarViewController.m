@@ -62,7 +62,8 @@
                                          otherButtonTitles:favoriteString,
                                                            NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
                                                            NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),
-                                                           NSLocalizedString(@"Tweet This Card",@"ActionBarViewController.ActionSheetTweet"),nil];
+                                                           NSLocalizedString(@"Tweet This Card",@"ActionBarViewController.ActionSheetTweet"),
+                                                           NSLocalizedString(@"Post On Facebook",@"Action Sheet Button to post on FB"),nil];
   
   // Yes, there is a showInTabBar: which seems like it might be good, but it makes the BG of the action sheet
   // REALLY black.  You don't want it, trust me - MMA
@@ -139,6 +140,10 @@
   {
 	  [self tweet];
   }
+  else if (buttonIndex == SVC_ACTION_FACEBOOK_BUTTON)
+  {
+    [self postToFacebook];
+  }
 }
 
 #pragma mark - MailCompose helper & delegate method
@@ -191,29 +196,77 @@
     return;
   }
   
-  // OK, now let's see if they CAN tweet
-  BOOL canTweet = [TWTweetComposeViewController canSendTweet];
-  if (canTweet == NO)
+  NSString *tweet = [NSString stringWithFormat:@"%@ %@",[self getTweetWord],LWE_TWITTER_HASH_TAG];
+  tweetClass = NSClassFromString(@"SLComposeViewController");
+  if(tweetClass == nil)
   {
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Twitter Not Set Up", @"Cannot Tweet Title - iOS5")
-                                       message:NSLocalizedString(@"Seems like Twitter isn't set up.   Visit the Apple Settings app, and scroll down to 'Twitter'.", @"Cannot Tweet Msg - iOS5")];
+    // iOS 5 goodness here
+    // OK, now let's see if they CAN tweet
+    BOOL canTweet = [TWTweetComposeViewController canSendTweet];
+    if (canTweet == NO)
+    {
+      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Twitter Not Set Up", @"Cannot Tweet Title - iOS5")
+                                         message:NSLocalizedString(@"Seems like Twitter isn't set up.   Visit the Apple Settings app, and scroll down to 'Twitter'.", @"Cannot Tweet Msg - iOS5")];
+      return;
+    }
+    // OK, tweet
+    TWTweetComposeViewController *tweetVC = [[[TWTweetComposeViewController alloc] init] autorelease];
+    [tweetVC setInitialText:tweet];
+    tweetVC.completionHandler = ^(TWTweetComposeViewControllerResult result){
+      if (result == TWTweetComposeViewControllerResultDone)
+      {
+        // OK, they tweeted.
+        [self dismissModalViewControllerAnimated:YES];
+      }
+    };
+    [self presentModalViewController:tweetVC animated:YES];
+  }
+  else
+  {
+    SLComposeViewController *tweetVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [tweetVC setInitialText:tweet];
+    tweetVC.completionHandler = ^(SLComposeViewControllerResult result){
+      if (result == SLComposeViewControllerResultDone)
+      {
+        // OK, they tweeted.
+        [self dismissModalViewControllerAnimated:YES];
+      }
+    };
+    [self presentModalViewController:tweetVC animated:YES];
+  }
+}
+
+- (void) postToFacebook
+{
+  Class socialClass = NSClassFromString(@"SLComposeViewController");
+  if(socialClass != nil && [SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+  {  
+    SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    
+    SLComposeViewControllerCompletionHandler completionBlock = ^(SLComposeViewControllerResult result){
+      if (result == SLComposeViewControllerResultCancelled)
+      {
+        LWE_LOG(@"Cancelled");
+      }
+      else
+      {
+        LWE_LOG(@"Posted to facebook");
+      }
+      [controller dismissViewControllerAnimated:YES completion:Nil];
+    };
+    controller.completionHandler = completionBlock;
+    
+    [controller setInitialText:[self getTweetWord]];
+    [controller addURL:[NSURL URLWithString:@"http://www.japaneseflash.com"]];
+    
+    [self presentViewController:controller animated:YES completion:Nil];    
+  }
+  else
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Facebook Not Available", @"Cannot Post To Facebook Title - iOS6")
+                                       message:NSLocalizedString(@"We're sorry. Posting to Facebook is only available on iOS6 and above.", @"Cannot Post To FB Msg - iOS5")];
     return;
   }
-
-  // OK, tweet
-  TWTweetComposeViewController *tweetVC = [[TWTweetComposeViewController alloc] init];
-  NSString *tweet = [NSString stringWithFormat:@"%@ %@",[self getTweetWord],LWE_TWITTER_HASH_TAG];
-  [tweetVC setInitialText:tweet];
-  tweetVC.completionHandler = ^(TWTweetComposeViewControllerResult result){
-    if (result == TWTweetComposeViewControllerResultDone)
-    {
-      // OK, they tweeted.
-    }
-  };
-
-  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  [appDelegate.tabBarController presentModalViewController:tweetVC animated:YES];
-  [tweetVC release];
 }
 
 #pragma mark - TweetWordMethod
