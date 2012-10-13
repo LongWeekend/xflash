@@ -230,7 +230,6 @@
 		4922ED95155678E000645F61 /* cflash_11_to_12.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4922ED94155678E000645F61 /* cflash_11_to_12.sql */; };
 		4922ED9815567FBC00645F61 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED9715567FBC00645F61 /* MBProgressHUD.m */; };
 		4922ED9915567FBC00645F61 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED9715567FBC00645F61 /* MBProgressHUD.m */; };
-		492435D61556AD070059B203 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		492435D71556AD0F0059B203 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
 		4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EA01148FADDE00F55D09 /* CardPeerTest.m */; };
@@ -769,8 +768,10 @@
 		919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
 		91910156148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
 		91910157148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
+		919FBDBB1622E9D2001FD77B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919FBDBA1622E9D2001FD77B /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		919FBDBC1622EA76001FD77B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		919FBDBD16230000001FD77B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919FBDBA1622E9D2001FD77B /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
-		91C05A3913F468D500061229 /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91C05A3813F468D500061229 /* Default.jpg */; };
 		91CA712D133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
 		91CA712E133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
 		91CA72EA133D216C008A89A8 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7225133D216C008A89A8 /* SFHFKeychainUtils.m */; };
@@ -1055,7 +1056,6 @@
 		91D3F9AE1580294F00CB8F1E /* JREngage-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72E9133D216C008A89A8 /* JREngage-Info.plist */; };
 		91D3F9AF1580294F00CB8F1E /* form-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9179E4251384FFB000A7739B /* form-background.jpg */; };
 		91D3F9B01580294F00CB8F1E /* table-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9179E44C1385021E00A7739B /* table-background.jpg */; };
-		91D3F9B11580294F00CB8F1E /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91C05A3813F468D500061229 /* Default.jpg */; };
 		91D3F9B21580294F00CB8F1E /* help in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA499144D4BBF00E6A9AE /* help */; };
 		91D3F9B31580294F00CB8F1E /* ReminderSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49716141144EC74D006BBEB4 /* ReminderSettingsViewController.xib */; };
 		91D3F9B41580294F00CB8F1E /* jFlash-available.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4919507A144F1BFE00DB81F7 /* jFlash-available.plist */; };
@@ -1740,8 +1740,8 @@
 		91910155148992EC003E9A19 /* TagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagTest.m; path = Tests/TagTest.m; sourceTree = SOURCE_ROOT; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
+		919FBDBA1622E9D2001FD77B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		91C05A3813F468D500061229 /* Default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Default.jpg; path = Assets/Default.jpg; sourceTree = "<group>"; };
 		91CA712B133BDE7B008A89A8 /* BackupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackupManager.h; sourceTree = "<group>"; };
 		91CA712C133BDE7B008A89A8 /* BackupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackupManager.m; sourceTree = "<group>"; };
 		91CA7224133D216C008A89A8 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
@@ -1861,7 +1861,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				492435D61556AD070059B203 /* Twitter.framework in Frameworks */,
+				919FBDBC1622EA76001FD77B /* Twitter.framework in Frameworks */,
+				919FBDBB1622E9D2001FD77B /* Social.framework in Frameworks */,
 				499448D01472817000671849 /* libsqlite3.a in Frameworks */,
 				242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */,
 				242A17411461AB68002977E6 /* AVFoundation.framework in Frameworks */,
@@ -1953,6 +1954,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				919FBDBD16230000001FD77B /* Social.framework in Frameworks */,
 				91D3FA5B1580294F00CB8F1E /* Twitter.framework in Frameworks */,
 				91D3FA5C1580294F00CB8F1E /* libsqlite3.a in Frameworks */,
 				91D3FA5D1580294F00CB8F1E /* AudioToolbox.framework in Frameworks */,
@@ -2031,6 +2033,7 @@
 		29B97314FDCFA39411CA2CEA /* jFlash */ = {
 			isa = PBXGroup;
 			children = (
+				919FBDBA1622E9D2001FD77B /* Social.framework */,
 				916A89CA101C681800D7917D /* Assets */,
 				24B5660413CF656100BEE166 /* Tests */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -2573,7 +2576,6 @@
 			isa = PBXGroup;
 			children = (
 				49BBA499144D4BBF00E6A9AE /* help */,
-				91C05A3813F468D500061229 /* Default.jpg */,
 				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
 				490B23561277BF4600CF3484 /* Icon.png */,
 				49D996C012705C8300D176D0 /* Icon@2x.png */,
@@ -3487,7 +3489,6 @@
 				91CA7429133D216C008A89A8 /* JREngage-Info.plist in Resources */,
 				9179E4261384FFB000A7739B /* form-background.jpg in Resources */,
 				9179E44D1385021E00A7739B /* table-background.jpg in Resources */,
-				91C05A3913F468D500061229 /* Default.jpg in Resources */,
 				49BBA49A144D4BBF00E6A9AE /* help in Resources */,
 				49716145144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
 				4919507C144F1BFE00DB81F7 /* jFlash-available.plist in Resources */,
@@ -3889,7 +3890,6 @@
 				91D3F9AE1580294F00CB8F1E /* JREngage-Info.plist in Resources */,
 				91D3F9AF1580294F00CB8F1E /* form-background.jpg in Resources */,
 				91D3F9B01580294F00CB8F1E /* table-background.jpg in Resources */,
-				91D3F9B11580294F00CB8F1E /* Default.jpg in Resources */,
 				91D3F9B21580294F00CB8F1E /* help in Resources */,
 				91D3F9B31580294F00CB8F1E /* ReminderSettingsViewController.xib in Resources */,
 				91D3F9B41580294F00CB8F1E /* jFlash-available.plist in Resources */,

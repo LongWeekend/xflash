@@ -91,6 +91,8 @@ extern NSString * const LWE_TWITTER_CONSUMER_KEY;
 extern NSString * const LWE_TWITTER_PRIVATE_KEY;
 extern NSString * const LWE_TWITTER_HASH_TAG;
 
+extern NSString * const LWE_XFLASH_HOMEPAGE;
+
 #if defined(LWE_JFLASH)
 
   // LWE Favorites - JFlash

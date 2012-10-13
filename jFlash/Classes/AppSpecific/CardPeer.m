@@ -7,6 +7,7 @@
 + (NSString *) _FTSSQLForKeyword:(NSString*)keyword column:(NSString *)columnName queryLimit:(NSInteger)limit;
 + (Card*) _retrieveCardWithResultSet:(FMResultSet *)rs;
 + (NSMutableArray*) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs hydrate:(BOOL)shouldHydrate;
++ (NSString *) _tagLinkTableName:(Tag *)tag;
 @end
 
 @implementation CardPeer
@@ -97,7 +98,6 @@
   return NO;
 #endif
 }
-
 
 /**
  * Returns an array of Card objects after searching keyword
@@ -201,6 +201,23 @@
   return cardList;
 }
 
+// Query different tables depending on the type of the tag
+// Get the tablename
++ (NSString *) _tagLinkTableName:(Tag *)tag
+{
+  NSString *tableName;
+  if ([tag isEditable] == YES || tag.tagId == 0)
+  {
+    tableName = @"card_tag_link";
+  }
+  else
+  {
+    tableName = @"system_card_tag_link";
+  }
+  return tableName;
+}
+
+
 #pragma mark - Convenience Helpers
 
 /**
@@ -232,9 +249,12 @@
   {
     [cardIdList addObject:[NSMutableArray array]];
   }
-  FMResultSet *rs = [db.dao executeQuery:@"SELECT l.card_id AS card_id,u.card_level as card_level "
-                     "FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id "
-                     "AND u.user_id = ? WHERE l.tag_id = ?",[settings objectForKey:@"user_id"],[NSNumber numberWithInt:tag.tagId]];
+  
+  NSString *linkTableName = [self _tagLinkTableName:tag];
+  NSString *sqlQuery = [NSString stringWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level "
+                        "FROM %@ l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id "
+                        "AND u.user_id = ? WHERE l.tag_id = ?", linkTableName];
+  FMResultSet *rs = [db.dao executeQuery:sqlQuery,[settings objectForKey:@"user_id"],[NSNumber numberWithInt:tag.tagId]];
   while ([rs next])
   {
     Card *newCard = [CardPeer blankCardWithId:[rs intForColumn:@"card_id"]];
@@ -251,7 +271,9 @@
 + (NSArray *) retrieveFaultedCardsForTag:(Tag *)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  FMResultSet *rs = [db.dao executeQuery:@"SELECT card_id FROM card_tag_link WHERE tag_id = ?",[NSNumber numberWithInt:tag.tagId]];
+  NSString *linkTableName = [self _tagLinkTableName:tag];
+  NSString *sqlQuery = [NSString stringWithFormat:@"SELECT card_id FROM %@ WHERE tag_id = ?",linkTableName];
+  FMResultSet *rs = [db.dao executeQuery:sqlQuery,[NSNumber numberWithInt:tag.tagId]];
   return (NSArray *)[self _addCardsToList:[NSMutableArray array] fromResultSet:rs hydrate:NO];
 }
 

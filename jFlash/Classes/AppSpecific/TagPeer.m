@@ -146,11 +146,30 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 {
   BOOL returnVal = NO;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM card_tag_link WHERE card_id = ? AND tag_id = ?",[NSNumber numberWithInt:card.cardId],[NSNumber numberWithInt:tag.tagId]];
+  FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM system_card_tag_link WHERE card_id = ? AND tag_id = ?",[NSNumber numberWithInt:card.cardId],[NSNumber numberWithInt:tag.tagId]];
 	while ([rs next])
   {
     returnVal = YES;
 	}
+	[rs close];
+  
+  // Now check the user sets if we didn't find it in the system
+  if (returnVal == NO)
+  {
+    rs = [db.dao executeQuery:@"SELECT * FROM card_tag_link WHERE card_id = ? AND tag_id = ?",[NSNumber numberWithInt:card.cardId],[NSNumber numberWithInt:tag.tagId]];
+    while ([rs next])
+    {
+      // Older jFlash Users still have the out of date system tags in their card_tag_link table
+      // We already checked the real system table, so if this is a user tag, keep it (ignore the system tags)
+      Tag* tag = [Tag blankTagWithId:[rs intForColumn:@"tag_id"]];
+      [tag hydrate];
+      // user tag is defined as editable or "My Starred Words" which is tag 0
+      if (tag.tagEditable == 1 || tag.tagId == 0)
+      {
+        returnVal = YES;
+      }
+    }
+  }
 	[rs close];
   return returnVal;
 }
@@ -159,16 +178,26 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 + (NSArray *) faultedTagsForCard:(Card *)card
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSMutableArray *membershipListArray = [NSMutableArray array];
+  NSMutableSet *membershipListSet = [NSMutableSet set];
   NSInteger tmpTagId = 0;
 	FMResultSet *rs = [db.dao executeQuery:@"SELECT t.tag_id AS tag_id FROM tags t, card_tag_link c WHERE t.tag_id = c.tag_id AND c.card_id = ?",[NSNumber numberWithInt:card.cardId]];
 	while ([rs next])
   {
     tmpTagId = [rs intForColumn:@"tag_id"];
-    [membershipListArray addObject:[Tag blankTagWithId:tmpTagId]];
+    [membershipListSet addObject:[Tag blankTagWithId:tmpTagId]];
 	}
 	[rs close];
-  return (NSArray*)membershipListArray;
+  
+  // Include the system sets, the NSMutableSet will handle removing duplicates for our legacy users
+  rs = [db.dao executeQuery:@"SELECT t.tag_id AS tag_id FROM tags t, system_card_tag_link c WHERE t.tag_id = c.tag_id AND c.card_id = ?",[NSNumber numberWithInt:card.cardId]];
+	while ([rs next])
+  {
+    tmpTagId = [rs intForColumn:@"tag_id"];
+    [membershipListSet addObject:[Tag blankTagWithId:tmpTagId]];
+	}
+	[rs close];
+  
+  return [membershipListSet allObjects];
 }
 
 
@@ -258,7 +287,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 + (NSArray *) retrieveSysTagListContainingCard:(Card*)card
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  FMResultSet *rs = [db.dao executeQuery:@"SELECT *, UPPER(t.tag_name) as utag_name FROM card_tag_link l,tags t WHERE l.card_id = ? AND l.tag_id = t.tag_id AND t.editable = 0 ORDER BY utag_name ASC",[NSNumber numberWithInt:card.cardId]];
+  FMResultSet *rs = [db.dao executeQuery:@"SELECT *, UPPER(t.tag_name) as utag_name FROM system_card_tag_link l,tags t WHERE l.card_id = ? AND l.tag_id = t.tag_id AND t.editable = 0 ORDER BY utag_name ASC",[NSNumber numberWithInt:card.cardId]];
   return [TagPeer _tagListWithResultSet:rs];
 }
 
