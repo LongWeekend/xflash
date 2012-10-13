@@ -13,6 +13,7 @@
 #import "LWENetworkUtils.h"
 #import "AddTagViewController.h"
 #import "UpdateManager.h"
+#import "UpgradeAdViewController.h"
 
 @interface StudyViewController()
 //private methods
@@ -603,12 +604,17 @@
 
 - (BOOL) hasExampleSentences
 {
-#if defined (LWE_JFLASH)
-  // JFlash is currently the only code base with example sentences
-  return [self _shouldShowExampleViewForCard:self.currentCard];
-#else
-  return NO;
-#endif
+  // JFlash Junior currently does not have an ad to show here so no examples
+  #if defined (LWE_JUNIOR)
+    return NO;
+  #endif
+  
+  #if defined (LWE_JFLASH)
+    // JFlash is currently the only code base with example sentences
+    return [self _shouldShowExampleViewForCard:self.currentCard];
+  #else
+    return NO;
+  #endif
 }
 
 /**
@@ -664,36 +670,40 @@
  */
 - (void) _setupScrollView
 {
-  UIViewController *vc = nil;
-  Plugin *exPlugin = [self.pluginManager pluginForKey:EXAMPLE_DB_KEY];
-  if (exPlugin)
-  {
-    // We have EX db installed
-    self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] initWithExamplesPlugin:exPlugin] autorelease];
-    vc = self.exampleSentencesViewController;
-  }
-  else
-  {
-    // No example sentence plugin loaded, so show "please download me" view instead
-    // TODO: iPad customization
-    vc = [[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil] autorelease];
-    vc.view.tag = LWE_EX_SENTENCE_INSTALLER_VIEW_TAG;
-  }
+  #if defined(LWE_JUNIOR)
+    // right now we don't have an ad that fits this space, so don't add the second page
+  #else
+    UIViewController *vc = nil;
+    Plugin *exPlugin = [self.pluginManager pluginForKey:EXAMPLE_DB_KEY];
+    if (exPlugin)
+    {
+      // We have EX db installed
+      self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] initWithExamplesPlugin:exPlugin] autorelease];
+      vc = self.exampleSentencesViewController;
+    }
+    else
+    {
+      // No example sentence plugin loaded, so show "please download me" view instead
+      // TODO: iPad customization
+      vc = [[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil] autorelease];
+      vc.view.tag = LWE_EX_SENTENCE_INSTALLER_VIEW_TAG;
+    }
   
-  // Resize our second view to match our first one
-	CGRect rect = vc.view.frame;
-	CGFloat cx = self.scrollView.frame.size.width;
-	rect.origin.x = ((self.scrollView.frame.size.width - rect.size.width) / 2) + cx;
-	rect.origin.y = ((self.scrollView.frame.size.height - rect.size.height) / 2);
-	vc.view.frame = rect;
-  
-  // Set the content size for the width * the number of views
-	NSInteger views = 2;
-	self.pageControl.numberOfPages = views;
-  self.scrollView.contentSize = CGSizeMake(cx * views, self.scrollView.bounds.size.height);
-  
-  // add the new view as a subview for the scroll view to handle
-	[self.scrollView addSubview:vc.view];
+    // Resize our second view to match our first one
+    CGRect rect = vc.view.frame;
+    CGFloat cx = self.scrollView.frame.size.width;
+    rect.origin.x = ((self.scrollView.frame.size.width - rect.size.width) / 2) + cx;
+    rect.origin.y = ((self.scrollView.frame.size.height - rect.size.height) / 2);
+    vc.view.frame = rect;
+    
+    // Set the content size for the width * the number of views
+    NSInteger views = 2;
+    self.pageControl.numberOfPages = views;
+    self.scrollView.contentSize = CGSizeMake(cx * views, self.scrollView.bounds.size.height);
+    
+    // add the new view as a subview for the scroll view to handle
+    [self.scrollView addSubview:vc.view];
+  #endif
 }
 
 

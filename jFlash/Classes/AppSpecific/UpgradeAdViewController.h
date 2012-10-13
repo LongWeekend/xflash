@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UpgradeAdViewController : UIViewController
+@property (retain, nonatomic) IBOutlet UIImageView *backgroundImg;
+@property (retain, nonatomic) IBOutlet UIButton *buyNowButton;
+@property (retain, nonatomic) IBOutlet UIImageView *beerImg;
 
 @end

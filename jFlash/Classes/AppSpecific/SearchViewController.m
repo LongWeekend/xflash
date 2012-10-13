@@ -178,7 +178,7 @@ const NSInteger KSegmentedTableHeader = 100;
   }
   else
   {
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+//    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
   }
 }
 

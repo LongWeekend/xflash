@@ -41,10 +41,22 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"ad-background.png"];
+  self.backgroundImg.image = [UIImage imageNamed:pathToBGImage];
+  
+  NSString *pathToAdButtonImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"ad-button.png"];
+  [self.buyNowButton setBackgroundImage:[UIImage imageNamed:pathToAdButtonImage] forState:UIControlStateNormal];
+  
+  NSString *pathToAdImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"beer.png"];
+  self.beerImg.image = [UIImage imageNamed:pathToAdImage];
 }
 
 - (void)viewDidUnload
 {
+  [self setBackgroundImg:nil];
+  [self setBuyNowButton:nil];
+  [self setBeerImg:nil];
   [super viewDidUnload];
 }
 
@@ -53,4 +65,10 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)dealloc {
+  [_backgroundImg release];
+  [_buyNowButton release];
+  [_beerImg release];
+  [super dealloc];
+}
 @end
