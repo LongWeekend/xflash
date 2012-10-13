@@ -10,7 +10,7 @@
 
 @implementation HelpWebViewController
 
-@synthesize filename;
+@synthesize filename, webView;
 
 /**
  * Initializes the class and sets HTML filename to use and the title of the nav bar.
@@ -38,19 +38,13 @@
  
 
 /** Creates the UIWebView programmatically */
-- (void) loadView
+- (void) viewDidLoad
 {
-  [super loadView];
+  [super viewDidLoad];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-  
-  _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 375.0f)];
-  _webView.delegate = self;
-  _webView.opaque = NO;
-  _webView.backgroundColor = [UIColor clearColor];
 
-  [_webView shutOffBouncing];
+  [self.webView shutOffBouncing];
   [self _loadPageWithBundleFilename:self.filename];
-  [self.view addSubview:_webView];
 }
 
 
@@ -69,14 +63,15 @@
   NSString *urlAddress = [[NSBundle mainBundle] pathForResource:fname ofType:@"html" inDirectory:@"help"];
   NSURL *url = [NSURL fileURLWithPath:urlAddress];
   NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-  [_webView loadRequest:requestObj];
+  [self.webView loadRequest:requestObj];
 }
  
          
 //! Standard dealloc
 - (void)dealloc
 {
-  [_webView release];
+  [filename release];
+  [webView release];
   [super dealloc];
 }
 

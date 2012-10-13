@@ -10,14 +10,11 @@
 #import "UIWebView+LWENoBounces.h"
 
 @interface HelpWebViewController : UIViewController <UIWebViewDelegate>
-{
-  UIWebView *_webView;
-}
 
 - (id) initWithFilename:(NSString *)filename usingTitle:(NSString*) title;
 - (void) loadPageWithBundleFilename:(NSString*)fn usingTitle:(NSString*) title;
-- (void) _loadPageWithBundleFilename:(NSString*)fname;
 
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
 
 @property (nonatomic, retain) NSString *filename;
 
