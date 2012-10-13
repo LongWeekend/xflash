@@ -650,6 +650,10 @@
 		49BBA4C5144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */; };
 		49BD2AF3138E664100FAC045 /* cFlash-CARD-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */; };
 		49BD2AF4138E664100FAC045 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
+		49C0C97C1629151900F8966C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49C0C97B1629151900F8966C /* Default-568h@2x.png */; };
+		49C0C97E16291B8400F8966C /* HelpWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C0C97D16291B8400F8966C /* HelpWebViewController.xib */; };
+		49C0C97F16291B8400F8966C /* HelpWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C0C97D16291B8400F8966C /* HelpWebViewController.xib */; };
+		49C0C98016291B8400F8966C /* HelpWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C0C97D16291B8400F8966C /* HelpWebViewController.xib */; };
 		49C506251484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
 		49C506261484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
 		49C506281484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
@@ -1586,6 +1590,8 @@
 		49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LWEChineseSearchBarInput.xib; path = AppSpecific/LWEChineseSearchBarInput.xib; sourceTree = "<group>"; };
 		49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-CARD-1.0.db"; path = "sql/cFlash-CARD-1.0.db"; sourceTree = "<group>"; };
 		49BD2AF2138E664100FAC045 /* cFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = cFlash.db; path = sql/cFlash.db; sourceTree = "<group>"; };
+		49C0C97B1629151900F8966C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Assets/Default-568h@2x.png"; sourceTree = "<group>"; };
+		49C0C97D16291B8400F8966C /* HelpWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HelpWebViewController.xib; path = XIBs/HelpWebViewController.xib; sourceTree = "<group>"; };
 		49C50623148496640094734D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Classes/External/janrain/JREngage/JSONKit/JSONKit.h; sourceTree = SOURCE_ROOT; };
 		49C506241484966A0094734D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Classes/External/janrain/JREngage/JSONKit/JSONKit.m; sourceTree = SOURCE_ROOT; };
 		49C521DE144D2461002011BD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -2033,7 +2039,6 @@
 		29B97314FDCFA39411CA2CEA /* jFlash */ = {
 			isa = PBXGroup;
 			children = (
-				919FBDBA1622E9D2001FD77B /* Social.framework */,
 				916A89CA101C681800D7917D /* Assets */,
 				24B5660413CF656100BEE166 /* Tests */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -2070,6 +2075,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				919FBDBA1622E9D2001FD77B /* Social.framework */,
 				242A174714628AF4002977E6 /* AudioToolbox.framework */,
 				242A173F1461AB60002977E6 /* AVFoundation.framework */,
 				91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */,
@@ -2577,6 +2583,9 @@
 			children = (
 				49BBA499144D4BBF00E6A9AE /* help */,
 				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
+				49DADB7E1277F36F00B8FD72 /* Default.png */,
+				49DADB7F1277F36F00B8FD72 /* Default@2x.png */,
+				49C0C97B1629151900F8966C /* Default-568h@2x.png */,
 				490B23561277BF4600CF3484 /* Icon.png */,
 				49D996C012705C8300D176D0 /* Icon@2x.png */,
 				490B23581277C05100CF3484 /* Icon-72.png */,
@@ -2587,6 +2596,8 @@
 		49D996D612705D5000D176D0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */,
+				D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */,
 				9179E44C1385021E00A7739B /* table-background.jpg */,
 				9179E4251384FFB000A7739B /* form-background.jpg */,
 				49B527B8127680F000EE64D3 /* Stars */,
@@ -2745,10 +2756,6 @@
 		916A89CA101C681800D7917D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */,
-				D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */,
-				49DADB7E1277F36F00B8FD72 /* Default.png */,
-				49DADB7F1277F36F00B8FD72 /* Default@2x.png */,
 				49D996C612705C9B00D176D0 /* Japanese Flash Assets */,
 				496C7BFE12633543004B6B90 /* Chinese Flash Assets */,
 				4965FD39126F6422000AC280 /* Action Bar */,
@@ -3130,6 +3137,7 @@
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
 				2424112011F6F48100D535D7 /* TweetWordViewController.xib */,
 				2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */,
+				49C0C97D16291B8400F8966C /* HelpWebViewController.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -3518,6 +3526,8 @@
 				49BA6DB514F4887500A48A21 /* jflash_161_to_162.sql in Resources */,
 				49695844150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 				493ABDC115562B41007F8B5E /* jflash_162_to_17.sql in Resources */,
+				49C0C97C1629151900F8966C /* Default-568h@2x.png in Resources */,
+				49C0C97E16291B8400F8966C /* HelpWebViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3744,6 +3754,7 @@
 				918EEB2914F5DACB00EF044C /* button_iosblue_280x40.png in Resources */,
 				49695845150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 				4922ED95155678E000645F61 /* cflash_11_to_12.sql in Resources */,
+				49C0C97F16291B8400F8966C /* HelpWebViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3921,6 +3932,7 @@
 				91D3F9CE1580294F00CB8F1E /* jflash_162_to_17.sql in Resources */,
 				499F07E915802FC1006B7A14 /* UpgradeAdViewController.xib in Resources */,
 				915FEC5115807BF300BEDF5F /* jFlashJr.db in Resources */,
+				49C0C98016291B8400F8966C /* HelpWebViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
