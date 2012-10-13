@@ -113,7 +113,8 @@
   if ([self _needToCopyDatabase])
   {
     // Show a spinny so the user knows what's up.
-    [DSBezelActivityView newActivityViewForView:self.splashView withLabel:NSLocalizedString(@"Setting up...\nThis will take a moment.",@"FirstLoadModalText")];
+    [DSBezelActivityView newActivityViewForView:self.splashView
+                                      withLabel:NSLocalizedString(@"Setting up...\nThis will take a moment.",@"FirstLoadModalText")];
 
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
     [db asynchCopyDatabaseFromBundle:LWE_CURRENT_USER_DATABASE
@@ -129,6 +130,7 @@
   }
   else
   {
+    // We put this on the dispatch queue so that way the runloop returns and we get a UI update
     dispatch_async(dispatch_get_main_queue(), ^{ [self _openUserDatabaseWithPlugins]; });
   }
   return YES;
