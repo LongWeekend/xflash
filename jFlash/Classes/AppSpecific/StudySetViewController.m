@@ -665,7 +665,13 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
     
     // We want to reload the selected row because it will now say "loading cards"
     [self.tableView beginUpdates];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedTagId inSection:kLWETagsSection];
+    NSInteger section = kLWETagsSection;
+    if (searching)
+    {
+      // If we are searching, the section is always 0.
+      section = 0;
+    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedTagId inSection:section];
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView endUpdates];
     
