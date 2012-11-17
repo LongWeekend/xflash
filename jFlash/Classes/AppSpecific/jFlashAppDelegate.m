@@ -106,7 +106,18 @@
   [audioManager setSessionActive:NO];
   
   // 4. Show the splash view
-  self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE];
+  CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+  CGRect splashFrame = self.splashView.frame;
+  splashFrame.size.height = screenHeight;
+  self.splashView.frame = splashFrame;
+  if ([UIScreen mainScreen].scale == 2.f && screenHeight == 568.0f)
+  {
+    self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE_568h];
+  }
+  else
+  {
+    self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE];
+  }
   [self.window makeKeyAndVisible];
   
   // 5. If we need to copy the xFlash user database (e.g. this is first load), schedule that.

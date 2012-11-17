@@ -66,6 +66,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 #if defined(LWE_JFLASH)
       NSString * const LWE_FLURRY_API_KEY           = @"1ZHZ39TNG7GC3VT5PSW4";
       NSString * const LWE_APP_SPLASH_IMAGE = @"Default.png";
+      NSString * const LWE_APP_SPLASH_IMAGE_568h = @"Default-568h@2x.png";
 
       // This setting is JFlash-specific
       NSString * const APP_READING              = @"reading";
