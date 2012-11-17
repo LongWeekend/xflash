@@ -382,9 +382,7 @@
   // TODO: iPad customization!
   if (self.progressDetailsViewController == nil)
   {
-    ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
-    self.progressDetailsViewController = progressView;
-    [progressView release];
+    self.progressDetailsViewController = [[[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil] autorelease];
   }
   self.progressDetailsViewController.tag = self.currentCardSet;
   self.progressDetailsViewController.rightStreak = self.currentRightStreak;
@@ -393,10 +391,7 @@
   self.progressDetailsViewController.cardsWrongNow.text = [NSString stringWithFormat:@"%i", self.numWrong];
   self.progressDetailsViewController.cardsViewedNow.text = [NSString stringWithFormat:@"%i", self.numViewed];
 
-  // Make room for the status bar
-  CGRect frame = self.progressDetailsViewController.view.frame;
-  frame.origin = CGPointMake(0, 20);
-  self.progressDetailsViewController.view.frame = frame;
+  self.progressDetailsViewController.view.frame = self.parentViewController.view.frame;
   
   // Tell the modal to update its details
   [self.progressDetailsViewController updateView];
@@ -404,7 +399,7 @@
   // The parent is a nav bar controller, (tab bar in this case), so it will cover the whole view
   // We could use presentModalViewController, but then we lose the "see-through" ability with the views underneath.
   // There is a call to -removeFromSuperview inside the progress VC on dismiss.
-  [self.parentViewController.view addSubview:self.progressDetailsViewController.view];
+  [self.view addSubview:self.progressDetailsViewController.view];
 }
 
 
