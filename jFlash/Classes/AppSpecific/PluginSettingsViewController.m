@@ -128,7 +128,6 @@
 - (void) viewDidUnload
 {
   [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.tableView = nil;
   self.btnCheckUpdate = nil;
   self.lblLastUpdate = nil;
@@ -254,12 +253,14 @@
 
 - (void)dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+
   [availablePlugins release];
   [installedPlugins release];
   [btnCheckUpdate release];
   [lblLastUpdate release];
   [_dateFormatter release];
-	
+
   [super dealloc];
 }
 
