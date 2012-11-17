@@ -124,7 +124,7 @@
     PDColoredProgressView *progressView = (PDColoredProgressView *)[self.view viewWithTag:(100+i)];
     LWE_ASSERT_EXC(progressView, @"Must get a progress view out of the XIB for i: %d", i);
     [progressView setTintColor:[lineColors objectAtIndex:i]];
-    progressView.progress = ([[tag.cardLevelCounts objectAtIndex:i] floatValue] / (CGFloat)self.tag.cardCount);
+    progressView.progress = ([[self.tag.cardLevelCounts objectAtIndex:i] floatValue] / (CGFloat)self.tag.cardCount);
   }
 }
 
