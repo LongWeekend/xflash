@@ -135,6 +135,7 @@
 #if defined (LWE_CFLASH)
   [settings addObserver:self forKeyPath:APP_PINYIN_COLOR options:NSKeyValueObservingOptionNew context:NULL];
 #elif defined (LWE_JFLASH)
+  [settings addObserver:self forKeyPath:APP_KANA_ONLY options:NSKeyValueObservingOptionNew context:NULL];
   [settings addObserver:self forKeyPath:APP_READING options:NSKeyValueObservingOptionNew context:NULL];
 #endif
   
@@ -254,6 +255,12 @@
 #elif defined (LWE_JFLASH)
   else if ([keyPath isEqualToString:APP_READING])
   {
+    [self doChangeCard:self.currentCard direction:nil];
+  }
+  else if ([keyPath isEqualToString:APP_KANA_ONLY])
+  {
+    // Reload the current card from the database first so we get the right headword.
+    self.currentCard = [CardPeer retrieveCardByPK:self.currentCard.cardId];
     [self doChangeCard:self.currentCard direction:nil];
   }
 #endif
@@ -779,6 +786,7 @@
   [settings removeObserver:self forKeyPath:APP_PINYIN_COLOR];
 #elif defined (LWE_JFLASH)
   [settings removeObserver:self forKeyPath:APP_READING];
+  [settings removeObserver:self forKeyPath:APP_KANA_ONLY];
 #endif
 
   [pronounceBtn release];
