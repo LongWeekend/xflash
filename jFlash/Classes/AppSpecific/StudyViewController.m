@@ -580,9 +580,9 @@
     }
     
     // Set the new VC
-    UIViewController<StudyViewSubcontrollerProtocol> *cardVC = [self.delegate cardViewControllerForStudyView:self];
-    [self.cardView addSubview:cardVC.view];
-    self.cardViewController = cardVC;
+    self.cardViewController = [self.delegate cardViewControllerForStudyView:self];
+    self.cardViewController.view.frame = self.cardView.frame;
+    [self.cardView addSubview:self.cardViewController.view];
   }
   
   // Add the Action Bar View -- ask the delegate what controller we want
@@ -684,13 +684,13 @@
 	CGRect rect = vc.view.frame;
 	CGFloat cx = self.scrollView.frame.size.width;
 	rect.origin.x = ((self.scrollView.frame.size.width - rect.size.width) / 2) + cx;
-	rect.origin.y = ((self.scrollView.frame.size.height - rect.size.height) / 2);
+  rect.size.height = self.scrollView.frame.size.height;
 	vc.view.frame = rect;
   
   // Set the content size for the width * the number of views
-	NSInteger views = 2;
-	self.pageControl.numberOfPages = views;
-  self.scrollView.contentSize = CGSizeMake(cx * views, self.scrollView.bounds.size.height);
+	NSInteger numViews = 2;
+	self.pageControl.numberOfPages = numViews;
+  self.scrollView.contentSize = CGSizeMake(cx * numViews, self.scrollView.contentSize.height);
   
   // add the new view as a subview for the scroll view to handle
 	[self.scrollView addSubview:vc.view];

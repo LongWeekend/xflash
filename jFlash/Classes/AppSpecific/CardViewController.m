@@ -115,6 +115,7 @@
   // Add mood icon subview - TODO: MMA this is 90% complete, but I want to find a way to do this in the NIB
   CGRect moodIconRect = CGRectMake(235, 197, 80, 73);
   self.moodIcon.view.frame = moodIconRect;
+  self.moodIcon.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
   [self.view addSubview:self.moodIcon.view];
   [self.moodIcon updateMoodIcon:100.0f];
   
