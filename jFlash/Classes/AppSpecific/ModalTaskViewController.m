@@ -218,7 +218,6 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 - (void) viewDidUnload
 {
   [super viewDidUnload];
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
   self.taskMsgLabel = nil;
   self.progressIndicator = nil;
 }

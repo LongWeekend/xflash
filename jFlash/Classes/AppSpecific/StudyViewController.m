@@ -758,6 +758,11 @@
 	self.remainingCardsLabel = nil;
 	self.showProgressModalBtn = nil;
   self.pronounceBtn = nil;
+  [super viewDidUnload];
+}
+
+- (void) dealloc
+{
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -770,11 +775,7 @@
 #elif defined (LWE_JFLASH)
   [settings removeObserver:self forKeyPath:APP_READING];
 #endif
-  [super viewDidUnload];
-}
 
-- (void) dealloc
-{
   [pronounceBtn release];
   
   //theme
