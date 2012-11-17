@@ -42,7 +42,7 @@
 					<object class="IBUIWebView" id="284989366">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">284</int>
-						<string key="NSFrame">{{11, 0}, {300, 259}}</string>
+						<string key="NSFrame">{{11, 10}, {300, 246}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<object class="NSColor" key="IBUIBackgroundColor">

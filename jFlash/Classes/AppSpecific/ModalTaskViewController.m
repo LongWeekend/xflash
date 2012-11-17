@@ -197,6 +197,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 
   // Load a UIWebView to show
   UIWebView *webView = [[UIWebView alloc] initWithFrame:webViewFrame];
+  webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
   [webView shutOffBouncing];
   webView.backgroundColor = [UIColor clearColor];
   webView.opaque = NO;
