@@ -409,12 +409,8 @@
  */
 - (IBAction)changePage:(id)sender animated:(BOOL)animated
 {
-	//	Change the scroll view
-  CGRect frame = self.scrollView.frame;
-  frame.origin.x = frame.size.width * self.pageControl.currentPage;
-  frame.origin.y = 0;
-	
-  [self.scrollView scrollRectToVisible:frame animated:animated];
+  CGFloat xOffset = self.scrollView.frame.size.width * self.pageControl.currentPage;
+  [self.scrollView setContentOffset:CGPointMake(xOffset, 0) animated:animated];
   
 	// When the animated scrolling finishings, scrollViewDidEndDecelerating will turn this off
   _isChangingPage = YES;
@@ -685,6 +681,7 @@
   // Set the content size for the width * the number of views
 	NSInteger numViews = 2;
 	self.pageControl.numberOfPages = numViews;
+  // Here we are setting contentSize to the frame's height because this scroll view never scrolls vertically.
   self.scrollView.contentSize = CGSizeMake(cx * numViews, self.scrollView.contentSize.height);
   
   // add the new view as a subview for the scroll view to handle
