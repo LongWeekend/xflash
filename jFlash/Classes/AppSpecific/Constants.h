@@ -102,6 +102,9 @@ extern NSString * const LWE_XFLASH_HOMEPAGE;
   extern NSString * const SET_READING_KANA;
   extern NSString * const SET_READING_ROMAJI;
   extern NSString * const SET_READING_BOTH;
+  extern NSString * const APP_KANA_ONLY;
+  extern NSString * const SET_KANA_ONLY_ON;
+  extern NSString * const SET_KANA_ONLY_OFF;
 
   extern NSString * const LWE_JF_VERSION_1_0;
   extern NSString * const LWE_JF_VERSION_1_1;

@@ -68,10 +68,13 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_APP_SPLASH_IMAGE = @"Default.png";
 
       // This setting is JFlash-specific
-      NSString * const APP_READING              = @"reading";
+      NSString * const APP_READING         = @"reading";
       NSString * const SET_READING_KANA    = @"KANA";
       NSString * const SET_READING_ROMAJI  = @"ROMAJI";
       NSString * const SET_READING_BOTH    = @"BOTH";
+      NSString * const APP_KANA_ONLY       = @"kana_only";
+      NSString * const SET_KANA_ONLY_ON    = @"ON";
+      NSString * const SET_KANA_ONLY_OFF   = @"OFF";
 
       // Each flash has its own Tiwtter key
       NSString * const LWE_TWITTER_CONSUMER_KEY = @"BGDlaaZWdjPo3oPudnIUNA";
