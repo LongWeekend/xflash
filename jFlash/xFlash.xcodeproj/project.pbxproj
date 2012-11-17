@@ -10,8 +10,6 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2424112311F6F48100D535D7 /* TweetWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112011F6F48100D535D7 /* TweetWordViewController.xib */; };
-		2424112411F6F48100D535D7 /* TweetWordXAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */; };
 		2424116511F7E1BC00D535D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */; };
 		242A17401461AB60002977E6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A173F1461AB60002977E6 /* AVFoundation.framework */; };
 		242A17411461AB68002977E6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A173F1461AB60002977E6 /* AVFoundation.framework */; };
@@ -436,8 +434,6 @@
 		496C7AE912632730004B6B90 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		496C7AEA12632730004B6B90 /* StudySetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6D11AB844300016BD2 /* StudySetView.xib */; };
 		496C7AEB12632730004B6B90 /* StudyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6E11AB844300016BD2 /* StudyView.xib */; };
-		496C7AED12632730004B6B90 /* TweetWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112011F6F48100D535D7 /* TweetWordViewController.xib */; };
-		496C7AEE12632730004B6B90 /* TweetWordXAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */; };
 		496C7AEF12632730004B6B90 /* UserDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6F11AB844300016BD2 /* UserDetailsView.xib */; };
 		496C7AF41263273D004B6B90 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7E11AB84EE00016BD2 /* CurrentState.m */; };
 		496C7AF51263273E004B6B90 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
@@ -957,8 +953,6 @@
 		91D3F9461580294F00CB8F1E /* practice-btn-actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */; };
 		91D3F9481580294F00CB8F1E /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 		91D3F9491580294F00CB8F1E /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
-		91D3F94A1580294F00CB8F1E /* TweetWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112011F6F48100D535D7 /* TweetWordViewController.xib */; };
-		91D3F94B1580294F00CB8F1E /* TweetWordXAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */; };
 		91D3F94C1580294F00CB8F1E /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE54F11EC5320003AB713 /* ActionBarViewController.xib */; };
 		91D3F94D1580294F00CB8F1E /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */; };
 		91D3F94E1580294F00CB8F1E /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55111EC5320003AB713 /* SearchView.xib */; };
@@ -1305,8 +1299,6 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* jFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		2424112011F6F48100D535D7 /* TweetWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordViewController.xib; path = XIBs/TweetWordViewController.xib; sourceTree = "<group>"; };
-		2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordXAuthController.xib; path = XIBs/TweetWordXAuthController.xib; sourceTree = "<group>"; };
 		242A173F1461AB60002977E6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		242A17421462893E002977E6 /* AudioSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioSessionManager.h; path = AppSpecific/AudioSessionManager.h; sourceTree = "<group>"; };
 		242A17431462893E002977E6 /* AudioSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioSessionManager.m; path = AppSpecific/AudioSessionManager.m; sourceTree = "<group>"; };
@@ -3135,8 +3127,6 @@
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
-				2424112011F6F48100D535D7 /* TweetWordViewController.xib */,
-				2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */,
 				49C0C97D16291B8400F8966C /* HelpWebViewController.xib */,
 			);
 			name = XIBs;
@@ -3394,8 +3384,6 @@
 				D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */,
 				D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */,
 				D322368611D370B900B1AF15 /* plugin-resources in Resources */,
-				2424112311F6F48100D535D7 /* TweetWordViewController.xib in Resources */,
-				2424112411F6F48100D535D7 /* TweetWordXAuthController.xib in Resources */,
 				496BE55211EC5320003AB713 /* ActionBarViewController.xib in Resources */,
 				496BE55311EC5320003AB713 /* AlgorithmSettingsView.xib in Resources */,
 				496BE55411EC5320003AB713 /* SearchView.xib in Resources */,
@@ -3626,8 +3614,6 @@
 				496C7AE912632730004B6B90 /* SentenceView.xib in Resources */,
 				496C7AEA12632730004B6B90 /* StudySetView.xib in Resources */,
 				496C7AEB12632730004B6B90 /* StudyView.xib in Resources */,
-				496C7AED12632730004B6B90 /* TweetWordViewController.xib in Resources */,
-				496C7AEE12632730004B6B90 /* TweetWordXAuthController.xib in Resources */,
 				496C7AEF12632730004B6B90 /* UserDetailsView.xib in Resources */,
 				4965FD35126F6417000AC280 /* practice-btn-actions@2x.png in Resources */,
 				4965FD36126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */,
@@ -3798,8 +3784,6 @@
 				91D3F9461580294F00CB8F1E /* practice-btn-actions.png in Resources */,
 				91D3F9481580294F00CB8F1E /* jFlash-CARD-1.1.db in Resources */,
 				91D3F9491580294F00CB8F1E /* plugin-resources in Resources */,
-				91D3F94A1580294F00CB8F1E /* TweetWordViewController.xib in Resources */,
-				91D3F94B1580294F00CB8F1E /* TweetWordXAuthController.xib in Resources */,
 				91D3F94C1580294F00CB8F1E /* ActionBarViewController.xib in Resources */,
 				91D3F94D1580294F00CB8F1E /* AlgorithmSettingsView.xib in Resources */,
 				91D3F94E1580294F00CB8F1E /* SearchView.xib in Resources */,

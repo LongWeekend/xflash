@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11C74</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">11G56</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">1926</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUIView</string>
-			<string>IBUIImageView</string>
 			<string>IBProxyObject</string>
-			<string>IBUILabel</string>
-			<string>IBUICustomObject</string>
-			<string>IBUIWebView</string>
-			<string>IBUIScrollView</string>
 			<string>IBUIButton</string>
+			<string>IBUICustomObject</string>
+			<string>IBUIImageView</string>
+			<string>IBUILabel</string>
+			<string>IBUIScrollView</string>
+			<string>IBUIView</string>
+			<string>IBUIWebView</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -44,7 +44,7 @@
 			</object>
 			<object class="IBUIView" id="755717646">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
+				<int key="NSvFlags">276</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIScrollView" id="831504020">
@@ -94,6 +94,7 @@
 									<double key="NSSize">18</double>
 									<int key="NSfFlags">16</int>
 								</object>
+								<double key="preferredMaxLayoutWidth">300</double>
 							</object>
 						</object>
 						<string key="NSFrame">{{10, 62}, {300, 42}}</string>
@@ -153,6 +154,7 @@
 									<double key="NSSize">38</double>
 									<int key="NSfFlags">16</int>
 								</object>
+								<double key="preferredMaxLayoutWidth">260</double>
 							</object>
 						</object>
 						<string key="NSFrame">{{10, 6}, {300, 55}}</string>
@@ -167,11 +169,10 @@
 					</object>
 					<object class="IBUIWebView" id="906154004">
 						<reference key="NSNextResponder" ref="755717646"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{10, 105}, {300, 146}}</string>
+						<int key="NSvFlags">272</int>
+						<string key="NSFrame">{{10, 112}, {300, 149}}</string>
 						<reference key="NSSuperview" ref="755717646"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEgMC45ODAwMDAwMTkxAA</bytes>
@@ -422,10 +423,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="831504020"/>
 							<reference ref="1006260728"/>
-							<reference ref="906154004"/>
 							<reference ref="9756947"/>
 							<reference ref="405833436"/>
 							<reference ref="665533496"/>
+							<reference ref="906154004"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">E to J View</string>
@@ -512,7 +513,7 @@
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
-				<object class="NSMutableArray" key="dict.values">
+				<object class="NSArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>CardViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -577,7 +578,7 @@
 							<string>readingScrollContainer</string>
 							<string>toggleReadingBtn</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>id</string>
 							<string>UILabel</string>
@@ -606,7 +607,7 @@
 							<string>readingScrollContainer</string>
 							<string>toggleReadingBtn</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">delegate</string>
@@ -678,7 +679,7 @@
 							<string>talkBubble</string>
 							<string>view</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
 							<string>UILabel</string>
@@ -695,7 +696,7 @@
 							<string>talkBubble</string>
 							<string>view</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">moodIconBtn</string>
@@ -737,12 +738,12 @@
 				<string>practice-btn-showreading.png</string>
 				<string>scroll-more.png</string>
 			</object>
-			<object class="NSMutableArray" key="dict.values">
+			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{110, 37}</string>
 				<string>{26, 17}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>
 </archive>
