@@ -22,15 +22,23 @@
 - (void) hydrateWithResultSet:(FMResultSet*)rs
 {
   [self hydrateWithResultSet:rs simpleHydrate:NO];
-  self.romaji = [rs stringForColumn:@"romaji"];
-	self._headword    = [rs stringForColumn:@"headword"];
 }
 
 - (void) hydrateWithResultSet:(FMResultSet*)rs simpleHydrate:(BOOL)isSimple
 {
   [super hydrateWithResultSet:rs simpleHydrate:isSimple];
   self.romaji = [rs stringForColumn:@"romaji"];
-	self._headword    = [rs stringForColumn:@"headword"];
+  BOOL isKanaOnly = (BOOL)[rs intForColumn:@"kana_only"];
+  BOOL showKanaHeadwordOn = [[[NSUserDefaults standardUserDefaults] objectForKey:APP_KANA_ONLY] isEqualToString:SET_KANA_ONLY_ON];
+  if (isKanaOnly && showKanaHeadwordOn)
+  {
+    // Ignore the "real" headword if this is a kana-only card and the setting for kana-only is turned on.
+    self._headword = [rs stringForColumn:@"reading"];
+  }
+  else
+  {
+    self._headword = [rs stringForColumn:@"headword"];
+  }
 }
 
 /**
