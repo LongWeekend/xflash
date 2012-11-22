@@ -50,9 +50,10 @@
   self.navigationItem.title = NSLocalizedString(@"Study Reminders",@"ReminderVC.Title");
   
   // Render the picker just below the visible screen, we will animate it in.
-  CGRect viewFrame = self.view.frame;
+  CGRect viewFrame = [UIScreen mainScreen].bounds;
   CGRect pickerFrame = CGRectZero;
-  pickerFrame.origin = CGPointMake(0, viewFrame.origin.y + viewFrame.size.height);
+  int tabBarHeight = 113;
+  pickerFrame.origin = CGPointMake(0, viewFrame.origin.y + viewFrame.size.height - tabBarHeight);
   pickerFrame.size = self.picker.frame.size;
   self.picker.frame = pickerFrame;
   [self.view addSubview:self.picker];
