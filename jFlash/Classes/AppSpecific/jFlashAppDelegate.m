@@ -110,7 +110,6 @@
   CGRect splashFrame = self.splashView.frame;
   splashFrame.size.height = screenHeight;
   self.splashView.frame = splashFrame;
-  self.window.frame = splashFrame;
   if ([UIScreen mainScreen].scale == 2.f && screenHeight == 568.0f)
   {
     self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE_568h];
