@@ -190,8 +190,13 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 - (IBAction) showDetailedView
 {
+  // The webview should take up all the screen except for the very bottom, where the buttons and such are.
+  // The buttons take up ~100 points.
+  CGRect webViewFrame = self.view.frame;
+  webViewFrame.size.height = webViewFrame.size.height - 100.0f;
+
   // Load a UIWebView to show
-  UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 317)];
+  UIWebView *webView = [[UIWebView alloc] initWithFrame:webViewFrame];
   [webView shutOffBouncing];
   webView.backgroundColor = [UIColor clearColor];
   webView.opaque = NO;
