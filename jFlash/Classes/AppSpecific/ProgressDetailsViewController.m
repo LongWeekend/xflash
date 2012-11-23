@@ -38,7 +38,12 @@
 
 - (void)viewDidUnload
 {
-	[super viewDidUnload];
+  [self setProgressViewLevel0:nil];
+  [self setProgressViewLevel1:nil];
+  [self setProgressViewLevel2:nil];
+  [self setProgressViewLevel3:nil];
+  [self setProgressViewLevel4:nil];
+  [self setProgressViewLevel5:nil];
   self.bgView = nil;
 	self.currentNumberOfWords = nil;
 	self.totalNumberOfWords = nil;
@@ -57,6 +62,7 @@
 	self.cardSetProgressLabel4 = nil;
 	self.cardSetProgressLabel5 = nil;
 	self.progressViewTitle = nil;
+	[super viewDidUnload];
 }
 
 #pragma mark -
@@ -68,7 +74,7 @@
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSInteger maxStudying = [settings integerForKey:APP_MAX_STUDYING];
-  NSInteger totalWords = tag.cardCount;
+  NSInteger totalWords = self.tag.cardCount;
   if (totalWords > maxStudying)
   {
     self.currentNumberOfWords.text = [NSString stringWithFormat:@"%d*",maxStudying];
@@ -80,8 +86,8 @@
     self.totalNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
   }    
   
-  self.cardsViewedAllTime.text = [NSString stringWithFormat:@"%d",(tag.cardCount - [[tag.cardLevelCounts objectAtIndex:kLWEUnseenCardLevel] integerValue])];
-  self.currentStudySet.text = tag.tagName;
+  self.cardsViewedAllTime.text = [NSString stringWithFormat:@"%d",(self.tag.cardCount - [[self.tag.cardLevelCounts objectAtIndex:kLWEUnseenCardLevel] integerValue])];
+  self.currentStudySet.text = self.tag.tagName;
 }
 
 - (void)setStreakLabel
@@ -100,30 +106,25 @@
 }
 
 - (void)drawProgressBars
-{  
+{
   NSString *labelText = nil;
   NSArray *labelsArray = [[NSArray alloc] initWithObjects:self.cardSetProgressLabel0, self.cardSetProgressLabel1, self.cardSetProgressLabel2 , self.cardSetProgressLabel3, self.cardSetProgressLabel4, self.cardSetProgressLabel5, nil];
   for (NSInteger i = 0; i < 6; i++)
   {
-    NSNumber *cardsAtLevel = [tag.cardLevelCounts objectAtIndex:i];
-    labelText = [NSString stringWithFormat:@"%.0f%% ~ %i", (100*([cardsAtLevel floatValue] / (CGFloat)tag.cardCount)), [cardsAtLevel integerValue]];
+    NSNumber *cardsAtLevel = [self.tag.cardLevelCounts objectAtIndex:i];
+    labelText = [NSString stringWithFormat:@"%.0f%% ~ %i", (100*([cardsAtLevel floatValue] / (CGFloat)self.tag.cardCount)), [cardsAtLevel integerValue]];
     [[labelsArray objectAtIndex:i] setText:labelText];
   }
   [labelsArray release];
   
   NSArray *lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
-  NSInteger pbOrigin = 203;
   for (NSInteger i = 0; i < 6; i++)
-  {  
-    PDColoredProgressView *progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+  {
+    // We are adding 100 here because the progress views in the XIB are arbitrarily tagged 100~105
+    PDColoredProgressView *progressView = (PDColoredProgressView *)[self.view viewWithTag:(100+i)];
+    LWE_ASSERT_EXC(progressView, @"Must get a progress view out of the XIB for i: %d", i);
     [progressView setTintColor:[lineColors objectAtIndex:i]];
-    progressView.progress = ([[tag.cardLevelCounts objectAtIndex:i] floatValue] / (CGFloat)tag.cardCount);
-    // TODO: iPad customization!
-    progressView.frame = CGRectMake(120, pbOrigin, 80, 14);
-    [self.view addSubview:progressView];
-    //move the origin of the next progress bar over
-    pbOrigin += progressView.frame.size.height + 6;
-    [progressView release];
+    progressView.progress = ([[self.tag.cardLevelCounts objectAtIndex:i] floatValue] / (CGFloat)self.tag.cardCount);
   }
 }
 
@@ -173,6 +174,12 @@
   [cardsViewedAllTime release];
   [cardsWrongNow release];
   [cardsRightNow release];
+  [_progressViewLevel0 release];
+  [_progressViewLevel1 release];
+  [_progressViewLevel2 release];
+  [_progressViewLevel3 release];
+  [_progressViewLevel4 release];
+  [_progressViewLevel5 release];
   [super dealloc];
 }
 

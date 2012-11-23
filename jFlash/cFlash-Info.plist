@@ -49,9 +49,11 @@
 	<string>MainWindow</string>
 	<key>UIInterfaceOrientation</key>
 	<string>UIInterfaceOrientationPortrait</string>
-	<key>UIStatusBarHidden</key>
-	<false/>
 	<key>UIPrerenderedIcon</key>
 	<true/>
+	<key>UIStatusBarHidden</key>
+	<false/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array/>
 </dict>
 </plist>

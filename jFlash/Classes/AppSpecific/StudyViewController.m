@@ -382,9 +382,7 @@
   // TODO: iPad customization!
   if (self.progressDetailsViewController == nil)
   {
-    ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
-    self.progressDetailsViewController = progressView;
-    [progressView release];
+    self.progressDetailsViewController = [[[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil] autorelease];
   }
   self.progressDetailsViewController.tag = self.currentCardSet;
   self.progressDetailsViewController.rightStreak = self.currentRightStreak;
@@ -393,10 +391,7 @@
   self.progressDetailsViewController.cardsWrongNow.text = [NSString stringWithFormat:@"%i", self.numWrong];
   self.progressDetailsViewController.cardsViewedNow.text = [NSString stringWithFormat:@"%i", self.numViewed];
 
-  // Make room for the status bar
-  CGRect frame = self.progressDetailsViewController.view.frame;
-  frame.origin = CGPointMake(0, 20);
-  self.progressDetailsViewController.view.frame = frame;
+  self.progressDetailsViewController.view.frame = self.parentViewController.view.frame;
   
   // Tell the modal to update its details
   [self.progressDetailsViewController updateView];
@@ -404,7 +399,7 @@
   // The parent is a nav bar controller, (tab bar in this case), so it will cover the whole view
   // We could use presentModalViewController, but then we lose the "see-through" ability with the views underneath.
   // There is a call to -removeFromSuperview inside the progress VC on dismiss.
-  [self.parentViewController.view addSubview:self.progressDetailsViewController.view];
+  [self.view addSubview:self.progressDetailsViewController.view];
 }
 
 
@@ -414,12 +409,8 @@
  */
 - (IBAction)changePage:(id)sender animated:(BOOL)animated
 {
-	//	Change the scroll view
-  CGRect frame = self.scrollView.frame;
-  frame.origin.x = frame.size.width * self.pageControl.currentPage;
-  frame.origin.y = 0;
-	
-  [self.scrollView scrollRectToVisible:frame animated:animated];
+  CGFloat xOffset = self.scrollView.frame.size.width * self.pageControl.currentPage;
+  [self.scrollView setContentOffset:CGPointMake(xOffset, 0) animated:animated];
   
 	// When the animated scrolling finishings, scrollViewDidEndDecelerating will turn this off
   _isChangingPage = YES;
@@ -580,9 +571,9 @@
     }
     
     // Set the new VC
-    UIViewController<StudyViewSubcontrollerProtocol> *cardVC = [self.delegate cardViewControllerForStudyView:self];
-    [self.cardView addSubview:cardVC.view];
-    self.cardViewController = cardVC;
+    self.cardViewController = [self.delegate cardViewControllerForStudyView:self];
+    self.cardViewController.view.frame = self.cardView.frame;
+    [self.cardView addSubview:self.cardViewController.view];
   }
   
   // Add the Action Bar View -- ask the delegate what controller we want
@@ -684,13 +675,14 @@
 	CGRect rect = vc.view.frame;
 	CGFloat cx = self.scrollView.frame.size.width;
 	rect.origin.x = ((self.scrollView.frame.size.width - rect.size.width) / 2) + cx;
-	rect.origin.y = ((self.scrollView.frame.size.height - rect.size.height) / 2);
+  rect.size.height = self.scrollView.frame.size.height;
 	vc.view.frame = rect;
   
   // Set the content size for the width * the number of views
-	NSInteger views = 2;
-	self.pageControl.numberOfPages = views;
-  self.scrollView.contentSize = CGSizeMake(cx * views, self.scrollView.bounds.size.height);
+	NSInteger numViews = 2;
+	self.pageControl.numberOfPages = numViews;
+  // Here we are setting contentSize to the frame's height because this scroll view never scrolls vertically.
+  self.scrollView.contentSize = CGSizeMake(cx * numViews, self.scrollView.contentSize.height);
   
   // add the new view as a subview for the scroll view to handle
 	[self.scrollView addSubview:vc.view];
@@ -763,6 +755,11 @@
 	self.remainingCardsLabel = nil;
 	self.showProgressModalBtn = nil;
   self.pronounceBtn = nil;
+  [super viewDidUnload];
+}
+
+- (void) dealloc
+{
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -775,11 +772,7 @@
 #elif defined (LWE_JFLASH)
   [settings removeObserver:self forKeyPath:APP_READING];
 #endif
-  [super viewDidUnload];
-}
 
-- (void) dealloc
-{
   [pronounceBtn release];
   
   //theme

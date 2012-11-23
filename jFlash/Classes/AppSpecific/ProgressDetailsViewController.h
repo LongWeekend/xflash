@@ -38,13 +38,21 @@
 @property (nonatomic,retain) IBOutlet UILabel *cardsWrongNow;
 @property NSInteger wrongStreak;
 @property NSInteger rightStreak;
+@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel0;
+@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel1;
+@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel2;
+@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel3;
+@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel4;
+@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel5;
 
-@property (nonatomic, retain) UILabel *cardSetProgressLabel0;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel1;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel2;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel3;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel4;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel5;
-@property (nonatomic, retain) UILabel *progressViewTitle;
+@property (nonatomic, retain) IBOutlet UILabel *cardSetProgressLabel0;
+@property (nonatomic, retain) IBOutlet UILabel *cardSetProgressLabel1;
+@property (nonatomic, retain) IBOutlet UILabel *cardSetProgressLabel2;
+@property (nonatomic, retain) IBOutlet UILabel *cardSetProgressLabel3;
+@property (nonatomic, retain) IBOutlet UILabel *cardSetProgressLabel4;
+@property (nonatomic, retain) IBOutlet UILabel *cardSetProgressLabel5;
+@property (nonatomic, retain) IBOutlet UILabel *progressViewTitle;
+
+
 
 @end
