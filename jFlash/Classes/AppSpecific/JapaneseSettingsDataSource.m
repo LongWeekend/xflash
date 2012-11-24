@@ -59,6 +59,11 @@
   NSArray *readingKeys = [NSArray arrayWithObjects:SET_READING_KANA,SET_READING_ROMAJI,SET_READING_BOTH,nil];
   NSDictionary *readingDict = [NSDictionary dictionaryWithObjects:readingObjects forKeys:readingKeys];
 
+  NSArray *kanaObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Prefer Kana",@"SettingsViewController.On"),
+                                                   NSLocalizedString(@"Prefer Kanji",@"SettingsViewController.Off"),nil];
+  NSArray *kanaKeys = [NSArray arrayWithObjects:SET_KANA_ONLY_ON,SET_KANA_ONLY_OFF,nil];
+  NSDictionary *kanaDict = [NSDictionary dictionaryWithObjects:kanaObjects forKeys:kanaKeys];
+  
   // This is for controlling the size of the text in the Web Views
   NSArray *textSizeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Normal",@"SettingsViewController.TextSizeNormal"),
                              NSLocalizedString(@"Large",@"SettingsViewController.TextSizeLarge"),
@@ -67,8 +72,8 @@
   NSDictionary *textSizeDict = [NSDictionary dictionaryWithObjects:textSizeObjects forKeys:textSizeKeys];
   
   // Create a complete dictionary of all settings display names & their setting constants
-  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,modeDict,textSizeDict,nil];
-  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_READING,APP_MODE,APP_TEXT_SIZE,nil];
+  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,kanaDict,modeDict,textSizeDict,nil];
+  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_READING,APP_KANA_ONLY,APP_MODE,APP_TEXT_SIZE,nil];
   self.settingsHash = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
 
   //======================================
@@ -79,9 +84,10 @@
   NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Study Mode",@"SettingsViewController.SettingNames_StudyMode"),
                                NSLocalizedString(@"Study Language",@"SettingsViewController.SettingNames_StudyLanguage"),
                                NSLocalizedString(@"Furigana / Reading",@"SettingsViewController.SettingNames_DisplayFuriganaReading"),
+                               NSLocalizedString(@"Common Kana Words",@"SettingsViewController.SettingNames_KanaOnlyWords"),
                                NSLocalizedString(@"Text Size",@"SettingsViewController.SettingNames_TextSize"),
                                NSLocalizedString(@"Difficulty",@"SettingsViewController.SettingNames_ChangeDifficulty"),nil];
-  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_TEXT_SIZE,APP_ALGORITHM,nil];
+  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_KANA_ONLY,APP_TEXT_SIZE,APP_ALGORITHM,nil];
   NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
   
   NSMutableArray *userSettingNames = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
