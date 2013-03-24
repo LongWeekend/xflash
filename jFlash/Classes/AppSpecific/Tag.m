@@ -312,7 +312,7 @@ NSInteger const kLWELearnedCardLevel       = 5;
 
 - (NSString *)description
 {
-  return [NSString stringWithFormat:@"<%@: 0x%0X>\n\
+  return [NSString stringWithFormat:@"<%@:\n\
           Editable: %d\n\
           Name: %@\n\
           Description: %@\n\
@@ -320,7 +320,6 @@ NSInteger const kLWELearnedCardLevel       = 5;
           Current Index: %d\n\
           CardIds: %@",
           NSStringFromClass([self class]),
-          self, 
           [self tagEditable],
           [self tagName],
           [self tagDescription],
