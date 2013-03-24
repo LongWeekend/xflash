@@ -75,7 +75,7 @@ extern NSString *const kAppiraterDeclinedToRate;
 /*
  Text of button that will send user to app review page.
  */
-#define APPIRATER_RATE_BUTTON [NSString stringWithFormat:@"Rate On App Store", APPIRATER_APP_NAME]
+#define APPIRATER_RATE_BUTTON @"Rate On App Store"
 
 /*
  Text of button that will send user to feedback page
