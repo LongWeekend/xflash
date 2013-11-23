@@ -393,7 +393,6 @@
 		496C7AD11263270B004B6B90 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
 		496C7AD31263270B004B6B90 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
 		496C7AD512632725004B6B90 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
-		496C7AD712632729004B6B90 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */; };
 		496C7AD812632730004B6B90 /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE54F11EC5320003AB713 /* ActionBarViewController.xib */; };
 		496C7AD912632730004B6B90 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */; };
 		496C7ADA12632730004B6B90 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55111EC5320003AB713 /* SearchView.xib */; };
@@ -693,7 +692,6 @@
 		917A5BFF11AB7CD700016BD2 /* TagPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF511AB7CD700016BD2 /* TagPeer.m */; };
 		917A5C0011AB7CD700016BD2 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF711AB7CD700016BD2 /* User.m */; };
 		917A5C0111AB7CD700016BD2 /* UserHistoryPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */; };
-		917A5C2611AB814B00016BD2 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */; };
 		917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */; };
 		917A5C5F11AB839300016BD2 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5E11AB839300016BD2 /* Appirater.m */; };
 		917A5C7011AB844300016BD2 /* AddTagView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6611AB844300016BD2 /* AddTagView.xib */; };
@@ -841,7 +839,6 @@
 		91D3F9E01580294F00CB8F1E /* TagPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF511AB7CD700016BD2 /* TagPeer.m */; };
 		91D3F9E11580294F00CB8F1E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF711AB7CD700016BD2 /* User.m */; };
 		91D3F9E21580294F00CB8F1E /* UserHistoryPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */; };
-		91D3F9E31580294F00CB8F1E /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */; };
 		91D3F9E41580294F00CB8F1E /* ProgressDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */; };
 		91D3F9E51580294F00CB8F1E /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5E11AB839300016BD2 /* Appirater.m */; };
 		91D3F9E61580294F00CB8F1E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7C11AB84EE00016BD2 /* Constants.m */; };
@@ -1990,8 +1987,6 @@
 		917A5BF711AB7CD700016BD2 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = AppSpecific/User.m; sourceTree = "<group>"; };
 		917A5BF811AB7CD700016BD2 /* UserHistoryPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserHistoryPeer.h; path = AppSpecific/UserHistoryPeer.h; sourceTree = "<group>"; };
 		917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserHistoryPeer.m; path = AppSpecific/UserHistoryPeer.m; sourceTree = "<group>"; };
-		917A5C2311AB814B00016BD2 /* PDColoredProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDColoredProgressView.h; path = Reusable/PDColoredProgressView/PDColoredProgressView.h; sourceTree = "<group>"; };
-		917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = Reusable/PDColoredProgressView/PDColoredProgressView.m; sourceTree = "<group>"; };
 		917A5C3711AB826000016BD2 /* CustomCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCellBackgroundView.h; path = Reusable/CustomCellBackgroundView/CustomCellBackgroundView.h; sourceTree = "<group>"; };
 		917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCellBackgroundView.m; path = Reusable/CustomCellBackgroundView/CustomCellBackgroundView.m; sourceTree = "<group>"; };
 		917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressDetailsViewController.h; path = AppSpecific/ProgressDetailsViewController.h; sourceTree = "<group>"; };
@@ -2570,7 +2565,6 @@
 			children = (
 				49AAB8861470DB210015D64B /* LWEChineseSearchBar */,
 				D36CE144111A9A050073D809 /* CustomCellBackgroundView */,
-				911DA682108B52F500E3D928 /* PDColoredProgressView */,
 				DA8B6A430FB111A200DE105C /* XIBs */,
 				4944B1E01495D23700AE23BE /* CloseButtonView.h */,
 				4944B1E11495D23700AE23BE /* CloseButtonView.m */,
@@ -3113,15 +3107,6 @@
 			);
 			name = TapjoyConnect;
 			path = External/TapjoyConnect;
-			sourceTree = "<group>";
-		};
-		911DA682108B52F500E3D928 /* PDColoredProgressView */ = {
-			isa = PBXGroup;
-			children = (
-				917A5C2311AB814B00016BD2 /* PDColoredProgressView.h */,
-				917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */,
-			);
-			name = PDColoredProgressView;
 			sourceTree = "<group>";
 		};
 		913D48051353A3E0008A4649 /* Reachability */ = {
@@ -4862,7 +4847,6 @@
 				917A5BFF11AB7CD700016BD2 /* TagPeer.m in Sources */,
 				917A5C0011AB7CD700016BD2 /* User.m in Sources */,
 				917A5C0111AB7CD700016BD2 /* UserHistoryPeer.m in Sources */,
-				917A5C2611AB814B00016BD2 /* PDColoredProgressView.m in Sources */,
 				917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */,
 				917A5C5F11AB839300016BD2 /* Appirater.m in Sources */,
 				917A5C7F11AB84EE00016BD2 /* Constants.m in Sources */,
@@ -5202,7 +5186,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				496C7AD512632725004B6B90 /* CustomCellBackgroundView.m in Sources */,
-				496C7AD712632729004B6B90 /* PDColoredProgressView.m in Sources */,
 				496C7AF41263273D004B6B90 /* CurrentState.m in Sources */,
 				496C7AF51263273E004B6B90 /* PluginManager.m in Sources */,
 				496C7AF61263273F004B6B90 /* ThemeManager.m in Sources */,
@@ -5379,7 +5362,6 @@
 				91D3F9E01580294F00CB8F1E /* TagPeer.m in Sources */,
 				91D3F9E11580294F00CB8F1E /* User.m in Sources */,
 				91D3F9E21580294F00CB8F1E /* UserHistoryPeer.m in Sources */,
-				91D3F9E31580294F00CB8F1E /* PDColoredProgressView.m in Sources */,
 				91D3F9E41580294F00CB8F1E /* ProgressDetailsViewController.m in Sources */,
 				91D3F9E51580294F00CB8F1E /* Appirater.m in Sources */,
 				91D3F9E61580294F00CB8F1E /* Constants.m in Sources */,
