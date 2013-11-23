@@ -14,7 +14,7 @@
 - (void) loginManagerDidAuthenticate:(LWEJanrainLoginManager *)manager;
 @end
 
-@interface LWEJanrainLoginManager : NSObject <JREngageDelegate> {}
+@interface LWEJanrainLoginManager : NSObject <JREngageSigninDelegate> {}
 
 - (void) login;
 - (void) loginForMoreProviders;
@@ -25,7 +25,6 @@
 - (void) share:(NSString*)action andUrl:(NSString*)url;
 - (void) share:(NSString*)action andUrl:(NSString*)url userContentOrNil:(NSString*)userContent;
 
-@property(nonatomic, retain) JREngage* jrEngage;
 @property(nonatomic, retain) NSString* userIdentifier;
 @property(nonatomic, retain) NSDictionary* profile;
 @property(assign, nonatomic) id<LWEJanrainLoginManagerDelegate> delegate;

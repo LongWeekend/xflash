@@ -9,7 +9,7 @@
 #import "LWEJanrainLoginManager.h"
 
 @implementation LWEJanrainLoginManager
-@synthesize jrEngage, userIdentifier, profile, delegate;
+@synthesize userIdentifier, profile, delegate;
 
 #pragma mark - Constructors
 
@@ -21,7 +21,7 @@
     static NSString *appId = @"mhbbfdgbbdndhjlcnkfd"; // <-- This is your app ID
     static NSString *tokenURL = @"http://lweflash.appspot.com/api/authorize";
     // TODO: add the appengine url
-    self.jrEngage = [JREngage jrEngageWithAppId:appId andTokenUrl:tokenURL delegate:self];
+    [JREngage setEngageAppId:appId tokenUrl:tokenURL andDelegate:self];
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
   }
@@ -34,7 +34,6 @@
 {
   self.profile = nil;
   self.userIdentifier = nil;
-  self.jrEngage = nil;
   [super dealloc];
 }
 
@@ -55,14 +54,14 @@
 {
   if ([self isAuthenticated] == NO)
   {
-    [self.jrEngage showAuthenticationDialog];
+    [JREngage showAuthenticationDialog];
   }
 }
 
 //! Shows the auth dialogue regardless of auth status
 - (void) loginForMoreProviders
 {
-  [self.jrEngage showAuthenticationDialog];
+  [JREngage showAuthenticationDialog];
 }
 
 //! Removes the profile, userIdentifier, and tells jr to signout for all providers
@@ -70,20 +69,20 @@
 {
   self.profile = nil;
   self.userIdentifier = nil;
-  [self.jrEngage signoutUserForAllProviders];
+  [JREngage clearSharingCredentialsForAllProviders];
 }
 
 #pragma mark Engage Authentication Delegate Callbacks
 
-- (void)jrAuthenticationDidSucceedForUser:(NSDictionary *)auth_info forProvider:(NSString *)provider
+- (void)authenticationDidSucceedForUser:(NSDictionary *)authInfo forProvider:(NSString *)provider
 {
-  NSDictionary *aProfile = [auth_info objectForKey:@"profile"];
+  NSDictionary *aProfile = [authInfo objectForKey:@"profile"];
   self.profile = aProfile;
   self.userIdentifier = [self.profile objectForKey:@"identifier"];
 }
 
-- (void)jrAuthenticationDidReachTokenUrl:(NSString*)tokenUrl withResponse:(NSURLResponse*)response andPayload:(NSData*)tokenUrlPayload forProvider:(NSString*)provider
-{ 
+- (void)authenticationDidReachTokenUrl:(NSString *)tokenUrl withResponse:(NSURLResponse *)response andPayload:(NSData *)tokenUrlPayload forProvider:(NSString *)provider
+{
   // TODO: handle the response from our server. Likely just a session or whatev
   if ([response respondsToSelector:@selector(allHeaderFields)])
   {
@@ -92,27 +91,17 @@
     {
       [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
     }
-    
+
     // Delegate callback
     if (self.delegate && [self.delegate respondsToSelector:@selector(loginManagerDidAuthenticate:)])
     {
       [self.delegate loginManagerDidAuthenticate:self];
     }
-    
+
     // Tell anyone who might care
     NSNotification *aNotification = [NSNotification notificationWithName:LWEJanrainLoginManagerUserDidAuthenticate object:self.userIdentifier];
     [[NSNotificationCenter defaultCenter] postNotification:aNotification];
   }
-}
-
-- (void) jrAuthenticationDidNotComplete
-{
-  // TODO: This is INCOMPLETE
-  [self forwardErrorToDelegate:nil];
-  
-  // Tell anyone who might care
-  NSNotification *aNotification = [NSNotification notificationWithName:LWEJanrainLoginManagerUserDidNotAuthenticate object:self.userIdentifier];
-  [[NSNotificationCenter defaultCenter] postNotification:aNotification];  
 }
 
 #pragma mark - Failure Delegate
@@ -126,12 +115,22 @@
   }
 }
 
-- (void) jrEngageDialogDidFailToShowWithError:(NSError *)error	
+- (void)authenticationDidNotComplete
+{
+  // TODO: This is INCOMPLETE
+  [self forwardErrorToDelegate:nil];
+
+  // Tell anyone who might care
+  NSNotification *aNotification = [NSNotification notificationWithName:LWEJanrainLoginManagerUserDidNotAuthenticate object:self.userIdentifier];
+  [[NSNotificationCenter defaultCenter] postNotification:aNotification];
+}
+
+- (void)authenticationDidFailWithError:(NSError *)error forProvider:(NSString *)provider
 {
   [self forwardErrorToDelegate:error];
 }
 
-- (void) jrAuthenticationDidFailWithError:(NSError *)error forProvider:(NSString *)provider
+- (void)engageDialogDidFailToShowWithError:(NSError *)error
 {
   [self forwardErrorToDelegate:error];
 }
@@ -142,8 +141,8 @@
 {
 //  [self login];
   
-  JRActivityObject *activity = [[[JRActivityObject alloc] initWithAction:action andUrl:url] autorelease];
-  [self.jrEngage showSocialPublishingDialogWithActivity:activity];
+//  JRActivityObject *activity = [[[JRActivityObject alloc] initWithAction:action andUrl:url] autorelease];
+//  [self.jrEngage showSocialPublishingDialogWithActivity:activity];
 }
 
 /*!
@@ -155,10 +154,10 @@
 {
 //  [self login];
   
-  JRActivityObject *activity = [[[JRActivityObject alloc] initWithAction:action andUrl:url] autorelease];
-  activity.title = userContent;
-  activity.description = userContent;
-  [self.jrEngage showSocialPublishingDialogWithActivity:activity];
+//  JRActivityObject *activity = [[[JRActivityObject alloc] initWithAction:action andUrl:url] autorelease];
+//  activity.title = userContent;
+//  activity.description = userContent;
+//  [self.jrEngage showSocialPublishingDialogWithActivity:activity];
 }
 
 @end

@@ -690,9 +690,9 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
   hud.mode = MBProgressHUDModeDeterminate;
   hud.labelText = NSLocalizedString(@"Authenticating",@"Starting Backup");
-  
-  // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-  [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3f];
+
+  // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto.
+  [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.7];
 }
 
 - (void) restore
@@ -701,8 +701,8 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
   hud.mode = MBProgressHUDModeDeterminate;
   hud.labelText = NSLocalizedString(@"Authenticating",@"Starting Restore");
 
-  // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-  [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3f];  
+  // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto.
+  [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.7];
 }
 
 #pragma mark - BackupManager Delegate
@@ -888,6 +888,7 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
 {
   [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [NSObject cancelPreviousPerformRequestsWithTarget:self];
   
   [_addButton release];
   [tagArray release];

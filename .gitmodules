@@ -25,3 +25,6 @@
 [submodule "jFlash/Classes/External/MBProgressHUD"]
 	path = jFlash/Classes/External/MBProgressHUD
 	url = git://github.com/matej/MBProgressHUD.git
+[submodule "jFlash/Classes/External/jump.ios"]
+	path = jFlash/Classes/External/jump.ios
+	url = git@github.com:janrain/jump.ios.git
