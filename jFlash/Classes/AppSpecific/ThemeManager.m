@@ -92,7 +92,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 - (UIColor*) currentThemeTintColor
 {
   // Calling currentThemeTintColor:(float)customAlpha
-  return [self currentThemeTintColor:0.8f];
+  return [self currentThemeTintColor:1.0f];
 }
 
 /**

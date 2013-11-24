@@ -42,9 +42,6 @@
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-  
-  // Get rid of the cat's pajamas
-  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
 
   self.onOffSwitch.on = self.remindersOn;
   self.navigationItem.title = NSLocalizedString(@"Study Reminders",@"ReminderVC.Title");

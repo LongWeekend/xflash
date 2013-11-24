@@ -38,9 +38,6 @@
   UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showUserDetailsView)];
   self.navigationItem.rightBarButtonItem = bbi;
   [bbi release];
-
-  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
-  self.tableView.separatorColor = [UIColor lightGrayColor];
 }
 
 /** Update the view if any theme info changed */

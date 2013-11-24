@@ -98,9 +98,6 @@ enum EntrySectionRows
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-
-  // Set up the table view background so we're not looking at cat's pajamas
-  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
 }
 

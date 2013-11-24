@@ -49,7 +49,6 @@
                                                                   style:UIBarButtonItemStyleBordered
                                                                  target:self action:@selector(_supportBtnPressed:)] autorelease];
   self.navigationItem.rightBarButtonItem = supportBtn;
-  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
 
   
   // We use absolute sizes though so let the old devices scale the images down.

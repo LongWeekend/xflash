@@ -54,8 +54,6 @@ NSString * const APP_NEW_UPDATE = @"new_update";
   [super viewDidLoad];
   self.sectionArray = [self.dataSource settingsArrayWithPluginManager:self.pluginManager];
 
-  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
-
   UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
   [rateUsBtn release];
