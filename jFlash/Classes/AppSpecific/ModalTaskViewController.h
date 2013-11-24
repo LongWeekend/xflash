@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LWELongRunningTaskProtocol.h"
-#import "PDColoredProgressView.h"
 #import "UIWebView+LWENoBounces.h"
 #import "LWEPackageDownloader.h"
-#import "GradientButton.h"
 
 extern NSString * const LWEModalTaskDidCancel;
 
@@ -35,8 +33,9 @@ extern NSString * const LWEModalTaskDidCancel;
 
 // Properties set from XIB file
 @property (nonatomic, retain) IBOutlet UILabel *taskMsgLabel;
-@property (nonatomic, retain) IBOutlet PDColoredProgressView *progressIndicator;
-@property (nonatomic, retain) IBOutlet GradientButton *startButton;
+@property (nonatomic, retain) IBOutlet UIButton *startButton;
+@property (nonatomic, retain) UIProgressView *progressIndicator;
+@property (retain, nonatomic) IBOutlet UIWebView *webView;
 
 // User-set properties
 
