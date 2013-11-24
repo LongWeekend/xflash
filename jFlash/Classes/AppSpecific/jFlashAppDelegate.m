@@ -89,7 +89,6 @@
 
   // Log user sessions on release builds & connect to Tapjoy for CPI ads
   [LWEAnalytics startSessionWithKey:LWE_FLURRY_API_KEY];
-  [TapjoyConnect requestTapjoyConnectWithAppId:LWE_TAPJOY_APP_ID];
   
   // 1. This call initializes app settings in NSUserDefaults if not already done.  Important!  Do this FIRST!
   [[CurrentState sharedCurrentState] initializeSettings];
@@ -118,6 +117,7 @@
   {
     self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE];
   }
+  [self.window setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
   [self.window makeKeyAndVisible];
   
   // 5. If we need to copy the xFlash user database (e.g. this is first load), schedule that.

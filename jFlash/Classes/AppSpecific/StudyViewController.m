@@ -152,10 +152,7 @@
   // Initialize the scroll view
   [self _setupScrollView];
   
-  // Choose the background based on the current theme
-  // TODO: iPad customization
-  NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
-  self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
+  [self setBackgroundColor_];
   
   // Load the active study set and be done!!
   [self changeStudySetToTag:[[CurrentState sharedCurrentState] activeTag]];
@@ -235,9 +232,7 @@
   }
   else if ([keyPath isEqualToString:APP_THEME])
   {
-    // TODO: iPad customization
-    NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
-    self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
+    [self setBackgroundColor_];
     [self _setupSubviews];
     [self doChangeCard:self.currentCard direction:nil];
   }
@@ -720,6 +715,14 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView 
 {
   _isChangingPage = NO;
+}
+
+/** 
+ * Choose the background based on the current theme
+ */
+-(void)setBackgroundColor_
+{
+  self.practiceBgImage.backgroundColor = [[ThemeManager sharedThemeManager] currentThemeTintColor:0.9];
 }
 
 #pragma mark - Class plumbing
