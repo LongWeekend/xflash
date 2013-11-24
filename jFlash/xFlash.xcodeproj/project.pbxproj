@@ -712,7 +712,6 @@
 		91910156148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
 		91910157148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
 		919FBDBB1622E9D2001FD77B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919FBDBA1622E9D2001FD77B /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		919FBDBC1622EA76001FD77B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		919FBDBD16230000001FD77B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919FBDBA1622E9D2001FD77B /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
 		91CA712D133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
@@ -1553,6 +1552,7 @@
 		A3D5C7AB18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
 		A3D5C7AC18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
 		A3D5C7AD18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
+		B3E8B2D3184240FC00C53BEA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D322368611D370B900B1AF15 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
 		D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		D35B07731116456D00DB5E02 /* 13-target.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07081116456D00DB5E02 /* 13-target.png */; };
@@ -2284,7 +2284,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				919FBDBC1622EA76001FD77B /* Twitter.framework in Frameworks */,
+				B3E8B2D3184240FC00C53BEA /* Twitter.framework in Frameworks */,
 				919FBDBB1622E9D2001FD77B /* Social.framework in Frameworks */,
 				499448D01472817000671849 /* libsqlite3.a in Frameworks */,
 				242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */,
@@ -3841,6 +3841,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Long Weekend LLC";
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = VL37Z36DSL;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "xFlash" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -5508,6 +5513,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_DEBUG,
@@ -5530,7 +5536,8 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_APP_STORE,
@@ -5894,7 +5901,8 @@
 		91EA2F601041365600AB848E /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_AD_HOC,
