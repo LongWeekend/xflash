@@ -41,7 +41,6 @@
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
 
   [self.webView shutOffBouncing];
   [self _loadPageWithBundleFilename:self.filename];
@@ -52,7 +51,7 @@
 - (void)viewWillAppear: (BOOL)animated
 {
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  self.view.backgroundColor = [UIColor colorWithWhite:0.888 alpha:1.0];
 }
 
 
