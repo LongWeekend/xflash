@@ -7,15 +7,10 @@
 //
 
 #import "ProgressBarViewController.h"
-#import "PDColoredProgressView.h"
 
 // The label tags are set in the NIB file!! Be careful!  (That's how we find out what the labels are, not a reference)
 #define PROGRESS_BAR_TAG 100
 #define PROGRESS_LABEL_TAG 200
-
-@interface ProgressBarViewController ()
-- (PDColoredProgressView *)_progressBarForLevel:(NSInteger)i;
-@end
 
 @implementation ProgressBarViewController
 @synthesize tag;

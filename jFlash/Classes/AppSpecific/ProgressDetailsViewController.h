@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Tag.h"
-#import "PDColoredProgressView.h"
 #import "CloseButtonView.h"
 
 @interface ProgressDetailsViewController : UIViewController <CloseButtonViewDelegate>
@@ -38,12 +37,6 @@
 @property (nonatomic,retain) IBOutlet UILabel *cardsWrongNow;
 @property NSInteger wrongStreak;
 @property NSInteger rightStreak;
-@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel0;
-@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel1;
-@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel2;
-@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel3;
-@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel4;
-@property (retain, nonatomic) IBOutlet PDColoredProgressView *progressViewLevel5;
 
 @property (nonatomic, retain) IBOutlet UILabel *cardSetProgressLabel0;
 @property (nonatomic, retain) IBOutlet UILabel *cardSetProgressLabel1;

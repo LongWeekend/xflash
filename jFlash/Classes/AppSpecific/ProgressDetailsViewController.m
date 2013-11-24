@@ -38,12 +38,7 @@
 
 - (void)viewDidUnload
 {
-  [self setProgressViewLevel0:nil];
-  [self setProgressViewLevel1:nil];
-  [self setProgressViewLevel2:nil];
-  [self setProgressViewLevel3:nil];
-  [self setProgressViewLevel4:nil];
-  [self setProgressViewLevel5:nil];
+
   self.bgView = nil;
 	self.currentNumberOfWords = nil;
 	self.totalNumberOfWords = nil;
@@ -116,16 +111,6 @@
     [[labelsArray objectAtIndex:i] setText:labelText];
   }
   [labelsArray release];
-  
-  NSArray *lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
-  for (NSInteger i = 0; i < 6; i++)
-  {
-    // We are adding 100 here because the progress views in the XIB are arbitrarily tagged 100~105
-    PDColoredProgressView *progressView = (PDColoredProgressView *)[self.view viewWithTag:(100+i)];
-    LWE_ASSERT_EXC(progressView, @"Must get a progress view out of the XIB for i: %d", i);
-    [progressView setTintColor:[lineColors objectAtIndex:i]];
-    progressView.progress = ([[self.tag.cardLevelCounts objectAtIndex:i] floatValue] / (CGFloat)self.tag.cardCount);
-  }
 }
 
 #pragma mark - IBActions
@@ -174,12 +159,7 @@
   [cardsViewedAllTime release];
   [cardsWrongNow release];
   [cardsRightNow release];
-  [_progressViewLevel0 release];
-  [_progressViewLevel1 release];
-  [_progressViewLevel2 release];
-  [_progressViewLevel3 release];
-  [_progressViewLevel4 release];
-  [_progressViewLevel5 release];
+
   [super dealloc];
 }
 
