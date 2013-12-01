@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment version="784" defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProgressDetailsViewController">
@@ -20,7 +20,8 @@
                 <outlet property="currentNumberOfWords" destination="71" id="72"/>
                 <outlet property="currentStudySet" destination="11" id="17"/>
                 <outlet property="motivationLabel" destination="13" id="16"/>
-                <outlet property="progressViewLevel0" destination="89" id="95"/>
+                <outlet property="progressViewLevel0" destination="89" id="Xpu-O8-miC"/>
+                <outlet property="progressViewLevel1" destination="90" id="5Ae-0O-Zvk"/>
                 <outlet property="progressViewLevel2" destination="91" id="98"/>
                 <outlet property="progressViewLevel3" destination="92" id="99"/>
                 <outlet property="progressViewLevel4" destination="93" id="100"/>

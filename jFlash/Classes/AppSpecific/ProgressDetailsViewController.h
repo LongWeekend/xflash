@@ -46,6 +46,12 @@
 @property (nonatomic, retain) IBOutlet UILabel *cardSetProgressLabel5;
 @property (nonatomic, retain) IBOutlet UILabel *progressViewTitle;
 
+@property (retain, nonatomic) IBOutlet UIProgressView *progressViewLevel0;
+@property (retain, nonatomic) IBOutlet UIProgressView *progressViewLevel1;
+@property (retain, nonatomic) IBOutlet UIProgressView *progressViewLevel2;
+@property (retain, nonatomic) IBOutlet UIProgressView *progressViewLevel3;
+@property (retain, nonatomic) IBOutlet UIProgressView *progressViewLevel4;
+@property (retain, nonatomic) IBOutlet UIProgressView *progressViewLevel5;
 
 
 @end
