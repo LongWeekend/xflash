@@ -38,8 +38,7 @@
 
 - (void)viewDidUnload
 {
-
-  self.bgView = nil;
+    self.bgView = nil;
 	self.currentNumberOfWords = nil;
 	self.totalNumberOfWords = nil;
 	self.closeBtn = nil;
