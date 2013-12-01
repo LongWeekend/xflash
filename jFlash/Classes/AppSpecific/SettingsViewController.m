@@ -58,7 +58,7 @@ NSString * const APP_NEW_UPDATE = @"new_update";
   self.navigationItem.leftBarButtonItem = rateUsBtn;
   [rateUsBtn release];
     
-//  UIBarButtonItem *shareBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Tell a Friend",@"SettingsViewController.Share") style:UIBarButtonItemStyleBordered target:self action:@selector(_shareJFlash)];
+  // UIBarButtonItem *shareBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Tell a Friend",@"SettingsViewController.Share") style:UIBarButtonItemStyleBordered target:self action:@selector(_shareJFlash)];
   UIBarButtonItem *shareBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(_shareJFlash)];
 
   self.navigationItem.rightBarButtonItem = shareBtn;
