@@ -38,7 +38,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self.view.backgroundColor = [UIColor colorWithWhite:0.888 alpha:1.0f];
+  self.view.backgroundColor = [[ThemeManager sharedThemeManager] backgroundColor];
   [self.progressIndicator setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
 }
 

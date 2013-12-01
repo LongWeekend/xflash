@@ -56,8 +56,8 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
   UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save)];
   self.navigationItem.rightBarButtonItem = doneButton;
   [doneButton release];
-  
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+    
+  self.view.backgroundColor = [[ThemeManager sharedThemeManager] backgroundColor];
   
   if ([self isModal])
   {
@@ -72,13 +72,7 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
     self.setNameTextfield.text = [tag tagName];
     self.setDescriptionTextView.text = [tag tagDescription];
   }
-  
-  //Round the corners of the textView
-  [self.setDescriptionTextView.layer setBorderColor: [[UIColor grayColor] CGColor]];
-  [self.setDescriptionTextView.layer setBorderWidth: 1.0];
-  [self.setDescriptionTextView.layer setCornerRadius:8.0f];
-  [self.setDescriptionTextView.layer setMasksToBounds:YES];
-  
+    
   [self.setNameTextfield becomeFirstResponder];
 }
 

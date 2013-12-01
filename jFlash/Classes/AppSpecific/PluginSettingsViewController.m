@@ -75,7 +75,7 @@
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  self.view.backgroundColor = [[ThemeManager sharedThemeManager] backgroundColor];
   self.tableView.backgroundColor = [UIColor clearColor];
 }
 

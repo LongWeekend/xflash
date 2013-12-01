@@ -87,6 +87,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 }
 
 /**
+ * Returns the background for gray backgrounded tables
+ */
+- (UIColor*) backgroundColor
+{
+  return [UIColor colorWithWhite:0.888 alpha:1.0];
+}
+
+/**
  * Returns the current theme's tint color as a UIColor
  */
 - (UIColor*) currentThemeTintColor
