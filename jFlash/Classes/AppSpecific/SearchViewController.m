@@ -110,21 +110,14 @@ const NSInteger KSegmentedTableHeader = 100;
 #if defined(LWE_CFLASH)
   // For Chinese Flash, add a custom accessory input to the search keyboard
   LWEChineseSearchBar *tmpSearchBar = [[LWEChineseSearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
-#else
-  UISearchBar *tmpSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+  self.searchBar = tmpSearchBar;
 #endif
-  tmpSearchBar.delegate = self;
-  tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-  tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+
+  self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+  self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
   
   // If we are loading the view AFTER running a search, make sure to set the search bar appropriately.
-  tmpSearchBar.text = self.externalAppManager.searchTerm;
-  
-  self.searchBar = tmpSearchBar;
-  // Set the Nav Bar title view to be the search bar itself
-  self.navigationItem.titleView = tmpSearchBar;
-  [tmpSearchBar sizeToFit];
-  [tmpSearchBar release];
+  self.searchBar.text = self.externalAppManager.searchTerm;
 }
 
 - (void) viewDidUnload
