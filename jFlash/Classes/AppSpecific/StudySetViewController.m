@@ -330,15 +330,19 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
       Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
       
       // Set up the image
-      // TODO: iPad customization?
       UIImageView *tmpView = cell.imageView;
+      tmpView.tintColor = [tm currentThemeTintColor];
       if (tmpTag.tagId == STARRED_TAG_ID)
       {
-        tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-starred-icon.png"]];
+        UIImage *tagImage = [UIImage imageNamed:@"starred-tag.png"];
+        tagImage = [tagImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        tmpView.image = tagImage;
       }
       else
       {
-        tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-icon.png"]];
+        UIImage *tagImage = [UIImage imageNamed:@"tag.png"];
+        tagImage = [tagImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        tmpView.image = tagImage;
       }
       
       cell.textLabel.text = tmpTag.tagName;
@@ -428,11 +432,18 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
     // TODO: iPad customization?
     if(tmpGroup.recommended)
     {
-      tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"special-folder-icon.png"]];
+      // IOS7 TODO: put a star on the folder for special icons
+      UIImage *image = [UIImage imageNamed:@"starred-folder.png"];
+      image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+      tmpView.tintColor = [tm currentThemeTintColor];
+      tmpView.image = image;
     }
     else
     {
-      tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"folder-icon.png"]];
+      UIImage *image = [UIImage imageNamed:@"folder.png"];
+      image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+      tmpView.tintColor = [tm currentThemeTintColor];
+      tmpView.image = image;
     }
     
     cell.accessoryType = UITableViewCellAccessoryNone;

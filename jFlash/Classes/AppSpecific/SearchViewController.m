@@ -11,6 +11,7 @@
 #import "SettingsViewController.h"
 #import "LWEChineseSearchBar.h"
 #import "jFlashAppDelegate.h"
+#import "UIColor+LWEUtilities.h"
 
 const NSInteger KSegmentedTableHeader = 100;
 
@@ -572,14 +573,18 @@ const NSInteger KSegmentedTableHeader = 100;
     [starButton addTarget:self action:@selector(_toggleMembership:event:) forControlEvents:UIControlEventTouchUpInside];
     [cell.contentView addSubview:starButton];
   }
+
+  UIImage *image = [UIImage imageNamed:@"star.png"];
+  image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  [starButton setImage:image forState:UIControlStateNormal];
   // Now set its state
   if ([self _checkMembershipCacheForCard:card])
   {
-    [starButton setImage:[UIImage imageNamed:@"star-selected.png"] forState:UIControlStateNormal];
+    [starButton setTintColor:[UIColor colorWithHex:[NSNumber numberWithInt:0xFFD700]]];
   }
   else
   {
-    [starButton setImage:[UIImage imageNamed:@"star-deselected.png"] forState:UIControlStateNormal];
+    [starButton setTintColor:[UIColor lightGrayColor]];
   }
   
   // Get the meaning
