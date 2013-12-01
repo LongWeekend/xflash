@@ -20,7 +20,8 @@
                 <outlet property="currentNumberOfWords" destination="71" id="72"/>
                 <outlet property="currentStudySet" destination="11" id="17"/>
                 <outlet property="motivationLabel" destination="13" id="16"/>
-                <outlet property="progressViewLevel" destination="89" id="fLr-hG-a84"/>
+                <outlet property="progressViewLevel0" destination="89" id="Xpu-O8-miC"/>
+                <outlet property="progressViewLevel1" destination="90" id="5Ae-0O-Zvk"/>
                 <outlet property="progressViewLevel2" destination="91" id="98"/>
                 <outlet property="progressViewLevel3" destination="92" id="99"/>
                 <outlet property="progressViewLevel4" destination="93" id="100"/>
