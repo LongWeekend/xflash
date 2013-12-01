@@ -110,6 +110,16 @@
     [[labelsArray objectAtIndex:i] setText:labelText];
   }
   [labelsArray release];
+  
+  NSArray *lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
+  for (NSInteger i = 0; i < 6; i++)
+  {
+    // We are adding 100 here because the progress views in the XIB are arbitrarily tagged 100~105
+    UIProgressView *progressView = (UIProgressView *)[self.view viewWithTag:(100+i)];
+    LWE_ASSERT_EXC(progressView, @"Must get a progress view out of the XIB for i: %d", i);
+    [progressView setTintColor:[lineColors objectAtIndex:i]];
+    progressView.progress = ([[self.tag.cardLevelCounts objectAtIndex:i] floatValue] / (CGFloat)self.tag.cardCount);
+  }
 }
 
 #pragma mark - IBActions
