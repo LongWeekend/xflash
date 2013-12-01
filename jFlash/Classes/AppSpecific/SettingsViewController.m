@@ -359,6 +359,8 @@ NSString * const APP_NEW_UPDATE = @"new_update";
     // One special case, theme: reload the nav bar for this page
     if ([key isEqualToString:APP_THEME])
     {
+      UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+      window.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
       self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
     }
   }
