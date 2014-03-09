@@ -15,7 +15,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 @implementation ModalTaskViewController
 
-@synthesize taskMsgLabel, progressIndicator, startButton, taskHandler;
+@synthesize taskMsgLabel, progressIndicator, startButton, taskHandler, webView;
 
 // For content/webview
 @synthesize webViewContent;
@@ -26,11 +26,6 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-  // Initialize the start button
-  [self.startButton useGreenConfirmStyle];
-  self.startButton.layer.borderWidth = 2.5f;
-  self.startButton.layer.cornerRadius = 9.0f;
   
   // Make sure the buttons are set to the right states
   [self updateButtons];
@@ -43,7 +38,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  self.view.backgroundColor = [UIColor colorWithWhite:0.888 alpha:1.0f];
   [self.progressIndicator setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
 }
 
@@ -190,33 +185,19 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 - (IBAction) showDetailedView
 {
-  // The webview should take up all the screen except for the very bottom, where the buttons and such are.
-  // The buttons take up ~100 points.
-  CGRect webViewFrame = self.view.frame;
-  webViewFrame.size.height = webViewFrame.size.height - 100.0f;
-
-  // Load a UIWebView to show
-  UIWebView *webView = [[UIWebView alloc] initWithFrame:webViewFrame];
-  webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-  [webView shutOffBouncing];
-  webView.backgroundColor = [UIColor clearColor];
-  webView.opaque = NO;
+  [self.webView shutOffBouncing];
   
   // Only show content if we have set this variable
   if (self.webViewContent)
   {
     NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:@"plugin-resources/index.html"]];
-    [webView loadHTMLString:self.webViewContent baseURL:url];
+    [self.webView loadHTMLString:self.webViewContent baseURL:url];
   }
-
-//  WebGradientView *subview = [[WebGradientView alloc] initWithFrame:CGRectMake(0,0,320,317) subview:webView];
-
-  [self.view addSubview:webView];
-  [webView release];
 }
 
 - (void) viewDidUnload
 {
+  [self setWebView:nil];
   [super viewDidUnload];
   self.taskMsgLabel = nil;
   self.progressIndicator = nil;
@@ -229,6 +210,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
   [progressIndicator release];
   [webViewContent release];
   [taskHandler release];
+  self.webView = nil;
   [super dealloc];
 }
 

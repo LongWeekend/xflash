@@ -50,19 +50,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                            @"4278b9",@"WEB_SELECTED",
                            @"dfn { background-color:lightsteelblue; border-color:white; }",@"CSS",
                            nil];
-    
-    
-//    // Defines the Forest Green theme tint values & CSS
-//    NSDictionary *forest = [NSDictionary dictionaryWithObjectsAndKeys:
-//                            SET_THEME_FOREST,@"key",
-//                            @"Forest",@"name",
-//                            @"green",@"filename",
-//                            [NSNumber numberWithFloat:74.0f/255.0f],@"R",
-//                            [NSNumber numberWithFloat:170/255.0f],@"G",
-//                            [NSNumber numberWithFloat:15/255.0f],@"B",
-//                            @"6BBA70",@"WEB_SELECTED",
-//                            @"dfn{ background-color:white; border-color:gray; }",@"CSS",
-//                            nil];
 
     // Defines the (Joseph) Tame theme tint values & CSS
     NSDictionary *tame = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -97,9 +84,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
     // No default set, first load?
     return [[self themes] objectForKey:DEFAULT_THEME];
   }
-
 }
-
 
 /**
  * Returns the current theme's tint color as a UIColor
@@ -107,7 +92,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 - (UIColor*) currentThemeTintColor
 {
   // Calling currentThemeTintColor:(float)customAlpha
-  return [self currentThemeTintColor:0.8f];
+  return [self currentThemeTintColor:1.0f];
 }
 
 /**
@@ -165,7 +150,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
  */
 - (NSString*) elementWithCurrentTheme:(NSString*)element
 {
-  // TODO: iPad customization!
   return [NSString stringWithFormat:@"/%@theme-cookie-cutters/%@",[self currentThemeFileName],element];
 }
 

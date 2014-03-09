@@ -67,8 +67,6 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  // TODO: iPad customization!
-  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
   
   // We do this on viewWillAppear instead of viewDidLoad because the tagName could change
   // when the user edits it after tapping "Edit" on this VC

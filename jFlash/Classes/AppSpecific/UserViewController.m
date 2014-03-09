@@ -38,9 +38,6 @@
   UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showUserDetailsView)];
   self.navigationItem.rightBarButtonItem = bbi;
   [bbi release];
-
-  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
-  self.tableView.separatorColor = [UIColor lightGrayColor];
 }
 
 /** Update the view if any theme info changed */
@@ -58,6 +55,9 @@
   // A better way to do this would be to just update the table cell with this user.
   self.usersArray = [UserPeer allUsers];
   [self.tableView reloadData];
+
+  // We're done with this VC
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) activateUser:(User*)user
@@ -73,6 +73,9 @@
     // post notification and dismiss view
     [DSActivityView removeView];
     [self.navigationController popViewControllerAnimated:YES];
+
+    // And our table should show the active user
+    [self.tableView reloadData];
   }];
 }
 
@@ -110,15 +113,7 @@
   if([settings integerForKey:@"user_id"] == [[self.usersArray objectAtIndex:indexPath.row] userId])
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"CellHighlighted" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
-    
-    CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
-    [bgView setCellIndexPath:indexPath tableLength:[self.usersArray count]];
-    [bgView setBorderColor:[lclTableView separatorColor]];
-    [bgView setFillColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.backgroundView = bgView;
-    [bgView release];
+    cell.textLabel.textColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   }
   // Unselected cells are white
   else 

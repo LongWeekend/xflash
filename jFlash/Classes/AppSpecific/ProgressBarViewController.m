@@ -7,29 +7,25 @@
 //
 
 #import "ProgressBarViewController.h"
-#import "PDColoredProgressView.h"
 
 // The label tags are set in the NIB file!! Be careful!  (That's how we find out what the labels are, not a reference)
 #define PROGRESS_BAR_TAG 100
 #define PROGRESS_LABEL_TAG 200
 
-@interface ProgressBarViewController ()
-- (PDColoredProgressView *)_progressBarForLevel:(NSInteger)i;
-@end
-
 @implementation ProgressBarViewController
 @synthesize tag;
 
-- (PDColoredProgressView *)_progressBarForLevel:(NSInteger)i
+- (UIProgressView *)_progressBarForLevel:(NSInteger)i
 {
     // Get the current progress view for this guy and remove him (we are going to re-add)
-    PDColoredProgressView *progressView = (PDColoredProgressView*)[self.view viewWithTag:(i+PROGRESS_BAR_TAG)];
+    UIProgressView *progressView = (UIProgressView *)[self.view viewWithTag:(i+PROGRESS_BAR_TAG)];
     if (progressView == nil)
     {
-        NSArray *lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
-        progressView = [[[PDColoredProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault] autorelease];
+        NSArray *lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor darkGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
+        progressView = [[[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault] autorelease];
         progressView.tag = i+PROGRESS_BAR_TAG;
-        [progressView setTintColor:[lineColors objectAtIndex:i]];
+        [progressView setProgressTintColor:[lineColors objectAtIndex:i]];
+        [progressView setTrackTintColor:[UIColor whiteColor]];
         [self.view addSubview:progressView];
     }
     return progressView;
@@ -46,7 +42,7 @@
   for (NSInteger i = 1; i < 6; i++)
   {
     // This call handles the creation and/or getting of the progress bar
-    PDColoredProgressView *progressView = [self _progressBarForLevel:i];
+    UIProgressView *progressView = [self _progressBarForLevel:i];
 
     if (i > 1)
     {
