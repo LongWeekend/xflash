@@ -39,7 +39,7 @@
 {
   [super viewDidLoad];
 
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  self.view.backgroundColor = [[ThemeManager sharedThemeManager] backgroundColor];
 
   // Start editing right away
   [self.userNicknameTextField becomeFirstResponder];

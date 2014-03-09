@@ -12,7 +12,7 @@
 
 @implementation AddStudySetInputViewController
 
-@synthesize owner, defaultCard, setNameTextfield, setDescriptionTextView, tag;
+@synthesize owner, defaultCard, setNameTextfield, tag;
 
 // REVIEW: Ross I have been putting more of these notifications into the model, it's been working well
 // for decoupling the tag content changes code.  By putting it there you also get the same functioality
@@ -56,8 +56,8 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
   UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save)];
   self.navigationItem.rightBarButtonItem = doneButton;
   [doneButton release];
-  
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+    
+  self.view.backgroundColor = [[ThemeManager sharedThemeManager] backgroundColor];
   
   if ([self isModal])
   {
@@ -70,15 +70,8 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
   {
     self.title = NSLocalizedString(@"Update Study Set",@"AddStudySetInputViewController.NavBarTitle");
     self.setNameTextfield.text = [tag tagName];
-    self.setDescriptionTextView.text = [tag tagDescription];
   }
-  
-  //Round the corners of the textView
-  [self.setDescriptionTextView.layer setBorderColor: [[UIColor grayColor] CGColor]];
-  [self.setDescriptionTextView.layer setBorderWidth: 1.0];
-  [self.setDescriptionTextView.layer setCornerRadius:8.0f];
-  [self.setDescriptionTextView.layer setMasksToBounds:YES];
-  
+    
   [self.setNameTextfield becomeFirstResponder];
 }
 
@@ -119,7 +112,7 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
   if (self.tag == nil)
   {
     // Create the tag & subscribe the card to it
-    Tag *newTag = [TagPeer createTagNamed:self.setNameTextfield.text inGroup:self.owner withDescription:self.setDescriptionTextView.text];
+    Tag *newTag = [TagPeer createTagNamed:self.setNameTextfield.text inGroup:self.owner withDescription:nil];
     if (self.defaultCard)
     {
       [TagPeer subscribeCard:self.defaultCard toTag:newTag];
@@ -128,7 +121,6 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
   else
   {
     self.tag.tagName = self.setNameTextfield.text;
-    self.tag.tagDescription = self.setDescriptionTextView.text;
     [self.tag save];
   }
     
@@ -146,7 +138,6 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
   }
   else if (theTextField == self.setNameTextfield)
   {
-    [self.setDescriptionTextView becomeFirstResponder];
     return NO;
   }
   return YES;
@@ -156,7 +147,6 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
 {
   [owner release];
   [defaultCard release];
-  [setDescriptionTextView release];
   [setNameTextfield release];
   [tag release];
   [super dealloc];

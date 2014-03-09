@@ -57,6 +57,14 @@ NSString * const APP_NEW_UPDATE = @"new_update";
   UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
   [rateUsBtn release];
+    
+  // UIBarButtonItem *shareBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Tell a Friend",@"SettingsViewController.Share") style:UIBarButtonItemStyleBordered target:self action:@selector(_shareJFlash)];
+  UIBarButtonItem *shareBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(_shareJFlash)];
+
+  self.navigationItem.rightBarButtonItem = shareBtn;
+  [shareBtn release];
+
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -109,6 +117,14 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 {
   Appirater *appirater = [[Appirater alloc] init]; // appirater releases itself, do not autorelease here.
   [appirater showPromptManually];
+}
+
+- (void) _shareJFlash
+{
+    NSArray *sharingItems = @[@"https://itunes.apple.com/us/app/japanese-flash-vocabulary/id367216357?mt=8"];
+        
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
+    [self presentViewController:activityController animated:YES completion:nil];
 }
 
 
@@ -359,6 +375,8 @@ NSString * const APP_NEW_UPDATE = @"new_update";
     // One special case, theme: reload the nav bar for this page
     if ([key isEqualToString:APP_THEME])
     {
+      UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+      window.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
       self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
     }
   }

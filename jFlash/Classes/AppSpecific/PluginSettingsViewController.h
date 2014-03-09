@@ -18,7 +18,7 @@
 - (IBAction) checkUpdatePlugin:(id)sender;
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) IBOutlet GradientButton *btnCheckUpdate;
+@property (nonatomic, retain) IBOutlet UIButton *btnCheckUpdate;
 @property (nonatomic, retain) IBOutlet UILabel *lblLastUpdate;
 @property (retain) NSArray *availablePlugins;
 @property (retain) NSArray *installedPlugins;

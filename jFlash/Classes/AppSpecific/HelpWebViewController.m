@@ -51,7 +51,7 @@
 - (void)viewWillAppear: (BOOL)animated
 {
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self.view.backgroundColor = [UIColor colorWithWhite:0.888 alpha:1.0];
+  self.view.backgroundColor = [[ThemeManager sharedThemeManager] backgroundColor];
 }
 
 

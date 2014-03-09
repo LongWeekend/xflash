@@ -19,7 +19,6 @@ extern NSString * const kSetWasAddedOrUpdated;
 - (BOOL)isModal;
 
 @property (retain) IBOutlet UITextField *setNameTextfield;
-@property (retain) IBOutlet UITextView *setDescriptionTextView;
 @property (retain) Tag *tag;
 @property (retain) Card *defaultCard;
 @property (retain) Group *owner;

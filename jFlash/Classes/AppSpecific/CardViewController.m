@@ -149,7 +149,7 @@
 {
   // Change state
   self.readingScrollContainer.hidden = NO;
-  [self.toggleReadingBtn setBackgroundImage:nil forState:UIControlStateNormal];
+  [self.toggleReadingBtn setTitle:@"" forState:UIControlStateNormal];
   
   // This will handle the "more" icon after the state change
   [self _updateReadingContainer];
@@ -161,8 +161,7 @@
   [self _updateReadingContainer];
   
   self.readingScrollContainer.hidden = YES;
-  [self.toggleReadingBtn setBackgroundImage:[UIImage imageNamed:@"practice-btn-showreading.png"]
-                                   forState:UIControlStateNormal];
+  [self.toggleReadingBtn setTitle:@"Show Reading" forState:UIControlStateNormal];
 
   // This will handle the "more" icon after the state change
   [self _updateReadingContainer];
@@ -171,11 +170,14 @@
 //! shows or hides the reading label and toggleButton according to the readingVisible bool
 - (void) resetReadingVisibility 
 {
-  self.readingScrollContainer.hidden = (self.readingVisible == NO);
-  
-  // Set the button image to nil when we have a reading showing, and show the "show reading" button when not.
-  UIImage *displayReadingImage = (self.readingVisible) ? nil : [UIImage imageNamed:@"practice-btn-showreading.png"];
-  [self.toggleReadingBtn setBackgroundImage:displayReadingImage forState:UIControlStateNormal];
+  if (self.readingVisible == NO)
+  {
+    [self turnReadingOff];
+  }
+  else
+  {
+    [self turnReadingOn];
+  }
 }
 
 #pragma mark - Private Methods
@@ -308,11 +310,11 @@
 NSString * const LWECardHTMLTemplate = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<style>"
-"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; } "
 "dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
 "#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;vertical-align:middle;} "
 "ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
-"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px;} "
+"li{color:white; margin:0px; margin-bottom:7px;} "
 "##THEMECSS##"
 "</style></head>"
 "<body><div id='container'>"
@@ -321,11 +323,11 @@ NSString * const LWECardHTMLTemplate = @""
 NSString * const LWECardHTMLTemplate_EtoJ = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<style>"
-"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; } "
 "dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
 "#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;font-size:34px; padding-left:3px; line-height:32px;} "
 "ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
-"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px;} "
+"li{color:white; margin:0px; margin-bottom:7px;} "
 "##THEMECSS##"
 "</style></head>"
 "<body><div id='container'>"

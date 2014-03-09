@@ -11,6 +11,7 @@
 #import "SettingsViewController.h"
 #import "LWEChineseSearchBar.h"
 #import "jFlashAppDelegate.h"
+#import "UIColor+LWEUtilities.h"
 
 const NSInteger KSegmentedTableHeader = 100;
 
@@ -110,21 +111,14 @@ const NSInteger KSegmentedTableHeader = 100;
 #if defined(LWE_CFLASH)
   // For Chinese Flash, add a custom accessory input to the search keyboard
   LWEChineseSearchBar *tmpSearchBar = [[LWEChineseSearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
-#else
-  UISearchBar *tmpSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+  self.searchBar = tmpSearchBar;
 #endif
-  tmpSearchBar.delegate = self;
-  tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-  tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+
+  self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+  self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
   
   // If we are loading the view AFTER running a search, make sure to set the search bar appropriately.
-  tmpSearchBar.text = self.externalAppManager.searchTerm;
-  
-  self.searchBar = tmpSearchBar;
-  // Set the Nav Bar title view to be the search bar itself
-  self.navigationItem.titleView = tmpSearchBar;
-  [tmpSearchBar sizeToFit];
-  [tmpSearchBar release];
+  self.searchBar.text = self.externalAppManager.searchTerm;
 }
 
 - (void) viewDidUnload
@@ -579,14 +573,18 @@ const NSInteger KSegmentedTableHeader = 100;
     [starButton addTarget:self action:@selector(_toggleMembership:event:) forControlEvents:UIControlEventTouchUpInside];
     [cell.contentView addSubview:starButton];
   }
+
+  UIImage *image = [UIImage imageNamed:@"star.png"];
+  image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  [starButton setImage:image forState:UIControlStateNormal];
   // Now set its state
   if ([self _checkMembershipCacheForCard:card])
   {
-    [starButton setImage:[UIImage imageNamed:@"star-selected.png"] forState:UIControlStateNormal];
+    [starButton setTintColor:[UIColor colorWithHex:[NSNumber numberWithInt:0xFFD700]]];
   }
   else
   {
-    [starButton setImage:[UIImage imageNamed:@"star-deselected.png"] forState:UIControlStateNormal];
+    [starButton setTintColor:[UIColor lightGrayColor]];
   }
   
   // Get the meaning
