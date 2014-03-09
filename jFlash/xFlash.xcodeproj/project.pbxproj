@@ -606,8 +606,6 @@
 		49FE8C7914A9B83200579716 /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FE8C7614A9B83200579716 /* CardViewController.xib */; };
 		49FE8C7A14A9B83200579716 /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FE8C7614A9B83200579716 /* CardViewController.xib */; };
 		91170DB411BF896F00D4A680 /* AlgorithmSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */; };
-		911D1961137A56C8005C9B55 /* TapjoyConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 911D195F137A56C8005C9B55 /* TapjoyConnect.m */; };
-		911D1962137A56C8005C9B55 /* TapjoyConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 911D195F137A56C8005C9B55 /* TapjoyConnect.m */; };
 		91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */; };
 		91214D6A11B4D77C0091AFEF /* PracticeModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
@@ -621,6 +619,7 @@
 		913EEF93130800F300EBCF87 /* toxxx.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF82130800F300EBCF87 /* toxxx.c */; };
 		913EEF94130800F300EBCF87 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF84130800F300EBCF87 /* util.c */; };
 		913EEF95130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */; };
+		915E3F0E18CC655600E299AB /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 915E3F0D18CC655600E299AB /* libFlurry_4.3.2.a */; };
 		915FEC5115807BF300BEDF5F /* jFlashJr.db in Resources */ = {isa = PBXBuildFile; fileRef = 915FEC4F15807B9100BEDF5F /* jFlashJr.db */; };
 		9175396C1310AA5C00B34EDF /* jflash_13_to_14.sql in Resources */ = {isa = PBXBuildFile; fileRef = 9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */; };
 		917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
@@ -814,7 +813,6 @@
 		91D3FA0B1580294F00CB8F1E /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE97A2134EC34400EC6B0E /* ASIInputStream.m */; };
 		91D3FA0C1580294F00CB8F1E /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE97A4134EC34400EC6B0E /* ASINetworkQueue.m */; };
 		91D3FA0D1580294F00CB8F1E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
-		91D3FA0E1580294F00CB8F1E /* TapjoyConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 911D195F137A56C8005C9B55 /* TapjoyConnect.m */; };
 		91D3FA101580294F00CB8F1E /* nameprep.c in Sources */ = {isa = PBXBuildFile; fileRef = 91F80F7113865C8700A07663 /* nameprep.c */; };
 		91D3FA111580294F00CB8F1E /* JapaneseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83F1400A93F0076EEED /* JapaneseCard.m */; };
 		91D3FA121580294F00CB8F1E /* JapaneseSettingsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B8441400BE540076EEED /* JapaneseSettingsDataSource.m */; };
@@ -1525,8 +1523,6 @@
 		A3D5C7AC18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
 		A3D5C7AD18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
 		B3E8B2D3184240FC00C53BEA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		B3F099E9184ADA1900396C2B /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F099E8184ADA1900396C2B /* libFlurry_4.3.0.a */; };
-		B3F099EA184ADA1A00396C2B /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F099E8184ADA1900396C2B /* libFlurry_4.3.0.a */; };
 		D322368611D370B900B1AF15 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
 		D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		D35B077B1116456D00DB5E02 /* overlay-btn-close.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B073D1116456D00DB5E02 /* overlay-btn-close.png */; };
@@ -1879,9 +1875,6 @@
 		49FE8C7614A9B83200579716 /* CardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardViewController.xib; path = XIBs/jFlash/CardViewController.xib; sourceTree = "<group>"; };
 		91170DB211BF896F00D4A680 /* AlgorithmSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmSettingsViewController.h; path = AppSpecific/AlgorithmSettingsViewController.h; sourceTree = "<group>"; };
 		91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlgorithmSettingsViewController.m; path = AppSpecific/AlgorithmSettingsViewController.m; sourceTree = "<group>"; };
-		911D195E137A56C8005C9B55 /* TapjoyConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapjoyConnect.h; sourceTree = "<group>"; };
-		911D195F137A56C8005C9B55 /* TapjoyConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapjoyConnect.m; sourceTree = "<group>"; };
-		911D1960137A56C8005C9B55 /* TapjoyConnectConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapjoyConnectConstants.h; sourceTree = "<group>"; };
 		91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrowseModeCardViewDelegate.h; path = AppSpecific/BrowseModeCardViewDelegate.h; sourceTree = "<group>"; };
 		91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrowseModeCardViewDelegate.m; path = AppSpecific/BrowseModeCardViewDelegate.m; sourceTree = "<group>"; };
 		91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PracticeModeCardViewDelegate.h; path = AppSpecific/PracticeModeCardViewDelegate.h; sourceTree = "<group>"; };
@@ -1900,6 +1893,7 @@
 		913EEF87130800F300EBCF87 /* xcode_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcode_config.h; sourceTree = "<group>"; };
 		913EEF88130800F300EBCF87 /* NSURL+IFUnicodeURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+IFUnicodeURL.h"; sourceTree = "<group>"; };
 		913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+IFUnicodeURL.m"; sourceTree = "<group>"; };
+		915E3F0D18CC655600E299AB /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.3.2.a; path = Classes/External/FlurryLib/libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		915FEC4F15807B9100BEDF5F /* jFlashJr.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlashJr.db; path = sql/jFlashJr.db; sourceTree = "<group>"; };
 		9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_13_to_14.sql; path = Migrations/jflash_13_to_14.sql; sourceTree = "<group>"; };
 		917728E011C0CA9600A90071 /* dropped-text-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropped-text-box.png"; path = "Assets/dropped-text-box.png"; sourceTree = "<group>"; };
@@ -2231,7 +2225,6 @@
 		A3D5C7A318406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+JRRequestUtils.h"; sourceTree = "<group>"; };
 		A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+JRRequestUtils.m"; sourceTree = "<group>"; };
 		B3F099E7184ADA1900396C2B /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Classes/External/FlurryLib/Flurry.h; sourceTree = SOURCE_ROOT; };
-		B3F099E8184ADA1900396C2B /* libFlurry_4.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.3.0.a; path = Classes/External/FlurryLib/libFlurry_4.3.0.a; sourceTree = SOURCE_ROOT; };
 		D322367A11D370B900B1AF15 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 		D32DC3CF116D82C9005D3852 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		D35B073D1116456D00DB5E02 /* overlay-btn-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "overlay-btn-close.png"; path = "Assets/overlay-btn-close.png"; sourceTree = "<group>"; };
@@ -2260,13 +2253,13 @@
 				499448D01472817000671849 /* libsqlite3.a in Frameworks */,
 				242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */,
 				242A17411461AB68002977E6 /* AVFoundation.framework in Frameworks */,
+				915E3F0E18CC655600E299AB /* libFlurry_4.3.2.a in Frameworks */,
 				91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */,
 				4938F8C714027853001EB473 /* CoreText.framework in Frameworks */,
 				D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
-				B3F099E9184ADA1900396C2B /* libFlurry_4.3.0.a in Frameworks */,
 				496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */,
 				917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */,
 				49F968E211AF64D400DFC3C9 /* CFNetwork.framework in Frameworks */,
@@ -2324,7 +2317,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3F099EA184ADA1A00396C2B /* libFlurry_4.3.0.a in Frameworks */,
 				492435D71556AD0F0059B203 /* Twitter.framework in Frameworks */,
 				499448D11472817800671849 /* libsqlite3.a in Frameworks */,
 				242A174814628AF4002977E6 /* AudioToolbox.framework in Frameworks */,
@@ -2463,7 +2455,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B3F099E8184ADA1900396C2B /* libFlurry_4.3.0.a */,
+				915E3F0D18CC655600E299AB /* libFlurry_4.3.2.a */,
 				919FBDBA1622E9D2001FD77B /* Social.framework */,
 				242A174714628AF4002977E6 /* AudioToolbox.framework */,
 				242A173F1461AB60002977E6 /* AVFoundation.framework */,
@@ -2840,7 +2832,6 @@
 				917A5C0B11AB807800016BD2 /* FlurryLib */,
 				9158C0020FB6C2320083223F /* FMDb */,
 				917A5BA611AB7B1C00016BD2 /* sqlite */,
-				911D195D137A56C8005C9B55 /* TapjoyConnect */,
 				49AD17B2148476080017EFB4 /* ZipArchive */,
 				4922ED9615567FBC00645F61 /* MBProgressHUD.h */,
 				4922ED9715567FBC00645F61 /* MBProgressHUD.m */,
@@ -3068,17 +3059,6 @@
 				49FE8C7014A9B82300579716 /* CardViewController.xib */,
 			);
 			name = "Chinese Flash";
-			sourceTree = "<group>";
-		};
-		911D195D137A56C8005C9B55 /* TapjoyConnect */ = {
-			isa = PBXGroup;
-			children = (
-				911D195E137A56C8005C9B55 /* TapjoyConnect.h */,
-				911D195F137A56C8005C9B55 /* TapjoyConnect.m */,
-				911D1960137A56C8005C9B55 /* TapjoyConnectConstants.h */,
-			);
-			name = TapjoyConnect;
-			path = External/TapjoyConnect;
 			sourceTree = "<group>";
 		};
 		913D48051353A3E0008A4649 /* Reachability */ = {
@@ -4839,7 +4819,6 @@
 				49EE97B2134EC34500EC6B0E /* ASIInputStream.m in Sources */,
 				49EE97B4134EC34500EC6B0E /* ASINetworkQueue.m in Sources */,
 				913D48081353A3E0008A4649 /* Reachability.m in Sources */,
-				911D1961137A56C8005C9B55 /* TapjoyConnect.m in Sources */,
 				91F80F7213865C8700A07663 /* nameprep.c in Sources */,
 				4927B8401400A93F0076EEED /* JapaneseCard.m in Sources */,
 				4927B8451400BE540076EEED /* JapaneseSettingsDataSource.m in Sources */,
@@ -5198,7 +5177,6 @@
 				A3D5C56B18406CDE00679ABD /* JREngageError.m in Sources */,
 				49EE97B5134EC34500EC6B0E /* ASINetworkQueue.m in Sources */,
 				913D48091353A3E0008A4649 /* Reachability.m in Sources */,
-				911D1962137A56C8005C9B55 /* TapjoyConnect.m in Sources */,
 				91F80F7313865C8700A07663 /* nameprep.c in Sources */,
 				49280A281396296800EF009C /* UpdateManager.m in Sources */,
 				4927B83D1400A8400076EEED /* ChineseCard.m in Sources */,
@@ -5354,7 +5332,6 @@
 				91D3FA0B1580294F00CB8F1E /* ASIInputStream.m in Sources */,
 				91D3FA0C1580294F00CB8F1E /* ASINetworkQueue.m in Sources */,
 				91D3FA0D1580294F00CB8F1E /* Reachability.m in Sources */,
-				91D3FA0E1580294F00CB8F1E /* TapjoyConnect.m in Sources */,
 				91D3FA101580294F00CB8F1E /* nameprep.c in Sources */,
 				91D3FA111580294F00CB8F1E /* JapaneseCard.m in Sources */,
 				91D3FA121580294F00CB8F1E /* JapaneseSettingsDataSource.m in Sources */,
@@ -5456,8 +5433,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_DEBUG,
@@ -5470,9 +5447,10 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/Classes/External/FlurryLib/",
+					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "84DB2FA3-1C5B-44E3-961A-B7F863341332";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -5482,8 +5460,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_APP_STORE,
@@ -5496,9 +5474,10 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/Classes/External/FlurryLib/",
+					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "84DB2FA3-1C5B-44E3-961A-B7F863341332";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -5852,8 +5831,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_AD_HOC,
@@ -5866,9 +5845,10 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/Classes/External/FlurryLib/",
+					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "84DB2FA3-1C5B-44E3-961A-B7F863341332";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Beta;

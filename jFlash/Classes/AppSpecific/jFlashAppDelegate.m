@@ -7,7 +7,6 @@
 #import "jFlashAppDelegate.h"
 
 #import "DSActivityView.h"
-#import "TapjoyConnect.h"
 #import "AudioSessionManager.h"
 #import "Appirater.h"
 
