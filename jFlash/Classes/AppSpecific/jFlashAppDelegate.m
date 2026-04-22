@@ -6,6 +6,44 @@
 
 #import "jFlashAppDelegate.h"
 
+// Scene delegate — defined here to avoid adding new project files.
+// UIKit creates a fresh instance of this class per scene; it grabs
+// the existing app delegate to access the NIB-created window.
+@interface LWESceneDelegate : UIResponder <UIWindowSceneDelegate>
+@property (nonatomic, strong) UIWindow *window;
+@end
+
+@implementation LWESceneDelegate
+
+- (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
+  if (@available(iOS 13.0, *)) {
+    if (![scene isKindOfClass:[UIWindowScene class]]) return;
+    UIWindowScene *windowScene = (UIWindowScene *)scene;
+
+    // didFinishLaunchingWithOptions already loaded the NIB and ran DB setup.
+    // Here we just create a scene-backed window and show the splash while the DB opens.
+    jFlashAppDelegate *appDelegate = (jFlashAppDelegate *)[UIApplication sharedApplication].delegate;
+    NSLog(@"[LWESceneDelegate] willConnect — appDelegate=%@ tabBarController=%@",
+          appDelegate, appDelegate.tabBarController);
+
+    UIWindow *window = [[UIWindow alloc] initWithWindowScene:windowScene];
+    // Placeholder rootVC so iOS 13+ doesn't complain about a missing rootViewController.
+    // The real tabBarController is installed by _openUserDatabaseWithPlugins after the DB opens.
+    UIViewController *placeholder = [[UIViewController alloc] init];
+    placeholder.view.backgroundColor = [UIColor blackColor];
+    window.rootViewController = placeholder;
+    if (appDelegate.splashView) {
+      [window addSubview:appDelegate.splashView];
+    }
+    appDelegate.window = window;
+    self.window = window;
+    [window makeKeyAndVisible];
+    NSLog(@"[LWESceneDelegate] makeKeyAndVisible done — window=%@ splashView=%@", window, appDelegate.splashView);
+  }
+}
+
+@end
+
 #import "DSActivityView.h"
 #import "AudioSessionManager.h"
 #import "Appirater.h"
@@ -78,12 +116,21 @@
   }
 }
 
+
 #pragma mark - appDidFinishingLaunching
 
 /** App delegate method, point of entry for the app */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)userInfo
 {
   NSSetUncaughtExceptionHandler(&LWEUncaughtExceptionHandler);  // in case we crash, we can log it
+
+  // iOS 26 no longer auto-loads NSMainNibFile when UIApplicationSceneManifest is present.
+  // Load it explicitly so all IBOutlets (tabBarController, splashView, managers) are wired
+  // before any outlet-based code below runs.
+  [[NSBundle mainBundle] loadNibNamed:@"MainWindow" owner:self options:nil];
+
+  NSLog(@"[jFlashAppDelegate] didFinishLaunching — window=%@ tabBarController=%@ splashView=%@",
+        self.window, self.tabBarController, self.splashView);
   srandomdev();    // Seed random generator
 
   // Log user sessions on release builds & connect to Tapjoy for CPI ads
@@ -116,8 +163,8 @@
   {
     self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE];
   }
-  [self.window setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
-  [self.window makeKeyAndVisible];
+  // Tint color and makeKeyAndVisible are applied to the scene window by LWESceneDelegate.
+  // The NIB-created window has no windowScene in iOS 26, so don't call makeKeyAndVisible on it.
   
   // 5. If we need to copy the xFlash user database (e.g. this is first load), schedule that.
   if ([self _needToCopyDatabase])
@@ -162,29 +209,42 @@
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *filename = LWE_CURRENT_USER_DATABASE;
-  BOOL openedDB = [db openDatabase:[LWEFile createDocumentPathWithFilename:filename]];
+  NSString *dbPath = [LWEFile createDocumentPathWithFilename:filename];
+  BOOL openedDB = [db openDatabase:dbPath];
+  NSLog(@"[_openUserDatabaseWithPlugins] openedDB=%d path=%@ isFirstLoad=%d pluginManager=%@",
+        openedDB, dbPath, [CurrentState sharedCurrentState].isFirstLoad, self.pluginManager);
   LWE_ASSERT_EXC(openedDB, @"Unable to open DB: %@", filename);
   if ([CurrentState sharedCurrentState].isFirstLoad)
   {
     // "Install" the preinstalled bundle plugins (CARD-DB) now
     NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
+    NSLog(@"[_openUserDatabaseWithPlugins] cardsDbFilePath=%@", cardsDbFilePath);
     LWE_ASSERT_EXC(cardsDbFilePath, @"Cannot find preinstalled plugins file");
     NSDictionary *preinstalledPluginHash = [[NSDictionary dictionaryWithContentsOfFile:cardsDbFilePath] objectForKey:CARD_DB_KEY];
     Plugin *cardsDb = [Plugin pluginWithDictionary:preinstalledPluginHash];
-    [self.pluginManager installPlugin:cardsDb error:NULL];
+    NSLog(@"[_openUserDatabaseWithPlugins] cardsDb=%@ filePath=%@ fileLocation=%ld fullPath=%@",
+          cardsDb, cardsDb.filePath, (long)cardsDb.fileLocation, cardsDb.fullPath);
+    NSError *installErr = nil;
+    BOOL installed = [self.pluginManager installPlugin:cardsDb error:&installErr];
+    NSLog(@"[_openUserDatabaseWithPlugins] installPlugin returned=%d error=%@", installed, installErr);
   }
-  
+
   // Then load plugins
   BOOL loadedPlugins = [self.pluginManager loadInstalledPlugins];
+  NSLog(@"[_openUserDatabaseWithPlugins] loadedPlugins=%d loadedDict=%@", loadedPlugins, [self.pluginManager loadedPlugins]);
   LWE_ASSERT_EXC(loadedPlugins, @"Unable to load plugins");
 
-  // Get rid of the splash view
+  // Remove splash and reveal the real UI now that the DB is open.
   [self.splashView removeFromSuperview];
   self.splashView = nil;
-  
+
+  // Replace the placeholder rootViewController with the actual tab bar controller.
+  // This is deferred until here so that viewDidLoad methods don't fire before the DB is open.
+  [self.window setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
+  self.window.rootViewController = self.tabBarController;
+
   // Finish setting up & load tab bar
   [self _registerObservers];
-  [self.window addSubview:self.tabBarController.view];
   [Appirater appLaunched];
   
   // Finally load search if we're supposed to do that.

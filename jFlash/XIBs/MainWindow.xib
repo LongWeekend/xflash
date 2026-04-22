@@ -4,13 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIApplication">
-            <connections>
-                <outlet property="delegate" destination="3" id="99"/>
-            </connections>
-        </placeholder>
-        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <customObject id="3" customClass="jFlashAppDelegate">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="jFlashAppDelegate">
             <connections>
                 <outlet property="downloadManager" destination="212" id="215"/>
                 <outlet property="externalAppManager" destination="223" id="226"/>
@@ -19,7 +13,8 @@
                 <outlet property="tabBarController" destination="172" id="204"/>
                 <outlet property="window" destination="2" id="9"/>
             </connections>
-        </customObject>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <customObject id="211" customClass="PluginManager"/>
         <customObject id="212" customClass="DownloadManager">
             <connections>
@@ -171,7 +166,7 @@
                 </navigationController>
             </viewControllers>
             <connections>
-                <outlet property="delegate" destination="3" id="222"/>
+                <outlet property="delegate" destination="-1" id="222"/>
             </connections>
         </tabBarController>
     </objects>
