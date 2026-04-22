@@ -7,7 +7,6 @@
 //
 
 #import "ActionBarViewController.h"
-#import <Twitter/Twitter.h>
 
 @interface ActionBarViewController ()
 - (void) _reportBadData;
@@ -262,6 +261,37 @@
   LWE_LOG(@"Tweet length: %d",[str length]);
   
 	return (NSString*)[str autorelease];
+}
+
+#pragma mark - Layout
+
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+  CGFloat width = self.view.bounds.size.width;
+
+  // Build an ordered array of whichever buttons are present (practice or browse mode).
+  NSMutableArray *buttons = [NSMutableArray array];
+  if (self.prevCardBtn) [buttons addObject:self.prevCardBtn];
+  if (self.addBtn)      [buttons addObject:self.addBtn];
+  if (self.rightBtn)    [buttons addObject:self.rightBtn];
+  if (self.wrongBtn)    [buttons addObject:self.wrongBtn];
+  if (self.buryCardBtn) [buttons addObject:self.buryCardBtn];
+  if (self.nextCardBtn) [buttons addObject:self.nextCardBtn];
+
+  if (buttons.count == 0) return;
+
+  CGFloat totalBtnWidth = 0;
+  for (UIButton *btn in buttons) totalBtnWidth += btn.bounds.size.width;
+  CGFloat gap = (width - totalBtnWidth) / (buttons.count + 1);
+
+  CGFloat x = gap;
+  for (UIButton *btn in buttons) {
+    CGRect f = btn.frame;
+    f.origin.x = roundf(x);
+    btn.frame = f;
+    x += f.size.width + gap;
+  }
 }
 
 #pragma mark - Class Plumbing

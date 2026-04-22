@@ -111,6 +111,18 @@
   }
 }
 
+- (void)viewSafeAreaInsetsDidChange
+{
+  [super viewSafeAreaInsetsDidChange];
+  if (@available(iOS 11.0, *)) {
+    CGFloat top = self.view.safeAreaInsets.top;
+    CGRect f = self.progressBarView.frame;
+    f.origin.y = top;
+    self.progressBarView.frame = f;
+    self.showProgressModalBtn.frame = f;
+  }
+}
+
 /**
  * This method sets up all of the non-nib stuff.
  * Observers are added for settings changes, plugins, etc.
