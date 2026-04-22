@@ -26,7 +26,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   [favoritesTag save];
   
   Tag *seperatelyRetrivedFavTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
-  STAssertEqualObjects(favoritesTag.tagDescription, seperatelyRetrivedFavTag.tagDescription, @"The DB does not contain the saved description");
+  XCTAssertEqualObjects(favoritesTag.tagDescription, seperatelyRetrivedFavTag.tagDescription, @"The DB does not contain the saved description");
   
   description = @"' foo";
   favoritesTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
@@ -34,7 +34,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   [favoritesTag save];
   
   seperatelyRetrivedFavTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
-  STAssertEqualObjects(favoritesTag.tagDescription, seperatelyRetrivedFavTag.tagDescription, @"The DB does not contain the saved description");
+  XCTAssertEqualObjects(favoritesTag.tagDescription, seperatelyRetrivedFavTag.tagDescription, @"The DB does not contain the saved description");
 }
 
 #pragma mark -
@@ -46,11 +46,11 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   NSError *error = nil;
   JFlashDatabase *db = [JFlashDatabase sharedJFlashDatabase];
   BOOL result = [db setupTestDatabaseAndOpenConnectionWithError:&error];
-  STAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
+  XCTAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
   
   //Setup Cards
   result = [db setupAttachedDatabase:CURRENT_CARD_TEST_DATABASE asName:@"cards"];
-  STAssertTrue(result, @"Failed to setup cards database");
+  XCTAssertTrue(result, @"Failed to setup cards database");
 }
 
 - (void)tearDown
@@ -58,7 +58,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   JFlashDatabase *db = [JFlashDatabase sharedJFlashDatabase];
   NSError *error = nil;
   BOOL result = [db removeTestDatabaseWithError:&error];
-  STAssertTrue(result, @"Test database cannot be removed for some reason.\nError: %@", [error localizedDescription]);
+  XCTAssertTrue(result, @"Test database cannot be removed for some reason.\nError: %@", [error localizedDescription]);
 }
 
 @end

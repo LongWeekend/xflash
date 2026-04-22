@@ -30,19 +30,19 @@
                                     nil];
   Plugin *newPlugin = [Plugin pluginWithLegacyDictionary:legacyPluginHash];
   
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_key"], newPlugin.pluginId, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_name"], newPlugin.name, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_details"], newPlugin.details, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_html_content"], newPlugin.htmlString, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_version"], newPlugin.version, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_target_url"], newPlugin.targetURL, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_target_path"], newPlugin.filePath, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_key"], newPlugin.pluginId, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_name"], newPlugin.name, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_details"], newPlugin.details, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_html_content"], newPlugin.htmlString, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_version"], newPlugin.version, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_target_url"], newPlugin.targetURL, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_target_path"], newPlugin.filePath, @"Should be equal");
   
   // Default to "Documents" for file location (this is a new feature)
-  STAssertEquals(kLWEFileLocationDocuments, newPlugin.fileLocation, @"Should be equal");
+  XCTAssertEqual(kLWEFileLocationDocuments, newPlugin.fileLocation, @"Should be equal");
   
   // Default to "database" type, this is a new feature
-  STAssertEqualObjects(@"database", newPlugin.pluginType, @"Should be equal");
+  XCTAssertEqualObjects(@"database", newPlugin.pluginType, @"Should be equal");
 }
 
 @end

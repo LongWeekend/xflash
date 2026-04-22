@@ -16,11 +16,11 @@
 
 - (void) testInitFromHash
 {
-  STAssertEqualObjects(@"Mark's FTS Cards",self.plugin.name,@"");
-  STAssertEqualObjects(@"FTS-DB",self.plugin.pluginId,@"");
-  STAssertEqualObjects(@"database",self.plugin.pluginType,@"");
-  STAssertEqualObjects(@"1.0",self.plugin.version,@"");
-  STAssertEqualObjects(@"cFlash-FTS-1.0.db",self.plugin.filePath,@"");
+  XCTAssertEqualObjects(@"Mark's FTS Cards",self.plugin.name,@"");
+  XCTAssertEqualObjects(@"FTS-DB",self.plugin.pluginId,@"");
+  XCTAssertEqualObjects(@"database",self.plugin.pluginType,@"");
+  XCTAssertEqualObjects(@"1.0",self.plugin.version,@"");
+  XCTAssertEqualObjects(@"cFlash-FTS-1.0.db",self.plugin.filePath,@"");
 }
 
 - (void) testFullPaths
@@ -29,22 +29,22 @@
   
   // Documents
   expectedPath = [LWEFile createDocumentPathWithFilename:self.plugin.filePath];
-  STAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
+  XCTAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
   
   // Library
   self.plugin.fileLocation = LWEPluginLocationLibrary;
   expectedPath = [LWEFile createLibraryPathWithFilename:self.plugin.filePath];
-  STAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
+  XCTAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
   
   // Bundle
   self.plugin.fileLocation = LWEPluginLocationBundle;
   expectedPath = [LWEFile createBundlePathWithFilename:self.plugin.filePath];
-  STAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
+  XCTAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
   
   // Unknown value defaults to bundle
   self.plugin.fileLocation = 6543;
   expectedPath = [LWEFile createBundlePathWithFilename:self.plugin.filePath];
-  STAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
+  XCTAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
 }
 
 - (void) testVersionDetection
@@ -68,17 +68,17 @@
   Plugin *newPlugin = [Plugin pluginWithDictionary:newDict];
   Plugin *evenNewerPlugin = [Plugin pluginWithDictionary:evenNewerDict];
   
-  STAssertTrue((YES == [newPlugin isNewVersionOfPlugin:self.plugin]),@"Should be YES");
-  STAssertEquals(YES,[evenNewerPlugin isNewVersionOfPlugin:self.plugin],@"Should be YES");
-  STAssertEquals(YES,[evenNewerPlugin isNewVersionOfPlugin:newPlugin],@"Should be YES");
-  STAssertEquals(NO,[self.plugin isNewVersionOfPlugin:newPlugin],@"Should be YES");
-  STAssertEquals(NO,[self.plugin isNewVersionOfPlugin:evenNewerPlugin],@"Should be YES");
+  XCTAssertTrue((YES == [newPlugin isNewVersionOfPlugin:self.plugin]),@"Should be YES");
+  XCTAssertEqual(YES,[evenNewerPlugin isNewVersionOfPlugin:self.plugin],@"Should be YES");
+  XCTAssertEqual(YES,[evenNewerPlugin isNewVersionOfPlugin:newPlugin],@"Should be YES");
+  XCTAssertEqual(NO,[self.plugin isNewVersionOfPlugin:newPlugin],@"Should be YES");
+  XCTAssertEqual(NO,[self.plugin isNewVersionOfPlugin:evenNewerPlugin],@"Should be YES");
 }
 
 - (void) testLooseKVC
 {
   // Doesn't throw an exception even with unknown value
-  STAssertNoThrow([self.plugin setValue:@"foo" forKey:@"fsd43dsar32"], @"This should pass");
+  XCTAssertNoThrow([self.plugin setValue:@"foo" forKey:@"fsd43dsar32"], @"This should pass");
 }
 
 #pragma mark - Setup/Teardown
