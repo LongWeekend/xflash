@@ -723,6 +723,7 @@
 -(void)setBackgroundColor_
 {
   self.practiceBgImage.backgroundColor = [[ThemeManager sharedThemeManager] currentThemeTintColor:0.9];
+  self.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.0];
 }
 
 #pragma mark - Class plumbing

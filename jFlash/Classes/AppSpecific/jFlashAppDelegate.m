@@ -23,9 +23,6 @@
     // didFinishLaunchingWithOptions already loaded the NIB and ran DB setup.
     // Here we just create a scene-backed window and show the splash while the DB opens.
     jFlashAppDelegate *appDelegate = (jFlashAppDelegate *)[UIApplication sharedApplication].delegate;
-    NSLog(@"[LWESceneDelegate] willConnect — appDelegate=%@ tabBarController=%@",
-          appDelegate, appDelegate.tabBarController);
-
     UIWindow *window = [[UIWindow alloc] initWithWindowScene:windowScene];
     window.backgroundColor = [UIColor blackColor];
     // Placeholder rootVC so iOS 13+ doesn't complain about a missing rootViewController.
@@ -39,7 +36,6 @@
     appDelegate.window = window;
     self.window = window;
     [window makeKeyAndVisible];
-    NSLog(@"[LWESceneDelegate] makeKeyAndVisible done — window=%@ splashView=%@", window, appDelegate.splashView);
   }
 }
 
@@ -130,8 +126,6 @@
   // before any outlet-based code below runs.
   [[NSBundle mainBundle] loadNibNamed:@"MainWindow" owner:self options:nil];
 
-  NSLog(@"[jFlashAppDelegate] didFinishLaunching — window=%@ tabBarController=%@ splashView=%@",
-        self.window, self.tabBarController, self.splashView);
   srandomdev();    // Seed random generator
 
   // Log user sessions on release builds & connect to Tapjoy for CPI ads
@@ -212,27 +206,20 @@
   NSString *filename = LWE_CURRENT_USER_DATABASE;
   NSString *dbPath = [LWEFile createDocumentPathWithFilename:filename];
   BOOL openedDB = [db openDatabase:dbPath];
-  NSLog(@"[_openUserDatabaseWithPlugins] openedDB=%d path=%@ isFirstLoad=%d pluginManager=%@",
-        openedDB, dbPath, [CurrentState sharedCurrentState].isFirstLoad, self.pluginManager);
   LWE_ASSERT_EXC(openedDB, @"Unable to open DB: %@", filename);
   if ([CurrentState sharedCurrentState].isFirstLoad)
   {
     // "Install" the preinstalled bundle plugins (CARD-DB) now
     NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
-    NSLog(@"[_openUserDatabaseWithPlugins] cardsDbFilePath=%@", cardsDbFilePath);
     LWE_ASSERT_EXC(cardsDbFilePath, @"Cannot find preinstalled plugins file");
     NSDictionary *preinstalledPluginHash = [[NSDictionary dictionaryWithContentsOfFile:cardsDbFilePath] objectForKey:CARD_DB_KEY];
     Plugin *cardsDb = [Plugin pluginWithDictionary:preinstalledPluginHash];
-    NSLog(@"[_openUserDatabaseWithPlugins] cardsDb=%@ filePath=%@ fileLocation=%ld fullPath=%@",
-          cardsDb, cardsDb.filePath, (long)cardsDb.fileLocation, cardsDb.fullPath);
     NSError *installErr = nil;
-    BOOL installed = [self.pluginManager installPlugin:cardsDb error:&installErr];
-    NSLog(@"[_openUserDatabaseWithPlugins] installPlugin returned=%d error=%@", installed, installErr);
+    [self.pluginManager installPlugin:cardsDb error:&installErr];
   }
 
   // Then load plugins
   BOOL loadedPlugins = [self.pluginManager loadInstalledPlugins];
-  NSLog(@"[_openUserDatabaseWithPlugins] loadedPlugins=%d loadedDict=%@", loadedPlugins, [self.pluginManager loadedPlugins]);
   LWE_ASSERT_EXC(loadedPlugins, @"Unable to load plugins");
 
   // Remove splash and reveal the real UI now that the DB is open.
@@ -243,12 +230,14 @@
   // This is deferred until here so that viewDidLoad methods don't fire before the DB is open.
   [self.window setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
 
-  // iOS 15+ uses a transparent scrollEdgeAppearance by default, which causes the window's
-  // white background to bleed through below the tab bar into the home-indicator safe area.
-  // Explicitly configure an opaque appearance to fill that region consistently.
+  // Make the tab bar opaque so UIKit sizes child view controllers' views to end above
+  // the tab bar rather than extending underneath it (the iOS 26 default floating-glass
+  // behaviour). This prevents the glass/white strip that appears between the action-bar
+  // buttons and the tab bar items.
+  self.tabBarController.tabBar.translucent = NO;
   if (@available(iOS 15.0, *)) {
     UITabBarAppearance *tabAppearance = [[UITabBarAppearance alloc] init];
-    [tabAppearance configureWithDefaultBackground];
+    [tabAppearance configureWithOpaqueBackground];
     self.tabBarController.tabBar.standardAppearance = tabAppearance;
     self.tabBarController.tabBar.scrollEdgeAppearance = tabAppearance;
     [tabAppearance release];
