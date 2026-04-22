@@ -27,6 +27,7 @@
           appDelegate, appDelegate.tabBarController);
 
     UIWindow *window = [[UIWindow alloc] initWithWindowScene:windowScene];
+    window.backgroundColor = [UIColor blackColor];
     // Placeholder rootVC so iOS 13+ doesn't complain about a missing rootViewController.
     // The real tabBarController is installed by _openUserDatabaseWithPlugins after the DB opens.
     UIViewController *placeholder = [[UIViewController alloc] init];
@@ -241,6 +242,18 @@
   // Replace the placeholder rootViewController with the actual tab bar controller.
   // This is deferred until here so that viewDidLoad methods don't fire before the DB is open.
   [self.window setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
+
+  // iOS 15+ uses a transparent scrollEdgeAppearance by default, which causes the window's
+  // white background to bleed through below the tab bar into the home-indicator safe area.
+  // Explicitly configure an opaque appearance to fill that region consistently.
+  if (@available(iOS 15.0, *)) {
+    UITabBarAppearance *tabAppearance = [[UITabBarAppearance alloc] init];
+    [tabAppearance configureWithDefaultBackground];
+    self.tabBarController.tabBar.standardAppearance = tabAppearance;
+    self.tabBarController.tabBar.scrollEdgeAppearance = tabAppearance;
+    [tabAppearance release];
+  }
+
   self.window.rootViewController = self.tabBarController;
 
   // Finish setting up & load tab bar
