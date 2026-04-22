@@ -265,12 +265,11 @@
 
 #pragma mark - Layout
 
-- (void)viewDidLayoutSubviews
+- (void)distributeButtonsEvenly
 {
-  [super viewDidLayoutSubviews];
   CGFloat width = self.view.bounds.size.width;
+  if (width <= 0) return;
 
-  // Build an ordered array of whichever buttons are present (practice or browse mode).
   NSMutableArray *buttons = [NSMutableArray array];
   if (self.prevCardBtn) [buttons addObject:self.prevCardBtn];
   if (self.addBtn)      [buttons addObject:self.addBtn];
@@ -283,7 +282,7 @@
 
   CGFloat totalBtnWidth = 0;
   for (UIButton *btn in buttons) totalBtnWidth += btn.bounds.size.width;
-  CGFloat gap = (width - totalBtnWidth) / (buttons.count + 1);
+  CGFloat gap = (width - totalBtnWidth) / ((CGFloat)buttons.count + 1);
 
   CGFloat x = gap;
   for (UIButton *btn in buttons) {
@@ -292,6 +291,12 @@
     btn.frame = f;
     x += f.size.width + gap;
   }
+}
+
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+  [self distributeButtonsEvenly];
 }
 
 #pragma mark - Class Plumbing

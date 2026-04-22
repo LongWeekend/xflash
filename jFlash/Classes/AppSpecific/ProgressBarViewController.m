@@ -34,14 +34,16 @@
 // draws the progress bar
 - (void) drawProgressBar
 {
-  // TODO: iPad customization
-  NSInteger pbOrigin = 7;
+  CGFloat totalWidth = self.view.bounds.size.width;
+  if (totalWidth <= 0) totalWidth = 320.0;
+  CGFloat colW = totalWidth / 5.0;
+  CGFloat hPad = 4.0;
+
   NSInteger thisLevelCount = self.tag.seenCardCount;
-  
+
   // For levels 1-5
   for (NSInteger i = 1; i < 6; i++)
   {
-    // This call handles the creation and/or getting of the progress bar
     UIProgressView *progressView = [self _progressBarForLevel:i];
 
     if (i > 1)
@@ -54,29 +56,41 @@
       progress = ((CGFloat)thisLevelCount / (CGFloat)tag.seenCardCount);
     }
     progressView.progress = progress;
-    
-    // TODO: iPad customization!
-    //move the origin of the next progress bar over
-    progressView.frame = CGRectMake(pbOrigin, 19, 57, 14);
-    pbOrigin += progressView.frame.size.width + 5;
+
+    CGFloat colX = (i - 1) * colW;
+    progressView.frame = CGRectMake(colX + hPad, 19, colW - 2 * hPad, 14);
   }
-  
-  // Finally bring all the labels to the front
+
+  // Update count labels (tags 201-205) and header labels (tags 301-305)
   for (NSInteger i = 1; i < 6; i++)
   {
-    // Update the label
-    UILabel *progressLabel = (UILabel*)[self.view viewWithTag:(i+PROGRESS_LABEL_TAG)];
-    if (progressLabel)
+    CGFloat colX = (i - 1) * colW;
+    CGFloat labelX = colX + hPad;
+    CGFloat labelW = colW - 2 * hPad;
+
+    UILabel *countLabel = (UILabel*)[self.view viewWithTag:(i + PROGRESS_LABEL_TAG)];
+    if (countLabel)
     {
-      progressLabel.text = [NSString stringWithFormat:@"%d",[[self.tag.cardLevelCounts objectAtIndex:i] integerValue]];
-      [self.view bringSubviewToFront:progressLabel];
+      countLabel.text = [NSString stringWithFormat:@"%d", [[self.tag.cardLevelCounts objectAtIndex:i] integerValue]];
+      countLabel.frame = CGRectMake(labelX, 20, labelW, 21);
+      [self.view bringSubviewToFront:countLabel];
+    }
+
+    UILabel *headerLabel = (UILabel*)[self.view viewWithTag:(i + 300)];
+    if (headerLabel)
+    {
+      headerLabel.frame = CGRectMake(labelX, -1, labelW, 21);
     }
   }
-        
-  [self.view setNeedsLayout];
 }
 
-- (void)dealloc 
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+  if (self.tag) [self drawProgressBar];
+}
+
+- (void)dealloc
 {
   [tag release];
   [super dealloc];

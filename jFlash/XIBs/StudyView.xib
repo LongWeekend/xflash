@@ -57,16 +57,16 @@
                     <rect key="frame" x="0.0" y="38" width="320" height="354"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Current Word Set" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="13" id="158" userLabel="cardSetLabel">
-                            <rect key="frame" x="4" y="326" width="132" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Current Word Set" textAlignment="left" lineBreakMode="tailTruncation" minimumFontSize="13" id="158" userLabel="cardSetLabel">
+                            <rect key="frame" x="8" y="326" width="132" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.023529414089999999" blue="0.50588238240000005" alpha="0.0" colorSpace="deviceRGB"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="500" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="13" id="187" userLabel="setCardsViewedNum">
-                            <rect key="frame" x="187" y="326" width="86" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="500" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="13" id="187" userLabel="setCardsViewedNum">
+                            <rect key="frame" x="152" y="326" width="160" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="textColor" red="1" green="0.99215692280000001" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>

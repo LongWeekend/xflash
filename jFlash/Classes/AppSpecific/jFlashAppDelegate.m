@@ -5,6 +5,26 @@
 //  Copyright LONG WEEKEND INC 2009. All rights reserved.
 
 #import "jFlashAppDelegate.h"
+#import <objc/runtime.h>
+
+// Centers UITabBarButton subviews vertically in the full tab bar frame,
+// so items appear centered in the space between the action bar and the screen bottom.
+@interface LWECenteredTabBar : UITabBar
+@end
+@implementation LWECenteredTabBar
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  CGFloat barH = self.bounds.size.height;
+  for (UIView *view in self.subviews) {
+    CGFloat h = view.frame.size.height;
+    if (h > 20 && h < barH - 5) {
+      CGRect f = view.frame;
+      f.origin.y = roundf((barH - f.size.height) / 2.0);
+      view.frame = f;
+    }
+  }
+}
+@end
 
 // Scene delegate — defined here to avoid adding new project files.
 // UIKit creates a fresh instance of this class per scene; it grabs
@@ -242,6 +262,10 @@
     self.tabBarController.tabBar.scrollEdgeAppearance = tabAppearance;
     [tabAppearance release];
   }
+
+  // XIB customClass is ignored for the tabBar property of UITabBarController, so we
+  // isa-swap the existing instance to our centering subclass instead.
+  object_setClass(self.tabBarController.tabBar, [LWECenteredTabBar class]);
 
   self.window.rootViewController = self.tabBarController;
 

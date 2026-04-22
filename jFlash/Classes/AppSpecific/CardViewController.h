@@ -49,6 +49,10 @@ extern NSString * const LWECardHTMLTemplate_EtoJ;
 //! Whatever the value of readingVisible is, this will reset it to that state.
 - (void) resetReadingVisibility;
 
+//! Lays out reading, headword, and webview based on current bounds.
+//! Call from StudyViewController.viewDidLayoutSubviews (child VC containment is informal).
+- (void) layoutCardSubviews;
+
 //! Implement this delegate to control how the card is displayed in a mode.
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
 

@@ -115,12 +115,44 @@
   // Add mood icon subview - TODO: MMA this is 90% complete, but I want to find a way to do this in the NIB
   CGRect moodIconRect = CGRectMake(235, 197, 80, 73);
   self.moodIcon.view.frame = moodIconRect;
-  self.moodIcon.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+  self.moodIcon.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
   [self.view addSubview:self.moodIcon.view];
   [self.moodIcon updateMoodIcon:100.0f];
   
   // For languages such as Chinese, we may need to configure the font
   self.headwordLabel.font = [Card configureFontForLabel:self.headwordLabel];
+}
+
+#pragma mark - Layout
+
+- (void)layoutCardSubviews
+{
+  CGFloat w = self.view.bounds.size.width;
+  CGFloat h = self.view.bounds.size.height;
+  if (w <= 0 || h <= 0) return;
+
+  CGFloat hPad = 10.0;
+  CGFloat contentW = w - 2.0 * hPad;
+
+  // Reading row at ~25% from top of card area so it lands near 30% of screen height.
+  CGFloat readingY = MAX(20.0, roundf(h * 0.25));
+  CGFloat readingH = 42.0;
+  self.readingScrollContainer.frame = CGRectMake(hPad, readingY, contentW, readingH);
+  self.readingMoreIcon.frame = CGRectMake(2.0, readingY + readingH - 17.0, 26.0, 17.0);
+  // Toggle overlays the full reading row; positioned above the reveal-button zone
+  // so it intercepts taps without triggering the definition reveal.
+  self.toggleReadingBtn.frame = CGRectMake(hPad, readingY, contentW, readingH);
+
+  // Headword immediately below reading
+  CGFloat headwordY = readingY + readingH + 4.0;
+  CGFloat headwordH = 55.0;
+  self.headwordScrollContainer.frame = CGRectMake(hPad, headwordY, contentW, headwordH);
+  self.headwordMoreIcon.frame = CGRectMake(2.0, headwordY + headwordH - 17.0, 26.0, 17.0);
+
+  // Meaning webview fills everything below the headword, giving it full space to the bottom.
+  CGFloat webY = headwordY + headwordH + 8.0;
+  CGFloat webH = MAX(60.0, h - webY - 8.0);
+  self.meaningWebView.frame = CGRectMake(hPad, webY, contentW, webH);
 }
 
 #pragma mark - IBAction Methods
@@ -310,9 +342,9 @@
 NSString * const LWECardHTMLTemplate = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<style>"
-"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; } "
+"body{ background-color:transparent; min-height:72px; display:-webkit-flex; display:flex; -webkit-justify-content:center; justify-content:center; -webkit-align-items:center; align-items:center; margin:0; padding:0; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; line-height:21px; } "
 "dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
-"#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;vertical-align:middle;} "
+"#container{ width:100%; text-align:center; } "
 "ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
 "li{color:white; margin:0px; margin-bottom:7px;} "
 "##THEMECSS##"
@@ -323,9 +355,9 @@ NSString * const LWECardHTMLTemplate = @""
 NSString * const LWECardHTMLTemplate_EtoJ = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<style>"
-"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; } "
+"body{ background-color:transparent; min-height:72px; display:-webkit-flex; display:flex; -webkit-justify-content:center; justify-content:center; -webkit-align-items:center; align-items:center; margin:0; padding:0; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; line-height:21px; } "
 "dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
-"#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;font-size:34px; padding-left:3px; line-height:32px;} "
+"#container{ width:100%; text-align:center; font-size:34px; padding-left:3px; line-height:32px; } "
 "ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
 "li{color:white; margin:0px; margin-bottom:7px;} "
 "##THEMECSS##"

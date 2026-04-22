@@ -44,6 +44,8 @@
 // action sheet
 - (IBAction)showCardActionSheet;
 
+- (void)distributeButtonsEvenly;
+
 @property (assign) IBOutlet id<ActionBarViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) Card *currentCard;

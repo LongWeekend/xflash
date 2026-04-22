@@ -13,6 +13,7 @@
 #import "LWENetworkUtils.h"
 #import "AddTagViewController.h"
 #import "UpdateManager.h"
+#import "CardViewController.h"
 
 @interface StudyViewController()
 //private methods
@@ -120,6 +121,81 @@
     f.origin.y = top;
     self.progressBarView.frame = f;
     self.showProgressModalBtn.frame = f;
+  }
+}
+
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+
+  // Fix action bar VC view width (autoresizing won't fire if container was already at
+  // final width when the view was added), then distribute buttons evenly.
+  if (self.actionBarController) {
+    CGRect f = self.actionBarController.view.frame;
+    f.size.width = self.actionbarView.bounds.size.width;
+    self.actionBarController.view.frame = f;
+    if ([self.actionBarController respondsToSelector:@selector(distributeButtonsEvenly)]) {
+      [(ActionBarViewController *)self.actionBarController distributeButtonsEvenly];
+    }
+  }
+
+  // Fix progress bar VC view width for the same reason, then redraw.
+  if (self.progressBarViewController) {
+    CGRect f = self.progressBarViewController.view.frame;
+    f.size.width = self.progressBarView.bounds.size.width;
+    self.progressBarViewController.view.frame = f;
+    if (self.progressBarViewController.tag) {
+      [self.progressBarViewController drawProgressBar];
+    }
+  }
+
+  // Lay out the card content to fill its container vertically.
+  // Reading/headword sit near the top; webview fills remaining space to the mood icon.
+  if (self.cardViewController && self.cardView.bounds.size.height > 0) {
+    CGFloat containerW = self.cardView.bounds.size.width;
+    CGFloat containerH = self.cardView.bounds.size.height;
+
+    // Fill the full card area so the layout percentages in layoutCardSubviews
+    // resolve to the intended on-screen positions (~30% from screen top for reading).
+    self.cardViewController.view.frame = CGRectMake(0, 0, containerW, containerH);
+
+    if ([self.cardViewController isKindOfClass:[CardViewController class]]) {
+      CardViewController *cvc = (CardViewController *)self.cardViewController;
+
+      // Apply internal card layout now that the view has its final bounds.
+      [cvc layoutCardSubviews];
+
+      // Move mood icon to cardView so it floats at the bottom-right of the red area
+      // regardless of how the card VC view is sized.
+      UIView *moodView = cvc.moodIcon.view;
+      if (moodView && moodView.superview != self.cardView) {
+        [[self.cardView viewWithTag:9001] removeFromSuperview];
+        moodView.tag = 9001;
+        [moodView removeFromSuperview];
+        [self.cardView addSubview:moodView];
+      }
+      if (moodView) {
+        CGFloat iconW = moodView.bounds.size.width;
+        CGFloat iconH = moodView.bounds.size.height;
+        moodView.frame = CGRectMake(
+          containerW - iconW + 20.0,
+          containerH - iconH - 8.0,
+          iconW, iconH
+        );
+      }
+
+      // Move the reveal button below the reading/headword area so the reading toggle
+      // sits above it and can be tapped without triggering the definition reveal.
+      if (self.revealCardBtn) {
+        // readingY (25% of containerH) + readingH (42) + gap (4) + headwordH (55) + buffer (10)
+        CGFloat headwordsBottom = roundf(containerH * 0.25) + 42.0 + 4.0 + 55.0 + 10.0;
+        CGFloat revealTop = self.scrollView.frame.origin.y + headwordsBottom;
+        CGRect rf = self.revealCardBtn.frame;
+        rf.origin.y = revealTop;
+        rf.size.height = MAX(100.0, self.view.bounds.size.height - revealTop);
+        self.revealCardBtn.frame = rf;
+      }
+    }
   }
 }
 
@@ -584,9 +660,10 @@
       [self.cardViewController.view removeFromSuperview];
     }
     
-    // Set the new VC
+    // Set the new VC — keep natural XIB height; width fills container.
+    // viewDidLayoutSubviews will center it vertically.
     self.cardViewController = [self.delegate cardViewControllerForStudyView:self];
-    self.cardViewController.view.frame = self.cardView.frame;
+    self.cardViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.cardView addSubview:self.cardViewController.view];
   }
   
@@ -597,8 +674,9 @@
     {
       [self.actionBarController.view removeFromSuperview];
     }
-    
+
     UIViewController<StudyViewSubcontrollerProtocol> *actionVC = [self.delegate actionBarViewControllerForStudyView:self];
+    actionVC.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.actionbarView addSubview:actionVC.view];
     self.actionBarController = actionVC;
   }
