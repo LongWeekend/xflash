@@ -7,19 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import "Card.h"
 #import "Plugin.h"
 
-// These are strings that will be used in the UIWebView's links, then as delegate we 
-// intercept those links and determine what "button" the user tapped.  Similar to a UIView
-// tag in the way we use it.
+// Strings used as fake URL paths in WKWebView links to intercept button taps.
 extern NSString * const TOKENIZE_SAMPLE_SENTENCE;
 extern NSString * const ADD_CARD_TO_SET;
 
 // The HTML template we show the example sentences in.
 extern NSString * const LWESentencesHTML;
 
-@interface ExampleSentencesViewController : UIViewController <UIWebViewDelegate>
+@interface ExampleSentencesViewController : UIViewController <WKNavigationDelegate>
 {
   BOOL _useOldPluginMethods;
 }
@@ -28,6 +27,6 @@ extern NSString * const LWESentencesHTML;
 - (void) setupWithCard:(Card*)card;
 
 @property (retain) NSMutableDictionary *sampleDecomposition;
-@property (nonatomic, retain) IBOutlet UIWebView *sentencesWebView;
+@property (nonatomic, retain) WKWebView *sentencesWebView;
 
 @end

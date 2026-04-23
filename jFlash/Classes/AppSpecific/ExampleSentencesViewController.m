@@ -12,7 +12,6 @@
 #import "CardViewController.h"
 
 #import "ExampleSentencePeer.h"
-#import "UIWebView+LWENoBounces.h"
 #import "NSURL+LWEUtilities.h"
 #import "AddTagViewController.h"
 #import "jFlashAppDelegate.h"
@@ -23,7 +22,7 @@
 
 @interface ExampleSentencesViewController ()
 - (void)_showAddToSetWithCardID:(NSString *)cardID;
-- (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(BOOL)isOpen webView:(UIWebView *)webView;
+- (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(BOOL)isOpen webView:(WKWebView *)webView;
 - (NSString *)_generateCardCompositionStringWithSentenceId:(NSInteger)sentenceId;
 @end
 
@@ -57,8 +56,17 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.sentencesWebView.backgroundColor = [UIColor clearColor];
-  [self.sentencesWebView shutOffBouncing];
+  WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+  WKWebView *wv = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
+  [config release];
+  wv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+  wv.navigationDelegate = self;
+  wv.opaque = NO;
+  wv.backgroundColor = [UIColor clearColor];
+  wv.scrollView.bounces = NO;
+  [self.view addSubview:wv];
+  self.sentencesWebView = wv;
+  [wv release];
 }
 
 
@@ -124,15 +132,17 @@
   [sentencesHTML release];
 }
 
-#pragma mark - UIWebViewDelegate
+#pragma mark - WKNavigationDelegate
 
-- (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-	NSString *url = [[request URL] relativePath];
-	//TODO: Make this better!!
-	if ((url == nil)||([url isEqualToString:@"about:blank"]))
+  NSURLRequest *request = navigationAction.request;
+  NSString *url = [[request URL] relativePath];
+
+  if (url == nil || [url isEqualToString:@"about:blank"])
   {
-		return YES;
+    decisionHandler(WKNavigationActionPolicyAllow);
+    return;
   }
 
   NSDictionary *dict = [[request URL] queryStrings];
@@ -142,8 +152,7 @@
   {
     url = [url substringFromIndex:slashPosition.location+1];
   }
-  
-  // Decide what to do based on the URL's ID
+
   if ([url isEqualToString:TOKENIZE_SAMPLE_SENTENCE])
   {
     BOOL isOpen = [[dict objectForKey:@"open"] isEqualToString:@"1"];
@@ -153,8 +162,8 @@
   {
     [self _showAddToSetWithCardID:[dict objectForKey:@"id"]];
   }
-  
-  return NO;
+
+  decisionHandler(WKNavigationActionPolicyCancel);
 }
 
 - (void)_showAddToSetWithCardID:(NSString *)cardID
@@ -176,7 +185,7 @@
 	[dict release];
 }
 
-- (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(BOOL)isOpen webView:(UIWebView *)webView
+- (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(BOOL)isOpen webView:(WKWebView *)webView
 {
 	NSString *js = nil;
 	if (isOpen)
@@ -185,7 +194,7 @@
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ",sentenceIDStr];
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@'; ",sentenceIDStr,SHOW_BUTTON_TITLE];
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = 'http://xflash.com/%@?id=%@&open=0'; ",sentenceIDStr,TOKENIZE_SAMPLE_SENTENCE,sentenceIDStr];
-		[webView stringByEvaluatingJavaScriptFromString:js];
+		[webView evaluateJavaScript:js completionHandler:nil];
 	}
 	else
 	{
@@ -205,7 +214,7 @@
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@';",sentenceIDStr,CLOSE_BUTTON_TITLE];
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = 'http://xflash.com/%@?id=%@&open=1';",sentenceIDStr,TOKENIZE_SAMPLE_SENTENCE,sentenceIDStr];
 		
-		[webView stringByEvaluatingJavaScriptFromString:js];
+		[webView evaluateJavaScript:js completionHandler:nil];
 	}
 }
 
