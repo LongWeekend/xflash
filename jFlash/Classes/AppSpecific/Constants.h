@@ -117,6 +117,7 @@ extern NSString * const LWE_XFLASH_HOMEPAGE;
   extern NSString * const LWE_JF_VERSION_1_6_2;
   extern NSString * const LWE_JF_VERSION_1_7;
   extern NSString * const LWE_JF_VERSION_1_8;
+  extern NSString * const LWE_JF_VERSION_1_9;
   extern NSString * const LWE_JF_10_USER_DATABASE;
   extern NSString * const LWE_JF_10_TO_11_SQL_FILENAME;
   extern NSString * const LWE_JF_12_TO_13_SQL_FILENAME;

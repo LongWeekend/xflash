@@ -229,13 +229,16 @@
   LWE_ASSERT_EXC(openedDB, @"Unable to open DB: %@", filename);
   if ([CurrentState sharedCurrentState].isFirstLoad)
   {
-    // "Install" the preinstalled bundle plugins (CARD-DB) now
-    NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
-    LWE_ASSERT_EXC(cardsDbFilePath, @"Cannot find preinstalled plugins file");
-    NSDictionary *preinstalledPluginHash = [[NSDictionary dictionaryWithContentsOfFile:cardsDbFilePath] objectForKey:CARD_DB_KEY];
-    Plugin *cardsDb = [Plugin pluginWithDictionary:preinstalledPluginHash];
-    NSError *installErr = nil;
-    [self.pluginManager installPlugin:cardsDb error:&installErr];
+    // Install all pre-bundled plugins (CARD_DB, FTS_DB, EX_DB) from the installed plist
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
+    LWE_ASSERT_EXC(plistPath, @"Cannot find preinstalled plugins file");
+    NSDictionary *plist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    for (NSString *key in plist)
+    {
+      Plugin *plugin = [Plugin pluginWithDictionary:[plist objectForKey:key]];
+      NSError *installErr = nil;
+      [self.pluginManager installPlugin:plugin error:&installErr];
+    }
   }
 
   // Then load plugins
