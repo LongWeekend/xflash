@@ -121,6 +121,13 @@
     f.origin.y = top;
     self.progressBarView.frame = f;
     self.showProgressModalBtn.frame = f;
+
+    CGFloat progressBottom = top + f.size.height;
+    CGRect sv = self.scrollView.frame;
+    CGFloat deltaY = progressBottom - sv.origin.y;
+    sv.origin.y = progressBottom;
+    sv.size.height -= deltaY;
+    self.scrollView.frame = sv;
   }
 }
 
@@ -763,11 +770,9 @@
     vc.view.tag = LWE_EX_SENTENCE_INSTALLER_VIEW_TAG;
   }
   
-  // Resize our second view to match our first one
-	CGRect rect = vc.view.frame;
+  // Resize our second view to fill the second page of the scroll view
 	CGFloat cx = self.scrollView.frame.size.width;
-	rect.origin.x = ((self.scrollView.frame.size.width - rect.size.width) / 2) + cx;
-  rect.size.height = self.scrollView.frame.size.height;
+	CGRect rect = CGRectMake(cx, 0, cx, self.scrollView.frame.size.height);
 	vc.view.frame = rect;
   
   // Set the content size for the width * the number of views

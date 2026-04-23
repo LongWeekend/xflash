@@ -81,7 +81,7 @@
 - (void) _pluginDidInstall:(NSNotification*)aNotification
 {
   Plugin *installedPlugin = (Plugin *)aNotification.object;
-  if ([installedPlugin.pluginId isEqualToString:EXAMPLE_DB_KEY] && [installedPlugin.version isEqualToString:@"1.1"])
+  if ([installedPlugin.pluginId isEqualToString:EXAMPLE_DB_KEY] && ![installedPlugin.version isEqualToString:@"1.1"])
   {
     _useOldPluginMethods = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEPluginDidInstall object:nil];
@@ -275,12 +275,12 @@ NSString * const LWESentencesHTML = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<meta name='viewport' content='width=device-width, initial-scale=1.0' />"
 "<style>"
-"body{ background-color: transparent; margin:0; padding: 0; box-sizing:border-box; width:100%; text-align:left; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; } "
+"body{ background-color: transparent; margin:0; padding: 0 10px; box-sizing:border-box; width:100%; text-align:left; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; } "
 "dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
 ".button{ font-size:14px; margin:2px 0px 2px 0px; padding: 2px 4px 3px 4px; display: inline; background: #777; border: none; color: #fff; font-weight: bold; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; background: rgba(0,0,0,0.3);} "
 ".showWordsDiv { float: right; margin: 0px 0px 9px 9px; }"
 "#container{ display:block; width:100%; text-align:left; } "
-"ol{ color:white; text-align:left; width:100%; box-sizing:border-box; margin:0px; padding-left:10px; } "
+"ol{ color:white; text-align:left; width:100%; box-sizing:border-box; margin:0px; padding-left:0px; list-style-position:inside; } "
 "li{ color:white; margin:0px; margin-bottom:17px; line-height:17px; } "
 ".lowlight {display:inline-block; margin-top:3px;color:#181818;text-shadow:none;font-weight:normal;} "
 ".readingLabel {font-size:14px;font-weight:bold; margin:3px 0px 0px 0px;} "

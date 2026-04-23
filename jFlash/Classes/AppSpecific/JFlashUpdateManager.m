@@ -43,9 +43,6 @@
 + (BOOL) _needs17to18SettingsUpdate:(NSUserDefaults *) settings;
 + (void) _updateSettingsFrom17to18:(NSUserDefaults *)settings;
 
-// JFLASH 1.8 -> 1.9
-+ (BOOL) _needs18to19SettingsUpdate:(NSUserDefaults *) settings;
-+ (void) _updateSettingsFrom18to19:(NSUserDefaults *)settings;
 
 @end
 
@@ -315,37 +312,6 @@
   [settings setObject:LWE_JF_VERSION_1_8 forKey:APP_SETTINGS_VERSION];
 }
 
-#pragma mark Version 1.9
-
-+ (BOOL) _needs18to19SettingsUpdate:(NSUserDefaults *) settings
-{
-  return [[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_8];
-}
-
-+ (void) _updateSettingsFrom18to19:(NSUserDefaults *)settings
-{
-  [settings setObject:LWE_JF_VERSION_1_9 forKey:APP_DATA_VERSION];
-  [settings setObject:LWE_JF_VERSION_1_9 forKey:APP_SETTINGS_VERSION];
-
-  // Register FTS_DB and EX_DB as bundle plugins so existing users get them
-  // without downloading. This runs before the DB is open so we write directly
-  // to NSUserDefaults rather than calling installPlugin: (which attaches DBs).
-  NSString *plistPath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
-  NSDictionary *plist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-  NSMutableDictionary *pluginsDict = [[[settings objectForKey:APP_PLUGIN] mutableCopy] autorelease];
-  NSArray *bundlePluginKeys = [NSArray arrayWithObjects:FTS_DB_KEY, EXAMPLE_DB_KEY, nil];
-  for (NSString *key in bundlePluginKeys)
-  {
-    NSDictionary *pluginHash = [plist objectForKey:key];
-    if (pluginHash)
-    {
-      Plugin *plugin = [Plugin pluginWithDictionary:pluginHash];
-      [pluginsDict setObject:[NSKeyedArchiver archivedDataWithRootObject:plugin] forKey:plugin.pluginId];
-    }
-  }
-  [settings setValue:pluginsDict forKey:APP_PLUGIN];
-}
-
 #pragma mark -
 
 + (BOOL) performMigrations:(NSUserDefaults*)settings
@@ -423,12 +389,6 @@
     migrated = YES;
   }
 
-  if ([JFlashUpdateManager _needs18to19SettingsUpdate:settings])
-  {
-    LWE_LOG(@"[Migration Log]YAY! Updating to 1.9 version - bundling FTS and EX plugins");
-    [JFlashUpdateManager _updateSettingsFrom18to19:settings];
-    migrated = YES;
-  }
   return migrated;
 }
 
