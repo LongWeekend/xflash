@@ -10,12 +10,58 @@
 
 @interface ActionBarViewController ()
 - (void) _reportBadData;
+- (void) _applyModernStyle:(UIButton *)btn symbolName:(NSString *)name label:(NSString *)labelText color:(UIColor *)color;
 @end
 
 @implementation ActionBarViewController
 @synthesize delegate, currentCard;
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn;
 @synthesize cardMeaningBtnHint;
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  if (@available(iOS 13.0, *)) {
+    self.view.backgroundColor = [UIColor systemBackgroundColor];
+    [self _applyModernStyle:self.addBtn      symbolName:@"plus.circle.fill"      label:@"actions" color:[UIColor systemBlueColor]];
+    [self _applyModernStyle:self.rightBtn    symbolName:@"checkmark.circle.fill" label:@"right"   color:[UIColor systemGreenColor]];
+    [self _applyModernStyle:self.wrongBtn    symbolName:@"xmark.circle.fill"     label:@"wrong"   color:[UIColor systemRedColor]];
+    [self _applyModernStyle:self.buryCardBtn symbolName:@"archivebox.circle.fill" label:@"bury it" color:[UIColor systemOrangeColor]];
+  }
+}
+
+- (void)_applyModernStyle:(UIButton *)btn symbolName:(NSString *)name label:(NSString *)labelText color:(UIColor *)color
+{
+  if (!btn) return;
+  if (@available(iOS 13.0, *)) {
+    UIImage *icon = [UIImage systemImageNamed:name];
+    if (icon) {
+      UIImageSymbolConfiguration *config = [UIImageSymbolConfiguration configurationWithPointSize:34 weight:UIImageSymbolWeightMedium];
+      icon = [icon imageByApplyingSymbolConfiguration:config];
+    }
+    [btn setImage:icon forState:UIControlStateNormal];
+    [btn setImage:nil forState:UIControlStateHighlighted];
+    [btn setBackgroundImage:nil forState:UIControlStateNormal];
+    [btn setBackgroundImage:nil forState:UIControlStateHighlighted];
+    [btn setTitle:@"" forState:UIControlStateNormal];
+    btn.tintColor = color;
+    btn.backgroundColor = [UIColor clearColor];
+
+    UILabel *lbl = (UILabel *)[btn viewWithTag:9002];
+    if (!lbl) {
+      lbl = [[UILabel alloc] init];
+      lbl.tag = 9002;
+      lbl.textAlignment = NSTextAlignmentCenter;
+      lbl.font = [UIFont systemFontOfSize:11 weight:UIFontWeightMedium];
+      lbl.textColor = [UIColor secondaryLabelColor];
+      [btn addSubview:lbl];
+      [lbl release];
+    }
+    lbl.text = labelText;
+  }
+}
 
 // MMA: 11/14/2011 -- this method appears to be unused...
 //Give the delegate a chance to not reveal the card
@@ -297,6 +343,23 @@
 {
   [super viewDidLayoutSubviews];
   [self distributeButtonsEvenly];
+
+  if (@available(iOS 13.0, *)) {
+    NSMutableArray *btns = [NSMutableArray array];
+    if (self.addBtn)      [btns addObject:self.addBtn];
+    if (self.rightBtn)    [btns addObject:self.rightBtn];
+    if (self.wrongBtn)    [btns addObject:self.wrongBtn];
+    if (self.buryCardBtn) [btns addObject:self.buryCardBtn];
+    for (UIButton *btn in btns) {
+      UILabel *lbl = (UILabel *)[btn viewWithTag:9002];
+      if (lbl) {
+        [lbl sizeToFit];
+        CGFloat bW = btn.bounds.size.width;
+        CGFloat bH = btn.bounds.size.height;
+        lbl.frame = CGRectMake(0, bH - lbl.bounds.size.height - 5, bW, lbl.bounds.size.height);
+      }
+    }
+  }
 }
 
 #pragma mark - Class Plumbing
