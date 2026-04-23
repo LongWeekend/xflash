@@ -13,11 +13,6 @@
 #import <MessageUI/MessageUI.h>
 #import "StudyViewProtocols.h"
 
-#define SVC_ACTION_ADDTOSET_BUTTON 1
-#define SVC_ACTION_ADDTOFAV_BUTTON 0
-#define SVC_ACTION_REPORT_BUTTON 2
-#define SVC_ACTION_SHARE_BUTTON 3
-
 @class ActionBarViewController;
 
 @protocol ActionBarViewControllerDelegate <NSObject>
@@ -34,9 +29,7 @@
 - (BOOL)actionBarShouldReveal:(ActionBarViewController*)avc;
 @end
 
-@interface ActionBarViewController : UIViewController <UIActionSheetDelegate,
-                                                       UIAlertViewDelegate,
-                                                       MFMailComposeViewControllerDelegate,
+@interface ActionBarViewController : UIViewController <MFMailComposeViewControllerDelegate,
                                                        StudyViewSubcontrollerProtocol>
 
 - (NSString *)getTweetWord;

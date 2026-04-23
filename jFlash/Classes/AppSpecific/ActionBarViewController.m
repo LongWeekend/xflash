@@ -86,34 +86,63 @@
 
 #pragma mark - IBActions
 
-//! IBAction method - loads card action sheet so user can choose "add to set" or "report bad data"
+//! IBAction method - shows card action sheet for starred, add to set, fix, and share
 - (IBAction) showCardActionSheet
 {
-  // Show them "remove" if they happen to be studying the favorites instead of "add to favorites".
-  NSString *favoriteString = @"";
   Tag *starredTag = [[CurrentState sharedCurrentState] starredTag];
-  if ([TagPeer card:self.currentCard isMemberOfTag:starredTag])
-  {
-    favoriteString = NSLocalizedString(@"Remove from Starred",@"ActionBarViewController.ActionSheetRemoveFromFavorites");
-  }
-  else
-  {
-    favoriteString = NSLocalizedString(@"Add to Starred",@"ActionBarViewController.ActionSheetAddToFavorites");
-  }
-  
-  UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Card Actions",@"ActionBarViewController.ActionSheetTitle") delegate:self
-                                         cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel")
-                                    destructiveButtonTitle:nil
-                                         otherButtonTitles:favoriteString,
-                                                           NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
-                                                           NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),
-                                                           NSLocalizedString(@"Share This Card",@"Action Sheet Button to post on FB"),nil];
-  
-  // Yes, there is a showInTabBar: which seems like it might be good, but it makes the BG of the action sheet
-  // REALLY black.  You don't want it, trust me - MMA
-  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  [as showInView:appDelegate.tabBarController.view];
-  [as release];
+  NSString *favoriteTitle = [TagPeer card:self.currentCard isMemberOfTag:starredTag]
+    ? NSLocalizedString(@"Remove from Starred", @"ActionBarViewController.ActionSheetRemoveFromFavorites")
+    : NSLocalizedString(@"Add to Starred",       @"ActionBarViewController.ActionSheetAddToFavorites");
+
+  UIAlertController *sheet = [UIAlertController
+    alertControllerWithTitle:NSLocalizedString(@"Card Actions", @"ActionBarViewController.ActionSheetTitle")
+                     message:nil
+              preferredStyle:UIAlertControllerStyleActionSheet];
+
+  Card *card = self.currentCard;
+  Tag  *favTag = starredTag;
+
+  [sheet addAction:[UIAlertAction actionWithTitle:favoriteTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *a) {
+    if ([TagPeer card:card isMemberOfTag:favTag]) {
+      NSError *err = nil;
+      BOOL removed = [TagPeer cancelMembership:card fromTag:favTag error:&err];
+      if (!removed && err.code == kRemoveLastCardOnATagError) {
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
+                                           message:[err localizedDescription]];
+      }
+    } else {
+      [TagPeer subscribeCard:card toTag:favTag];
+    }
+  }]];
+
+  [sheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Add to Study Set", @"ActionBarViewController.ActionSheetAddToSet") style:UIAlertActionStyleDefault handler:^(UIAlertAction *a) {
+    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:card];
+    tmpVC.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
+      initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle")
+              style:UIBarButtonItemStyleBordered
+             target:tmpVC
+             action:@selector(dismissModalViewControllerAnimated:)] autorelease];
+    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:tmpVC, @"controller",
+                          [NSNumber numberWithBool:YES], @"useNavController", nil];
+    [tmpVC release];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:info];
+  }]];
+
+  [sheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Fix Card", @"ActionBarViewController.ActionSheetReportBadData") style:UIAlertActionStyleDefault handler:^(UIAlertAction *a) {
+    [self _reportBadData];
+  }]];
+
+  [sheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share This Card", @"Action Sheet Button to post on FB") style:UIAlertActionStyleDefault handler:^(UIAlertAction *a) {
+    [self shareWord];
+  }]];
+
+  [sheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"ActionBarViewController.ActionSheetCancel") style:UIAlertActionStyleCancel handler:nil]];
+
+  // iPad needs a source for the popover anchor
+  sheet.popoverPresentationController.sourceView = self.addBtn;
+  sheet.popoverPresentationController.sourceRect = self.addBtn.bounds;
+
+  [self presentViewController:sheet animated:YES completion:nil];
 }
 
 #pragma mark - SVC Subcontroller Delegate Implementation
@@ -129,61 +158,6 @@
 {
   LWE_DELEGATE_CALL(@selector(actionBarWillReveal:), self);
   LWE_DELEGATE_CALL(@selector(actionBarDidReveal:), self);
-}
-
-#pragma mark - UIActionSheetDelegate methods
-
-//! UIActionSheet delegate method - which modal do we load when the user taps "add to set" or "report bad data"
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  Tag *favoritesTag = [[CurrentState sharedCurrentState] starredTag];
-  if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
-  {
-    [self _reportBadData];
-  }
-  else if (buttonIndex == SVC_ACTION_ADDTOSET_BUTTON)
-  {
-    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:self.currentCard];
-    tmpVC.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
-                                               initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle")
-                                                       style:UIBarButtonItemStyleBordered
-                                                      target:tmpVC
-                                                     action:@selector(dismissModalViewControllerAnimated:)] autorelease];
-
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:tmpVC,@"controller",
-                              [NSNumber numberWithBool:YES],@"useNavController",nil];
-    [tmpVC release];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:userInfo];
-  }
-  else if (buttonIndex == SVC_ACTION_ADDTOFAV_BUTTON)
-  {    
-    // Do something here - subscribe or cancel, depending.
-    if ([TagPeer card:self.currentCard isMemberOfTag:favoritesTag])
-    {
-      // First of all, do it
-      NSError *error = nil;
-      BOOL removed = [TagPeer cancelMembership:self.currentCard fromTag:favoritesTag error:&error];
-      if (removed == NO)
-      {
-        if (error.code == kRemoveLastCardOnATagError)
-        {
-          NSString *errorMessage = [error localizedDescription];
-          [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
-                                             message:errorMessage];
-        }
-        return;
-      }
-    }
-    else
-    {
-      [TagPeer subscribeCard:self.currentCard toTag:favoritesTag];
-    }
-
-  }
-  else if (buttonIndex == SVC_ACTION_SHARE_BUTTON)
-  {
-    [self shareWord];
-  }
 }
 
 #pragma mark - MailCompose helper & delegate method
