@@ -205,7 +205,9 @@
 
 - (IBAction)doSpeakHeadword
 {
-  NSString *text = self.headwordLabel.text;
+  // Reading label text is "kana - romaji"; speak only the kana part.
+  NSString *reading = self.readingLabel.text;
+  NSString *text = [[reading componentsSeparatedByString:@" - "] firstObject];
   if (text.length == 0) return;
 
   [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
