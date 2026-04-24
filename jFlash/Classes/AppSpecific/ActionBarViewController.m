@@ -25,10 +25,12 @@
   [super viewDidLoad];
   if (@available(iOS 13.0, *)) {
     self.view.backgroundColor = [UIColor systemBackgroundColor];
-    [self _applyModernStyle:self.addBtn      symbolName:@"plus.circle.fill"      label:@"actions" color:[UIColor systemBlueColor]];
-    [self _applyModernStyle:self.rightBtn    symbolName:@"checkmark.circle.fill" label:@"right"   color:[UIColor systemGreenColor]];
-    [self _applyModernStyle:self.wrongBtn    symbolName:@"xmark.circle.fill"     label:@"wrong"   color:[UIColor systemRedColor]];
-    [self _applyModernStyle:self.buryCardBtn symbolName:@"archivebox.circle.fill" label:@"bury it" color:[UIColor systemOrangeColor]];
+    [self _applyModernStyle:self.addBtn      symbolName:@"plus.circle.fill"           label:@"actions" color:[UIColor systemBlueColor]];
+    [self _applyModernStyle:self.rightBtn    symbolName:@"checkmark.circle.fill"      label:@"right"   color:[UIColor systemGreenColor]];
+    [self _applyModernStyle:self.wrongBtn    symbolName:@"xmark.circle.fill"          label:@"wrong"   color:[UIColor systemRedColor]];
+    [self _applyModernStyle:self.buryCardBtn symbolName:@"archivebox.circle.fill"     label:@"bury it" color:[UIColor systemOrangeColor]];
+    [self _applyModernStyle:self.prevCardBtn symbolName:@"chevron.left.circle.fill"   label:@"prev"    color:[UIColor systemGrayColor]];
+    [self _applyModernStyle:self.nextCardBtn symbolName:@"chevron.right.circle.fill"  label:@"next"    color:[UIColor systemGrayColor]];
   }
 }
 
@@ -38,7 +40,7 @@
   if (@available(iOS 13.0, *)) {
     UIImage *icon = [UIImage systemImageNamed:name];
     if (icon) {
-      UIImageSymbolConfiguration *config = [UIImageSymbolConfiguration configurationWithPointSize:34 weight:UIImageSymbolWeightMedium];
+      UIImageSymbolConfiguration *config = [UIImageSymbolConfiguration configurationWithPointSize:44 weight:UIImageSymbolWeightMedium];
       icon = [icon imageByApplyingSymbolConfiguration:config];
     }
     [btn setImage:icon forState:UIControlStateNormal];
@@ -48,6 +50,7 @@
     [btn setTitle:@"" forState:UIControlStateNormal];
     btn.tintColor = color;
     btn.backgroundColor = [UIColor clearColor];
+    btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 20, 0);
 
     UILabel *lbl = (UILabel *)[btn viewWithTag:9002];
     if (!lbl) {
@@ -288,7 +291,8 @@
 - (void)distributeButtonsEvenly
 {
   CGFloat width = self.view.bounds.size.width;
-  if (width <= 0) return;
+  CGFloat height = self.view.bounds.size.height;
+  if (width <= 0 || height <= 0) return;
 
   NSMutableArray *buttons = [NSMutableArray array];
   if (self.prevCardBtn) [buttons addObject:self.prevCardBtn];
@@ -300,16 +304,12 @@
 
   if (buttons.count == 0) return;
 
-  CGFloat totalBtnWidth = 0;
-  for (UIButton *btn in buttons) totalBtnWidth += btn.bounds.size.width;
-  CGFloat gap = (width - totalBtnWidth) / ((CGFloat)buttons.count + 1);
-
-  CGFloat x = gap;
-  for (UIButton *btn in buttons) {
-    CGRect f = btn.frame;
-    f.origin.x = roundf(x);
-    btn.frame = f;
-    x += f.size.width + gap;
+  CGFloat btnWidth = floorf(width / (CGFloat)buttons.count);
+  for (NSUInteger i = 0; i < buttons.count; i++) {
+    UIButton *btn = buttons[i];
+    CGFloat x = i * btnWidth;
+    CGFloat w = (i == buttons.count - 1) ? (width - x) : btnWidth;
+    btn.frame = CGRectMake(x, 0, w, height);
   }
 }
 
@@ -324,6 +324,8 @@
     if (self.rightBtn)    [btns addObject:self.rightBtn];
     if (self.wrongBtn)    [btns addObject:self.wrongBtn];
     if (self.buryCardBtn) [btns addObject:self.buryCardBtn];
+    if (self.prevCardBtn) [btns addObject:self.prevCardBtn];
+    if (self.nextCardBtn) [btns addObject:self.nextCardBtn];
     for (UIButton *btn in btns) {
       UILabel *lbl = (UILabel *)[btn viewWithTag:9002];
       if (lbl) {
