@@ -120,7 +120,7 @@
       [sentencesHTML appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='http://xflash.com/%@?id=%d&open=0'><span class='button'>%@</span></a></div>",
         sentence.sentenceId,TOKENIZE_SAMPLE_SENTENCE,sentence.sentenceId,SHOW_BUTTON_TITLE];
     }
-    [sentencesHTML appendFormat:@"%@ <a href='http://xflash.com/%@?id=%d'><span class='button'>🔊</span></a><br />",
+    [sentencesHTML appendFormat:@"%@ <a href='http://xflash.com/%@?id=%d'><span class='button'>&#x1F50A;</span></a><br />",
       sentence.sentenceJa, SPEAK_SENTENCE, sentence.sentenceId];
 
     // Only put this stuff in HTML if we have example sentences 1.2
