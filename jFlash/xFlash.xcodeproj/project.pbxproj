@@ -21,7 +21,7 @@
 		24B5660113CF656100BEE166 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		24B5660213CF656100BEE166 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		24B5660313CF656100BEE166 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
-		24B5661513CF67CD00BEE166 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* SenTestingKit.framework */; };
+		24B5661513CF67CD00BEE166 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* XCTest.framework */; };
 		24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
 		24BB428214685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
 		24E47F4711F3E780007F6FB7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E47F4611F3E780007F6FB7 /* CoreData.framework */; };
@@ -33,7 +33,7 @@
 		4904662F14727835004C44E2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
 		4904663014727835004C44E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A173F1461AB60002977E6 /* AVFoundation.framework */; };
 		4904663114727835004C44E2 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C521DE144D2461002011BD /* CoreText.framework */; };
-		4904663214727835004C44E2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* SenTestingKit.framework */; };
+		4904663214727835004C44E2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* XCTest.framework */; };
 		4904663314727835004C44E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		4904663414727835004C44E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		4904663514727835004C44E2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
@@ -215,9 +215,6 @@
 		4919507C144F1BFE00DB81F7 /* jFlash-available.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4919507A144F1BFE00DB81F7 /* jFlash-available.plist */; };
 		49195080144F9E7900DB81F7 /* jFlash-FTS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */; };
 		49195081144F9E7900DB81F7 /* jFlash-EX-1.2.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507F144F9E7900DB81F7 /* jFlash-EX-1.2.db */; };
-		AA1A507E19000001000000AA /* jFlash-FTS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */; };
-		AA1A600119000010000000AA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1A600019000010000000AA /* WebKit.framework */; };
-		AA1A507F19000002000000AA /* jFlash-EX-1.2.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507F144F9E7900DB81F7 /* jFlash-EX-1.2.db */; };
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		491E276E14F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
@@ -1523,6 +1520,9 @@
 		A3D5C7AB18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
 		A3D5C7AC18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
 		A3D5C7AD18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
+		AA1A507E19000001000000AA /* jFlash-FTS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */; };
+		AA1A507F19000002000000AA /* jFlash-EX-1.2.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507F144F9E7900DB81F7 /* jFlash-EX-1.2.db */; };
+		AA1A600119000010000000AA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1A600019000010000000AA /* WebKit.framework */; };
 		D322368611D370B900B1AF15 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
 		D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		D35B077B1116456D00DB5E02 /* overlay-btn-close.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B073D1116456D00DB5E02 /* overlay-btn-close.png */; };
@@ -1986,7 +1986,6 @@
 		91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressBarViewController.m; path = AppSpecific/ProgressBarViewController.m; sourceTree = "<group>"; };
 		91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressBarViewController.xib; path = Classes/AppSpecific/ProgressBarViewController.xib; sourceTree = "<group>"; };
 		91E93B0D133AD450007E5F83 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		AA1A600019000010000000AA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		91F80F7013865C8700A07663 /* nameprep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nameprep.h; sourceTree = "<group>"; };
 		91F80F7113865C8700A07663 /* nameprep.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nameprep.c; sourceTree = "<group>"; };
 		A34F4595184B137400FA137C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = jFlash/Images.xcassets; sourceTree = "<group>"; };
@@ -2225,6 +2224,7 @@
 		A3D5C7A218406D2D00679ABD /* NSDictionary+JRQueryParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JRQueryParams.m"; sourceTree = "<group>"; };
 		A3D5C7A318406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+JRRequestUtils.h"; sourceTree = "<group>"; };
 		A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+JRRequestUtils.m"; sourceTree = "<group>"; };
+		AA1A600019000010000000AA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		B3F099E7184ADA1900396C2B /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Classes/External/FlurryLib/Flurry.h; sourceTree = SOURCE_ROOT; };
 		D322367A11D370B900B1AF15 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 		D32DC3CF116D82C9005D3852 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
@@ -2386,6 +2386,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		238422F12F9A9E1100828567 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				AA1A600019000010000000AA /* WebKit.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		24AEAEA013D5E1F6008ADA45 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2424,6 +2432,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				238422F12F9A9E1100828567 /* Recovered References */,
 			);
 			name = jFlash;
 			sourceTree = "<group>";
@@ -2456,8 +2465,6 @@
 			children = (
 				915E3F0D18CC655600E299AB /* libFlurry_4.3.2.a */,
 				919FBDBA1622E9D2001FD77B /* Social.framework */,
-				242A174714628AF4002977E6 /* AudioToolbox.framework */,
-				242A173F1461AB60002977E6 /* AVFoundation.framework */,
 				91B3E2F0144FD8ED003F8986 /* libz.tbd */,
 				242A174714628AF4002977E6 /* AudioToolbox.framework */,
 				242A173F1461AB60002977E6 /* AVFoundation.framework */,
@@ -3793,7 +3800,8 @@
 				ORGANIZATIONNAME = "Long Weekend LLC";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = VL37Z36DSL;
+						DevelopmentTeam = DT6C9KA2HD;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -5434,9 +5442,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DT6C9KA2HD;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LWE_DEBUG,
+					LWE_JFLASH,
+				);
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Classes/**",
 					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
@@ -5449,21 +5463,19 @@
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
 					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					LWE_DEBUG,
-					LWE_JFLASH,
-				);
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "Japanese Flash";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/Classes/External/FlurryLib/",
 					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ross.jflash;
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "84DB2FA3-1C5B-44E3-961A-B7F863341332";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -5473,9 +5485,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DT6C9KA2HD;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LWE_RELEASE_APP_STORE,
+					LWE_JFLASH,
+				);
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Classes/**",
 					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
@@ -5488,21 +5506,19 @@
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
 					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					LWE_RELEASE_APP_STORE,
-					LWE_JFLASH,
-				);
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "Japanese Flash";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/Classes/External/FlurryLib/",
 					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ross.jflash;
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "84DB2FA3-1C5B-44E3-961A-B7F863341332";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -5757,6 +5773,12 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					LWE_JUNIOR,
+					LWE_JFLASH,
+				);
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Classes/**",
 					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
@@ -5769,12 +5791,6 @@
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
 					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					LWE_JUNIOR,
-					LWE_JFLASH,
-				);
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlashJr-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -5793,6 +5809,12 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Long Weekend";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					LWE_JUNIOR,
+					LWE_JFLASH,
+				);
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Classes/**",
 					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
@@ -5805,12 +5827,6 @@
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
 					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					LWE_JUNIOR,
-					LWE_JFLASH,
-				);
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlashJr-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -5829,6 +5845,12 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Long Weekend";
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					LWE_JUNIOR,
+					LWE_JFLASH,
+				);
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Classes/**",
 					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
@@ -5841,12 +5863,6 @@
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
 					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					LWE_JUNIOR,
-					LWE_JFLASH,
-				);
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlashJr-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -5874,7 +5890,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -5886,9 +5902,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DT6C9KA2HD;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LWE_RELEASE_AD_HOC,
+					LWE_JFLASH,
+				);
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Classes/**",
 					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
@@ -5901,21 +5923,19 @@
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
 					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					LWE_RELEASE_AD_HOC,
-					LWE_JFLASH,
-				);
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "jFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "Japanese Flash";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/Classes/External/FlurryLib/",
 					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ross.jflash;
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "84DB2FA3-1C5B-44E3-961A-B7F863341332";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Beta;
@@ -5932,7 +5952,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -5956,7 +5976,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
