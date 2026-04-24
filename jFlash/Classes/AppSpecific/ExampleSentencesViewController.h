@@ -14,6 +14,7 @@
 // Strings used as fake URL paths in WKWebView links to intercept button taps.
 extern NSString * const TOKENIZE_SAMPLE_SENTENCE;
 extern NSString * const ADD_CARD_TO_SET;
+extern NSString * const SPEAK_SENTENCE;
 
 // The HTML template we show the example sentences in.
 extern NSString * const LWESentencesHTML;

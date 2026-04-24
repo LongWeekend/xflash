@@ -15,15 +15,21 @@
 #import "NSURL+LWEUtilities.h"
 #import "AddTagViewController.h"
 #import "jFlashAppDelegate.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define SHOW_BUTTON_TITLE NSLocalizedString(@"Read",@"ReadButton")
 #define CLOSE_BUTTON_TITLE NSLocalizedString(@"Close",@"CloseButton")
 #define ADD_BUTTON_TITLE NSLocalizedString(@"Add",@"AddButton")
 
 @interface ExampleSentencesViewController ()
+{
+  AVSpeechSynthesizer *_speechSynthesizer;
+  NSMutableDictionary *_sentenceTexts; // sentenceId (string) → sentenceJa
+}
 - (void)_showAddToSetWithCardID:(NSString *)cardID;
 - (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(BOOL)isOpen webView:(WKWebView *)webView;
 - (NSString *)_generateCardCompositionStringWithSentenceId:(NSInteger)sentenceId;
+- (AVSpeechSynthesisVoice *)_bestJapaneseVoice;
 @end
 
 @implementation ExampleSentencesViewController
@@ -34,10 +40,12 @@
 
 - (id)initWithExamplesPlugin:(Plugin *)plugin
 {
-	if ((self = [super init]))
-	{
+  if ((self = [super init]))
+  {
     LWE_ASSERT_EXC([plugin.pluginId isEqualToString:EXAMPLE_DB_KEY], @"This class only knows how to deal with EXAMPLE_DB_KEY plugin");
-		self.sampleDecomposition = [NSMutableDictionary dictionary];
+    self.sampleDecomposition = [NSMutableDictionary dictionary];
+    _speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
+    _sentenceTexts = [[NSMutableDictionary alloc] init];
     
     // What version of the example sentence plugin are we using?  If 1.1, it's old.
 #if defined (LWE_JFLASH)
@@ -96,10 +104,15 @@
 {
   NSMutableString *sentencesHTML = [[NSMutableString alloc] initWithFormat:@"<div class='readingLabel'>%@</div><h2 class='headwordLabel'>%@</h2><ol>",card.reading,card.headword];
 
+  [_sentenceTexts removeAllObjects];
+
   // Get all sentences out - extract this
   NSMutableArray *sentences = [ExampleSentencePeer getExampleSentencesByCardId:card.cardId];
-  for (ExampleSentence *sentence in sentences) 
+  for (ExampleSentence *sentence in sentences)
   {
+    NSString *sentenceIdStr = [NSString stringWithFormat:@"%d", sentence.sentenceId];
+    [_sentenceTexts setObject:sentence.sentenceJa forKey:sentenceIdStr];
+
     [sentencesHTML appendFormat:@"<li>"];
     // Only put this stuff in HTML if we have example sentences 1.2
     if (_useOldPluginMethods == NO)
@@ -107,8 +120,9 @@
       [sentencesHTML appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='http://xflash.com/%@?id=%d&open=0'><span class='button'>%@</span></a></div>",
         sentence.sentenceId,TOKENIZE_SAMPLE_SENTENCE,sentence.sentenceId,SHOW_BUTTON_TITLE];
     }
-    [sentencesHTML appendFormat:@"%@<br />",sentence.sentenceJa];
-    
+    [sentencesHTML appendFormat:@"%@ <a href='http://xflash.com/%@?id=%d'><span class='button'>🔊</span></a><br />",
+      sentence.sentenceJa, SPEAK_SENTENCE, sentence.sentenceId];
+
     // Only put this stuff in HTML if we have example sentences 1.2
     if (_useOldPluginMethods == NO)
     {
@@ -161,6 +175,19 @@
   else if ([url isEqualToString:ADD_CARD_TO_SET])
   {
     [self _showAddToSetWithCardID:[dict objectForKey:@"id"]];
+  }
+  else if ([url isEqualToString:SPEAK_SENTENCE])
+  {
+    NSString *sentenceId = [dict objectForKey:@"id"];
+    NSString *text = [_sentenceTexts objectForKey:sentenceId];
+    if (text.length > 0)
+    {
+      [_speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+      AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:text];
+      utterance.voice = [self _bestJapaneseVoice];
+      utterance.rate = 0.4f;
+      [_speechSynthesizer speakUtterance:utterance];
+    }
   }
 
   decisionHandler(WKNavigationActionPolicyCancel);
@@ -249,6 +276,19 @@
   return (NSString *)cardHTML;
 }
 
+- (AVSpeechSynthesisVoice *)_bestJapaneseVoice
+{
+  AVSpeechSynthesisVoice *enhanced = nil;
+  for (AVSpeechSynthesisVoice *v in [AVSpeechSynthesisVoice speechVoices]) {
+    if (![v.language isEqualToString:@"ja-JP"]) continue;
+    if (@available(iOS 16.0, *)) {
+      if (v.quality == AVSpeechSynthesisVoiceQualityPremium) return v;
+    }
+    if (v.quality == AVSpeechSynthesisVoiceQualityEnhanced) enhanced = v;
+  }
+  return enhanced ?: [AVSpeechSynthesisVoice voiceWithLanguage:@"ja-JP"];
+}
+
 #pragma mark - Class Plumbing
 
 - (void)viewDidUnload
@@ -261,7 +301,9 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEPluginDidInstall object:nil];
   [sentencesWebView release];
-	[sampleDecomposition release];
+  [sampleDecomposition release];
+  [_speechSynthesizer release];
+  [_sentenceTexts release];
   [super dealloc];
 }
 
@@ -269,6 +311,7 @@
 
 NSString * const TOKENIZE_SAMPLE_SENTENCE = @"0";
 NSString * const ADD_CARD_TO_SET = @"1";
+NSString * const SPEAK_SENTENCE = @"speak";
 
 NSString * const LWESentencesHTML = @""
 "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>"
