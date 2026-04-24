@@ -8,6 +8,7 @@
 
 #import "CardViewController.h"
 #import "UIScrollView+LWEUtilities.h"
+#import <AVFoundation/AVFoundation.h>
 
 #if defined (LWE_CFLASH)
   #import "ChineseCard.h"
@@ -22,6 +23,11 @@
 
 //! Returns YES if the contents of theLabel fit in scrollViewContainer w/o scrolling
 - (BOOL) _shouldHideMoreIconForLabel:(UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
+
+#if defined(LWE_JFLASH)
+- (AVSpeechSynthesisVoice *) _bestJapaneseVoice;
+@property (nonatomic, retain) AVSpeechSynthesizer *speechSynthesizer;
+#endif
 @end
 
 @implementation CardViewController
@@ -29,10 +35,11 @@
 @synthesize delegate;
 @synthesize meaningWebView, headwordMoreIcon, headwordLabel, readingMoreIcon, readingLabel, toggleReadingBtn;
 @synthesize readingScrollContainer, headwordScrollContainer, readingVisible = _readingVisible;
-
 @synthesize baseHtml;
-
 @synthesize moodIcon;
+#if defined(LWE_JFLASH)
+@synthesize speakBtn, speechSynthesizer;
+#endif
 
 #pragma mark - Flow Methods
 
@@ -105,22 +112,35 @@
   return self;
 }
 
-- (void)viewDidLoad 
+- (void)viewDidLoad
 {
   [super viewDidLoad];
   [self.meaningWebView loadHTMLString:self.baseHtml baseURL:nil];
   [self.meaningWebView shutOffBouncing];
   self.meaningWebView.backgroundColor = [UIColor clearColor];
-  
+
   // Add mood icon subview - TODO: MMA this is 90% complete, but I want to find a way to do this in the NIB
   CGRect moodIconRect = CGRectMake(235, 197, 80, 73);
   self.moodIcon.view.frame = moodIconRect;
   self.moodIcon.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
   [self.view addSubview:self.moodIcon.view];
   [self.moodIcon updateMoodIcon:100.0f];
-  
+
   // For languages such as Chinese, we may need to configure the font
   self.headwordLabel.font = [Card configureFontForLabel:self.headwordLabel];
+
+#if defined(LWE_JFLASH)
+  self.speechSynthesizer = [[[AVSpeechSynthesizer alloc] init] autorelease];
+
+  UIButton *speak = [UIButton buttonWithType:UIButtonTypeSystem];
+  UIImage *speakerImg = [UIImage systemImageNamed:@"speaker.wave.2"];
+  [speak setImage:speakerImg forState:UIControlStateNormal];
+  speak.tintColor = [UIColor whiteColor];
+  speak.accessibilityLabel = NSLocalizedString(@"Speak word", @"CardViewController.SpeakWordAccessibility");
+  [speak addTarget:self action:@selector(doSpeakHeadword) forControlEvents:UIControlEventTouchUpInside];
+  [self.view addSubview:speak];
+  self.speakBtn = speak;
+#endif
 }
 
 #pragma mark - Layout
@@ -143,10 +163,21 @@
   // so it intercepts taps without triggering the definition reveal.
   self.toggleReadingBtn.frame = CGRectMake(hPad, readingY, contentW, readingH);
 
-  // Headword immediately below reading
+  // Headword immediately below reading.
+  // Reserve 40 pt on the right for the speak button.
   CGFloat headwordY = readingY + readingH + 4.0;
   CGFloat headwordH = 55.0;
+#if defined(LWE_JFLASH)
+  CGFloat speakBtnSize = 36.0;
+  CGFloat speakBtnX = w - hPad - speakBtnSize;
+  CGFloat headwordW = speakBtnX - hPad - 4.0;
+  self.headwordScrollContainer.frame = CGRectMake(hPad, headwordY, headwordW, headwordH);
+  self.speakBtn.frame = CGRectMake(speakBtnX,
+                                   headwordY + roundf((headwordH - speakBtnSize) / 2.0),
+                                   speakBtnSize, speakBtnSize);
+#else
   self.headwordScrollContainer.frame = CGRectMake(hPad, headwordY, contentW, headwordH);
+#endif
   self.headwordMoreIcon.frame = CGRectMake(2.0, headwordY + headwordH - 17.0, 26.0, 17.0);
 
   // Meaning webview fills everything below the headword, giving it full space to the bottom.
@@ -156,6 +187,36 @@
 }
 
 #pragma mark - IBAction Methods
+
+#if defined(LWE_JFLASH)
+
+- (AVSpeechSynthesisVoice *)_bestJapaneseVoice
+{
+  AVSpeechSynthesisVoice *enhanced = nil;
+  for (AVSpeechSynthesisVoice *v in [AVSpeechSynthesisVoice speechVoices]) {
+    if (![v.language isEqualToString:@"ja-JP"]) continue;
+    if (@available(iOS 16.0, *)) {
+      if (v.quality == AVSpeechSynthesisVoiceQualityPremium) return v;
+    }
+    if (v.quality == AVSpeechSynthesisVoiceQualityEnhanced) enhanced = v;
+  }
+  return enhanced ?: [AVSpeechSynthesisVoice voiceWithLanguage:@"ja-JP"];
+}
+
+- (IBAction)doSpeakHeadword
+{
+  NSString *text = self.headwordLabel.text;
+  if (text.length == 0) return;
+
+  [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+
+  AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:text];
+  utterance.voice = [self _bestJapaneseVoice];
+  utterance.rate = 0.4f;
+  [self.speechSynthesizer speakUtterance:utterance];
+}
+
+#endif
 
 /**
  * If the reading scroll container is hidden, this shows it.
@@ -297,42 +358,51 @@
 
 #pragma mark - Plumbing
 
-- (void)viewDidUnload 
+- (void)viewDidUnload
 {
-	[super viewDidUnload];
-	self.readingScrollContainer = nil;
-	self.headwordScrollContainer = nil;
-	self.headwordMoreIcon = nil;
-	self.readingMoreIcon = nil;
-	self.headwordLabel = nil;
-	self.readingLabel = nil;
-	self.toggleReadingBtn = nil;
-	self.meaningWebView = nil;
-	self.moodIcon = nil;
+  [super viewDidUnload];
+  self.readingScrollContainer = nil;
+  self.headwordScrollContainer = nil;
+  self.headwordMoreIcon = nil;
+  self.readingMoreIcon = nil;
+  self.headwordLabel = nil;
+  self.readingLabel = nil;
+  self.toggleReadingBtn = nil;
+  self.meaningWebView = nil;
+  self.moodIcon = nil;
+#if defined(LWE_JFLASH)
+  self.speakBtn = nil;
+  self.speechSynthesizer = nil;
+#endif
 }
 
 
-- (void)dealloc 
+- (void)dealloc
 {
   [moodIcon release];
 
   [baseHtml release];
   [_tmpJavascript release];
-  
-	[headwordScrollContainer release];
-	[headwordMoreIcon release];
+
+  [headwordScrollContainer release];
+  [headwordMoreIcon release];
   [headwordLabel release];
-	
-	[readingScrollContainer release];
-	[readingMoreIcon release];
+
+  [readingScrollContainer release];
+  [readingMoreIcon release];
   [readingLabel release];
   [toggleReadingBtn release];
-  
+
+#if defined(LWE_JFLASH)
+  [speakBtn release];
+  [speechSynthesizer release];
+#endif
+
   // Apparently we're supposed to set this to nil, according to the docs
   // I guess it's in case some other guy is holding a reference to this dude
   self.meaningWebView.delegate = nil;
   [meaningWebView release];
-	
+
   [super dealloc];
 }
 
