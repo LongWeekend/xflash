@@ -10,6 +10,7 @@
 #import "SetupDatabaseHelper.h"
 #import "TagPeer.h"
 #import "Tag.h"
+#import "GroupPeer.h"
 
 #import <UIKit/UIKit.h>
 
@@ -18,6 +19,56 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
 @implementation TagTest
 
 // All code under test is in the iOS Application
+
+- (void)testTagNameAfterRetrieval
+{
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  XCTAssertNotNil(tag, @"Should retrieve favorites tag");
+  XCTAssertEqualObjects(kLWEFavoriteTagName, tag.tagName, @"Tag name should match what was requested");
+}
+
+- (void)testFavoritesTagIsNotEditable
+{
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  XCTAssertNotNil(tag, @"Should retrieve favorites tag");
+  XCTAssertFalse([tag isEditable], @"System tags must not be editable");
+}
+
+- (void)testCreateUserTagIsEditable
+{
+  Tag *created = [TagPeer createTagNamed:@"EditableTestTag" inGroup:[GroupPeer topLevelGroup]];
+  XCTAssertNotNil(created, @"Should be able to create a user tag");
+  XCTAssertTrue([created isEditable], @"User-created tags should be editable");
+}
+
+- (void)testCreateTagCanBeRetrievedByName
+{
+  NSString *name = @"RetrievalTestTag";
+  Tag *created = [TagPeer createTagNamed:name inGroup:[GroupPeer topLevelGroup]];
+  XCTAssertNotNil(created, @"Tag creation should succeed");
+
+  Tag *fetched = [TagPeer retrieveTagByName:name];
+  XCTAssertNotNil(fetched, @"Should retrieve the newly created tag by name");
+  XCTAssertEqualObjects(name, fetched.tagName, @"Fetched tag name should match");
+}
+
+- (void)testRetrieveTagByIdMatchesTagByName
+{
+  Tag *byName = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  XCTAssertNotNil(byName, @"Should retrieve favorites by name");
+
+  Tag *byId = [TagPeer retrieveTagById:byName.tagId];
+  XCTAssertNotNil(byId, @"Should retrieve the same tag by its ID");
+  XCTAssertEqualObjects(byName.tagName, byId.tagName, @"Tag name should be the same whether retrieved by name or ID");
+}
+
+- (void)testSysTagListIsNonEmpty
+{
+  NSArray *sysTags = [TagPeer retrieveSysTagList];
+  XCTAssertNotNil(sysTags, @"System tag list should not be nil");
+  XCTAssertTrue([sysTags count] > 0, @"There should be at least one system tag");
+}
+
 - (void)testSave
 {
   NSString* description = @"Monkeys Fly Out of My Butt";

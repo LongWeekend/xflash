@@ -60,7 +60,7 @@
 {
   /**
    * User reported that "ちょきん" (savings) was in the database as "chikin" (it was).  This
-   * test confirms that it is fixed as of Mar 2012 (MMA).  It was actually a duplicate card 
+   * test confirms that it is fixed as of Mar 2012 (MMA).  It was actually a duplicate card
    * (didn't match the real card because of the different reading in the first versions).
    *
    * Since we have trouble " deleting " cards, I just fixed the card.  This test confirms that.
@@ -73,6 +73,35 @@
     // This will be "both" because the "reading" returns the romaji + kana in the ddefault setting
     XCTAssertEqualObjects(card.reading,@"ちょきん - chokin",@"Both readings should be chokin.");
   }
+}
+
+- (void)testSearchWithKanaReturnsResults
+{
+  NSArray *results = [CardPeer searchCardsForKeyword:@"ちょきん"];
+  XCTAssertTrue([results count] > 0, @"Kana search for ちょきん should return at least one result");
+}
+
+- (void)testSearchWithEnglishReturnsResults
+{
+  NSArray *results = [CardPeer searchCardsForKeyword:@"water"];
+  XCTAssertTrue([results count] > 0, @"English search for 'water' should return results");
+}
+
+- (void)testSearchWithNonsenseReturnsEmpty
+{
+  NSArray *results = [CardPeer searchCardsForKeyword:@"xyzabcnonsense99887"];
+  XCTAssertNotNil(results, @"Search result array should not be nil");
+  XCTAssertEqual((NSInteger)[results count], (NSInteger)0, @"Nonsense keyword should return no results");
+}
+
+- (void)testKeywordIsReadingWithHiragana
+{
+  XCTAssertTrue([CardPeer keywordIsReading:@"ちょきん"], @"Hiragana input should be classified as a reading");
+}
+
+- (void)testKeywordIsHeadwordWithKanji
+{
+  XCTAssertTrue([CardPeer keywordIsHeadword:@"日本語"], @"Kanji input should be classified as a headword");
 }
 
 #pragma mark - Setup & Teardown

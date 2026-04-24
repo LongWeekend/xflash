@@ -1543,6 +1543,11 @@
 		D3C180041488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */; };
 		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
+		3699AD28DD324B5EB79FA3C7 /* UserHistoryPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */; };
+		CA5AAE2CD187409796A303E1 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
+		8E7A78D2E4F94E2AA7357CBF /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
+		12B02D81F78F4F22BAA4C74F /* JREngage.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C48318406CDD00679ABD /* JREngage.m */; };
+		ABEDDAE28290466B896CF174 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF711AB7CD700016BD2 /* User.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3725,7 +3730,6 @@
 				24B565FB13CF656100BEE166 /* Sources */,
 				24B565FC13CF656100BEE166 /* Frameworks */,
 				24B565FD13CF656100BEE166 /* Resources */,
-				24B565FE13CF656100BEE166 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -5008,6 +5012,11 @@
 				490D4548153BAB3B0003EA47 /* SBJsonWriter.m in Sources */,
 				4922ED8D1556490200645F61 /* UserHistory.m in Sources */,
 				496461CF158092A800C3AB80 /* JFlashUpdateManager.m in Sources */,
+				3699AD28DD324B5EB79FA3C7 /* UserHistoryPeer.m in Sources */,
+				CA5AAE2CD187409796A303E1 /* UserPeer.m in Sources */,
+				8E7A78D2E4F94E2AA7357CBF /* DisplaySearchedSentenceViewController.m in Sources */,
+				12B02D81F78F4F22BAA4C74F /* JREngage.m in Sources */,
+				ABEDDAE28290466B896CF174 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -81,6 +81,69 @@
   XCTAssertNoThrow([self.plugin setValue:@"foo" forKey:@"fsd43dsar32"], @"This should pass");
 }
 
+- (void)testIsDatabasePlugin
+{
+  // setUp creates a plugin with pluginType = "database"
+  XCTAssertTrue([self.plugin isDatabasePlugin], @"Plugin with type 'database' should report isDatabasePlugin YES");
+}
+
+- (void)testIsNotDirectoryPlugin
+{
+  XCTAssertFalse([self.plugin isDirectoryPlugin], @"Plugin with type 'database' should report isDirectoryPlugin NO");
+}
+
+- (void)testDirectoryPluginTypeDetection
+{
+  NSDictionary *dirDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                           @"Audio Pack",        @"name",
+                           @"AUDIO-DIR",         @"pluginId",
+                           @"directory",         @"pluginType",
+                           @"1.0",               @"version",
+                           [NSNumber numberWithInt:LWEPluginLocationDocuments], @"fileLocation",
+                           @"audio/",            @"filePath", nil];
+  Plugin *dirPlugin = [Plugin pluginWithDictionary:dirDict];
+  XCTAssertTrue([dirPlugin isDirectoryPlugin], @"Plugin with type 'directory' should report isDirectoryPlugin YES");
+  XCTAssertFalse([dirPlugin isDatabasePlugin], @"Directory plugin should not report isDatabasePlugin YES");
+}
+
+- (void)testSameVersionIsNotNewer
+{
+  NSDictionary *sameDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"Same Version Plugin", @"name",
+                            @"FTS-DB",              @"pluginId",
+                            @"database",            @"pluginType",
+                            @"1.0",                 @"version",
+                            [NSNumber numberWithInt:LWEPluginLocationDocuments], @"fileLocation",
+                            @"cFlash-FTS-1.0.db",   @"filePath", nil];
+  Plugin *samePlugin = [Plugin pluginWithDictionary:sameDict];
+  XCTAssertFalse([samePlugin isNewVersionOfPlugin:self.plugin],
+                 @"A plugin with the same version should NOT be considered newer");
+}
+
+- (void)testPatchVersionIsNewer
+{
+  NSDictionary *patchDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                             @"Patch Plugin",        @"name",
+                             @"FTS-DB",              @"pluginId",
+                             @"database",            @"pluginType",
+                             @"1.0.1",               @"version",
+                             [NSNumber numberWithInt:LWEPluginLocationDocuments], @"fileLocation",
+                             @"cFlash-FTS-1.0.1.db", @"filePath", nil];
+  Plugin *patchPlugin = [Plugin pluginWithDictionary:patchDict];
+  XCTAssertTrue([patchPlugin isNewVersionOfPlugin:self.plugin],
+                @"Version 1.0.1 should be newer than 1.0");
+}
+
+- (void)testPluginHasCorrectName
+{
+  XCTAssertEqualObjects(@"Mark's FTS Cards", self.plugin.name, @"Plugin name must match dictionary");
+}
+
+- (void)testPluginHasCorrectPluginId
+{
+  XCTAssertEqualObjects(@"FTS-DB", self.plugin.pluginId, @"Plugin ID must match dictionary");
+}
+
 #pragma mark - Setup/Teardown
 
 - (void) setUp
