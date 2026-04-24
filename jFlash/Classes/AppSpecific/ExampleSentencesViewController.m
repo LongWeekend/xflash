@@ -113,22 +113,27 @@
     NSString *sentenceIdStr = [NSString stringWithFormat:@"%d", sentence.sentenceId];
     [_sentenceTexts setObject:sentence.sentenceJa forKey:sentenceIdStr];
 
-    [sentencesHTML appendFormat:@"<li>"];
-    // Only put this stuff in HTML if we have example sentences 1.2
-    if (_useOldPluginMethods == NO)
-    {
-      [sentencesHTML appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='http://xflash.com/%@?id=%d&open=0'><span class='button'>%@</span></a></div>",
-        sentence.sentenceId,TOKENIZE_SAMPLE_SENTENCE,sentence.sentenceId,SHOW_BUTTON_TITLE];
-    }
-    [sentencesHTML appendFormat:@"%@ <a href='http://xflash.com/%@?id=%d'><span class='button'>&#x1F50A;</span></a><br />",
-      sentence.sentenceJa, SPEAK_SENTENCE, sentence.sentenceId];
+    NSString *speakSVG = @"<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='white'><path d='M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z'/></svg>";
+    NSString *speakLink = [NSString stringWithFormat:@"<a href='http://xflash.com/%@?id=%d'><span class='button'>%@</span></a>",
+      SPEAK_SENTENCE, sentence.sentenceId, speakSVG];
 
-    // Only put this stuff in HTML if we have example sentences 1.2
+    [sentencesHTML appendFormat:@"<li>"];
     if (_useOldPluginMethods == NO)
     {
-      [sentencesHTML appendFormat:@"<div id='detailedCards%d'></div>",sentence.sentenceId];
+      [sentencesHTML appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='http://xflash.com/%@?id=%d&open=0'><span class='button'>%@</span></a> %@</div>",
+        sentence.sentenceId, TOKENIZE_SAMPLE_SENTENCE, sentence.sentenceId, SHOW_BUTTON_TITLE, speakLink];
     }
-    [sentencesHTML appendFormat:@"<div class='lowlight'>%@</div></li>",sentence.sentenceEn];
+    else
+    {
+      [sentencesHTML appendFormat:@"<div class='showWordsDiv'>%@</div>", speakLink];
+    }
+    [sentencesHTML appendFormat:@"%@<br />", sentence.sentenceJa];
+
+    if (_useOldPluginMethods == NO)
+    {
+      [sentencesHTML appendFormat:@"<div id='detailedCards%d'></div>", sentence.sentenceId];
+    }
+    [sentencesHTML appendFormat:@"<div class='lowlight'>%@</div></li>", sentence.sentenceEn];
   }
   [sentencesHTML appendFormat:@"</ol>"];
   
