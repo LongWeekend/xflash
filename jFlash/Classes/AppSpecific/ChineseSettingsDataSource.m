@@ -99,11 +99,6 @@
   NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_REMINDER,APP_USER,APP_PLUGIN,nil];
   NSMutableArray *userSettingArray = [NSMutableArray arrayWithObjects:userSettingNames,userSettingKeys,NSLocalizedString(@"Application",@"SettingsViewController.TableHeader_Application"),nil];
   
-  NSArray *socialNames = [NSArray arrayWithObjects:NSLocalizedString(@"Follow us on Twitter",@"SettingsViewController.SettingNames_Twitter"),
-                          NSLocalizedString(@"See us on Facebook",@"SettingsViewController.SettingNames_Facebook"),nil];
-  NSArray *socialKeys = [NSArray arrayWithObjects:APP_TWITTER,APP_FACEBOOK,nil];
-  NSArray *socialArray = [NSArray arrayWithObjects:socialNames,socialKeys,NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs"),nil];
-  
   NSArray *aboutNames = [NSArray arrayWithObjects:NSLocalizedString(@"Special thanks goes to Teja for helping us write and simulate the frequency algorithm.\n\nThis application uses data from CC-CEDICT, a public domain Chinese language dictionary, which is licensed under the Creative Commons Attribution-Share Alike 3.0 License.\n\nWord frequency lists are courtesy of Jun Da and Patrick Hassel Zein.\n\nTextbook names & content in the Study Sets are copyright of their respective owners.  Their inclusion neither constitutes an endorsement of Chinese Flash by those owners, or vice-versa.  Users on http://zdt.sourceforge.net/ provided these lists; Long Weekend offers no warranty regarding their accuracy.\n\nPhew, I hate legal stuff.  Shouldn't you be studying instead of reading the fine print?\n\nIf you want a break, you could write us a great review (up there on the left!).",@"SettingsViewController.Acknowledgements"),nil];
   NSArray *aboutKeys = [NSArray arrayWithObjects:APP_ABOUT,nil];
   NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,NSLocalizedString(@"Acknowledgements",@"SettingsViewController.TableHeader_Acknowledgements"),nil];
@@ -112,11 +107,11 @@
 	// If there is a new available update plugin, it will show in the first section, however, if it does not have anything, it will show nothing. 
 	if (newAvailableUpdate > 0)
   {
-		return [NSArray arrayWithObjects:newUpdateArray,cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
+		return [NSArray arrayWithObjects:newUpdateArray,cardSettingArray,userSettingArray,aboutArray,nil];
   }
-	else 
+	else
   {
-		return [NSArray arrayWithObjects:cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
+		return [NSArray arrayWithObjects:cardSettingArray,userSettingArray,aboutArray,nil];
   }
 }
 
