@@ -324,10 +324,6 @@
 		496C66AF1472894C009F04D4 /* UpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AF3D341265EDCD00CEAA52 /* UpdateManager.m */; };
 		496C66B014728951009F04D4 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		496C66B114728951009F04D4 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
-		496C66B214728956009F04D4 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
-		496C66B314728956009F04D4 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
-		496C66B41472896B009F04D4 /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
-		496C66B51472896B009F04D4 /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
 		496C66C2147289A3009F04D4 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEF11AB7CD700016BD2 /* Group.m */; };
 		496C66C3147289A3009F04D4 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEF11AB7CD700016BD2 /* Group.m */; };
 		496C66C6147289C1009F04D4 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE979E134EC34400EC6B0E /* ASIHTTPRequest.m */; };
@@ -666,10 +662,6 @@
 		919FBDBB1622E9D2001FD77B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919FBDBA1622E9D2001FD77B /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		919FBDBD16230000001FD77B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919FBDBA1622E9D2001FD77B /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		91B3E2F1144FD8ED003F8986 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.tbd */; };
-		91CA712D133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
-		91CA712E133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
-		91CA772A133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
-		91CA772B133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
 		91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */; };
 		91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */; };
@@ -801,8 +793,6 @@
 		91D3F9FE1580294F00CB8F1E /* toxxx.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF82130800F300EBCF87 /* toxxx.c */; };
 		91D3F9FF1580294F00CB8F1E /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF84130800F300EBCF87 /* util.c */; };
 		91D3FA001580294F00CB8F1E /* NSURL+IFUnicodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */; };
-		91D3FA011580294F00CB8F1E /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
-		91D3FA041580294F00CB8F1E /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
 		91D3FA051580294F00CB8F1E /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9793134EC34300EC6B0E /* ASIAuthenticationDialog.m */; };
 		91D3FA061580294F00CB8F1E /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9796134EC34300EC6B0E /* ASIDataCompressor.m */; };
 		91D3FA071580294F00CB8F1E /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9798134EC34300EC6B0E /* ASIDataDecompressor.m */; };
@@ -1973,10 +1963,6 @@
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		919FBDBA1622E9D2001FD77B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		91B3E2F0144FD8ED003F8986 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		91CA712B133BDE7B008A89A8 /* BackupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackupManager.h; sourceTree = "<group>"; };
-		91CA712C133BDE7B008A89A8 /* BackupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackupManager.m; sourceTree = "<group>"; };
-		91CA7728133D2E22008A89A8 /* LWEJanrainLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEJanrainLoginManager.h; sourceTree = "<group>"; };
-		91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEJanrainLoginManager.m; sourceTree = "<group>"; };
 		91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExampleSentencesView.xib; path = XIBs/ExampleSentencesView.xib; sourceTree = "<group>"; };
 		91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSentencesViewController.h; path = AppSpecific/ExampleSentencesViewController.h; sourceTree = "<group>"; };
 		91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencesViewController.m; path = AppSpecific/ExampleSentencesViewController.m; sourceTree = "<group>"; };
@@ -3183,10 +3169,6 @@
 				4950C25211B764B200B70EE9 /* PluginManager.m */,
 				4999672811B3E45F00898A0C /* ThemeManager.h */,
 				4999672911B3E45F00898A0C /* ThemeManager.m */,
-				91CA712B133BDE7B008A89A8 /* BackupManager.h */,
-				91CA712C133BDE7B008A89A8 /* BackupManager.m */,
-				91CA7728133D2E22008A89A8 /* LWEJanrainLoginManager.h */,
-				91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */,
 				24BB427F14685E67002C387B /* LWEAudioQueue.h */,
 				24BB428014685E67002C387B /* LWEAudioQueue.m */,
 			);
@@ -4819,9 +4801,7 @@
 				913EEF8D130800F300EBCF87 /* toxxx.c in Sources */,
 				913EEF8E130800F300EBCF87 /* util.c in Sources */,
 				913EEF8F130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */,
-				91CA712E133BDE7B008A89A8 /* BackupManager.m in Sources */,
 				A3D5C55B18406CDE00679ABD /* debug_log.m in Sources */,
-				91CA772B133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */,
 				49EE97A6134EC34500EC6B0E /* ASIAuthenticationDialog.m in Sources */,
 				A3D5C56D18406CDE00679ABD /* JREngagePhonegapPlugin.m in Sources */,
 				49EE97A8134EC34500EC6B0E /* ASIDataCompressor.m in Sources */,
@@ -4934,8 +4914,6 @@
 				496C66AD14728945009F04D4 /* GroupPeer.m in Sources */,
 				496C66AF1472894C009F04D4 /* UpdateManager.m in Sources */,
 				496C66B114728951009F04D4 /* PluginManager.m in Sources */,
-				496C66B314728956009F04D4 /* BackupManager.m in Sources */,
-				496C66B51472896B009F04D4 /* LWEJanrainLoginManager.m in Sources */,
 				496C66C3147289A3009F04D4 /* Group.m in Sources */,
 				496C66C7147289C2009F04D4 /* ASIHTTPRequest.m in Sources */,
 				496C66C9147289C5009F04D4 /* ASINetworkQueue.m in Sources */,
@@ -5043,8 +5021,6 @@
 				496C66AC14728945009F04D4 /* GroupPeer.m in Sources */,
 				496C66AE1472894C009F04D4 /* UpdateManager.m in Sources */,
 				496C66B014728951009F04D4 /* PluginManager.m in Sources */,
-				496C66B214728956009F04D4 /* BackupManager.m in Sources */,
-				496C66B41472896B009F04D4 /* LWEJanrainLoginManager.m in Sources */,
 				496C66C2147289A3009F04D4 /* Group.m in Sources */,
 				496C66C6147289C1009F04D4 /* ASIHTTPRequest.m in Sources */,
 				496C66C8147289C5009F04D4 /* ASINetworkQueue.m in Sources */,
@@ -5181,8 +5157,6 @@
 				913EEF93130800F300EBCF87 /* toxxx.c in Sources */,
 				913EEF94130800F300EBCF87 /* util.c in Sources */,
 				913EEF95130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */,
-				91CA712D133BDE7B008A89A8 /* BackupManager.m in Sources */,
-				91CA772A133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */,
 				49EE97A7134EC34500EC6B0E /* ASIAuthenticationDialog.m in Sources */,
 				A3D5C57118406CDE00679ABD /* JRInfoBar.m in Sources */,
 				49EE97A9134EC34500EC6B0E /* ASIDataCompressor.m in Sources */,
@@ -5337,9 +5311,7 @@
 				91D3F9FE1580294F00CB8F1E /* toxxx.c in Sources */,
 				91D3F9FF1580294F00CB8F1E /* util.c in Sources */,
 				91D3FA001580294F00CB8F1E /* NSURL+IFUnicodeURL.m in Sources */,
-				91D3FA011580294F00CB8F1E /* BackupManager.m in Sources */,
 				A3D5C55D18406CDE00679ABD /* debug_log.m in Sources */,
-				91D3FA041580294F00CB8F1E /* LWEJanrainLoginManager.m in Sources */,
 				91D3FA051580294F00CB8F1E /* ASIAuthenticationDialog.m in Sources */,
 				A3D5C56F18406CDE00679ABD /* JREngagePhonegapPlugin.m in Sources */,
 				91D3FA061580294F00CB8F1E /* ASIDataCompressor.m in Sources */,
