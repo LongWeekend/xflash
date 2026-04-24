@@ -26,6 +26,7 @@
 
 #if defined(LWE_JFLASH)
 - (AVSpeechSynthesisVoice *) _bestJapaneseVoice;
+- (void) _updateSpeakBtnPosition;
 @property (nonatomic, retain) AVSpeechSynthesizer *speechSynthesizer;
 #endif
 @end
@@ -164,21 +165,13 @@
   self.toggleReadingBtn.frame = CGRectMake(hPad, readingY, contentW, readingH);
 
   // Headword immediately below reading.
-  // Reserve 40 pt on the right for the speak button.
   CGFloat headwordY = readingY + readingH + 4.0;
   CGFloat headwordH = 55.0;
-#if defined(LWE_JFLASH)
-  CGFloat speakBtnSize = 36.0;
-  CGFloat speakBtnX = w - hPad - speakBtnSize;
-  CGFloat headwordW = speakBtnX - hPad - 4.0;
-  self.headwordScrollContainer.frame = CGRectMake(hPad, headwordY, headwordW, headwordH);
-  self.speakBtn.frame = CGRectMake(speakBtnX,
-                                   headwordY + roundf((headwordH - speakBtnSize) / 2.0),
-                                   speakBtnSize, speakBtnSize);
-#else
   self.headwordScrollContainer.frame = CGRectMake(hPad, headwordY, contentW, headwordH);
-#endif
   self.headwordMoreIcon.frame = CGRectMake(2.0, headwordY + headwordH - 17.0, 26.0, 17.0);
+#if defined(LWE_JFLASH)
+  [self _updateSpeakBtnPosition];
+#endif
 
   // Meaning webview fills everything below the headword, giving it full space to the bottom.
   CGFloat webY = headwordY + headwordH + 8.0;
@@ -189,6 +182,25 @@
 #pragma mark - IBAction Methods
 
 #if defined(LWE_JFLASH)
+
+- (void)_updateSpeakBtnPosition
+{
+  CGRect container = self.headwordScrollContainer.frame;
+  if (container.size.width <= 0 || self.headwordLabel.text.length == 0) return;
+
+  // Text is center-aligned in the label; compute the visual right edge from intrinsic text width.
+  CGSize textSize = [self.headwordLabel.text sizeWithAttributes:
+                     @{NSFontAttributeName: self.headwordLabel.font}];
+  CGFloat textWidth = MIN(textSize.width, container.size.width);
+  CGFloat containerCenterX = container.origin.x + container.size.width / 2.0;
+  CGFloat textRightEdge = containerCenterX + textWidth / 2.0;
+
+  CGFloat btnSize = 36.0;
+  CGFloat maxX = self.view.bounds.size.width - 2.0;
+  CGFloat speakX = MIN(textRightEdge + 6.0, maxX - btnSize);
+  CGFloat speakY = container.origin.y + roundf((container.size.height - btnSize) / 2.0);
+  self.speakBtn.frame = CGRectMake(speakX, speakY, btnSize, btnSize);
+}
 
 - (AVSpeechSynthesisVoice *)_bestJapaneseVoice
 {
@@ -315,6 +327,9 @@
   //[self _updateReadingContainer];
   self.headwordMoreIcon.hidden = [self _shouldHideMoreIconForLabel:self.headwordLabel
                                                      forScrollView:self.headwordScrollContainer];
+#if defined(LWE_JFLASH)
+  [self _updateSpeakBtnPosition];
+#endif
 }
 
 - (void) _updateReadingContainer
