@@ -44,11 +44,15 @@
     // Here we just create a scene-backed window and show the splash while the DB opens.
     jFlashAppDelegate *appDelegate = (jFlashAppDelegate *)[UIApplication sharedApplication].delegate;
     UIWindow *window = [[UIWindow alloc] initWithWindowScene:windowScene];
-    window.backgroundColor = [UIColor blackColor];
+    // Force light mode — this app was designed for light mode only.
+    // Without this, system colors (systemBackgroundColor etc.) resolve to dark
+    // values on devices with dark mode enabled, causing black backgrounds.
+    window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    window.backgroundColor = [UIColor whiteColor];
     // Placeholder rootVC so iOS 13+ doesn't complain about a missing rootViewController.
     // The real tabBarController is installed by _openUserDatabaseWithPlugins after the DB opens.
     UIViewController *placeholder = [[UIViewController alloc] init];
-    placeholder.view.backgroundColor = [UIColor blackColor];
+    placeholder.view.backgroundColor = [UIColor whiteColor];
     window.rootViewController = placeholder;
     if (appDelegate.splashView) {
       [window addSubview:appDelegate.splashView];
