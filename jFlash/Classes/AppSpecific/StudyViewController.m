@@ -115,25 +115,33 @@
 - (void)viewSafeAreaInsetsDidChange
 {
   [super viewSafeAreaInsetsDidChange];
-  if (@available(iOS 11.0, *)) {
-    CGFloat top = self.view.safeAreaInsets.top;
-    CGRect f = self.progressBarView.frame;
-    f.origin.y = top;
-    self.progressBarView.frame = f;
-    self.showProgressModalBtn.frame = f;
-
-    CGFloat progressBottom = top + f.size.height;
-    CGRect sv = self.scrollView.frame;
-    CGFloat deltaY = progressBottom - sv.origin.y;
-    sv.origin.y = progressBottom;
-    sv.size.height -= deltaY;
-    self.scrollView.frame = sv;
-  }
+  [self.view setNeedsLayout];
 }
 
 - (void)viewDidLayoutSubviews
 {
   [super viewDidLayoutSubviews];
+
+  // Position progress bar and scroll view from the live safe area insets so
+  // the layout is correct regardless of what triggered this pass (initial load,
+  // safe area change, tag change, modal dismiss, etc.).
+  if (@available(iOS 11.0, *)) {
+    CGFloat top = self.view.safeAreaInsets.top;
+    CGFloat progressBottom = top + self.progressBarView.bounds.size.height;
+
+    CGRect pf = self.progressBarView.frame;
+    pf.origin.y = top;
+    self.progressBarView.frame = pf;
+    self.showProgressModalBtn.frame = pf;
+
+    CGFloat svBottom = CGRectGetMinY(self.actionbarView.frame);
+    if (svBottom > progressBottom) {
+      CGRect sv = self.scrollView.frame;
+      sv.origin.y = progressBottom;
+      sv.size.height = svBottom - progressBottom;
+      self.scrollView.frame = sv;
+    }
+  }
 
   // Fix action bar VC view width (autoresizing won't fire if container was already at
   // final width when the view was added), then distribute buttons evenly.
@@ -204,6 +212,7 @@
       }
     }
   }
+
 }
 
 /**
@@ -687,6 +696,11 @@
     [self.actionbarView addSubview:actionVC.view];
     self.actionBarController = actionVC;
   }
+
+  // New subcontrollers have just been swapped in at their NIB sizes.
+  // Mark self.view as needing layout so viewDidLayoutSubviews runs and
+  // resizes them to fill their containers correctly.
+  [self.view setNeedsLayout];
 }
 
 #pragma mark - Plugin-Related
