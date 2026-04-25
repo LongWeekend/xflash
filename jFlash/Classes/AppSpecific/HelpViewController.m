@@ -40,8 +40,6 @@
                     // The tag glossary is only in JFlash
                     NSLocalizedString(@"Tag Glossary",@"HelpViewController.Table_TagGlossary"),
 #endif
-                    NSLocalizedString(@"Backup Custom Sets",@"HelpViewController.Table_BackupCustomSets"),
-                    NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),
                     nil];
   self.sectionTitles = names;
   
@@ -65,8 +63,7 @@
                         // We only use this in JFlash
                         @"tags@2x",
 #endif
-                        @"backup@2x",
-                        @"feedback@2x",nil];
+                        nil];
   currentIndex = 0;
 }
 

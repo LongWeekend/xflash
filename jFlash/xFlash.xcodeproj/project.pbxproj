@@ -614,7 +614,6 @@
 		913EEF93130800F300EBCF87 /* toxxx.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF82130800F300EBCF87 /* toxxx.c */; };
 		913EEF94130800F300EBCF87 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF84130800F300EBCF87 /* util.c */; };
 		913EEF95130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */; };
-		915E3F0E18CC655600E299AB /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 915E3F0D18CC655600E299AB /* libFlurry_4.3.2.a */; };
 		915FEC5115807BF300BEDF5F /* jFlashJr.db in Resources */ = {isa = PBXBuildFile; fileRef = 915FEC4F15807B9100BEDF5F /* jFlashJr.db */; };
 		9175396C1310AA5C00B34EDF /* jflash_13_to_14.sql in Resources */ = {isa = PBXBuildFile; fileRef = 9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */; };
 		917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
@@ -1888,7 +1887,6 @@
 		913EEF87130800F300EBCF87 /* xcode_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcode_config.h; sourceTree = "<group>"; };
 		913EEF88130800F300EBCF87 /* NSURL+IFUnicodeURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+IFUnicodeURL.h"; sourceTree = "<group>"; };
 		913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+IFUnicodeURL.m"; sourceTree = "<group>"; };
-		915E3F0D18CC655600E299AB /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.3.2.a; path = Classes/External/FlurryLib/libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		915FEC4F15807B9100BEDF5F /* jFlashJr.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlashJr.db; path = sql/jFlashJr.db; sourceTree = "<group>"; };
 		9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_13_to_14.sql; path = Migrations/jflash_13_to_14.sql; sourceTree = "<group>"; };
 		917728E011C0CA9600A90071 /* dropped-text-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropped-text-box.png"; path = "Assets/dropped-text-box.png"; sourceTree = "<group>"; };
@@ -2216,7 +2214,6 @@
 		A3D5C7A318406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+JRRequestUtils.h"; sourceTree = "<group>"; };
 		A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+JRRequestUtils.m"; sourceTree = "<group>"; };
 		AA1A600019000010000000AA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		B3F099E7184ADA1900396C2B /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Classes/External/FlurryLib/Flurry.h; sourceTree = SOURCE_ROOT; };
 		D322367A11D370B900B1AF15 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 		D32DC3CF116D82C9005D3852 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		D35B073D1116456D00DB5E02 /* overlay-btn-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "overlay-btn-close.png"; path = "Assets/overlay-btn-close.png"; sourceTree = "<group>"; };
@@ -2244,7 +2241,6 @@
 				499448D01472817000671849 /* libsqlite3.a in Frameworks */,
 				242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */,
 				242A17411461AB68002977E6 /* AVFoundation.framework in Frameworks */,
-				915E3F0E18CC655600E299AB /* libFlurry_4.3.2.a in Frameworks */,
 				91B3E2F1144FD8ED003F8986 /* libz.tbd in Frameworks */,
 				4938F8C714027853001EB473 /* CoreText.framework in Frameworks */,
 				D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */,
@@ -2454,7 +2450,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				915E3F0D18CC655600E299AB /* libFlurry_4.3.2.a */,
 				919FBDBA1622E9D2001FD77B /* Social.framework */,
 				91B3E2F0144FD8ED003F8986 /* libz.tbd */,
 				242A174714628AF4002977E6 /* AudioToolbox.framework */,
@@ -2826,7 +2821,6 @@
 				917A5C5C11AB839300016BD2 /* Appirater */,
 				49EE97B6134EC34A00EC6B0E /* asi-http-request */,
 				913EEF6C130800F300EBCF87 /* IFUnicodeURL */,
-				917A5C0B11AB807800016BD2 /* FlurryLib */,
 				9158C0020FB6C2320083223F /* FMDb */,
 				917A5BA611AB7B1C00016BD2 /* sqlite */,
 				49AD17B2148476080017EFB4 /* ZipArchive */,
@@ -3130,15 +3124,6 @@
 				494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */,
 			);
 			name = sqlite;
-			sourceTree = "<group>";
-		};
-		917A5C0B11AB807800016BD2 /* FlurryLib */ = {
-			isa = PBXGroup;
-			children = (
-				B3F099E7184ADA1900396C2B /* Flurry.h */,
-			);
-			name = FlurryLib;
-			path = External/FlurryLib;
 			sourceTree = "<group>";
 		};
 		917A5C5C11AB839300016BD2 /* Appirater */ = {
@@ -5442,7 +5427,6 @@
 					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
 					"$(SRCROOT)/Classes/External/MBProgressHUD",
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
-					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
 				INFOPLIST_FILE = "jFlash-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Japanese Flash";
@@ -5451,8 +5435,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(SRCROOT)/Classes/External/FlurryLib/",
-					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ross.jflash;
 				PRODUCT_NAME = jFlash;
@@ -5485,7 +5467,6 @@
 					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
 					"$(SRCROOT)/Classes/External/MBProgressHUD",
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
-					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
 				INFOPLIST_FILE = "jFlash-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Japanese Flash";
@@ -5494,8 +5475,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(SRCROOT)/Classes/External/FlurryLib/",
-					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ross.jflash;
 				PRODUCT_NAME = jFlash;
@@ -5694,8 +5673,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/Classes/External/FlurryLib\\\"",
-					/Users/unquiet/lwe/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_NAME = cFlash;
 				PROVISIONING_PROFILE = "";
@@ -5717,8 +5694,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/Classes/External/FlurryLib\\\"",
-					/Users/unquiet/lwe/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_NAME = cFlash;
 				PROVISIONING_PROFILE = "";
@@ -5740,8 +5715,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/Classes/External/FlurryLib\\\"",
-					/Users/unquiet/lwe/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_NAME = cFlash;
 				PROVISIONING_PROFILE = "";
@@ -5770,13 +5743,11 @@
 					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
 					"$(SRCROOT)/Classes/External/MBProgressHUD",
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
-					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
 				INFOPLIST_FILE = "jFlashJr-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "jFlash Junior";
@@ -5806,13 +5777,11 @@
 					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
 					"$(SRCROOT)/Classes/External/MBProgressHUD",
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
-					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
 				INFOPLIST_FILE = "jFlashJr-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "jFlash Junior";
@@ -5842,13 +5811,11 @@
 					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
 					"$(SRCROOT)/Classes/External/MBProgressHUD",
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
-					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
 				INFOPLIST_FILE = "jFlashJr-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "jFlash Junior";
@@ -5902,7 +5869,6 @@
 					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
 					"$(SRCROOT)/Classes/External/MBProgressHUD",
 					"$(SRCROOT)/Classes/External/LWEGradientButton",
-					"$(SRCROOT)/Classes/External/FlurryLib",
 				);
 				INFOPLIST_FILE = "jFlash-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Japanese Flash";
@@ -5911,8 +5877,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(SRCROOT)/Classes/External/FlurryLib/",
-					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ross.jflash;
 				PRODUCT_NAME = jFlash;
