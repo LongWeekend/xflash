@@ -62,7 +62,8 @@ NSString * const APP_NEW_UPDATE = @"new_update";
   self.navigationItem.rightBarButtonItem = shareBtn;
   [shareBtn release];
 
-
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.estimatedRowHeight = 60;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -251,23 +252,6 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 
 #pragma mark - UITableViewDelegate Methods
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	NSArray *thisSectionArray = [self.sectionArray objectAtIndex:indexPath.section];
-  NSString *key = [[thisSectionArray objectAtIndex:1] objectAtIndex:indexPath.row];
-
-  CGFloat size;
-  // Special case for about section
-  if (key == APP_ABOUT)
-  {
-    size = [self.dataSource sizeForAcknowledgementsRow];
-  }
-  else
-  {
-    size = 44.0f;    
-  }
-  return size;
-}
 
 
 //! Make selection for a table cell

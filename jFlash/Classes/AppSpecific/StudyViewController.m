@@ -18,6 +18,7 @@
 @interface StudyViewController()
 //private methods
 - (void) _applicationDidEnterBackground:(NSNotification*)notification;
+- (void) _contentSizeCategoryDidChange:(NSNotification*)notification;
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
 - (BOOL) _shouldShowSampleAudioButtonForCard:(Card*)card;
 - (void) _tagContentDidChange:(NSNotification*)notification;
@@ -235,7 +236,6 @@
   [settings addObserver:self forKeyPath:APP_THEME options:NSKeyValueObservingOptionNew context:NULL];
   [settings addObserver:self forKeyPath:APP_HEADWORD options:NSKeyValueObservingOptionNew context:NULL];
   [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
-  [settings addObserver:self forKeyPath:APP_TEXT_SIZE options:NSKeyValueObservingOptionNew context:NULL];
 #if defined (LWE_CFLASH)
   [settings addObserver:self forKeyPath:APP_PINYIN_COLOR options:NSKeyValueObservingOptionNew context:NULL];
 #elif defined (LWE_JFLASH)
@@ -246,6 +246,7 @@
   [center addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   [center addObserver:self selector:@selector(_tagContentDidChange:) name:LWETagContentDidChange object:nil];
   [center addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationWillTerminateNotification object:nil];
+  [center addObserver:self selector:@selector(_contentSizeCategoryDidChange:) name:UIContentSizeCategoryDidChangeNotification object:nil];
   
   // Initialize the progressBarView
 	ProgressBarViewController *tmpPBVC = [[ProgressBarViewController alloc] init];
@@ -340,7 +341,7 @@
     [self _setupSubviews];
     [self doChangeCard:self.currentCard direction:nil];
   }
-  else if ([keyPath isEqualToString:APP_TEXT_SIZE] || [keyPath isEqualToString:APP_HEADWORD])
+  else if ([keyPath isEqualToString:APP_HEADWORD])
   {
     // We need to setup the card view controller again
     [self _setupSubviews];
@@ -836,6 +837,12 @@
 }
 
 #pragma mark - Class plumbing
+
+- (void) _contentSizeCategoryDidChange:(NSNotification *)notification
+{
+  [self _setupSubviews];
+  [self doChangeCard:self.currentCard direction:nil];
+}
 
 /*
 * We ask Tag to freeze its current state to a plist so if the app is killed

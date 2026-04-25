@@ -21,11 +21,6 @@
 
 #pragma mark - Settings Data Source
 
-- (CGFloat) sizeForAcknowledgementsRow
-{
-  return 730.0f;
-}
-
 /** Returns all the arrays to configure the settings table */
 - (NSArray*) settingsArrayWithPluginManager:(PluginManager *)pluginManager
 {
@@ -65,16 +60,9 @@
   NSArray *sandhiKeys = [NSArray arrayWithObjects:SET_PINYIN_CHANGE_TONE_OFF, SET_PINYIN_CHANGE_TONE_ON, nil];
   NSDictionary *sandhiDict = [NSDictionary dictionaryWithObjects:sandhiObjects forKeys:sandhiKeys];
 
-  // This is for controlling the size of the text in the Web Views
-  NSArray *textSizeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Normal",@"SettingsViewController.TextSizeNormal"),
-                              NSLocalizedString(@"Large",@"SettingsViewController.TextSizeLarge"),
-                              NSLocalizedString(@"Huge",@"SettingsViewController.TextSizeHuge"),nil];
-  NSArray *textSizeKeys = [NSArray arrayWithObjects:SET_TEXT_NORMAL,SET_TEXT_LARGE,SET_TEXT_HUGE,nil];
-  NSDictionary *textSizeDict = [NSDictionary dictionaryWithObjects:textSizeObjects forKeys:textSizeKeys];
-  
   // Create a complete dictionary of all settings display names & their setting constants
-  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,colorDict,sandhiDict, hwTypeDict,modeDict,textSizeDict,nil];
-  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_PINYIN_COLOR,APP_PINYIN_CHANGE_TONE,APP_HEADWORD_TYPE,APP_MODE,APP_TEXT_SIZE,nil];
+  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,colorDict,sandhiDict,hwTypeDict,modeDict,nil];
+  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_PINYIN_COLOR,APP_PINYIN_CHANGE_TONE,APP_HEADWORD_TYPE,APP_MODE,nil];
   self.settingsHash = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
   
   //======================================
@@ -87,9 +75,8 @@
                                NSLocalizedString(@"Pinyin Coloring",@"SettingsViewController.SettingNames_PinyinColoring"),
                                NSLocalizedString(@"Tone Sandhi",@"SettingsViewController.SettingNames_PinyinSandhi"),
                                NSLocalizedString(@"Character Style",@"SettingsViewController.SettingNames_HW_Type"),
-                               NSLocalizedString(@"Text Size",@"SettingsViewController.SettingNames_TextSize"),
                                NSLocalizedString(@"Difficulty",@"SettingsViewController.SettingNames_ChangeDifficulty"),nil];
-  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_PINYIN_COLOR,APP_PINYIN_CHANGE_TONE,APP_HEADWORD_TYPE,APP_TEXT_SIZE,APP_ALGORITHM,nil];
+  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_PINYIN_COLOR,APP_PINYIN_CHANGE_TONE,APP_HEADWORD_TYPE,APP_ALGORITHM,nil];
   NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
   
   NSMutableArray *userSettingNames = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),

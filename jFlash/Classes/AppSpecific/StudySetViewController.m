@@ -94,6 +94,9 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
   
   self.tagArray = [[self.group.childTags mutableCopy] autorelease];
   self.activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.estimatedRowHeight = 60;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -302,8 +305,9 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
       cell.accessoryType = UITableViewCellAccessoryNone;
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
+      cell.textLabel.numberOfLines = 0;
       cell.textLabel.text = NSLocalizedString(@"No Results Found",@"StudySetViewController.SearchedButNoResults");
-      cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+      cell.detailTextLabel.numberOfLines = 0;
     }
     // Normal cell display
     else
@@ -328,6 +332,7 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
         tmpView.image = tagImage;
       }
       
+      cell.textLabel.numberOfLines = 0;
       cell.textLabel.text = tmpTag.tagName;
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
       NSString *tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Words",@"StudySetViewController.WordCount"), [tmpTag cardCount]];
@@ -354,6 +359,7 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
   else if (indexPath.section == kLWEPremiumTagsSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+    cell.textLabel.numberOfLines = 0;
     cell.textLabel.text = NSLocalizedString(@"Get More Sets", @"StudySetViewController.premiumSets");
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
@@ -377,6 +383,7 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
     
     // This is for groups?
     Group *tmpGroup = [self.subgroupArray objectAtIndex:indexPath.row];
+    cell.textLabel.numberOfLines = 0;
     cell.textLabel.text = tmpGroup.groupName;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
 

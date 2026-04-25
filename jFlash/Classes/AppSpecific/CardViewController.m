@@ -10,6 +10,55 @@
 #import "UIScrollView+LWEUtilities.h"
 #import <AVFoundation/AVFoundation.h>
 
+// Maps iOS system text size category to a CSS font-size string for WKWebView/UIWebView HTML.
+static NSString *LWEDynamicTypeCSSFontSize(void)
+{
+  static NSDictionary *map = nil;
+  if (!map) {
+    map = [@{
+      UIContentSizeCategoryExtraSmall:                            @"13px",
+      UIContentSizeCategorySmall:                                 @"14px",
+      UIContentSizeCategoryMedium:                                @"15px",
+      UIContentSizeCategoryLarge:                                 @"16px",
+      UIContentSizeCategoryExtraLarge:                            @"18px",
+      UIContentSizeCategoryExtraExtraLarge:                       @"20px",
+      UIContentSizeCategoryExtraExtraExtraLarge:                  @"22px",
+      UIContentSizeCategoryAccessibilityMedium:                   @"26px",
+      UIContentSizeCategoryAccessibilityLarge:                    @"30px",
+      UIContentSizeCategoryAccessibilityExtraLarge:               @"34px",
+      UIContentSizeCategoryAccessibilityExtraExtraLarge:          @"38px",
+      UIContentSizeCategoryAccessibilityExtraExtraExtraLarge:     @"44px",
+    } retain];
+  }
+  NSString *category = [UIApplication sharedApplication].preferredContentSizeCategory;
+  return map[category] ?: @"16px";
+}
+
+// Scale factor relative to the default (Large) category, used to scale native label font sizes.
+static CGFloat LWEDynamicTypeSizeMultiplier(void)
+{
+  static NSDictionary *map = nil;
+  if (!map) {
+    map = [@{
+      UIContentSizeCategoryExtraSmall:                            @(0.82f),
+      UIContentSizeCategorySmall:                                 @(0.88f),
+      UIContentSizeCategoryMedium:                                @(0.94f),
+      UIContentSizeCategoryLarge:                                 @(1.00f),
+      UIContentSizeCategoryExtraLarge:                            @(1.06f),
+      UIContentSizeCategoryExtraExtraLarge:                       @(1.12f),
+      UIContentSizeCategoryExtraExtraExtraLarge:                  @(1.19f),
+      UIContentSizeCategoryAccessibilityMedium:                   @(1.35f),
+      UIContentSizeCategoryAccessibilityLarge:                    @(1.53f),
+      UIContentSizeCategoryAccessibilityExtraLarge:               @(1.76f),
+      UIContentSizeCategoryAccessibilityExtraExtraLarge:          @(1.94f),
+      UIContentSizeCategoryAccessibilityExtraExtraExtraLarge:     @(2.35f),
+    } retain];
+  }
+  NSString *category = [UIApplication sharedApplication].preferredContentSizeCategory;
+  NSNumber *multiplier = map[category];
+  return multiplier ? multiplier.floatValue : 1.0f;
+}
+
 #if defined (LWE_CFLASH)
   #import "ChineseCard.h"
   #import "TTTAttributedLabel.h"
@@ -104,9 +153,7 @@
     NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
     html = [html stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];
     
-    // Replace the font tag with the current setting
-    NSString *textSize = [[NSUserDefaults standardUserDefaults] objectForKey:APP_TEXT_SIZE];
-    html = [html stringByReplacingOccurrencesOfString:@"##TEXTSIZE##" withString:textSize];
+    html = [html stringByReplacingOccurrencesOfString:@"##TEXTSIZE##" withString:LWEDynamicTypeCSSFontSize()];
     
     self.baseHtml = html;
   }
@@ -316,8 +363,9 @@
 #endif
   // These calls re-size the reading & headword labels.  They used to take the scrollContainer as well,
   // but we infer it (superview) of the labels inside this call.
-  [self.readingLabel resizeWithMinFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE];
-  [self.headwordLabel resizeWithMinFontSize:HEADWORD_MIN_FONTSIZE maxFontSize:HEADWORD_MAX_FONTSIZE];
+  CGFloat dtScale = LWEDynamicTypeSizeMultiplier();
+  [self.readingLabel resizeWithMinFontSize:(NSInteger)(READING_MIN_FONTSIZE * dtScale) maxFontSize:(NSInteger)(READING_MAX_FONTSIZE * dtScale)];
+  [self.headwordLabel resizeWithMinFontSize:(NSInteger)(HEADWORD_MIN_FONTSIZE * dtScale) maxFontSize:(NSInteger)(HEADWORD_MAX_FONTSIZE * dtScale)];
   
   // Now resize the scroll views as necessary based on the resized views above, if necessary.
   // This call also centers the label inside the scroll view.
@@ -429,8 +477,8 @@
 NSString * const LWECardHTMLTemplate = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<style>"
-"body{ background-color:transparent; margin:0; padding:0; text-align:center; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; line-height:21px; } "
-"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
+"body{ background-color:transparent; margin:0; padding:0; text-align:center; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; line-height:1.4; } "
+"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:1.4; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
 "#container{ width:100%; text-align:center; padding-top:12px; } "
 "ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
 "li{color:white; margin:0px; margin-bottom:7px;} "
@@ -443,9 +491,9 @@ NSString * const LWECardHTMLTemplate_EtoJ = @""
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
 "<style>"
 "html,body{ height:100%; } "
-"body{ background-color:transparent; display:-webkit-flex; display:flex; -webkit-justify-content:center; justify-content:center; -webkit-align-items:flex-start; align-items:flex-start; margin:0; padding:10px 0 0 0; box-sizing:border-box; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; line-height:21px; } "
-"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
-"#container{ width:100%; text-align:center; font-size:34px; padding-left:3px; line-height:32px; } "
+"body{ background-color:transparent; display:-webkit-flex; display:flex; -webkit-justify-content:center; justify-content:center; -webkit-align-items:flex-start; align-items:flex-start; margin:0; padding:10px 0 0 0; box-sizing:border-box; font-size:##TEXTSIZE##; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; line-height:1.4; } "
+"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:1.4; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
+"#container{ width:100%; text-align:center; font-size:34px; padding-left:3px; line-height:1.4; } "
 "ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
 "li{color:white; margin:0px; margin-bottom:7px;} "
 "##THEMECSS##"

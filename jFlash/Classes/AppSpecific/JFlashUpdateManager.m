@@ -304,8 +304,6 @@
 
 + (void) _updateSettingsFrom17to18:(NSUserDefaults *)settings
 {
-  // Create a default setting that wasn't there before
-  [settings setObject:SET_TEXT_NORMAL forKey:APP_TEXT_SIZE];
   [settings setObject:SET_KANA_ONLY_ON forKey:APP_KANA_ONLY];
   
   [settings setObject:LWE_JF_VERSION_1_8 forKey:APP_DATA_VERSION];

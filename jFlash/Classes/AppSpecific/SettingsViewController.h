@@ -17,7 +17,6 @@ extern NSString * const APP_NEW_UPDATE;
 @required
 - (NSArray*) settingsArrayWithPluginManager:(PluginManager *)pluginManager;
 - (NSDictionary*) settingsHash;
-- (CGFloat) sizeForAcknowledgementsRow;
 @end
 
 @class SettingsViewController;

@@ -43,6 +43,9 @@
                     nil];
   self.sectionTitles = names;
   
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.estimatedRowHeight = 52;
+
   UIBarButtonItem *supportBtn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Ask Us", @"HelpViewController.GetSatsifactionLink")
                                                                   style:UIBarButtonItemStyleBordered
                                                                  target:self action:@selector(_supportBtnPressed:)] autorelease];
@@ -174,6 +177,7 @@
   cell = [LWEUITableUtils reuseCellForIdentifier:@"help" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   cell.selectionStyle = UITableViewCellSelectionStyleGray;
+  cell.textLabel.numberOfLines = 0;
   cell.textLabel.text = [self.sectionTitles objectAtIndex:indexPath.row];
   return cell;  
 }

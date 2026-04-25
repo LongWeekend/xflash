@@ -50,11 +50,6 @@ extern NSString * const APP_HEADWORD;
 extern NSString * const SET_J_TO_E;
 extern NSString * const SET_E_TO_J;
 
-extern NSString * const APP_TEXT_SIZE;
-extern NSString * const SET_TEXT_NORMAL;
-extern NSString * const SET_TEXT_LARGE;
-extern NSString * const SET_TEXT_HUGE;
-
 extern NSString * const APP_HEADWORD_TYPE;
 extern NSString * const SET_HEADWORD_TYPE_TRAD;
 extern NSString * const SET_HEADWORD_TYPE_SIMP;
