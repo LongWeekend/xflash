@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import "Card.h"
-#import "UIWebView+LWENoBounces.h"
 #import "MoodIcon.h"
 #import "StudyViewProtocols.h"
 
@@ -29,10 +29,12 @@ extern NSString * const LWECardHTMLTemplate_EtoJ;
 - (BOOL)shouldRevealCardView:(CardViewController*)cvc;
 @end
 
-@interface CardViewController : UIViewController <StudyViewSubcontrollerProtocol>
+@interface CardViewController : UIViewController <StudyViewSubcontrollerProtocol, WKNavigationDelegate>
 {
   //! Holds a reference to the current meaning's string-replacement javascript
   NSString *_tmpJavascript;
+  //! WKWebView created programmatically inside meaningWebViewContainer.
+  WKWebView *_meaningWebView;
 }
 
 //! Designated initializer.  Passing "NO" to displayMainHeadword shows alt headword (e.g. English)
@@ -93,8 +95,8 @@ extern NSString * const LWECardHTMLTemplate_EtoJ;
 @property (nonatomic, retain) UIButton *speakBtn;
 #endif
 
-//! Web view that renders the meaning HTML
-@property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;
+//! Container view (XIB-instantiated UIView) into which the WKWebView is added in viewDidLoad.
+@property (nonatomic, retain) IBOutlet UIView *meaningWebViewContainer;
 
 @property (nonatomic, retain) NSString *baseHtml;
 @end

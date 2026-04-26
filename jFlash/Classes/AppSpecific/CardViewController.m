@@ -83,7 +83,7 @@ static CGFloat LWEDynamicTypeSizeMultiplier(void)
 @implementation CardViewController
 
 @synthesize delegate;
-@synthesize meaningWebView, headwordMoreIcon, headwordLabel, readingMoreIcon, readingLabel, toggleReadingBtn;
+@synthesize meaningWebViewContainer, headwordMoreIcon, headwordLabel, readingMoreIcon, readingLabel, toggleReadingBtn;
 @synthesize readingScrollContainer, headwordScrollContainer, readingVisible = _readingVisible;
 @synthesize baseHtml;
 @synthesize moodIcon;
@@ -163,9 +163,21 @@ static CGFloat LWEDynamicTypeSizeMultiplier(void)
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self.meaningWebView loadHTMLString:self.baseHtml baseURL:nil];
-  [self.meaningWebView shutOffBouncing];
-  self.meaningWebView.backgroundColor = [UIColor clearColor];
+
+  // Create the WKWebView programmatically inside the XIB-instantiated container.
+  // (UIWebView is removed in modern iOS so we no longer instantiate it from the XIB.)
+  WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+  _meaningWebView = [[WKWebView alloc] initWithFrame:self.meaningWebViewContainer.bounds
+                                       configuration:config];
+  [config release];
+  _meaningWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+  _meaningWebView.navigationDelegate = self;
+  _meaningWebView.opaque = NO;
+  _meaningWebView.backgroundColor = [UIColor clearColor];
+  _meaningWebView.scrollView.backgroundColor = [UIColor clearColor];
+  _meaningWebView.scrollView.bounces = NO;
+  [self.meaningWebViewContainer addSubview:_meaningWebView];
+  [_meaningWebView loadHTMLString:self.baseHtml baseURL:nil];
 
   // Add mood icon subview - TODO: MMA this is 90% complete, but I want to find a way to do this in the NIB
   CGRect moodIconRect = CGRectMake(235, 197, 80, 73);
@@ -223,7 +235,7 @@ static CGFloat LWEDynamicTypeSizeMultiplier(void)
   // Meaning webview fills everything below the headword, giving it full space to the bottom.
   CGFloat webY = headwordY + headwordH + 8.0;
   CGFloat webH = MAX(60.0, h - webY - 8.0);
-  self.meaningWebView.frame = CGRectMake(hPad, webY, contentW, webH);
+  self.meaningWebViewContainer.frame = CGRectMake(hPad, webY, contentW, webH);
 }
 
 #pragma mark - IBAction Methods
@@ -345,11 +357,8 @@ static CGFloat LWEDynamicTypeSizeMultiplier(void)
 // Prepare the view for the current card
 - (void) _prepareView:(Card*)card
 {
-  // Reset the meaning's scroll view location -- this is not available earlier than iOS5, so wrap it.
-  if ([self.meaningWebView respondsToSelector:@selector(scrollView)])
-  {
-    self.meaningWebView.scrollView.contentOffset = CGPointZero;
-  }
+  // Reset the meaning's scroll view location.
+  _meaningWebView.scrollView.contentOffset = CGPointZero;
   
   // Fix up the headword & the meaning; those are a bit easier.
   [self _injectMeaningHTML:card.meaning];
@@ -390,32 +399,35 @@ static CGFloat LWEDynamicTypeSizeMultiplier(void)
 
 - (void) _injectMeaningHTML:(NSString*)html
 {
-  // The HTML will be encapsulated in Javascript, make sure to escape that noise
-  NSString *escapedHtml = [html stringByReplacingOccurrencesOfString:@"'" withString:@"\\\'"];
+  // The HTML will be encapsulated in Javascript, escape backslash, quote, and
+  // newline so the resulting JS string literal stays well-formed for any
+  // characters that might appear in card meanings.
+  NSString *escapedHtml = [html stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+  escapedHtml = [escapedHtml stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
+  escapedHtml = [escapedHtml stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+  escapedHtml = [escapedHtml stringByReplacingOccurrencesOfString:@"\r" withString:@""];
   NSString *js = [NSString stringWithFormat:@"var textElement = document.getElementById('container'); if (textElement) { textElement.innerHTML = '%@'; }",escapedHtml];
-  
-  // Save of copy of this in case the webview hasn't finished loading yet (see WebView delegate below)
+
+  // Save a copy of this in case the webview hasn't finished loading yet
+  // (see WKNavigationDelegate callback below).
+  [_tmpJavascript release];
   _tmpJavascript = [js retain];
-  
-  // Not loading, do it as normal
-  [self.meaningWebView stringByEvaluatingJavaScriptFromString:js];
+
+  [_meaningWebView evaluateJavaScript:js completionHandler:nil];
 }
 
 
-#pragma mark - UIWebViewDelegate Support
+#pragma mark - WKNavigationDelegate
 
 /**
- * This callback should only be called once at the beginning of a study session
- * When the webview doesn't load as fast as the view controllers (so far, always)
- * the javascript call in "setupWebMeaning" or whatever will do nothing - so 
- * it caches the result in _tmpJavascript and waits for the delegate callback
+ * The HTML template loads from a string and a JS-injection request can race the
+ * load. If the JS was queued before the WebView finished loading, replay it now.
  */
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-  // Aha, we have some HTML on first load, so load that shit up
   if (_tmpJavascript)
   {
-    [self.meaningWebView stringByEvaluatingJavaScriptFromString:_tmpJavascript];
+    [_meaningWebView evaluateJavaScript:_tmpJavascript completionHandler:nil];
     [_tmpJavascript release];
     _tmpJavascript = nil;
   }
@@ -433,7 +445,7 @@ static CGFloat LWEDynamicTypeSizeMultiplier(void)
   self.headwordLabel = nil;
   self.readingLabel = nil;
   self.toggleReadingBtn = nil;
-  self.meaningWebView = nil;
+  self.meaningWebViewContainer = nil;
   self.moodIcon = nil;
 #if defined(LWE_JFLASH)
   self.speakBtn = nil;
@@ -463,10 +475,9 @@ static CGFloat LWEDynamicTypeSizeMultiplier(void)
   [speechSynthesizer release];
 #endif
 
-  // Apparently we're supposed to set this to nil, according to the docs
-  // I guess it's in case some other guy is holding a reference to this dude
-  self.meaningWebView.delegate = nil;
-  [meaningWebView release];
+  _meaningWebView.navigationDelegate = nil;
+  [_meaningWebView release];
+  [meaningWebViewContainer release];
 
   [super dealloc];
 }

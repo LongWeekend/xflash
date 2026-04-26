@@ -11,7 +11,7 @@
                 <outlet property="startButton" destination="23" id="33"/>
                 <outlet property="taskMsgLabel" destination="5" id="9"/>
                 <outlet property="view" destination="1" id="7"/>
-                <outlet property="webView" destination="wV0-NA-Hyn" id="Zxl-BZ-igx"/>
+                <outlet property="webViewContainer" destination="wV0-NA-Hyn" id="Zxl-BZ-igx"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -41,12 +41,12 @@
                         <action selector="startProcess" destination="-1" eventType="touchUpInside" id="25"/>
                     </connections>
                 </button>
-                <webView opaque="NO" contentMode="scaleToFill" id="wV0-NA-Hyn">
+                <view opaque="NO" contentMode="scaleToFill" id="wV0-NA-Hyn">
                     <rect key="frame" x="0.0" y="63" width="320" height="405"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="60" maxX="0.0" maxY="-60"/>
-                </webView>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

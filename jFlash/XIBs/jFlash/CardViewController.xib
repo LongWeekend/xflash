@@ -10,7 +10,7 @@
                 <outlet property="headwordLabel" destination="10" id="62"/>
                 <outlet property="headwordMoreIcon" destination="9" id="66"/>
                 <outlet property="headwordScrollContainer" destination="5" id="64"/>
-                <outlet property="meaningWebView" destination="6" id="17"/>
+                <outlet property="meaningWebViewContainer" destination="6" id="17"/>
                 <outlet property="moodIcon" destination="57" id="60"/>
                 <outlet property="readingLabel" destination="42" id="61"/>
                 <outlet property="readingMoreIcon" destination="8" id="65"/>
@@ -73,16 +73,12 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </imageView>
-                <webView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="6" userLabel="meaningWebView">
+                <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="6" userLabel="meaningWebViewContainer">
                     <rect key="frame" x="10" y="122" width="300" height="129"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                    <dataDetectorType key="dataDetectorTypes"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="16"/>
-                    </connections>
-                </webView>
+                </view>
                 <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7" userLabel="toggleReadingButton">
                     <rect key="frame" x="105" y="28" width="110" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
