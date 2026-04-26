@@ -201,11 +201,11 @@
 
 - (void) shareWord
 {
-  NSMutableArray *sharingItems = [NSMutableArray new];
+  NSMutableArray *sharingItems = [NSMutableArray array];
   [sharingItems addObject:[self getTweetWord]];
   [sharingItems addObject:@"https://itunes.apple.com/us/app/japanese-flash-vocabulary/id367216357?mt=8"];
-          
-  UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
+
+  UIActivityViewController *activityController = [[[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil] autorelease];
   [self presentViewController:activityController animated:YES completion:nil];
 }
 

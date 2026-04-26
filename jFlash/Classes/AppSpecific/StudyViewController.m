@@ -901,8 +901,10 @@
   [settings removeObserver:self forKeyPath:APP_KANA_ONLY];
 #endif
 
+  [delegate release];
+
   [pronounceBtn release];
-  
+
   //theme
   [practiceBgImage release];
   

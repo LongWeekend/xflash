@@ -108,8 +108,9 @@
 }
 
 
-- (void)dealloc 
+- (void)dealloc
 {
+	[delegate release];
 	[webView release];
 	[_cancelBtn release];
     [super dealloc];

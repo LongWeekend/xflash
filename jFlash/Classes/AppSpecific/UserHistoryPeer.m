@@ -77,7 +77,6 @@
 + (void) _recordResult:(Card*)card forTag:(Tag *)tag gotItRight:(BOOL) gotItRight knewIt:(BOOL) knewIt
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *sql = nil;
   NSInteger nextLevel = -1;
   if (knewIt)
   {
@@ -88,20 +87,20 @@
     nextLevel = [[self class] _nextAfterLevel:card.levelId gotItRight:gotItRight];
   }
 
-  if (gotItRight)
-  {
-    // int oldNextLevel
-    sql = [[NSString alloc] initWithFormat:@"INSERT OR REPLACE INTO user_history (card_id,timestamp,created_on,user_id,right_count,wrong_count,card_level) VALUES ('%d',current_timestamp,current_timestamp,'%d','%d','%d','%d')",card.cardId,[settings integerForKey:@"user_id"],(card.rightCount+1),card.wrongCount,nextLevel];
-  }
-  else
-  {
-    // int
-    sql = [[NSString alloc] initWithFormat:@"INSERT OR REPLACE INTO user_history (card_id,timestamp,created_on,user_id,right_count,wrong_count,card_level) VALUES ('%d',current_timestamp,current_timestamp,'%d','%d','%d','%d')",card.cardId,[settings integerForKey:@"user_id"],card.rightCount,(card.wrongCount+1),nextLevel];
-  }
+  NSInteger newRightCount = gotItRight ? (card.rightCount + 1) : card.rightCount;
+  NSInteger newWrongCount = gotItRight ? card.wrongCount : (card.wrongCount + 1);
+
+  NSString *sql = @"INSERT OR REPLACE INTO user_history (card_id,timestamp,created_on,user_id,right_count,wrong_count,card_level) VALUES (?,current_timestamp,current_timestamp,?,?,?,?)";
+  NSArray *args = [NSArray arrayWithObjects:
+                   [NSNumber numberWithInteger:card.cardId],
+                   [NSNumber numberWithInteger:[settings integerForKey:@"user_id"]],
+                   [NSNumber numberWithInteger:newRightCount],
+                   [NSNumber numberWithInteger:newWrongCount],
+                   [NSNumber numberWithInteger:nextLevel],
+                   nil];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  [db executeUpdate:sql];
-  [sql release];
-  
+  [[db dao] executeUpdate:sql withArgumentsInArray:args];
+
   [tag moveCard:card toLevel:nextLevel];
 }
 

@@ -40,10 +40,10 @@
  * \param sql SQL string used to return the ExampleSentence objects
  * \param hydrate If YES, the -hydrate:rs method will be called on each ExampleSentence
  */
-+ (NSMutableArray*) retrieveSentencesWithSQL:(NSString*)sql hydrate:(BOOL)hydrate
++ (NSMutableArray*) retrieveSentencesWithSQL:(NSString*)sql hydrate:(BOOL)hydrate arguments:(NSArray *)arguments
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  FMResultSet *rs = [[db dao] executeQuery:sql];
+  FMResultSet *rs = [[db dao] executeQuery:sql withArgumentsInArray:arguments];
   ExampleSentence* tmpSentence;
   NSMutableArray *sentenceList = [[[NSMutableArray alloc] init] autorelease];
   while ([rs next])
@@ -64,6 +64,11 @@
   return sentenceList;
 }
 
++ (NSMutableArray*) retrieveSentencesWithSQL:(NSString*)sql hydrate:(BOOL)hydrate
+{
+  return [self retrieveSentencesWithSQL:sql hydrate:hydrate arguments:[NSArray array]];
+}
+
 
 /**
  * Returns a single hydrated ExampleSentence object
@@ -71,10 +76,14 @@
  */
 + (ExampleSentence*) retrieveExampleSentenceByPK: (NSInteger)sentenceId;
 {
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM sentences WHERE sentence_id = '%d'", sentenceId];
-  NSMutableArray* tmpSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
-	[sql release];
-	return [tmpSentences objectAtIndex:0];
+  NSMutableArray* tmpSentences = [ExampleSentencePeer retrieveSentencesWithSQL:@"SELECT * FROM sentences WHERE sentence_id = ?"
+                                                                       hydrate:YES
+                                                                     arguments:[NSArray arrayWithObject:[NSNumber numberWithInteger:sentenceId]]];
+  if ([tmpSentences count] == 0)
+  {
+    return nil;
+  }
+  return [tmpSentences objectAtIndex:0];
 }
 
 
@@ -84,16 +93,18 @@
  */
 + (NSMutableArray*) getExampleSentencesByCardId: (NSInteger)cardId
 {
-	NSString *sql = nil;
-	if ([ExampleSentencePeer isNewVersion])
+  NSString *sql = nil;
+  if ([ExampleSentencePeer isNewVersion])
   {
-		sql = [NSString stringWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = %d AND s.sentence_id = l.sentence_id AND l.should_show = 1 LIMIT 10", cardId];
+    sql = @"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = ? AND s.sentence_id = l.sentence_id AND l.should_show = 1 LIMIT 10";
   }
   else
   {
-		sql = [NSString stringWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = %d AND s.sentence_id = l.sentence_id LIMIT 10", cardId];
-	}
-	return [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
+    sql = @"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = ? AND s.sentence_id = l.sentence_id LIMIT 10";
+  }
+  return [ExampleSentencePeer retrieveSentencesWithSQL:sql
+                                               hydrate:YES
+                                             arguments:[NSArray arrayWithObject:[NSNumber numberWithInteger:cardId]]];
 }
 
 /**
@@ -103,26 +114,22 @@
 + (BOOL) sentencesExistForCardId: (NSInteger)cardId
 {
   NSString *sql = nil;
-  
+
   if ([ExampleSentencePeer isNewVersion])
   {
     // Version 1.2 example sentences DB
-    sql = [[NSString alloc] initWithFormat:@"SELECT sentence_id FROM card_sentence_link WHERE card_id = %d AND should_show = '1' LIMIT 1", cardId];
+    sql = @"SELECT sentence_id FROM card_sentence_link WHERE card_id = ? AND should_show = '1' LIMIT 1";
   }
   else
   {
     // Version 1.1 example sentences DB
-    sql = [[NSString alloc] initWithFormat:@"SELECT sentence_id FROM card_sentence_link WHERE card_id = %d LIMIT 1", cardId];
+    sql = @"SELECT sentence_id FROM card_sentence_link WHERE card_id = ? LIMIT 1";
   }
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  FMResultSet *rs = [db executeQuery:sql];
-  [sql release];
-  if ([rs next])
-  {
-    return YES;
-  }
+  FMResultSet *rs = [[db dao] executeQuery:sql withArgumentsInArray:[NSArray arrayWithObject:[NSNumber numberWithInteger:cardId]]];
+  BOOL exists = [rs next];
   [rs close];
-  return NO;
+  return exists;
 }
 
 
@@ -132,30 +139,24 @@
 + (NSArray*) searchSentencesForKeyword: (NSString*)keyword
 {
   NSArray *cardList = [CardPeer searchCardsForKeyword:keyword];
-  
-  // Do a clever IN SQL statement!  Aha!
-  NSString *inStatement = nil;
-  Card* card = nil;
-  for (int i = 0; i < [cardList count]; i++)
+  if ([cardList count] == 0)
   {
-    card = [cardList objectAtIndex:i];
-    if (i == 0)
-    {
-      inStatement = [NSString stringWithFormat:@"%d",[card cardId]];
-    }
-    else if (i > 0)
-    {
-      inStatement = [NSString stringWithFormat:@"%@,%d",inStatement,[card cardId]];      
-    }
+    return [NSArray array];
   }
-  
-  LWE_LOG(@"In Statement: %@",inStatement);
-  
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT DISTINCT(s.sentence_id), s.sentence_ja, s.sentence_en, s.checked FROM sentences s, card_sentence_link c WHERE s.sentence_id = c.sentence_id AND c.card_id IN (%@)",inStatement];
-  NSArray* exampleSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
-  [sql release];
-  return exampleSentences;
 
+  // Build the IN-list of placeholders ("?,?,?,...") and a parallel arguments array.
+  // cardIds come from a previous DB query, but we still parameterize for hygiene.
+  NSMutableArray *placeholders = [NSMutableArray arrayWithCapacity:[cardList count]];
+  NSMutableArray *arguments = [NSMutableArray arrayWithCapacity:[cardList count]];
+  for (Card *card in cardList)
+  {
+    [placeholders addObject:@"?"];
+    [arguments addObject:[NSNumber numberWithInteger:[card cardId]]];
+  }
+  NSString *inList = [placeholders componentsJoinedByString:@","];
+
+  NSString *sql = [NSString stringWithFormat:@"SELECT DISTINCT(s.sentence_id), s.sentence_ja, s.sentence_en, s.checked FROM sentences s, card_sentence_link c WHERE s.sentence_id = c.sentence_id AND c.card_id IN (%@)", inList];
+  return [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES arguments:arguments];
 }
 
 @end
