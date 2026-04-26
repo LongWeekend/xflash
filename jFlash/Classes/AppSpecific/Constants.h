@@ -12,7 +12,6 @@
 #define DEFAULT_REMINDER_DAYS 4
 
 #define LWE_PLUGIN_UPDATE_PERIOD		14
-#define LWE_TWITTER_MAX_CHARS	132
 
 // algorithm controls
 #define MAX_MAX_STUDYING 50
@@ -80,11 +79,6 @@ extern NSString * const LWE_SUPPORT_EMAIL;
 
 // Tapjoy ID - should be updated for each app!
 extern NSString * const LWE_TAPJOY_APP_ID;
-
-// Twitter Keys
-extern NSString * const LWE_TWITTER_CONSUMER_KEY;
-extern NSString * const LWE_TWITTER_PRIVATE_KEY;
-extern NSString * const LWE_TWITTER_HASH_TAG;
 
 extern NSString * const LWE_XFLASH_HOMEPAGE;
 

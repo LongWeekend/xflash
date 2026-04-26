@@ -32,8 +32,6 @@
 @interface ActionBarViewController : UIViewController <MFMailComposeViewControllerDelegate,
                                                        StudyViewSubcontrollerProtocol>
 
-- (NSString *)getTweetWord;
-
 // action sheet
 - (IBAction)showCardActionSheet;
 

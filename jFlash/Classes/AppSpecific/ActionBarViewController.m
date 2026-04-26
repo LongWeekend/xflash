@@ -201,89 +201,25 @@
 
 - (void) shareWord
 {
+  // Format: "Headword [reading] meaning"
+  NSMutableString *shareText = [NSMutableString stringWithString:self.currentCard.headword];
+  NSString *reading = self.currentCard.reading;
+  if ([reading length] > 0)
+  {
+    [shareText appendFormat:@" [%@]", reading];
+  }
+  NSString *meaning = [self.currentCard meaningWithoutMarkup];
+  if ([meaning length] > 0)
+  {
+    [shareText appendFormat:@" %@", meaning];
+  }
+
   NSMutableArray *sharingItems = [NSMutableArray array];
-  [sharingItems addObject:[self getTweetWord]];
+  [sharingItems addObject:shareText];
   [sharingItems addObject:@"https://itunes.apple.com/us/app/japanese-flash-vocabulary/id367216357?mt=8"];
 
   UIActivityViewController *activityController = [[[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil] autorelease];
   [self presentViewController:activityController animated:YES completion:nil];
-}
-
-#pragma mark - TweetWordMethod
-
-//! get the tweet word and try to cut the maning of the tweet word so that it gives the result of NSString which is going to fit within the allocation of twitter status update
-- (NSString *)getTweetWord
-{
-	NSMutableString *str = nil; 
-  
-	//Set up the tweet word, so that the str will have the following format
-	//Head Word [reading] meaning
-
-  // Get the lengths of everyone involved
-  NSInteger headwordLength = [self.currentCard.headword length];
-  NSInteger readingLength = [self.currentCard.reading length];
-  NSInteger meaningLength = [[self.currentCard meaningWithoutMarkup] length];
-  
-  // Now go from most conservative (headword exceeds LWE_TWITTER_MAX_CHARS) 
-  // to most liberal (the whole thing fits in LWE_TWITTER_MAX_CHARS)  
-  if (headwordLength > LWE_TWITTER_MAX_CHARS)
-  {
-    // Headword alone is longer than kMaxChars
-    str = [[NSMutableString alloc] initWithFormat:@"%@", [self.currentCard.headword substringToIndex:LWE_TWITTER_MAX_CHARS]];
-  }
-  else
-  {
-    // Add four because we add brackets and spaces
-    if ((headwordLength + readingLength + 4) > LWE_TWITTER_MAX_CHARS)
-    {
-      // Headword + reading is too long, so just use headword.
-      str = [[NSMutableString alloc] initWithFormat:@"%@",self.currentCard.headword];
-    }
-    else
-    {
-      str = [[NSMutableString alloc] initWithFormat:@"%@ [%@] ",self.currentCard.headword,self.currentCard.reading];
-    }
-  }
-
-  // Now determine if we have any space left for a meaning.
-	NSInteger charLeftBeforeMeaning = LWE_TWITTER_MAX_CHARS - [str length];
-  
-  // If there are less than 5, just ignore - not worth it
-  if (charLeftBeforeMeaning > 5)
-  {
-    NSString *meaning = [self.currentCard meaningWithoutMarkup];
-    NSInteger charLeftAfterMeaning = charLeftBeforeMeaning - meaningLength;
-    //but in some cases, the "meaning" length, can exceed the maximum length
-    //of the twitter update status lenght, so it looks for "/" and cut the meaning
-    //to fit in. 
-    if (charLeftAfterMeaning < 0)
-    {
-      NSRange range = [meaning rangeOfString:@"/" options:NSBackwardsSearch];
-      if (range.location != NSNotFound && (range.location < charLeftBeforeMeaning))
-      {
-        // We got one, and it fits
-        // This is still a naive implementation, it should recursively chop off slashes until it fits...
-        // AT present it only does it once
-        [str appendString:[meaning substringToIndex:range.location]];
-      }
-      else
-      {
-        // Simple truncate
-        [str appendString:[meaning substringToIndex:charLeftBeforeMeaning]];
-      }
-    }
-    else
-    {
-      // Enough room for the whole meaning
-      [str appendString:meaning];
-    }
-  } 
-  
-  // Debug output
-  LWE_LOG(@"Tweet string: %@",str);
-  LWE_LOG(@"Tweet length: %d",[str length]);
-  
-	return (NSString*)[str autorelease];
 }
 
 #pragma mark - Layout

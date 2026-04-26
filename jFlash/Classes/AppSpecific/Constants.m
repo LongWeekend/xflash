@@ -72,11 +72,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const SET_KANA_ONLY_ON    = @"ON";
       NSString * const SET_KANA_ONLY_OFF   = @"OFF";
 
-      // Each flash has its own Tiwtter key
-      NSString * const LWE_TWITTER_CONSUMER_KEY = @"BGDlaaZWdjPo3oPudnIUNA";
-      NSString * const LWE_TWITTER_PRIVATE_KEY  = @"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU";
-      NSString * const LWE_TWITTER_HASH_TAG     = @"#jflash";
-
       NSString * const LWE_XFLASH_HOMEPAGE       = @"http://www.japaneseflash.com";
 
       // Tapjoy
@@ -145,11 +140,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const SET_PINYIN_CHANGE_TONE_ON    = @"ON";
       NSString * const SET_PINYIN_CHANGE_TONE_OFF   = @"OFF";
 
-
-      // Each flash has its own Tiwtter key
-      NSString * const LWE_TWITTER_CONSUMER_KEY = @"2xLbYtl787ShwJBFIC1QaA";
-      NSString * const LWE_TWITTER_PRIVATE_KEY  = @"AKst54TeQWdQssmKL9PZrDTmm0DyIO48iEnaZIbFmc";
-      NSString * const LWE_TWITTER_HASH_TAG     = @"#cflash";
 
       NSString * const LWE_XFLASH_HOMEPAGE       = @"http://www.chineseflashapp.com";
 

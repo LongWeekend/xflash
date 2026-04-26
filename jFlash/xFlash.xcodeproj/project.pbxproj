@@ -1696,7 +1696,6 @@
 		4922ED94155678E000645F61 /* cflash_11_to_12.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cflash_11_to_12.sql; path = Migrations/cflash_11_to_12.sql; sourceTree = "<group>"; };
 		4922ED9615567FBC00645F61 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = External/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		4922ED9715567FBC00645F61 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = External/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
-		492435D51556AD070059B203 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
 		4926EA00148FADDE00F55D09 /* CardPeerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardPeerTest.h; path = Tests/cFlashTests/CardPeerTest.h; sourceTree = SOURCE_ROOT; };
@@ -2454,7 +2453,6 @@
 				91B3E2F0144FD8ED003F8986 /* libz.tbd */,
 				242A174714628AF4002977E6 /* AudioToolbox.framework */,
 				242A173F1461AB60002977E6 /* AVFoundation.framework */,
-				492435D51556AD070059B203 /* Twitter.framework */,
 				49C521DE144D2461002011BD /* CoreText.framework */,
 				4938F8C814027860001EB473 /* CFlash */,
 				4938F8C214027818001EB473 /* CoreText.framework */,
