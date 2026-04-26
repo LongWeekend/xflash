@@ -69,6 +69,29 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   XCTAssertTrue([sysTags count] > 0, @"There should be at least one system tag");
 }
 
+- (void)testDeleteTagRemovesItFromList
+{
+  NSString *name = @"DeleteTestTag";
+  Tag *created = [TagPeer createTagNamed:name inGroup:[GroupPeer topLevelGroup]];
+  XCTAssertNotNil(created, @"Should create tag before deletion test");
+
+  BOOL deleted = [TagPeer deleteTag:created];
+  XCTAssertTrue(deleted, @"deleteTag should return YES for a user-created tag");
+
+  Tag *shouldBeGone = [TagPeer retrieveTagByName:name];
+  XCTAssertNil(shouldBeGone, @"Deleted tag should not be retrievable by name");
+}
+
+- (void)testRetrieveTagListByGroupIdReturnsNonEmpty
+{
+  Group *topGroup = [GroupPeer topLevelGroup];
+  XCTAssertNotNil(topGroup, @"Should have a top-level group");
+
+  NSArray *tags = [TagPeer retrieveTagListByGroupId:topGroup.groupId];
+  XCTAssertNotNil(tags, @"retrieveTagListByGroupId should not return nil");
+  XCTAssertTrue([tags count] > 0, @"Top-level group should contain at least one tag");
+}
+
 - (void)testSave
 {
   NSString* description = @"Monkeys Fly Out of My Butt";

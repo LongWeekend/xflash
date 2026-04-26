@@ -14,5 +14,7 @@
 @interface TagTest : XCTestCase
 
 - (void)testSave;
+- (void)testDeleteTagRemovesItFromList;
+- (void)testRetrieveTagListByGroupIdReturnsNonEmpty;
 
 @end

@@ -25,4 +25,8 @@
 - (void)testCalculateNextCardLevelWithError;
 - (void) testUpdateLevelCounts;
 - (void)testAddThenRemoveCardsFromStudySet;
+- (void)testRecordCorrectFromLevel2MovesCardToLevel3;
+- (void)testRecordCorrectFromLevel3MovesCardToLevel4;
+- (void)testRecordWrongFromLevel0MovesCardToLevel1;
+- (void)testRecordWrongFromLevel5MovesCardToLevel1;
 @end
