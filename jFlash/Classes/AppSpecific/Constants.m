@@ -29,11 +29,6 @@ NSString * const APP_HEADWORD_TYPE        = @"headword_type";
 NSString * const SET_HEADWORD_TYPE_TRAD   = @"TRAD";
 NSString * const SET_HEADWORD_TYPE_SIMP   = @"SIMP";
 
-NSString * const APP_TEXT_SIZE            = @"text_size";
-NSString * const SET_TEXT_NORMAL          = @"16px";
-NSString * const SET_TEXT_LARGE           = @"20px";
-NSString * const SET_TEXT_HUGE            = @"24px";
-
 // These setting types do not have discrete set values, their setting values are
 // determined in code.
 NSString * const APP_THEME                = @"theme";
@@ -77,11 +72,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const SET_KANA_ONLY_ON    = @"ON";
       NSString * const SET_KANA_ONLY_OFF   = @"OFF";
 
-      // Each flash has its own Tiwtter key
-      NSString * const LWE_TWITTER_CONSUMER_KEY = @"BGDlaaZWdjPo3oPudnIUNA";
-      NSString * const LWE_TWITTER_PRIVATE_KEY  = @"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU";
-      NSString * const LWE_TWITTER_HASH_TAG     = @"#jflash";
-
       NSString * const LWE_XFLASH_HOMEPAGE       = @"http://www.japaneseflash.com";
 
       // Tapjoy
@@ -92,7 +82,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_CURRENT_USER_DATABASE = @"jFlashJr.db";
 #else
       // These constants are general to the flashes
-      NSString * const LWE_CURRENT_VERSION       = @"1.8";
+      NSString * const LWE_CURRENT_VERSION       = @"1.9";
       NSString * const LWE_CURRENT_USER_DATABASE = @"jFlash.db";
 #endif
       NSString * const LWE_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
@@ -117,6 +107,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_JF_VERSION_1_6_2         = @"1.6.2";
       NSString * const LWE_JF_VERSION_1_7           = @"1.7";
       NSString * const LWE_JF_VERSION_1_8           = @"1.8";
+      NSString * const LWE_JF_VERSION_1_9           = @"1.9";
 
       // This pertains to the plugin manager
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"jFlash-available.plist";
@@ -149,11 +140,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const SET_PINYIN_CHANGE_TONE_ON    = @"ON";
       NSString * const SET_PINYIN_CHANGE_TONE_OFF   = @"OFF";
 
-
-      // Each flash has its own Tiwtter key
-      NSString * const LWE_TWITTER_CONSUMER_KEY = @"2xLbYtl787ShwJBFIC1QaA";
-      NSString * const LWE_TWITTER_PRIVATE_KEY  = @"AKst54TeQWdQssmKL9PZrDTmm0DyIO48iEnaZIbFmc";
-      NSString * const LWE_TWITTER_HASH_TAG     = @"#cflash";
 
       NSString * const LWE_XFLASH_HOMEPAGE       = @"http://www.chineseflashapp.com";
 

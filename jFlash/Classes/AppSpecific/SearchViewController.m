@@ -406,7 +406,8 @@ const NSInteger KSegmentedTableHeader = 100;
 
 - (CGFloat)tableView:(UITableView *)lclTableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  return 64.0f;
+  CGFloat bodySize = [UIFont preferredFontForTextStyle:UIFontTextStyleBody].pointSize;
+  return floorf(64.0f * bodySize / 17.0f);
 }
 
 /** Returns 75px if _showSearchTargetControl is YES, otherwise returns UITableView standard 0 (no headers) */
@@ -547,20 +548,25 @@ const NSInteger KSegmentedTableHeader = 100;
 /** Helper method - makes a cell for cellForIndexPath for a Card */
 - (UITableViewCell*) _setupTableCell:(UITableViewCell*)cell forCard:(Card*) card
 {
+  CGFloat bodySize = [UIFont preferredFontForTextStyle:UIFontTextStyleBody].pointSize;
+  CGFloat scale = bodySize / 17.0f;
+  CGFloat rowH = floorf(64.0f * scale);
+
   // Get the headword (or make a new one)
   UILabel *searchResult = (UILabel*)[cell viewWithTag:SEARCH_CELL_HEADWORD];
-  if (searchResult == nil) 
+  if (searchResult == nil)
   {
-    searchResult = [[[UILabel alloc] initWithFrame:CGRectMake(43,3,240,25)] autorelease];  
+    searchResult = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
     searchResult.tag = SEARCH_CELL_HEADWORD;
-    searchResult.font = [UIFont boldSystemFontOfSize:18];
     searchResult.lineBreakMode = UILineBreakModeTailTruncation;
     [cell.contentView addSubview:searchResult];
   }
+  searchResult.frame = CGRectMake(43, floorf(3 * scale), 240, floorf(25 * scale));
+  searchResult.font = [UIFont boldSystemFontOfSize:floorf(18 * scale)];
   searchResult.backgroundColor = [UIColor whiteColor];
   // Ignore == YES means we will always get the target language's headword
   searchResult.text = [card headwordIgnoringMode:YES];
-  
+
   // Update the glyph based on settings, if necessary
   searchResult.font = [Card configureFontForLabel:searchResult];
   
@@ -568,11 +574,14 @@ const NSInteger KSegmentedTableHeader = 100;
   UIButton *starButton = (UIButton*)[cell viewWithTag:SEARCH_CELL_BUTTON];
   if (starButton == nil)
   {
-    starButton = [[[UIButton alloc] initWithFrame:CGRectMake(7,12,29,39)] autorelease];
+    starButton = [[[UIButton alloc] initWithFrame:CGRectZero] autorelease];
     starButton.tag = SEARCH_CELL_BUTTON;
     [starButton addTarget:self action:@selector(_toggleMembership:event:) forControlEvents:UIControlEventTouchUpInside];
     [cell.contentView addSubview:starButton];
   }
+  CGFloat btnH = floorf(rowH * 0.6f);
+  CGFloat btnY = floorf((rowH - btnH) / 2.0f);
+  starButton.frame = CGRectMake(7, btnY, floorf(29 * scale), btnH);
 
   UIImage *image = [UIImage imageNamed:@"star.png"];
   image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -589,25 +598,27 @@ const NSInteger KSegmentedTableHeader = 100;
   
   // Get the meaning
   UILabel *meaningLabel = (UILabel*)[cell viewWithTag:SEARCH_CELL_MEANING];
-  if (meaningLabel == nil) 
+  if (meaningLabel == nil)
   {
-    meaningLabel = [[[UILabel alloc] initWithFrame:CGRectMake(44,41,250,20)] autorelease];
+    meaningLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
     meaningLabel.tag = SEARCH_CELL_MEANING;
-    meaningLabel.font = [UIFont systemFontOfSize:13];
     [cell.contentView addSubview:meaningLabel];
   }
+  meaningLabel.frame = CGRectMake(44, floorf(41 * scale), 250, floorf(20 * scale));
+  meaningLabel.font = [UIFont systemFontOfSize:floorf(13 * scale)];
   meaningLabel.text = [card meaningWithoutMarkup];
-  
+
   // And the reading
   UILabel *readingLabel = (UILabel*)[cell viewWithTag:SEARCH_CELL_READING];
   if (readingLabel == nil)
   {
-    readingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(43,27,250,16)] autorelease];
-    readingLabel.font = [UIFont systemFontOfSize:13];
+    readingLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
     readingLabel.textColor = [UIColor grayColor];
     readingLabel.tag = SEARCH_CELL_READING;
     [cell.contentView addSubview:readingLabel];
   }
+  readingLabel.frame = CGRectMake(43, floorf(27 * scale), 250, floorf(16 * scale));
+  readingLabel.font = [UIFont systemFontOfSize:floorf(13 * scale)];
   
 #if defined(LWE_CFLASH)
   readingLabel.text = [(ChineseCard *)card pinyinReading];

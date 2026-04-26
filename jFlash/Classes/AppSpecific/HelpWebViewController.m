@@ -10,7 +10,7 @@
 
 @implementation HelpWebViewController
 
-@synthesize filename, webView;
+@synthesize filename, webViewContainer;
 
 /**
  * Initializes the class and sets HTML filename to use and the title of the nav bar.
@@ -35,14 +35,22 @@
   self.title = title;
   [self _loadPageWithBundleFilename:fn];
 }
- 
 
-/** Creates the UIWebView programmatically */
+
+/** Creates the WKWebView programmatically inside the XIB-instantiated container. */
 - (void) viewDidLoad
 {
   [super viewDidLoad];
 
-  [self.webView shutOffBouncing];
+  WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+  _webView = [[WKWebView alloc] initWithFrame:self.webViewContainer.bounds
+                                configuration:config];
+  [config release];
+  _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+  _webView.navigationDelegate = self;
+  _webView.scrollView.bounces = NO;
+  [self.webViewContainer addSubview:_webView];
+
   [self _loadPageWithBundleFilename:self.filename];
 }
 
@@ -55,22 +63,25 @@
 }
 
 
-/** Loads the filename into the _webView UIWebView - there should be no extension on the filename (but the actual file should be .html) */
+/** Loads the filename into the WKWebView - there should be no extension on the filename (but the actual file should be .html) */
 - (void) _loadPageWithBundleFilename:(NSString*)fname
 {
-  // Prepare the URL
   NSString *urlAddress = [[NSBundle mainBundle] pathForResource:fname ofType:@"html" inDirectory:@"help"];
+  if (urlAddress == nil) return;
+
   NSURL *url = [NSURL fileURLWithPath:urlAddress];
-  NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-  [self.webView loadRequest:requestObj];
+  // WKWebView requires a readAccessURL for file:// loads to grant directory access.
+  [_webView loadFileURL:url allowingReadAccessToURL:[url URLByDeletingLastPathComponent]];
 }
- 
-         
+
+
 //! Standard dealloc
 - (void)dealloc
 {
+  _webView.navigationDelegate = nil;
+  [_webView release];
   [filename release];
-  [webView release];
+  [webViewContainer release];
   [super dealloc];
 }
 

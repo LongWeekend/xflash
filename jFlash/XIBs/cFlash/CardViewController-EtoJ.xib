@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
+		<int key="IBDocument.SystemTarget">1792</int>
 		<string key="IBDocument.SystemVersion">11C74</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
 		<string key="IBDocument.AppKitVersion">1138.23</string>
@@ -165,7 +165,7 @@
 						<int key="IBUIIndicatorStyle">2</int>
 						<bool key="IBUIBouncesZoom">NO</bool>
 					</object>
-					<object class="IBUIWebView" id="906154004">
+					<object class="IBUIView" id="906154004">
 						<reference key="NSNextResponder" ref="755717646"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{10, 105}, {300, 146}}</string>
@@ -289,7 +289,7 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">meaningWebView</string>
+						<string key="label">meaningWebViewContainer</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="906154004"/>
 					</object>
@@ -454,7 +454,7 @@
 						<int key="objectID">6</int>
 						<reference key="object" ref="906154004"/>
 						<reference key="parent" ref="755717646"/>
-						<string key="objectName">meaningWebView</string>
+						<string key="objectName">meaningWebViewContainer</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
@@ -572,7 +572,7 @@
 							<string>headwordLabel</string>
 							<string>headwordMoreIcon</string>
 							<string>headwordScrollContainer</string>
-							<string>meaningWebView</string>
+							<string>meaningWebViewContainer</string>
 							<string>moodIcon</string>
 							<string>readingLabel</string>
 							<string>readingMoreIcon</string>
@@ -601,7 +601,7 @@
 							<string>headwordLabel</string>
 							<string>headwordMoreIcon</string>
 							<string>headwordScrollContainer</string>
-							<string>meaningWebView</string>
+							<string>meaningWebViewContainer</string>
 							<string>moodIcon</string>
 							<string>readingLabel</string>
 							<string>readingMoreIcon</string>
@@ -627,7 +627,7 @@
 								<string key="candidateClassName">UIScrollView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">meaningWebView</string>
+								<string key="name">meaningWebViewContainer</string>
 								<string key="candidateClassName">UIWebView</string>
 							</object>
 							<object class="IBToOneOutletInfo">

@@ -5,6 +5,65 @@
 //  Copyright LONG WEEKEND INC 2009. All rights reserved.
 
 #import "jFlashAppDelegate.h"
+#import <objc/runtime.h>
+
+// Centers UITabBarButton subviews vertically in the full tab bar frame,
+// so items appear centered in the space between the action bar and the screen bottom.
+@interface LWECenteredTabBar : UITabBar
+@end
+@implementation LWECenteredTabBar
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  CGFloat barH = self.bounds.size.height;
+  for (UIView *view in self.subviews) {
+    CGFloat h = view.frame.size.height;
+    if (h > 20 && h < barH - 5) {
+      CGRect f = view.frame;
+      f.origin.y = roundf((barH - f.size.height) / 2.0);
+      view.frame = f;
+    }
+  }
+}
+@end
+
+// Scene delegate — defined here to avoid adding new project files.
+// UIKit creates a fresh instance of this class per scene; it grabs
+// the existing app delegate to access the NIB-created window.
+@interface LWESceneDelegate : UIResponder <UIWindowSceneDelegate>
+@property (nonatomic, strong) UIWindow *window;
+@end
+
+@implementation LWESceneDelegate
+
+- (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
+  if (@available(iOS 13.0, *)) {
+    if (![scene isKindOfClass:[UIWindowScene class]]) return;
+    UIWindowScene *windowScene = (UIWindowScene *)scene;
+
+    // didFinishLaunchingWithOptions already loaded the NIB and ran DB setup.
+    // Here we just create a scene-backed window and show the splash while the DB opens.
+    jFlashAppDelegate *appDelegate = (jFlashAppDelegate *)[UIApplication sharedApplication].delegate;
+    UIWindow *window = [[UIWindow alloc] initWithWindowScene:windowScene];
+    // Force light mode — this app was designed for light mode only.
+    // Without this, system colors (systemBackgroundColor etc.) resolve to dark
+    // values on devices with dark mode enabled, causing black backgrounds.
+    window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    window.backgroundColor = [UIColor whiteColor];
+    // Placeholder rootVC so iOS 13+ doesn't complain about a missing rootViewController.
+    // The real tabBarController is installed by _openUserDatabaseWithPlugins after the DB opens.
+    UIViewController *placeholder = [[UIViewController alloc] init];
+    placeholder.view.backgroundColor = [UIColor whiteColor];
+    window.rootViewController = placeholder;
+    if (appDelegate.splashView) {
+      [window addSubview:appDelegate.splashView];
+    }
+    appDelegate.window = window;
+    self.window = window;
+    [window makeKeyAndVisible];
+  }
+}
+
+@end
 
 #import "DSActivityView.h"
 #import "AudioSessionManager.h"
@@ -78,12 +137,19 @@
   }
 }
 
+
 #pragma mark - appDidFinishingLaunching
 
 /** App delegate method, point of entry for the app */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)userInfo
 {
   NSSetUncaughtExceptionHandler(&LWEUncaughtExceptionHandler);  // in case we crash, we can log it
+
+  // iOS 26 no longer auto-loads NSMainNibFile when UIApplicationSceneManifest is present.
+  // Load it explicitly so all IBOutlets (tabBarController, splashView, managers) are wired
+  // before any outlet-based code below runs.
+  [[NSBundle mainBundle] loadNibNamed:@"MainWindow" owner:self options:nil];
+
   srandomdev();    // Seed random generator
 
   // Log user sessions on release builds & connect to Tapjoy for CPI ads
@@ -95,7 +161,7 @@
   // 2. Check for plugin updates if it's time for that
 	if ([self.pluginManager isTimeForCheckingUpdate])
 	{
-    [self.pluginManager checkNewPluginsAsynchronous:YES];
+    [self.pluginManager checkNewPluginsWithCompletion:nil];
 	}
   
   // 3. Initialize audio session manager - start with audio session "playback" first
@@ -116,8 +182,8 @@
   {
     self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE];
   }
-  [self.window setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
-  [self.window makeKeyAndVisible];
+  // Tint color and makeKeyAndVisible are applied to the scene window by LWESceneDelegate.
+  // The NIB-created window has no windowScene in iOS 26, so don't call makeKeyAndVisible on it.
   
   // 5. If we need to copy the xFlash user database (e.g. this is first load), schedule that.
   if ([self _needToCopyDatabase])
@@ -162,29 +228,56 @@
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *filename = LWE_CURRENT_USER_DATABASE;
-  BOOL openedDB = [db openDatabase:[LWEFile createDocumentPathWithFilename:filename]];
+  NSString *dbPath = [LWEFile createDocumentPathWithFilename:filename];
+  BOOL openedDB = [db openDatabase:dbPath];
   LWE_ASSERT_EXC(openedDB, @"Unable to open DB: %@", filename);
   if ([CurrentState sharedCurrentState].isFirstLoad)
   {
-    // "Install" the preinstalled bundle plugins (CARD-DB) now
-    NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
-    LWE_ASSERT_EXC(cardsDbFilePath, @"Cannot find preinstalled plugins file");
-    NSDictionary *preinstalledPluginHash = [[NSDictionary dictionaryWithContentsOfFile:cardsDbFilePath] objectForKey:CARD_DB_KEY];
-    Plugin *cardsDb = [Plugin pluginWithDictionary:preinstalledPluginHash];
-    [self.pluginManager installPlugin:cardsDb error:NULL];
+    // Install all pre-bundled plugins (CARD_DB, FTS_DB, EX_DB) from the installed plist
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
+    LWE_ASSERT_EXC(plistPath, @"Cannot find preinstalled plugins file");
+    NSDictionary *plist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    for (NSString *key in plist)
+    {
+      Plugin *plugin = [Plugin pluginWithDictionary:[plist objectForKey:key]];
+      NSError *installErr = nil;
+      [self.pluginManager installPlugin:plugin error:&installErr];
+    }
   }
-  
+
   // Then load plugins
   BOOL loadedPlugins = [self.pluginManager loadInstalledPlugins];
   LWE_ASSERT_EXC(loadedPlugins, @"Unable to load plugins");
 
-  // Get rid of the splash view
+  // Remove splash and reveal the real UI now that the DB is open.
   [self.splashView removeFromSuperview];
   self.splashView = nil;
-  
+
+  // Replace the placeholder rootViewController with the actual tab bar controller.
+  // This is deferred until here so that viewDidLoad methods don't fire before the DB is open.
+  [self.window setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
+
+  // Make the tab bar opaque so UIKit sizes child view controllers' views to end above
+  // the tab bar rather than extending underneath it (the iOS 26 default floating-glass
+  // behaviour). This prevents the glass/white strip that appears between the action-bar
+  // buttons and the tab bar items.
+  self.tabBarController.tabBar.translucent = NO;
+  if (@available(iOS 15.0, *)) {
+    UITabBarAppearance *tabAppearance = [[UITabBarAppearance alloc] init];
+    [tabAppearance configureWithOpaqueBackground];
+    self.tabBarController.tabBar.standardAppearance = tabAppearance;
+    self.tabBarController.tabBar.scrollEdgeAppearance = tabAppearance;
+    [tabAppearance release];
+  }
+
+  // XIB customClass is ignored for the tabBar property of UITabBarController, so we
+  // isa-swap the existing instance to our centering subclass instead.
+  object_setClass(self.tabBarController.tabBar, [LWECenteredTabBar class]);
+
+  self.window.rootViewController = self.tabBarController;
+
   // Finish setting up & load tab bar
   [self _registerObservers];
-  [self.window addSubview:self.tabBarController.view];
   [Appirater appLaunched];
   
   // Finally load search if we're supposed to do that.

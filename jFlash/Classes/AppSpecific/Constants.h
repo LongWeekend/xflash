@@ -12,7 +12,6 @@
 #define DEFAULT_REMINDER_DAYS 4
 
 #define LWE_PLUGIN_UPDATE_PERIOD		14
-#define LWE_TWITTER_MAX_CHARS	132
 
 // algorithm controls
 #define MAX_MAX_STUDYING 50
@@ -50,11 +49,6 @@ extern NSString * const APP_HEADWORD;
 extern NSString * const SET_J_TO_E;
 extern NSString * const SET_E_TO_J;
 
-extern NSString * const APP_TEXT_SIZE;
-extern NSString * const SET_TEXT_NORMAL;
-extern NSString * const SET_TEXT_LARGE;
-extern NSString * const SET_TEXT_HUGE;
-
 extern NSString * const APP_HEADWORD_TYPE;
 extern NSString * const SET_HEADWORD_TYPE_TRAD;
 extern NSString * const SET_HEADWORD_TYPE_SIMP;
@@ -86,11 +80,6 @@ extern NSString * const LWE_SUPPORT_EMAIL;
 // Tapjoy ID - should be updated for each app!
 extern NSString * const LWE_TAPJOY_APP_ID;
 
-// Twitter Keys
-extern NSString * const LWE_TWITTER_CONSUMER_KEY;
-extern NSString * const LWE_TWITTER_PRIVATE_KEY;
-extern NSString * const LWE_TWITTER_HASH_TAG;
-
 extern NSString * const LWE_XFLASH_HOMEPAGE;
 
 #if defined(LWE_JFLASH)
@@ -117,6 +106,7 @@ extern NSString * const LWE_XFLASH_HOMEPAGE;
   extern NSString * const LWE_JF_VERSION_1_6_2;
   extern NSString * const LWE_JF_VERSION_1_7;
   extern NSString * const LWE_JF_VERSION_1_8;
+  extern NSString * const LWE_JF_VERSION_1_9;
   extern NSString * const LWE_JF_10_USER_DATABASE;
   extern NSString * const LWE_JF_10_TO_11_SQL_FILENAME;
   extern NSString * const LWE_JF_12_TO_13_SQL_FILENAME;
