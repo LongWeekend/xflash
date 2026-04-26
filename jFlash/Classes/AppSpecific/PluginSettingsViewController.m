@@ -49,22 +49,21 @@
 }
 
 /**
- * This method will perform the real check update method on the 
+ * This method will perform the real check update method on the
  * plugin manager.
  */
 - (void)performCheckUpdateWithLoadingView
 {
-	
-	[self _changeLastUpdateLabel];
-	BOOL success = [self.pluginManager checkNewPluginsAsynchronous:NO];
-  if (success == NO)
-  {
-    // If we failed to check for plugins, we probably have no network connectivity.
-    [LWEUIAlertView noNetworkAlert];
-  }
-	[self _reloadTableData];
-  
-  [DSBezelActivityView removeViewAnimated:YES];
+  [self _changeLastUpdateLabel];
+  [self.pluginManager checkNewPluginsWithCompletion:^(BOOL success) {
+    if (success == NO)
+    {
+      // If we failed to check for plugins, we probably have no network connectivity.
+      [LWEUIAlertView noNetworkAlert];
+    }
+    [self _reloadTableData];
+    [DSBezelActivityView removeViewAnimated:YES];
+  }];
 }
 
 #pragma mark -
