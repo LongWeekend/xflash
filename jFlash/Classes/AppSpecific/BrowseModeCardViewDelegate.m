@@ -131,8 +131,6 @@
 
 - (void) actionBarDidChangeMode:(ActionBarViewController *)avc
 {
-  // Change action bar view to browse XIB
-  [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController-Browse" owner:avc options:nil];
 }
 
 @end

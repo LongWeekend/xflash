@@ -29,23 +29,46 @@ enum ControlSectionRows
 
 #pragma mark - UIViewController Methods
 
-- (void)viewDidLoad 
+- (void)viewDidLoad
 {
-  [super viewDidLoad];  
-   self.navigationItem.title = NSLocalizedString(@"Change Difficulty",@"AlgorithmSettingsViewController.NavBarTitle");
+  [super viewDidLoad];
+  self.navigationItem.title = NSLocalizedString(@"Change Difficulty",@"AlgorithmSettingsViewController.NavBarTitle");
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   self.maxCardsSlider.minimumValue = MIN_MAX_STUDYING;
   self.maxCardsSlider.maximumValue = MAX_MAX_STUDYING;
   self.maxCardsSlider.tag = MAX_CARDS_SLIDER_TAG;
   self.maxCardsSlider.value = (CGFloat)[settings integerForKey:APP_MAX_STUDYING];
-  
+
   self.frequencySlider.minimumValue = MIN_FREQUENCY_MULTIPLIER;
   self.frequencySlider.maximumValue = MAX_FREQUENCY_MULTIPLIER;
   self.frequencySlider.tag = FREQUENCY_SLIDER_TAG;
   self.frequencySlider.value = (CGFloat)[settings integerForKey:APP_FREQUENCY_MULTIPLIER];
-  
+
   self.difficultySegmentControl.selectedSegmentIndex = [settings integerForKey:APP_DIFFICULTY];
+
+  // Build a table header view so the segment control sits inside the scroll area
+  // and is never obscured by the navigation bar.
+  CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+  UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 74)];
+  headerView.backgroundColor = [UIColor clearColor];
+  headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+
+  UILabel *diffLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 14, screenWidth - 32, 26)];
+  diffLabel.text = NSLocalizedString(@"Difficulty", @"AlgorithmVC.Difficulty");
+  diffLabel.font = [UIFont boldSystemFontOfSize:17];
+  diffLabel.textColor = [UIColor colorWithRed:0.233f green:0.265f blue:0.348f alpha:0.89f];
+  diffLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+  [headerView addSubview:diffLabel];
+  [diffLabel release];
+
+  self.difficultySegmentControl.frame = CGRectMake(16, 44, screenWidth - 32, 32);
+  self.difficultySegmentControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+  [headerView addSubview:self.difficultySegmentControl];
+
+  self.tableView.tableHeaderView = headerView;
+  [headerView release];
+
   [self setDifficulty:self.difficultySegmentControl];
 }
 

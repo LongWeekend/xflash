@@ -40,6 +40,11 @@ extern NSString * const LWECardHTMLTemplate_EtoJ;
 
 - (IBAction) doToggleReadingBtn;
 
+#if defined(LWE_JFLASH)
+//! Speaks the current headword using AVSpeechSynthesizer.
+- (IBAction) doSpeakHeadword;
+#endif
+
 //! Use when you want to show the reading (w/o persisting that state)
 - (void) turnReadingOn;
 
@@ -48,6 +53,10 @@ extern NSString * const LWECardHTMLTemplate_EtoJ;
 
 //! Whatever the value of readingVisible is, this will reset it to that state.
 - (void) resetReadingVisibility;
+
+//! Lays out reading, headword, and webview based on current bounds.
+//! Call from StudyViewController.viewDidLayoutSubviews (child VC containment is informal).
+- (void) layoutCardSubviews;
 
 //! Implement this delegate to control how the card is displayed in a mode.
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
@@ -78,6 +87,11 @@ extern NSString * const LWECardHTMLTemplate_EtoJ;
 
 //! If the headword is scrollable, the "more icon" will show to help the user understand
 @property (nonatomic, retain) IBOutlet UIImageView *headwordMoreIcon;
+
+#if defined(LWE_JFLASH)
+//! Speaker button that triggers TTS for the current headword.
+@property (nonatomic, retain) UIButton *speakBtn;
+#endif
 
 //! Web view that renders the meaning HTML
 @property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;

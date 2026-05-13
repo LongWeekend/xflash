@@ -91,7 +91,26 @@
 
   [self _reloadTableData];
 	[self _changeLastUpdateLabel];
-  
+
+  CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+  UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 96)];
+  headerView.backgroundColor = [UIColor clearColor];
+  headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+
+  self.btnCheckUpdate.frame = CGRectMake(16, 12, screenWidth - 32, 44);
+  self.btnCheckUpdate.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+  [headerView addSubview:self.btnCheckUpdate];
+
+  self.lblLastUpdate.frame = CGRectMake(16, 64, screenWidth - 32, 21);
+  self.lblLastUpdate.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+  [headerView addSubview:self.lblLastUpdate];
+
+  self.tableView.tableHeaderView = headerView;
+  [headerView release];
+
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.estimatedRowHeight = 52;
+
   // Set YELLOW, not RED
   NSMutableArray *colors = [NSMutableArray arrayWithCapacity:4];
   UIColor *color = nil;
@@ -196,12 +215,14 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     Plugin *thePlugin = [self.installedPlugins objectAtIndex:indexPath.row];
+    cell.textLabel.numberOfLines = 0;
     cell.textLabel.text = thePlugin.name;
   }
   else
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"available" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
     Plugin *thePlugin = [self.availablePlugins objectAtIndex:indexPath.row];
+    cell.textLabel.numberOfLines = 0;
     cell.textLabel.text = thePlugin.name;
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
     cell.detailTextLabel.text = thePlugin.details;

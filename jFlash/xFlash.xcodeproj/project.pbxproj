@@ -17,11 +17,11 @@
 		242A17451462893F002977E6 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
 		242A174814628AF4002977E6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
 		242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
-		24A9F5681461334800C9D46F /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
+		24A9F5681461334800C9D46F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.tbd */; };
 		24B5660113CF656100BEE166 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		24B5660213CF656100BEE166 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		24B5660313CF656100BEE166 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
-		24B5661513CF67CD00BEE166 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* SenTestingKit.framework */; };
+		24B5661513CF67CD00BEE166 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* XCTest.framework */; };
 		24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
 		24BB428214685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
 		24E47F4711F3E780007F6FB7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E47F4611F3E780007F6FB7 /* CoreData.framework */; };
@@ -33,7 +33,7 @@
 		4904662F14727835004C44E2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
 		4904663014727835004C44E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A173F1461AB60002977E6 /* AVFoundation.framework */; };
 		4904663114727835004C44E2 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C521DE144D2461002011BD /* CoreText.framework */; };
-		4904663214727835004C44E2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* SenTestingKit.framework */; };
+		4904663214727835004C44E2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* XCTest.framework */; };
 		4904663314727835004C44E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		4904663414727835004C44E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		4904663514727835004C44E2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
@@ -228,7 +228,6 @@
 		4922ED95155678E000645F61 /* cflash_11_to_12.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4922ED94155678E000645F61 /* cflash_11_to_12.sql */; };
 		4922ED9815567FBC00645F61 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED9715567FBC00645F61 /* MBProgressHUD.m */; };
 		4922ED9915567FBC00645F61 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED9715567FBC00645F61 /* MBProgressHUD.m */; };
-		492435D71556AD0F0059B203 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
 		4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EA01148FADDE00F55D09 /* CardPeerTest.m */; };
 		4927B83D1400A8400076EEED /* ChineseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83C1400A8400076EEED /* ChineseCard.m */; };
@@ -325,10 +324,6 @@
 		496C66AF1472894C009F04D4 /* UpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AF3D341265EDCD00CEAA52 /* UpdateManager.m */; };
 		496C66B014728951009F04D4 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		496C66B114728951009F04D4 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
-		496C66B214728956009F04D4 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
-		496C66B314728956009F04D4 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
-		496C66B41472896B009F04D4 /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
-		496C66B51472896B009F04D4 /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
 		496C66C2147289A3009F04D4 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEF11AB7CD700016BD2 /* Group.m */; };
 		496C66C3147289A3009F04D4 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEF11AB7CD700016BD2 /* Group.m */; };
 		496C66C6147289C1009F04D4 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE979E134EC34400EC6B0E /* ASIHTTPRequest.m */; };
@@ -349,8 +344,8 @@
 		496C66D5147289D9009F04D4 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE97A2134EC34400EC6B0E /* ASIInputStream.m */; };
 		496C66D6147289E0009F04D4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
 		496C66D7147289E0009F04D4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
-		496C66DE14728A1E009F04D4 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
-		496C66DF14728A26009F04D4 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
+		496C66DE14728A1E009F04D4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.tbd */; };
+		496C66DF14728A26009F04D4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.tbd */; };
 		496C66E014728A37009F04D4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
 		496C66E114728A3D009F04D4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
 		496C66E214728A47009F04D4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
@@ -570,6 +565,9 @@
 		49DADB831277F36F00B8FD72 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49DADB7F1277F36F00B8FD72 /* Default@2x.png */; };
 		49E3D17D1472803900F79308 /* CardTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17A1472803900F79308 /* CardTagTest.m */; };
 		49E3D17E1472803900F79308 /* CardTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17A1472803900F79308 /* CardTagTest.m */; };
+		44F6A3257BC7490FB532B615 /* CardModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CF57AFED14CF4453BFD1623E /* CardModelTest.m */; };
+		691BFE8994084A70BF87B858 /* CardModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CF57AFED14CF4453BFD1623E /* CardModelTest.m */; };
+		21CAB04CBCF745C183F8E4D7 /* JapaneseCardTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 969093541A684E73B823323F /* JapaneseCardTest.m */; };
 		49E3D17F1472803900F79308 /* SetupDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */; };
 		49E3D1801472803900F79308 /* SetupDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */; };
 		49E3D1831472804400F79308 /* CFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D1821472804400F79308 /* CFlashSearchTest.m */; };
@@ -619,7 +617,6 @@
 		913EEF93130800F300EBCF87 /* toxxx.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF82130800F300EBCF87 /* toxxx.c */; };
 		913EEF94130800F300EBCF87 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF84130800F300EBCF87 /* util.c */; };
 		913EEF95130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */; };
-		915E3F0E18CC655600E299AB /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 915E3F0D18CC655600E299AB /* libFlurry_4.3.2.a */; };
 		915FEC5115807BF300BEDF5F /* jFlashJr.db in Resources */ = {isa = PBXBuildFile; fileRef = 915FEC4F15807B9100BEDF5F /* jFlashJr.db */; };
 		9175396C1310AA5C00B34EDF /* jflash_13_to_14.sql in Resources */ = {isa = PBXBuildFile; fileRef = 9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */; };
 		917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
@@ -666,11 +663,7 @@
 		91910157148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
 		919FBDBB1622E9D2001FD77B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919FBDBA1622E9D2001FD77B /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		919FBDBD16230000001FD77B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919FBDBA1622E9D2001FD77B /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
-		91CA712D133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
-		91CA712E133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
-		91CA772A133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
-		91CA772B133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
+		91B3E2F1144FD8ED003F8986 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.tbd */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
 		91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */; };
 		91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */; };
@@ -802,8 +795,6 @@
 		91D3F9FE1580294F00CB8F1E /* toxxx.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF82130800F300EBCF87 /* toxxx.c */; };
 		91D3F9FF1580294F00CB8F1E /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF84130800F300EBCF87 /* util.c */; };
 		91D3FA001580294F00CB8F1E /* NSURL+IFUnicodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */; };
-		91D3FA011580294F00CB8F1E /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
-		91D3FA041580294F00CB8F1E /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
 		91D3FA051580294F00CB8F1E /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9793134EC34300EC6B0E /* ASIAuthenticationDialog.m */; };
 		91D3FA061580294F00CB8F1E /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9796134EC34300EC6B0E /* ASIDataCompressor.m */; };
 		91D3FA071580294F00CB8F1E /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9798134EC34300EC6B0E /* ASIDataDecompressor.m */; };
@@ -876,11 +867,10 @@
 		91D3FA571580294F00CB8F1E /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D447E153BAB3B0003EA47 /* SBJsonWriter.m */; };
 		91D3FA581580294F00CB8F1E /* UserHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED8A1556490200645F61 /* UserHistory.m */; };
 		91D3FA591580294F00CB8F1E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922ED9715567FBC00645F61 /* MBProgressHUD.m */; };
-		91D3FA5B1580294F00CB8F1E /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		91D3FA5C1580294F00CB8F1E /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4941833C13EFB237006A5616 /* libsqlite3.a */; };
 		91D3FA5D1580294F00CB8F1E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
 		91D3FA5E1580294F00CB8F1E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A173F1461AB60002977E6 /* AVFoundation.framework */; };
-		91D3FA5F1580294F00CB8F1E /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
+		91D3FA5F1580294F00CB8F1E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.tbd */; };
 		91D3FA601580294F00CB8F1E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C614027853001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		91D3FA611580294F00CB8F1E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		91D3FA621580294F00CB8F1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -1522,7 +1512,9 @@
 		A3D5C7AB18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
 		A3D5C7AC18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
 		A3D5C7AD18406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */; };
-		B3E8B2D3184240FC00C53BEA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492435D51556AD070059B203 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		AA1A507E19000001000000AA /* jFlash-FTS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */; };
+		AA1A507F19000002000000AA /* jFlash-EX-1.2.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507F144F9E7900DB81F7 /* jFlash-EX-1.2.db */; };
+		AA1A600119000010000000AA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1A600019000010000000AA /* WebKit.framework */; };
 		D322368611D370B900B1AF15 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
 		D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		D35B077B1116456D00DB5E02 /* overlay-btn-close.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B073D1116456D00DB5E02 /* overlay-btn-close.png */; };
@@ -1543,6 +1535,11 @@
 		D3C180041488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */; };
 		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
+		3699AD28DD324B5EB79FA3C7 /* UserHistoryPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */; };
+		CA5AAE2CD187409796A303E1 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
+		8E7A78D2E4F94E2AA7357CBF /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
+		12B02D81F78F4F22BAA4C74F /* JREngage.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C48318406CDD00679ABD /* JREngage.m */; };
+		ABEDDAE28290466B896CF174 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF711AB7CD700016BD2 /* User.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1584,8 +1581,8 @@
 		24AEAEA913D5E298008ADA45 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		24AEAEAB13D5E2AB008ADA45 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		24AEAEAD13D5E2B3008ADA45 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		24B5660013CF656100BEE166 /* jFlashTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jFlashTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		24B5661413CF67CD00BEE166 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		24B5660013CF656100BEE166 /* jFlashTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jFlashTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		24B5661413CF67CD00BEE166 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		24BB427F14685E67002C387B /* LWEAudioQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEAudioQueue.h; sourceTree = "<group>"; };
 		24BB428014685E67002C387B /* LWEAudioQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEAudioQueue.m; sourceTree = "<group>"; };
 		24E47F4611F3E780007F6FB7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -1593,7 +1590,7 @@
 		28A0AB4B0D9B1048005BE974 /* jFlash_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jFlash_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-FTS-1.0.db"; path = "sql/plugins/cFlash-FTS-1.0.db"; sourceTree = "<group>"; };
-		4904664514727835004C44E2 /* cFlashTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cFlashTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4904664514727835004C44E2 /* cFlashTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cFlashTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4908209711B794A500150499 /* PluginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSettingsViewController.h; path = AppSpecific/PluginSettingsViewController.h; sourceTree = "<group>"; };
 		4908209811B794A500150499 /* PluginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginSettingsViewController.m; path = AppSpecific/PluginSettingsViewController.m; sourceTree = "<group>"; };
 		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
@@ -1835,6 +1832,10 @@
 		49E3D17814727FBF00F79308 /* cFlashTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "cFlashTest-Info.plist"; path = "Tests/cFlashTests/cFlashTest-Info.plist"; sourceTree = SOURCE_ROOT; };
 		49E3D1791472803900F79308 /* CardTagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardTagTest.h; path = Tests/CardTagTest.h; sourceTree = SOURCE_ROOT; };
 		49E3D17A1472803900F79308 /* CardTagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardTagTest.m; path = Tests/CardTagTest.m; sourceTree = SOURCE_ROOT; };
+		3D4316EACB834608A16BA825 /* CardModelTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardModelTest.h; path = Tests/CardModelTest.h; sourceTree = SOURCE_ROOT; };
+		CF57AFED14CF4453BFD1623E /* CardModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardModelTest.m; path = Tests/CardModelTest.m; sourceTree = SOURCE_ROOT; };
+		07203B478DBF477887BC9B5C /* JapaneseCardTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JapaneseCardTest.h; path = Tests/jFlashTests/JapaneseCardTest.h; sourceTree = SOURCE_ROOT; };
+		969093541A684E73B823323F /* JapaneseCardTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JapaneseCardTest.m; path = Tests/jFlashTests/JapaneseCardTest.m; sourceTree = SOURCE_ROOT; };
 		49E3D17B1472803900F79308 /* SetupDatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetupDatabaseHelper.h; path = Tests/SetupDatabaseHelper.h; sourceTree = SOURCE_ROOT; };
 		49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetupDatabaseHelper.m; path = Tests/SetupDatabaseHelper.m; sourceTree = SOURCE_ROOT; };
 		49E3D1811472804400F79308 /* CFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFlashSearchTest.h; path = Tests/cFlashTests/CFlashSearchTest.h; sourceTree = SOURCE_ROOT; };
@@ -1893,7 +1894,6 @@
 		913EEF87130800F300EBCF87 /* xcode_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcode_config.h; sourceTree = "<group>"; };
 		913EEF88130800F300EBCF87 /* NSURL+IFUnicodeURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+IFUnicodeURL.h"; sourceTree = "<group>"; };
 		913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+IFUnicodeURL.m"; sourceTree = "<group>"; };
-		915E3F0D18CC655600E299AB /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.3.2.a; path = Classes/External/FlurryLib/libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		915FEC4F15807B9100BEDF5F /* jFlashJr.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlashJr.db; path = sql/jFlashJr.db; sourceTree = "<group>"; };
 		9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_13_to_14.sql; path = Migrations/jflash_13_to_14.sql; sourceTree = "<group>"; };
 		917728E011C0CA9600A90071 /* dropped-text-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropped-text-box.png"; path = "Assets/dropped-text-box.png"; sourceTree = "<group>"; };
@@ -1967,11 +1967,7 @@
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		919FBDBA1622E9D2001FD77B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		91CA712B133BDE7B008A89A8 /* BackupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackupManager.h; sourceTree = "<group>"; };
-		91CA712C133BDE7B008A89A8 /* BackupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackupManager.m; sourceTree = "<group>"; };
-		91CA7728133D2E22008A89A8 /* LWEJanrainLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEJanrainLoginManager.h; sourceTree = "<group>"; };
-		91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEJanrainLoginManager.m; sourceTree = "<group>"; };
+		91B3E2F0144FD8ED003F8986 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExampleSentencesView.xib; path = XIBs/ExampleSentencesView.xib; sourceTree = "<group>"; };
 		91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSentencesViewController.h; path = AppSpecific/ExampleSentencesViewController.h; sourceTree = "<group>"; };
 		91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencesViewController.m; path = AppSpecific/ExampleSentencesViewController.m; sourceTree = "<group>"; };
@@ -2224,7 +2220,7 @@
 		A3D5C7A218406D2D00679ABD /* NSDictionary+JRQueryParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JRQueryParams.m"; sourceTree = "<group>"; };
 		A3D5C7A318406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+JRRequestUtils.h"; sourceTree = "<group>"; };
 		A3D5C7A418406D2D00679ABD /* NSMutableURLRequest+JRRequestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+JRRequestUtils.m"; sourceTree = "<group>"; };
-		B3F099E7184ADA1900396C2B /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Classes/External/FlurryLib/Flurry.h; sourceTree = SOURCE_ROOT; };
+		AA1A600019000010000000AA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		D322367A11D370B900B1AF15 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 		D32DC3CF116D82C9005D3852 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		D35B073D1116456D00DB5E02 /* overlay-btn-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "overlay-btn-close.png"; path = "Assets/overlay-btn-close.png"; sourceTree = "<group>"; };
@@ -2248,13 +2244,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E8B2D3184240FC00C53BEA /* Twitter.framework in Frameworks */,
 				919FBDBB1622E9D2001FD77B /* Social.framework in Frameworks */,
 				499448D01472817000671849 /* libsqlite3.a in Frameworks */,
 				242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */,
 				242A17411461AB68002977E6 /* AVFoundation.framework in Frameworks */,
-				915E3F0E18CC655600E299AB /* libFlurry_4.3.2.a in Frameworks */,
-				91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */,
+				91B3E2F1144FD8ED003F8986 /* libz.tbd in Frameworks */,
 				4938F8C714027853001EB473 /* CoreText.framework in Frameworks */,
 				D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -2266,6 +2260,7 @@
 				24E47F4711F3E780007F6FB7 /* CoreData.framework in Frameworks */,
 				2424116511F7E1BC00D535D7 /* SystemConfiguration.framework in Frameworks */,
 				91E93B0E133AD450007E5F83 /* MessageUI.framework in Frameworks */,
+				AA1A600119000010000000AA /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2281,10 +2276,10 @@
 				496C66E514728A6C009F04D4 /* MessageUI.framework in Frameworks */,
 				496C66E214728A47009F04D4 /* SystemConfiguration.framework in Frameworks */,
 				496C66E114728A3D009F04D4 /* CFNetwork.framework in Frameworks */,
-				496C66DE14728A1E009F04D4 /* libz.1.2.5.dylib in Frameworks */,
+				496C66DE14728A1E009F04D4 /* libz.tbd in Frameworks */,
 				49046617147272AD004C44E2 /* AudioToolbox.framework in Frameworks */,
 				49046616147272A0004C44E2 /* AVFoundation.framework in Frameworks */,
-				24B5661513CF67CD00BEE166 /* SenTestingKit.framework in Frameworks */,
+				24B5661513CF67CD00BEE166 /* XCTest.framework in Frameworks */,
 				24B5660213CF656100BEE166 /* Foundation.framework in Frameworks */,
 				24B5660113CF656100BEE166 /* UIKit.framework in Frameworks */,
 				24B5660313CF656100BEE166 /* CoreGraphics.framework in Frameworks */,
@@ -2303,10 +2298,10 @@
 				4904663114727835004C44E2 /* CoreText.framework in Frameworks */,
 				496C66E314728A4B009F04D4 /* SystemConfiguration.framework in Frameworks */,
 				496C66E014728A37009F04D4 /* CFNetwork.framework in Frameworks */,
-				496C66DF14728A26009F04D4 /* libz.1.2.5.dylib in Frameworks */,
+				496C66DF14728A26009F04D4 /* libz.tbd in Frameworks */,
 				4904662F14727835004C44E2 /* AudioToolbox.framework in Frameworks */,
 				4904663014727835004C44E2 /* AVFoundation.framework in Frameworks */,
-				4904663214727835004C44E2 /* SenTestingKit.framework in Frameworks */,
+				4904663214727835004C44E2 /* XCTest.framework in Frameworks */,
 				4904663314727835004C44E2 /* Foundation.framework in Frameworks */,
 				4904663414727835004C44E2 /* UIKit.framework in Frameworks */,
 				4904663514727835004C44E2 /* CoreGraphics.framework in Frameworks */,
@@ -2317,11 +2312,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				492435D71556AD0F0059B203 /* Twitter.framework in Frameworks */,
 				499448D11472817800671849 /* libsqlite3.a in Frameworks */,
 				242A174814628AF4002977E6 /* AudioToolbox.framework in Frameworks */,
 				242A17401461AB60002977E6 /* AVFoundation.framework in Frameworks */,
-				24A9F5681461334800C9D46F /* libz.1.2.5.dylib in Frameworks */,
+				24A9F5681461334800C9D46F /* libz.tbd in Frameworks */,
 				4938F8C314027818001EB473 /* CoreText.framework in Frameworks */,
 				493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */,
 				496C7B831263286D004B6B90 /* SystemConfiguration.framework in Frameworks */,
@@ -2341,11 +2335,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				919FBDBD16230000001FD77B /* Social.framework in Frameworks */,
-				91D3FA5B1580294F00CB8F1E /* Twitter.framework in Frameworks */,
 				91D3FA5C1580294F00CB8F1E /* libsqlite3.a in Frameworks */,
 				91D3FA5D1580294F00CB8F1E /* AudioToolbox.framework in Frameworks */,
 				91D3FA5E1580294F00CB8F1E /* AVFoundation.framework in Frameworks */,
-				91D3FA5F1580294F00CB8F1E /* libz.1.2.5.dylib in Frameworks */,
+				91D3FA5F1580294F00CB8F1E /* libz.tbd in Frameworks */,
 				91D3FA601580294F00CB8F1E /* CoreText.framework in Frameworks */,
 				91D3FA611580294F00CB8F1E /* Security.framework in Frameworks */,
 				91D3FA621580294F00CB8F1E /* Foundation.framework in Frameworks */,
@@ -2380,11 +2373,19 @@
 			children = (
 				1D6058910D05DD3D006BFB54 /* jFlash.app */,
 				496C7A6C126325FD004B6B90 /* cFlash.app */,
-				24B5660013CF656100BEE166 /* jFlashTest.octest */,
-				4904664514727835004C44E2 /* cFlashTest.octest */,
+				24B5660013CF656100BEE166 /* jFlashTest.xctest */,
+				4904664514727835004C44E2 /* cFlashTest.xctest */,
 				91D3FA701580294F00CB8F1E /* jFlash Junior.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		238422F12F9A9E1100828567 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				AA1A600019000010000000AA /* WebKit.framework */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		24AEAEA013D5E1F6008ADA45 /* Frameworks */ = {
@@ -2397,7 +2398,7 @@
 				24AEAEA313D5E24F008ADA45 /* MobileCoreServices.framework */,
 				24AEAEA113D5E246008ADA45 /* QuartzCore.framework */,
 				24AEAE9E13D5E1EB008ADA45 /* Security.framework */,
-				24B5661413CF67CD00BEE166 /* SenTestingKit.framework */,
+				24B5661413CF67CD00BEE166 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2425,6 +2426,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				238422F12F9A9E1100828567 /* Recovered References */,
 			);
 			name = jFlash;
 			sourceTree = "<group>";
@@ -2455,11 +2457,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				915E3F0D18CC655600E299AB /* libFlurry_4.3.2.a */,
 				919FBDBA1622E9D2001FD77B /* Social.framework */,
-				242A174714628AF4002977E6 /* AudioToolbox.framework */,
-				242A173F1461AB60002977E6 /* AVFoundation.framework */,
-				91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */,
+				91B3E2F0144FD8ED003F8986 /* libz.tbd */,
 				242A174714628AF4002977E6 /* AudioToolbox.framework */,
 				242A173F1461AB60002977E6 /* AVFoundation.framework */,
 				492435D51556AD070059B203 /* Twitter.framework */,
@@ -2488,6 +2487,8 @@
 			children = (
 				49E3D1791472803900F79308 /* CardTagTest.h */,
 				49E3D17A1472803900F79308 /* CardTagTest.m */,
+				3D4316EACB834608A16BA825 /* CardModelTest.h */,
+				CF57AFED14CF4453BFD1623E /* CardModelTest.m */,
 				498EBDB11488D43A00BA6DE7 /* PluginTest.h */,
 				498EBDB21488D43A00BA6DE7 /* PluginTest.m */,
 				498EBDA11488AEAA00BA6DE7 /* PluginManagerTest.h */,
@@ -2507,6 +2508,8 @@
 				4979D7AD14949AB800625635 /* JFlashPluginMigrationTest.m */,
 				91910048148052A1003E9A19 /* JFlashSearchTest.h */,
 				91910049148052A1003E9A19 /* JFlashSearchTest.m */,
+				07203B478DBF477887BC9B5C /* JapaneseCardTest.h */,
+				969093541A684E73B823323F /* JapaneseCardTest.m */,
 			);
 			name = JFlash;
 			sourceTree = "<group>";
@@ -2829,7 +2832,6 @@
 				917A5C5C11AB839300016BD2 /* Appirater */,
 				49EE97B6134EC34A00EC6B0E /* asi-http-request */,
 				913EEF6C130800F300EBCF87 /* IFUnicodeURL */,
-				917A5C0B11AB807800016BD2 /* FlurryLib */,
 				9158C0020FB6C2320083223F /* FMDb */,
 				917A5BA611AB7B1C00016BD2 /* sqlite */,
 				49AD17B2148476080017EFB4 /* ZipArchive */,
@@ -3135,15 +3137,6 @@
 			name = sqlite;
 			sourceTree = "<group>";
 		};
-		917A5C0B11AB807800016BD2 /* FlurryLib */ = {
-			isa = PBXGroup;
-			children = (
-				B3F099E7184ADA1900396C2B /* Flurry.h */,
-			);
-			name = FlurryLib;
-			path = External/FlurryLib;
-			sourceTree = "<group>";
-		};
 		917A5C5C11AB839300016BD2 /* Appirater */ = {
 			isa = PBXGroup;
 			children = (
@@ -3172,10 +3165,6 @@
 				4950C25211B764B200B70EE9 /* PluginManager.m */,
 				4999672811B3E45F00898A0C /* ThemeManager.h */,
 				4999672911B3E45F00898A0C /* ThemeManager.m */,
-				91CA712B133BDE7B008A89A8 /* BackupManager.h */,
-				91CA712C133BDE7B008A89A8 /* BackupManager.m */,
-				91CA7728133D2E22008A89A8 /* LWEJanrainLoginManager.h */,
-				91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */,
 				24BB427F14685E67002C387B /* LWEAudioQueue.h */,
 				24BB428014685E67002C387B /* LWEAudioQueue.m */,
 			);
@@ -3719,7 +3708,6 @@
 				24B565FB13CF656100BEE166 /* Sources */,
 				24B565FC13CF656100BEE166 /* Frameworks */,
 				24B565FD13CF656100BEE166 /* Resources */,
-				24B565FE13CF656100BEE166 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3728,8 +3716,8 @@
 			);
 			name = jFlashTest;
 			productName = jFlashTest;
-			productReference = 24B5660013CF656100BEE166 /* jFlashTest.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 24B5660013CF656100BEE166 /* jFlashTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		4904661E14727835004C44E2 /* cFlashTest */ = {
 			isa = PBXNativeTarget;
@@ -3747,8 +3735,8 @@
 			);
 			name = cFlashTest;
 			productName = jFlashTest;
-			productReference = 4904664514727835004C44E2 /* cFlashTest.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 4904664514727835004C44E2 /* cFlashTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		496C7A6B126325FD004B6B90 /* cFlash */ = {
 			isa = PBXNativeTarget;
@@ -3794,7 +3782,8 @@
 				ORGANIZATIONNAME = "Long Weekend LLC";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = VL37Z36DSL;
+						DevelopmentTeam = DT6C9KA2HD;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -3928,6 +3917,8 @@
 				91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */,
 				D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */,
 				D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */,
+				AA1A507E19000001000000AA /* jFlash-FTS-1.1.db in Resources */,
+				AA1A507F19000002000000AA /* jFlash-EX-1.2.db in Resources */,
 				D322368611D370B900B1AF15 /* plugin-resources in Resources */,
 				496BE55211EC5320003AB713 /* ActionBarViewController.xib in Resources */,
 				A3D5C5D618406CDE00679ABD /* icon_flickr_30x30.png in Resources */,
@@ -4806,9 +4797,7 @@
 				913EEF8D130800F300EBCF87 /* toxxx.c in Sources */,
 				913EEF8E130800F300EBCF87 /* util.c in Sources */,
 				913EEF8F130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */,
-				91CA712E133BDE7B008A89A8 /* BackupManager.m in Sources */,
 				A3D5C55B18406CDE00679ABD /* debug_log.m in Sources */,
-				91CA772B133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */,
 				49EE97A6134EC34500EC6B0E /* ASIAuthenticationDialog.m in Sources */,
 				A3D5C56D18406CDE00679ABD /* JREngagePhonegapPlugin.m in Sources */,
 				49EE97A8134EC34500EC6B0E /* ASIDataCompressor.m in Sources */,
@@ -4921,8 +4910,6 @@
 				496C66AD14728945009F04D4 /* GroupPeer.m in Sources */,
 				496C66AF1472894C009F04D4 /* UpdateManager.m in Sources */,
 				496C66B114728951009F04D4 /* PluginManager.m in Sources */,
-				496C66B314728956009F04D4 /* BackupManager.m in Sources */,
-				496C66B51472896B009F04D4 /* LWEJanrainLoginManager.m in Sources */,
 				496C66C3147289A3009F04D4 /* Group.m in Sources */,
 				496C66C7147289C2009F04D4 /* ASIHTTPRequest.m in Sources */,
 				496C66C9147289C5009F04D4 /* ASINetworkQueue.m in Sources */,
@@ -4941,6 +4928,8 @@
 				49AD1804148476340017EFB4 /* zip.c in Sources */,
 				49AD1808148476340017EFB4 /* ZipArchive.mm in Sources */,
 				9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */,
+				44F6A3257BC7490FB532B615 /* CardModelTest.m in Sources */,
+				21CAB04CBCF745C183F8E4D7 /* JapaneseCardTest.m in Sources */,
 				4971252C14873B0000D4D150 /* MoodIcon.m in Sources */,
 				498EBDA31488AEAA00BA6DE7 /* PluginManagerTest.m in Sources */,
 				498EBDA91488B96800BA6DE7 /* Plugin.m in Sources */,
@@ -4999,6 +4988,11 @@
 				490D4548153BAB3B0003EA47 /* SBJsonWriter.m in Sources */,
 				4922ED8D1556490200645F61 /* UserHistory.m in Sources */,
 				496461CF158092A800C3AB80 /* JFlashUpdateManager.m in Sources */,
+				3699AD28DD324B5EB79FA3C7 /* UserHistoryPeer.m in Sources */,
+				CA5AAE2CD187409796A303E1 /* UserPeer.m in Sources */,
+				8E7A78D2E4F94E2AA7357CBF /* DisplaySearchedSentenceViewController.m in Sources */,
+				12B02D81F78F4F22BAA4C74F /* JREngage.m in Sources */,
+				ABEDDAE28290466B896CF174 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5025,8 +5019,6 @@
 				496C66AC14728945009F04D4 /* GroupPeer.m in Sources */,
 				496C66AE1472894C009F04D4 /* UpdateManager.m in Sources */,
 				496C66B014728951009F04D4 /* PluginManager.m in Sources */,
-				496C66B214728956009F04D4 /* BackupManager.m in Sources */,
-				496C66B41472896B009F04D4 /* LWEJanrainLoginManager.m in Sources */,
 				496C66C2147289A3009F04D4 /* Group.m in Sources */,
 				496C66C6147289C1009F04D4 /* ASIHTTPRequest.m in Sources */,
 				496C66C8147289C5009F04D4 /* ASINetworkQueue.m in Sources */,
@@ -5049,6 +5041,7 @@
 				498EBDAA1488B96800BA6DE7 /* Plugin.m in Sources */,
 				498EBDB61488D43A00BA6DE7 /* PluginTest.m in Sources */,
 				91910157148992EC003E9A19 /* TagTest.m in Sources */,
+				691BFE8994084A70BF87B858 /* CardModelTest.m in Sources */,
 				4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */,
 				4944B1E51495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B914972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
@@ -5163,8 +5156,6 @@
 				913EEF93130800F300EBCF87 /* toxxx.c in Sources */,
 				913EEF94130800F300EBCF87 /* util.c in Sources */,
 				913EEF95130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */,
-				91CA712D133BDE7B008A89A8 /* BackupManager.m in Sources */,
-				91CA772A133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */,
 				49EE97A7134EC34500EC6B0E /* ASIAuthenticationDialog.m in Sources */,
 				A3D5C57118406CDE00679ABD /* JRInfoBar.m in Sources */,
 				49EE97A9134EC34500EC6B0E /* ASIDataCompressor.m in Sources */,
@@ -5319,9 +5310,7 @@
 				91D3F9FE1580294F00CB8F1E /* toxxx.c in Sources */,
 				91D3F9FF1580294F00CB8F1E /* util.c in Sources */,
 				91D3FA001580294F00CB8F1E /* NSURL+IFUnicodeURL.m in Sources */,
-				91D3FA011580294F00CB8F1E /* BackupManager.m in Sources */,
 				A3D5C55D18406CDE00679ABD /* debug_log.m in Sources */,
-				91D3FA041580294F00CB8F1E /* LWEJanrainLoginManager.m in Sources */,
 				91D3FA051580294F00CB8F1E /* ASIAuthenticationDialog.m in Sources */,
 				A3D5C56F18406CDE00679ABD /* JREngagePhonegapPlugin.m in Sources */,
 				91D3FA061580294F00CB8F1E /* ASIDataCompressor.m in Sources */,
@@ -5433,24 +5422,37 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DT6C9KA2HD;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_DEBUG,
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Classes/**",
+					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
+					"$(SRCROOT)/Classes/External/asi-http-request/External/Reachability",
+					"$(SRCROOT)/Classes/External/FMDB/src",
+					"$(SRCROOT)/Classes/External/jump.ios/Janrain/JREngage",
+					"$(SRCROOT)/Classes/External/TTTAttributedLabel",
+					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
+					"$(SRCROOT)/Classes/External/MBProgressHUD",
+					"$(SRCROOT)/Classes/External/LWEGradientButton",
+				);
 				INFOPLIST_FILE = "jFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "Japanese Flash";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(SRCROOT)/Classes/External/FlurryLib/",
-					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ross.jflash;
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "84DB2FA3-1C5B-44E3-961A-B7F863341332";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -5460,24 +5462,37 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DT6C9KA2HD;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_APP_STORE,
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Classes/**",
+					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
+					"$(SRCROOT)/Classes/External/asi-http-request/External/Reachability",
+					"$(SRCROOT)/Classes/External/FMDB/src",
+					"$(SRCROOT)/Classes/External/jump.ios/Janrain/JREngage",
+					"$(SRCROOT)/Classes/External/TTTAttributedLabel",
+					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
+					"$(SRCROOT)/Classes/External/MBProgressHUD",
+					"$(SRCROOT)/Classes/External/LWEGradientButton",
+				);
 				INFOPLIST_FILE = "jFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "Japanese Flash";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(SRCROOT)/Classes/External/FlurryLib/",
-					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ross.jflash;
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "84DB2FA3-1C5B-44E3-961A-B7F863341332";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -5485,7 +5500,6 @@
 		24B5660F13CF656200BEE166 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/jFlash.app/jFlash";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -5501,21 +5515,20 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/jFlashTests/jFlashTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				OTHER_LDFLAGS = (
 					"-framework",
-					SenTestingKit,
+					XCTest,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
 		24B5661013CF656200BEE166 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/jFlash.app/jFlash";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -5531,21 +5544,20 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/jFlashTests/jFlashTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				OTHER_LDFLAGS = (
 					"-framework",
-					SenTestingKit,
+					XCTest,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Beta;
 		};
 		24B5661113CF656200BEE166 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/jFlash.app/jFlash";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -5562,21 +5574,20 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/jFlashTests/jFlashTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				OTHER_LDFLAGS = (
 					"-framework",
-					SenTestingKit,
+					XCTest,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
 		4904664214727835004C44E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/cFlash.app/cFlash";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -5592,21 +5603,20 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/cFlashTests/cFlashTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				OTHER_LDFLAGS = (
 					"-framework",
-					SenTestingKit,
+					XCTest,
 				);
 				PRODUCT_NAME = cFlashTest;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
 		4904664314727835004C44E2 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/cFlash.app/cFlash";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -5622,21 +5632,20 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/cFlashTests/cFlashTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				OTHER_LDFLAGS = (
 					"-framework",
-					SenTestingKit,
+					XCTest,
 				);
 				PRODUCT_NAME = cFlashTest;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Beta;
 		};
 		4904664414727835004C44E2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/cFlash.app/cFlash";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -5653,14 +5662,14 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Tests/cFlashTests/cFlashTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				OTHER_LDFLAGS = (
 					"-framework",
-					SenTestingKit,
+					XCTest,
 				);
 				PRODUCT_NAME = cFlashTest;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -5675,11 +5684,9 @@
 				);
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "cFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/Classes/External/FlurryLib\\\"",
-					/Users/unquiet/lwe/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_NAME = cFlash;
 				PROVISIONING_PROFILE = "";
@@ -5698,11 +5705,9 @@
 				);
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "cFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/Classes/External/FlurryLib\\\"",
-					/Users/unquiet/lwe/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_NAME = cFlash;
 				PROVISIONING_PROFILE = "";
@@ -5721,11 +5726,9 @@
 				);
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "cFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/Classes/External/FlurryLib\\\"",
-					/Users/unquiet/lwe/xflash/jFlash/Classes/External/FlurryLib,
 				);
 				PRODUCT_NAME = cFlash;
 				PROVISIONING_PROFILE = "";
@@ -5744,11 +5747,21 @@
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Classes/**",
+					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
+					"$(SRCROOT)/Classes/External/asi-http-request/External/Reachability",
+					"$(SRCROOT)/Classes/External/FMDB/src",
+					"$(SRCROOT)/Classes/External/jump.ios/Janrain/JREngage",
+					"$(SRCROOT)/Classes/External/TTTAttributedLabel",
+					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
+					"$(SRCROOT)/Classes/External/MBProgressHUD",
+					"$(SRCROOT)/Classes/External/LWEGradientButton",
+				);
 				INFOPLIST_FILE = "jFlashJr-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "jFlash Junior";
@@ -5768,11 +5781,21 @@
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Classes/**",
+					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
+					"$(SRCROOT)/Classes/External/asi-http-request/External/Reachability",
+					"$(SRCROOT)/Classes/External/FMDB/src",
+					"$(SRCROOT)/Classes/External/jump.ios/Janrain/JREngage",
+					"$(SRCROOT)/Classes/External/TTTAttributedLabel",
+					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
+					"$(SRCROOT)/Classes/External/MBProgressHUD",
+					"$(SRCROOT)/Classes/External/LWEGradientButton",
+				);
 				INFOPLIST_FILE = "jFlashJr-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "jFlash Junior";
@@ -5792,11 +5815,21 @@
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Classes/**",
+					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
+					"$(SRCROOT)/Classes/External/asi-http-request/External/Reachability",
+					"$(SRCROOT)/Classes/External/FMDB/src",
+					"$(SRCROOT)/Classes/External/jump.ios/Janrain/JREngage",
+					"$(SRCROOT)/Classes/External/TTTAttributedLabel",
+					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
+					"$(SRCROOT)/Classes/External/MBProgressHUD",
+					"$(SRCROOT)/Classes/External/LWEGradientButton",
+				);
 				INFOPLIST_FILE = "jFlashJr-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "jFlash Junior";
@@ -5819,7 +5852,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -5831,24 +5864,37 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DT6C9KA2HD;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_AD_HOC,
 					LWE_JFLASH,
 				);
 				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Classes/**",
+					"$(SRCROOT)/Classes/External/asi-http-request/Classes",
+					"$(SRCROOT)/Classes/External/asi-http-request/External/Reachability",
+					"$(SRCROOT)/Classes/External/FMDB/src",
+					"$(SRCROOT)/Classes/External/jump.ios/Janrain/JREngage",
+					"$(SRCROOT)/Classes/External/TTTAttributedLabel",
+					"$(SRCROOT)/Classes/External/DSActivityView/Sources",
+					"$(SRCROOT)/Classes/External/MBProgressHUD",
+					"$(SRCROOT)/Classes/External/LWEGradientButton",
+				);
 				INFOPLIST_FILE = "jFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "Japanese Flash";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(SRCROOT)/Classes/External/FlurryLib/",
-					/Users/Ross/Dev/xflash/jFlash/Classes/External/FlurryLib,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ross.jflash;
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "84DB2FA3-1C5B-44E3-961A-B7F863341332";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Beta;
@@ -5865,7 +5911,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -5889,7 +5935,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

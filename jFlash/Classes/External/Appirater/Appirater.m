@@ -166,70 +166,62 @@ NSString *feedbackURL = @"http://getsatisfaction.com/longweekend";
   [pool release];
 }
 
-// Add manual mode to support GetSatisfaction.com
+// Returns topmost view controller for presenting UIAlertController.
+- (UIViewController *)_topViewController {
+  UIViewController *top = nil;
+  for (UIScene *scene in [UIApplication sharedApplication].connectedScenes) {
+    if ([scene isKindOfClass:[UIWindowScene class]]) {
+      for (UIWindow *w in ((UIWindowScene *)scene).windows) {
+        if (w.isKeyWindow) { top = w.rootViewController; break; }
+      }
+    }
+    if (top) break;
+  }
+  while (top.presentedViewController) top = top.presentedViewController;
+  return top;
+}
+
+- (void)_presentAlertWithTitle:(NSString *)title message:(NSString *)message isManual:(BOOL)isManual {
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  NSString *reviewURL = [templateReviewURL stringByReplacingOccurrencesOfString:@"APP_ID"
+                                                                     withString:[NSString stringWithFormat:@"%d", APPIRATER_APP_ID]];
+  UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                 message:message
+                                                          preferredStyle:UIAlertControllerStyleAlert];
+  NSString *cancelTitle = isManual ? @"Not Right Now" : APPIRATER_CANCEL_BUTTON;
+  [alert addAction:[UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *a) {
+    if (!isManual) {
+      [userDefaults setBool:YES forKey:kAppiraterDeclinedToRate];
+      [userDefaults synchronize];
+    }
+    [self release];
+  }]];
+  [alert addAction:[UIAlertAction actionWithTitle:APPIRATER_RATE_BUTTON style:UIAlertActionStyleDefault handler:^(UIAlertAction *a) {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:reviewURL]];
+    [userDefaults setBool:YES forKey:kAppiraterRatedCurrentVersion];
+    [userDefaults synchronize];
+    [self release];
+  }]];
+  NSString *thirdTitle = isManual ? APPIRATER_FEEDBACK_BUTTON : APPIRATER_RATE_LATER;
+  [alert addAction:[UIAlertAction actionWithTitle:thirdTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *a) {
+    if (isManual) {
+      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedbackURL]];
+      [userDefaults setBool:YES forKey:kAppiraterRatedCurrentVersion];
+      [userDefaults synchronize];
+    }
+    [self release];
+  }]];
+  [[self _topViewController] presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)showPromptManually {
   manualMode = YES;
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:APPIRATER_MESSAGE_TITLE
-                                                      message:APPIRATER_MESSAGE_MANUAL
-                                                     delegate:self
-                                            cancelButtonTitle:@"Not Right Now"
-                                            otherButtonTitles:APPIRATER_RATE_BUTTON, APPIRATER_FEEDBACK_BUTTON, nil];
-  [alertView show];
+  [self _presentAlertWithTitle:APPIRATER_MESSAGE_TITLE message:APPIRATER_MESSAGE_MANUAL isManual:YES];
 }
 
 - (void)showPrompt {
   manualMode = NO;
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:APPIRATER_MESSAGE_TITLE
-                                                      message:APPIRATER_MESSAGE
-                                                     delegate:self
-                                            cancelButtonTitle:APPIRATER_CANCEL_BUTTON
-                                            otherButtonTitles:APPIRATER_RATE_BUTTON, APPIRATER_RATE_LATER, nil];
-  [alertView show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  
-  switch (buttonIndex) {
-    case 0:
-    {
-      if(manualMode)
-      {
-        //they'll rate it later
-      }
-      else
-      {
-        // they don't want to rate it
-        [userDefaults setBool:YES forKey:kAppiraterDeclinedToRate];
-      }
-      break;
-    }
-    case 1:
-    {
-      NSString *reviewURL = [templateReviewURL stringByReplacingOccurrencesOfString:@"APP_ID" withString:[NSString stringWithFormat:@"%d", APPIRATER_APP_ID]];
-      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:reviewURL]];
-      [userDefaults setBool:YES forKey:kAppiraterRatedCurrentVersion];
-      break;
-    }
-    case 2:
-    {
-      if(manualMode){
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedbackURL]];
-        [userDefaults setBool:YES forKey:kAppiraterRatedCurrentVersion];
-      }
-      else {
-        // will remind them later
-      }
-      break;
-    }
-    default:
-      break;
-  }
-  
-  [userDefaults synchronize];
-  
-  [alertView release];
-  [self release];
+  [self _presentAlertWithTitle:APPIRATER_MESSAGE_TITLE message:APPIRATER_MESSAGE isManual:NO];
 }
 
 @end

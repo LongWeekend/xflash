@@ -13,10 +13,12 @@
 #import "LWENetworkUtils.h"
 #import "AddTagViewController.h"
 #import "UpdateManager.h"
+#import "CardViewController.h"
 
 @interface StudyViewController()
 //private methods
 - (void) _applicationDidEnterBackground:(NSNotification*)notification;
+- (void) _contentSizeCategoryDidChange:(NSNotification*)notification;
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
 - (BOOL) _shouldShowSampleAudioButtonForCard:(Card*)card;
 - (void) _tagContentDidChange:(NSNotification*)notification;
@@ -111,6 +113,109 @@
   }
 }
 
+- (void)viewSafeAreaInsetsDidChange
+{
+  [super viewSafeAreaInsetsDidChange];
+  [self.view setNeedsLayout];
+}
+
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+
+  // Position progress bar and scroll view from the live safe area insets so
+  // the layout is correct regardless of what triggered this pass (initial load,
+  // safe area change, tag change, modal dismiss, etc.).
+  if (@available(iOS 11.0, *)) {
+    CGFloat top = self.view.safeAreaInsets.top;
+    CGFloat progressBottom = top + self.progressBarView.bounds.size.height;
+
+    CGRect pf = self.progressBarView.frame;
+    pf.origin.y = top;
+    self.progressBarView.frame = pf;
+    self.showProgressModalBtn.frame = pf;
+
+    CGFloat svBottom = CGRectGetMinY(self.actionbarView.frame);
+    if (svBottom > progressBottom) {
+      CGRect sv = self.scrollView.frame;
+      sv.origin.y = progressBottom;
+      sv.size.height = svBottom - progressBottom;
+      self.scrollView.frame = sv;
+    }
+  }
+
+  // Fix action bar VC view width (autoresizing won't fire if container was already at
+  // final width when the view was added), then distribute buttons evenly.
+  if (self.actionBarController) {
+    CGRect f = self.actionBarController.view.frame;
+    f.size.width = self.actionbarView.bounds.size.width;
+    self.actionBarController.view.frame = f;
+    if ([self.actionBarController respondsToSelector:@selector(distributeButtonsEvenly)]) {
+      [(ActionBarViewController *)self.actionBarController distributeButtonsEvenly];
+    }
+  }
+
+  // Fix progress bar VC view width for the same reason, then redraw.
+  if (self.progressBarViewController) {
+    CGRect f = self.progressBarViewController.view.frame;
+    f.size.width = self.progressBarView.bounds.size.width;
+    self.progressBarViewController.view.frame = f;
+    if (self.progressBarViewController.tag) {
+      [self.progressBarViewController drawProgressBar];
+    }
+  }
+
+  // Lay out the card content to fill its container vertically.
+  // Reading/headword sit near the top; webview fills remaining space to the mood icon.
+  if (self.cardViewController && self.cardView.bounds.size.height > 0) {
+    CGFloat containerW = self.cardView.bounds.size.width;
+    CGFloat containerH = self.cardView.bounds.size.height;
+
+    // Fill the full card area so the layout percentages in layoutCardSubviews
+    // resolve to the intended on-screen positions (~30% from screen top for reading).
+    self.cardViewController.view.frame = CGRectMake(0, 0, containerW, containerH);
+
+    if ([self.cardViewController isKindOfClass:[CardViewController class]]) {
+      CardViewController *cvc = (CardViewController *)self.cardViewController;
+
+      // Apply internal card layout now that the view has its final bounds.
+      [cvc layoutCardSubviews];
+
+      // Move mood icon to cardView so it floats at the bottom-right of the red area
+      // regardless of how the card VC view is sized.
+      UIView *moodView = cvc.moodIcon.view;
+      if (moodView && moodView.superview != self.cardView) {
+        [[self.cardView viewWithTag:9001] removeFromSuperview];
+        moodView.tag = 9001;
+        [moodView removeFromSuperview];
+        [self.cardView addSubview:moodView];
+      }
+      if (moodView) {
+        CGFloat iconW = moodView.bounds.size.width;
+        CGFloat iconH = moodView.bounds.size.height;
+        moodView.frame = CGRectMake(
+          containerW - iconW + 20.0,
+          containerH - iconH - 8.0,
+          iconW, iconH
+        );
+      }
+
+      // Move the reveal button below the reading/headword area so the reading toggle
+      // sits above it and can be tapped without triggering the definition reveal.
+      if (self.revealCardBtn) {
+        // readingY (25% of containerH) + readingH (42) + gap (4) + headwordH (55) + buffer (10)
+        CGFloat headwordsBottom = roundf(containerH * 0.25) + 42.0 + 4.0 + 55.0 + 10.0;
+        CGFloat revealTop = self.scrollView.frame.origin.y + headwordsBottom;
+        CGRect rf = self.revealCardBtn.frame;
+        rf.origin.y = revealTop;
+        rf.size.height = MAX(100.0, self.view.bounds.size.height - revealTop);
+        self.revealCardBtn.frame = rf;
+      }
+    }
+  }
+
+}
+
 /**
  * This method sets up all of the non-nib stuff.
  * Observers are added for settings changes, plugins, etc.
@@ -131,7 +236,6 @@
   [settings addObserver:self forKeyPath:APP_THEME options:NSKeyValueObservingOptionNew context:NULL];
   [settings addObserver:self forKeyPath:APP_HEADWORD options:NSKeyValueObservingOptionNew context:NULL];
   [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
-  [settings addObserver:self forKeyPath:APP_TEXT_SIZE options:NSKeyValueObservingOptionNew context:NULL];
 #if defined (LWE_CFLASH)
   [settings addObserver:self forKeyPath:APP_PINYIN_COLOR options:NSKeyValueObservingOptionNew context:NULL];
 #elif defined (LWE_JFLASH)
@@ -142,6 +246,7 @@
   [center addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   [center addObserver:self selector:@selector(_tagContentDidChange:) name:LWETagContentDidChange object:nil];
   [center addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationWillTerminateNotification object:nil];
+  [center addObserver:self selector:@selector(_contentSizeCategoryDidChange:) name:UIContentSizeCategoryDidChangeNotification object:nil];
   
   // Initialize the progressBarView
 	ProgressBarViewController *tmpPBVC = [[ProgressBarViewController alloc] init];
@@ -236,7 +341,7 @@
     [self _setupSubviews];
     [self doChangeCard:self.currentCard direction:nil];
   }
-  else if ([keyPath isEqualToString:APP_TEXT_SIZE] || [keyPath isEqualToString:APP_HEADWORD])
+  else if ([keyPath isEqualToString:APP_HEADWORD])
   {
     // We need to setup the card view controller again
     [self _setupSubviews];
@@ -572,9 +677,10 @@
       [self.cardViewController.view removeFromSuperview];
     }
     
-    // Set the new VC
+    // Set the new VC — keep natural XIB height; width fills container.
+    // viewDidLayoutSubviews will center it vertically.
     self.cardViewController = [self.delegate cardViewControllerForStudyView:self];
-    self.cardViewController.view.frame = self.cardView.frame;
+    self.cardViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.cardView addSubview:self.cardViewController.view];
   }
   
@@ -585,11 +691,17 @@
     {
       [self.actionBarController.view removeFromSuperview];
     }
-    
+
     UIViewController<StudyViewSubcontrollerProtocol> *actionVC = [self.delegate actionBarViewControllerForStudyView:self];
+    actionVC.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.actionbarView addSubview:actionVC.view];
     self.actionBarController = actionVC;
   }
+
+  // New subcontrollers have just been swapped in at their NIB sizes.
+  // Mark self.view as needing layout so viewDidLayoutSubviews runs and
+  // resizes them to fill their containers correctly.
+  [self.view setNeedsLayout];
 }
 
 #pragma mark - Plugin-Related
@@ -673,11 +785,9 @@
     vc.view.tag = LWE_EX_SENTENCE_INSTALLER_VIEW_TAG;
   }
   
-  // Resize our second view to match our first one
-	CGRect rect = vc.view.frame;
+  // Resize our second view to fill the second page of the scroll view
 	CGFloat cx = self.scrollView.frame.size.width;
-	rect.origin.x = ((self.scrollView.frame.size.width - rect.size.width) / 2) + cx;
-  rect.size.height = self.scrollView.frame.size.height;
+	CGRect rect = CGRectMake(cx, 0, cx, self.scrollView.frame.size.height);
 	vc.view.frame = rect;
   
   // Set the content size for the width * the number of views
@@ -723,9 +833,16 @@
 -(void)setBackgroundColor_
 {
   self.practiceBgImage.backgroundColor = [[ThemeManager sharedThemeManager] currentThemeTintColor:0.9];
+  self.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.0];
 }
 
 #pragma mark - Class plumbing
+
+- (void) _contentSizeCategoryDidChange:(NSNotification *)notification
+{
+  [self _setupSubviews];
+  [self doChangeCard:self.currentCard direction:nil];
+}
 
 /*
 * We ask Tag to freeze its current state to a plist so if the app is killed

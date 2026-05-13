@@ -12,31 +12,24 @@
 #import "UpgradeAdViewController.h"
 
 #import "CustomCellBackgroundView.h"
-#import "LWEJanrainLoginManager.h"
 #import "SettingsViewController.h"
 #import "Constants.h"
-#import "MBProgressHUD.h"
-
-NSInteger const kBackupConfirmationAlertTag = 10;
-NSInteger const kRestoreConfirmationAlertTag = 11;
 
 #if defined (LWE_JUNIOR)
 enum Sections {
   kLWEGroupsSection = 0,
   kLWETagsSection = 1,
   kLWEPremiumTagsSection = 2,
-  kLWEBackupSection = 3,
   NUM_SECTIONS
 };
 #else
 enum Sections {
   kLWEGroupsSection = 0,
   kLWETagsSection = 1,
-  kLWEBackupSection = 2,
   NUM_SECTIONS
 };
 
-// trash implementation which is never called to avoid compile error and scattering LWE_JUNIOR in more places
+// stub to avoid scattering LWE_JUNIOR ifdefs further
 NSInteger const kLWEPremiumTagsSection = INT32_MAX;
 #endif
 
@@ -45,7 +38,7 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
 @end
 
 @implementation StudySetViewController
-@synthesize subgroupArray,tagArray,selectedTagId,group,activityIndicator,searchBar,backupManager;
+@synthesize subgroupArray,tagArray,selectedTagId,group,activityIndicator,searchBar;
 /** 
  * Customized initializer - returns UITableView group as self.view
  * Also creates tab bar image and sets nav bar title
@@ -76,7 +69,6 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
 - (void) _commonInit
 {
   self.selectedTagId = kLWEUninitializedTagId;
-  self.backupManager = [[[BackupManager alloc] initWithDelegate:self] autorelease];
 
   // Register observers to reload table data on other events
   [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
@@ -102,6 +94,9 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
   
   self.tagArray = [[self.group.childTags mutableCopy] autorelease];
   self.activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.estimatedRowHeight = 60;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -282,15 +277,6 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
     {
       return 1;
     }
-    else if (section == kLWEBackupSection)
-    {
-      if ([self.backupManager.loginManager isAuthenticated])
-      {
-        // One extra row for the "logout" button
-        return 3;
-      }
-      return 2;
-    }
     else
     {
       return [self.subgroupArray count];
@@ -319,8 +305,9 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
       cell.accessoryType = UITableViewCellAccessoryNone;
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
+      cell.textLabel.numberOfLines = 0;
       cell.textLabel.text = NSLocalizedString(@"No Results Found",@"StudySetViewController.SearchedButNoResults");
-      cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+      cell.detailTextLabel.numberOfLines = 0;
     }
     // Normal cell display
     else
@@ -345,6 +332,7 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
         tmpView.image = tagImage;
       }
       
+      cell.textLabel.numberOfLines = 0;
       cell.textLabel.text = tmpTag.tagName;
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
       NSString *tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Words",@"StudySetViewController.WordCount"), [tmpTag cardCount]];
@@ -368,28 +356,10 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
       }
     }
   }
-  else if (indexPath.section == kLWEBackupSection)
-  {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"backup" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
-    if (indexPath.row == 0)
-    {
-      cell.textLabel.text = NSLocalizedString(@"Backup Now", @"StudyViewController.backupUserSets");
-    }
-    else if (indexPath.row == 1)
-    {
-      cell.textLabel.text = NSLocalizedString(@"Restore Now", @"StudyViewController.restoreUserSets");
-    }
-    else
-    {
-      if ([self.backupManager.loginManager isAuthenticated])
-      {
-        cell.textLabel.text = NSLocalizedString(@"Logout", @"StudyViewController.backupLogot");
-      }
-    }
-  }
   else if (indexPath.section == kLWEPremiumTagsSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+    cell.textLabel.numberOfLines = 0;
     cell.textLabel.text = NSLocalizedString(@"Get More Sets", @"StudySetViewController.premiumSets");
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
@@ -413,6 +383,7 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
     
     // This is for groups?
     Group *tmpGroup = [self.subgroupArray objectAtIndex:indexPath.row];
+    cell.textLabel.numberOfLines = 0;
     cell.textLabel.text = tmpGroup.groupName;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
 
@@ -469,18 +440,6 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
     [self.tagArray removeObjectAtIndex:indexPath.row];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     [self reloadSubgroupData];
-  }
-}
-
--(NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
-{
-  if (section == kLWEBackupSection && [self.group isTopLevelGroup])
-  {
-    return NSLocalizedString(@"Backup Sets & Study Progress",@"StudySetVC.BackupCustomSetsTitle");
-  }
-  else
-  {
-    return nil;
   }
 }
 
@@ -551,34 +510,6 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
       // deselect "no results" msg
       [lclTableView deselectRowAtIndexPath:indexPath animated:NO];    
     }
-  }
-  else if (indexPath.section == kLWEBackupSection)
-  {
-    if (indexPath.row == 0)
-    {
-      [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Backup Custom Sets", @"StudySetViewController")
-                                         message:NSLocalizedString(@"We will now backup your custom sets. This will overwrite any backup that may already be stored.", @"StudySetViewController")
-                                              ok:NSLocalizedString(@"Backup!", @"StudySetViewController") 
-                                          cancel:NSLocalizedString(@"No Thanks.", @"StudySetViewController") 
-                                        delegate:self 
-                                             tag:kBackupConfirmationAlertTag];
-    }
-    else if (indexPath.row == 1)
-    {
-      [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Restore Custom Sets", @"StudySetViewController")
-                                         message:NSLocalizedString(@"We will now restore your custom sets from our server. This will add words and sets not already found, but will NOT remove any words or sets on this device.", @"StudySetViewController")
-                                              ok:NSLocalizedString(@"Restore!" , @"StudySetViewController")
-                                          cancel:NSLocalizedString(@"Maybe later." , @"StudySetViewController")
-                                        delegate:self 
-                                             tag:kRestoreConfirmationAlertTag];
-    }
-    else if (indexPath.row == 2)
-    {
-      [self.backupManager.loginManager logout];
-    }
-    
-    [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
-    [self reloadTableData];
   }
   else if (indexPath.section == kLWEPremiumTagsSection)
   {
@@ -653,15 +584,6 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
     return;
   }
   
-  if (alertView.tag == kBackupConfirmationAlertTag)
-  {
-    [self backup];
-  }
-  else if (alertView.tag == kRestoreConfirmationAlertTag)
-  {
-    [self restore];
-  }
-  else 
   {
     // This is the alert view that warns users they are about to start a new tag.
     
@@ -686,112 +608,6 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
     // Activate the tag!
     [self activateTag:[self.tagArray objectAtIndex:self.selectedTagId]]; 
   }
-}
-
-#pragma mark - Backup Methods
-
-- (void) backup
-{
-  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
-  hud.mode = MBProgressHUDModeDeterminate;
-  hud.labelText = NSLocalizedString(@"Authenticating",@"Starting Backup");
-
-  // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto.
-  [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.7];
-}
-
-- (void) restore
-{
-  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
-  hud.mode = MBProgressHUDModeDeterminate;
-  hud.labelText = NSLocalizedString(@"Authenticating",@"Starting Restore");
-
-  // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto.
-  [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.7];
-}
-
-#pragma mark - BackupManager Delegate
-
-- (void)backupManager:(BackupManager *)manager statusDidChange:(NSString *)status
-{
-  MBProgressHUD *hud = [MBProgressHUD HUDForView:self.parentViewController.view];
-  hud.labelText = status;
-}
-
-- (void)backupManager:(BackupManager *)manager currentProgress:(CGFloat)progress
-{
-  MBProgressHUD *hud = [MBProgressHUD HUDForView:self.parentViewController.view];
-  hud.progress = progress;
-}
-
-- (void)backupManagerDidBackupUserData:(BackupManager *)manager 
-{
-  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
-  
-  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your sets & progress have been backed up successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
-  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") message:alertMessage];
-}
-
-- (void)backupManager:(BackupManager *)manager didFailToBackupUserDataWithError:(NSError *)error
-{
-  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
-  
-  // overwrite the default error message if it's from the server
-  if ([error.domain isEqualToString:NetworkRequestErrorDomain])
-  {
-    NSString *errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
-    switch (error.code) // these should be http codes
-    {
-      case 503:
-        errorMessage = NSLocalizedString(@"The service is temporaily unavailable. Please try again later. Sorry!", @"StudySetViewController.503error");
-        break;
-      case 500:
-        errorMessage = NSLocalizedString(@"Something went wrong on the server. We will try to fix it in a jiffy!", @"StudySetViewController.500error");
-      default:
-        break;
-    }
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Failed", @"BackupFailed") message:errorMessage];
-  }
-  else if (error.code == 103)
-  {
-    // There was a problem communicating with the Janrain server while configuring authentication -
-    // probably no network
-    [LWEUIAlertView noNetworkAlert];
-  }
-}
-
-- (void)backupManagerDidRestoreUserData:(BackupManager *)manager
-{
-  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
-  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your sets & progress have been restored successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
-  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") message:alertMessage]; 
-  [self reloadTableData];
-
-  // Reload the current tag so that the progress details are correct - otherwise the progress bar can be
-  // out of whack after restore because we have different progress.
-  [self activateTag:[[CurrentState sharedCurrentState] activeTag]];
-}
-
-- (void)backupManager:(BackupManager *)manager didFailToRestoreUserDataWithError:(NSError *)error
-{
-  [MBProgressHUD hideHUDForView:self.parentViewController.view animated:YES];
-  if (error.code == kDataNotFound && [error.domain isEqualToString:LWEBackupManagerErrorDomain])
-  {
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Backup Found", @"DataNotFound") 
-                                       message:NSLocalizedString(@"We couldn't find a backup for you! Please login with another account or create a backup first.", @"BackupManager_DataNotFoundBody")];
-  }
-  else if (error.code == 103)
-  {
-    // There was a problem communicating with the Janrain server while configuring authentication -
-    // probably no network
-    [LWEUIAlertView noNetworkAlert];
-  }
-  else // show the other error (we don't know what this will be)
-  {
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Could Not Restore", @"RestoreFailed") 
-                                       message:[NSString stringWithFormat:@"Sorry about this! We couldn't restore because: %@", [error localizedDescription]]];
-  }
-  [self.activityIndicator stopAnimating];
 }
 
 #pragma mark - Search Bar delegate methods
@@ -900,7 +716,6 @@ NSInteger const kLWEPremiumTagsSection = INT32_MAX;
   [group release];
   [activityIndicator release];
   [searchBar release];
-  [backupManager release];
   [super dealloc];
 }
 

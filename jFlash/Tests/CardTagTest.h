@@ -12,12 +12,12 @@
 
 #define USE_APPLICATION_UNIT_TEST 1
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <UIKit/UIKit.h>
 //#import "application_headers" as required
 
 
-@interface CardTagTest : SenTestCase 
+@interface CardTagTest : XCTestCase 
 {
   Tag *tag_;
 }
@@ -25,4 +25,8 @@
 - (void)testCalculateNextCardLevelWithError;
 - (void) testUpdateLevelCounts;
 - (void)testAddThenRemoveCardsFromStudySet;
+- (void)testRecordCorrectFromLevel2MovesCardToLevel3;
+- (void)testRecordCorrectFromLevel3MovesCardToLevel4;
+- (void)testRecordWrongFromLevel0MovesCardToLevel1;
+- (void)testRecordWrongFromLevel5MovesCardToLevel1;
 @end

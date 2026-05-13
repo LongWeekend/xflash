@@ -50,11 +50,6 @@ extern NSString * const APP_HEADWORD;
 extern NSString * const SET_J_TO_E;
 extern NSString * const SET_E_TO_J;
 
-extern NSString * const APP_TEXT_SIZE;
-extern NSString * const SET_TEXT_NORMAL;
-extern NSString * const SET_TEXT_LARGE;
-extern NSString * const SET_TEXT_HUGE;
-
 extern NSString * const APP_HEADWORD_TYPE;
 extern NSString * const SET_HEADWORD_TYPE_TRAD;
 extern NSString * const SET_HEADWORD_TYPE_SIMP;
@@ -117,6 +112,7 @@ extern NSString * const LWE_XFLASH_HOMEPAGE;
   extern NSString * const LWE_JF_VERSION_1_6_2;
   extern NSString * const LWE_JF_VERSION_1_7;
   extern NSString * const LWE_JF_VERSION_1_8;
+  extern NSString * const LWE_JF_VERSION_1_9;
   extern NSString * const LWE_JF_10_USER_DATABASE;
   extern NSString * const LWE_JF_10_TO_11_SQL_FILENAME;
   extern NSString * const LWE_JF_12_TO_13_SQL_FILENAME;
