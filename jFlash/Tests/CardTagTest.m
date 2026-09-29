@@ -349,6 +349,78 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   [practiceMode release];
 }
 
+- (void)testRecordCorrectFromLevel2MovesCardToLevel3
+{
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  Card *card = [practiceMode getNextCard:tag afterCard:nil direction:nil];
+  XCTAssertNotNil(card, @"Should get a card");
+
+  [tag moveCard:card toLevel:2];
+  card.levelId = 2;
+
+  [UserHistoryPeer recordCorrectForCard:card inTag:tag];
+
+  NSMutableArray *level3 = [[tag cardsByLevel] objectAtIndex:3];
+  XCTAssertTrue([level3 containsObject:card], @"Correct from level 2 should place card at level 3");
+  [practiceMode release];
+}
+
+- (void)testRecordCorrectFromLevel3MovesCardToLevel4
+{
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  Card *card = [practiceMode getNextCard:tag afterCard:nil direction:nil];
+  XCTAssertNotNil(card, @"Should get a card");
+
+  [tag moveCard:card toLevel:3];
+  card.levelId = 3;
+
+  [UserHistoryPeer recordCorrectForCard:card inTag:tag];
+
+  NSMutableArray *level4 = [[tag cardsByLevel] objectAtIndex:4];
+  XCTAssertTrue([level4 containsObject:card], @"Correct from level 3 should place card at level 4");
+  [practiceMode release];
+}
+
+- (void)testRecordWrongFromLevel0MovesCardToLevel1
+{
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  Card *card = [practiceMode getNextCard:tag afterCard:nil direction:nil];
+  XCTAssertNotNil(card, @"Should get a card");
+
+  [tag moveCard:card toLevel:0];
+  card.levelId = 0;
+
+  [UserHistoryPeer recordWrongForCard:card inTag:tag];
+
+  NSMutableArray *level1 = [[tag cardsByLevel] objectAtIndex:1];
+  XCTAssertTrue([level1 containsObject:card], @"Wrong answer from level 0 should place card at level 1");
+  [practiceMode release];
+}
+
+- (void)testRecordWrongFromLevel5MovesCardToLevel1
+{
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  Card *card = [practiceMode getNextCard:tag afterCard:nil direction:nil];
+  XCTAssertNotNil(card, @"Should get a card");
+
+  [tag moveCard:card toLevel:5];
+  card.levelId = 5;
+
+  [UserHistoryPeer recordWrongForCard:card inTag:tag];
+
+  NSMutableArray *level1 = [[tag cardsByLevel] objectAtIndex:1];
+  XCTAssertTrue([level1 containsObject:card], @"Wrong answer from level 5 should place card at level 1");
+  [practiceMode release];
+}
+
 #pragma mark - Setting up
 
 - (void)setUp
