@@ -11,20 +11,17 @@
 #import "PluginManager.h"
 
 extern NSString * const APP_ABOUT;
-extern NSString * const APP_TWITTER;
-extern NSString * const APP_FACEBOOK;
 extern NSString * const APP_NEW_UPDATE;
 
 @protocol LWESettingsDataSource <NSObject>
 @required
 - (NSArray*) settingsArrayWithPluginManager:(PluginManager *)pluginManager;
 - (NSDictionary*) settingsHash;
-- (CGFloat) sizeForAcknowledgementsRow;
 @end
 
 @class SettingsViewController;
 
-@interface SettingsViewController : UITableViewController <UIWebViewDelegate>
+@interface SettingsViewController : UITableViewController
 - (void) updateBadgeValue;
 - (void) iterateSetting: (NSString*) setting;
 

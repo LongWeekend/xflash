@@ -29,15 +29,18 @@
   }
   
   [db.dao beginDeferredTransaction];
-  
+
   LWE_LOG(@"Starting SQL statement loop");
-  while (!feof(fh))
+  // fgets returns NULL at EOF (or on error). Looping on feof() before calling
+  // fgets re-executed the previous line whenever the final read hit EOF without
+  // returning a fresh line, because str_buf still held the prior contents.
+  while (fgets(str_buf, sizeof(str_buf), fh) != NULL)
   {
-    fgets(str_buf,1024,fh); // get me a line of the file    
-    if (![db.dao executeUpdate:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]])
+    NSString *line = [NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding];
+    if (![db.dao executeUpdate:line])
     {
       success = NO;
-      LWE_LOG(@"Unable to do SQL: %@",[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]);
+      LWE_LOG(@"Unable to do SQL: %@", line);
       break;
     }
   }

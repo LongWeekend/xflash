@@ -22,8 +22,6 @@
 @synthesize downloadManager, pluginManager;
 
 NSString * const APP_ABOUT = @"about";
-NSString * const APP_TWITTER = @"twitter";
-NSString * const APP_FACEBOOK = @"facebook";
 NSString * const APP_NEW_UPDATE = @"new_update";
 
 #pragma mark -
@@ -64,7 +62,8 @@ NSString * const APP_NEW_UPDATE = @"new_update";
   self.navigationItem.rightBarButtonItem = shareBtn;
   [shareBtn release];
 
-
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.estimatedRowHeight = 60;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -225,23 +224,6 @@ NSString * const APP_NEW_UPDATE = @"new_update";
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_ABOUT onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
-  else if (key == APP_FACEBOOK || key == APP_TWITTER)
-  {
-    // Set up the image
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"social" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    UIImageView *tmpView = cell.imageView;
-    // TODO: iPad customization!
-    if (key == APP_TWITTER)
-    {
-      tmpView.image = [UIImage imageNamed:@"icon_twitter_30x30.png"];
-    }
-    else if (key == APP_FACEBOOK)
-    {
-      tmpView.image = [UIImage imageNamed:@"icon_facebook_30x30.png"];
-    }
-  }
   else if (key == APP_ALGORITHM)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_ALGORITHM onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
@@ -270,23 +252,6 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 
 #pragma mark - UITableViewDelegate Methods
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	NSArray *thisSectionArray = [self.sectionArray objectAtIndex:indexPath.section];
-  NSString *key = [[thisSectionArray objectAtIndex:1] objectAtIndex:indexPath.row];
-
-  CGFloat size;
-  // Special case for about section
-  if (key == APP_ABOUT)
-  {
-    size = [self.dataSource sizeForAcknowledgementsRow];
-  }
-  else
-  {
-    size = 44.0f;    
-  }
-  return size;
-}
 
 
 //! Make selection for a table cell
@@ -313,41 +278,6 @@ NSString * const APP_NEW_UPDATE = @"new_update";
     psvc.pluginManager = self.pluginManager;
 		[self.navigationController pushViewController:psvc animated:YES];
 		[psvc release];
-  }
-  else if (key == APP_TWITTER || key == APP_FACEBOOK)
-  {
-    // Load a UIWebView to show
-    UIViewController *webVC = [[UIViewController alloc] init];
-    UIWebView *webView = [[UIWebView alloc] init];
-    webVC.title = NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs");
-    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reload",@"Global.Reload")
-                                                            style:UIBarButtonItemStyleBordered target:webView action:@selector(reload)];
-    webVC.navigationItem.rightBarButtonItem = bbi;
-    [bbi release];
-
-    NSURL *url = nil;
-    if (key == APP_FACEBOOK)
-    {
-#if defined (LWE_JFLASH)
-      // JFlash is the only app with its own FB page
-      url = [NSURL URLWithString:@"http://m.facebook.com/pages/Japanese-Flash/111141367918"];
-#else
-      url = [NSURL URLWithString:@"http://www.facebook.com/pages/Long-Weekend/174666231385"];
-#endif
-    }
-    else
-    {
-      url = [NSURL URLWithString:@"http://twitter.com/long_weekend/"];
-    }
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [webView loadRequest:request];
-    webView.delegate = self;
-    webVC.view = webView;
-
-    [self.navigationController pushViewController:webVC animated:YES];
-    [webVC release];
   }
   else if (key == APP_ABOUT)
   {
@@ -401,21 +331,6 @@ NSString * const APP_NEW_UPDATE = @"new_update";
   {
     return nil;
   }
-}
-
-# pragma mark - UIWebView delegate methods
-
-//! Turns off the network activity indicator & shows a "you are not connected" error
-- (void) webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error
-{
-  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-  [LWEUIAlertView noNetworkAlertWithDelegate:self];
-}
-
-//! Turns off the network activity indicator
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 # pragma mark - Housekeeping

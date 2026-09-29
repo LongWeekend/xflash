@@ -24,7 +24,7 @@
   // This should put the accent mark over the "i", not the "u".
   ChineseCard *card = [[ChineseCard alloc] init];
   card.hw_reading = @"hui2";
-  STAssertEqualObjects(card.pinyinReading,@"huí",@"Card reading should be the same");
+  XCTAssertEqualObjects(card.pinyinReading,@"huí",@"Card reading should be the same");
 }
 
 #pragma mark - Tone Change Tests
@@ -42,16 +42,16 @@
    */
 
   ChineseCard *card = [self _cardForKeyword:@"你好"];
-  STAssertNotNil(card, @"Card could not be found: 你好");
-  STAssertEqualObjects(@"ni3 hao3", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"nǐ hǎo", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"ní hǎo", card.sandhiReading, @"Tone sandhi reading should change"); 
+  XCTAssertNotNil(card, @"Card could not be found: 你好");
+  XCTAssertEqualObjects(@"ni3 hao3", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"nǐ hǎo", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"ní hǎo", card.sandhiReading, @"Tone sandhi reading should change"); 
 
   card = [self _cardForKeyword:@"好久"];
-  STAssertNotNil(card, @"Card could not be found: 好久");
-  STAssertEqualObjects(@"hao3 jiu3", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"hǎo jiǔ", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"háo jiǔ", card.sandhiReading, @"Tone sandhi reading should change"); 
+  XCTAssertNotNil(card, @"Card could not be found: 好久");
+  XCTAssertEqualObjects(@"hao3 jiu3", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"hǎo jiǔ", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"háo jiǔ", card.sandhiReading, @"Tone sandhi reading should change"); 
 }
 
 - (void) testTone3FollowedByNonTone3
@@ -86,22 +86,22 @@
    */
 
 //  ChineseCard *card = [self _cardForKeyword:@"一个"];
-//  STAssertNotNil(card, @"Card could not be found: 一个");
-//  STAssertEqualObjects(@"yi1 ge4", card.reading, @"Regular reading should not change"); 
-//  STAssertEqualObjects(@"yī gè", card.attributedReading.string, @"Regular reading should not change"); 
-//  STAssertEqualObjects(@"yí gè", card.sandhiReading, @"Tone sandhi reading should change"); 
+//  XCTAssertNotNil(card, @"Card could not be found: 一个");
+//  XCTAssertEqualObjects(@"yi1 ge4", card.reading, @"Regular reading should not change"); 
+//  XCTAssertEqualObjects(@"yī gè", card.attributedReading.string, @"Regular reading should not change"); 
+//  XCTAssertEqualObjects(@"yí gè", card.sandhiReading, @"Tone sandhi reading should change"); 
 
   ChineseCard *card = [self _cardForKeyword:@"一半"];
-  STAssertNotNil(card, @"Card could not be found: 一半");
-  STAssertEqualObjects(@"yi1 ban4", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"yī bàn", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"yí bàn", card.sandhiReading, @"Tone sandhi reading should change"); 
+  XCTAssertNotNil(card, @"Card could not be found: 一半");
+  XCTAssertEqualObjects(@"yi1 ban4", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"yī bàn", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"yí bàn", card.sandhiReading, @"Tone sandhi reading should change"); 
   
   card = [self _cardForKeyword:@"一步"];
-  STAssertNotNil(card, @"Card could not be found: 一步");
-  STAssertEqualObjects(@"yi1 bu4", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"yī bù", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"yí bù", card.sandhiReading, @"Tone sandhi reading should change"); 
+  XCTAssertNotNil(card, @"Card could not be found: 一步");
+  XCTAssertEqualObjects(@"yi1 bu4", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"yī bù", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"yí bù", card.sandhiReading, @"Tone sandhi reading should change"); 
 }
 
 - (void) testYi1BecomesYi4WhenFollowedByNonTone4
@@ -117,22 +117,22 @@
    一起 (together): yīqǐ ⇒ ‘yìqǐ’
    */
   ChineseCard *card = [self _cardForKeyword:@"一般"];
-  STAssertNotNil(card, @"Card could not be found: 一般");
-  STAssertEqualObjects(@"yi1 ban1", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"yī bān", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"yì bān", card.sandhiReading, @"Tone sandhi reading should change");
+  XCTAssertNotNil(card, @"Card could not be found: 一般");
+  XCTAssertEqualObjects(@"yi1 ban1", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"yī bān", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"yì bān", card.sandhiReading, @"Tone sandhi reading should change");
 
   card = [self _cardForKeyword:@"一直"];
-  STAssertNotNil(card, @"Card could not be found: 一直");
-  STAssertEqualObjects(@"yi1 zhi2", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"yī zhí", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"yì zhí", card.sandhiReading, @"Tone sandhi reading should change"); 
+  XCTAssertNotNil(card, @"Card could not be found: 一直");
+  XCTAssertEqualObjects(@"yi1 zhi2", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"yī zhí", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"yì zhí", card.sandhiReading, @"Tone sandhi reading should change"); 
   
   card = [self _cardForKeyword:@"一起"];
-  STAssertNotNil(card, @"Card could not be found: 一起");
-  STAssertEqualObjects(@"yi1 qi3", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"yī qǐ", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"yì qǐ", card.sandhiReading, @"Tone sandhi reading should change"); 
+  XCTAssertNotNil(card, @"Card could not be found: 一起");
+  XCTAssertEqualObjects(@"yi1 qi3", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"yī qǐ", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"yì qǐ", card.sandhiReading, @"Tone sandhi reading should change"); 
 }
 
 #pragma mark Rules for "不" (non-, no)
@@ -151,22 +151,22 @@
    不错 (not bad): bù cuò ⇒ ‘bú cuò’
    */
   ChineseCard *card = [self _cardForKeyword:@"不是"];
-  STAssertNotNil(card, @"Card could not be found: 不是");
-  STAssertEqualObjects(@"bu4 shi4", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"bù shì", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"bú shì", card.sandhiReading, @"Tone sandhi reading should change");
+  XCTAssertNotNil(card, @"Card could not be found: 不是");
+  XCTAssertEqualObjects(@"bu4 shi4", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"bù shì", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"bú shì", card.sandhiReading, @"Tone sandhi reading should change");
   
   card = [self _cardForKeyword:@"不会"];
-  STAssertNotNil(card, @"Card could not be found: 不会");
-  STAssertEqualObjects(@"bu4 hui4", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"bù huì", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"bú huì", card.sandhiReading, @"Tone sandhi reading should change"); 
+  XCTAssertNotNil(card, @"Card could not be found: 不会");
+  XCTAssertEqualObjects(@"bu4 hui4", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"bù huì", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"bú huì", card.sandhiReading, @"Tone sandhi reading should change"); 
   
   card = [self _cardForKeyword:@"不错"];
-  STAssertNotNil(card, @"Card could not be found: 不错");
-  STAssertEqualObjects(@"bu4 cuo4", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"bù cuò", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"bú cuò", card.sandhiReading, @"Tone sandhi reading should change");
+  XCTAssertNotNil(card, @"Card could not be found: 不错");
+  XCTAssertEqualObjects(@"bu4 cuo4", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"bù cuò", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"bú cuò", card.sandhiReading, @"Tone sandhi reading should change");
 }
 
 #pragma mark Rules for 2nd Tone
@@ -188,22 +188,22 @@
    特别难看 (especially ugly): tèbié nánkàn ⇒ tèbié nānkàn
    */
 //  ChineseCard *card = [self _cardForKeyword:@"三年级"];
-//  STAssertNotNil(card, @"Card could not be found: 三年级");
-//  STAssertEqualObjects(@"bu4 shi4", card.reading, @"Regular reading should not change"); 
-//  STAssertEqualObjects(@"bù shì", card.attributedReading.string, @"Regular reading should not change"); 
-//  STAssertEqualObjects(@"bú shì", card.sandhiReading, @"Tone sandhi reading should change");
+//  XCTAssertNotNil(card, @"Card could not be found: 三年级");
+//  XCTAssertEqualObjects(@"bu4 shi4", card.reading, @"Regular reading should not change"); 
+//  XCTAssertEqualObjects(@"bù shì", card.attributedReading.string, @"Regular reading should not change"); 
+//  XCTAssertEqualObjects(@"bú shì", card.sandhiReading, @"Tone sandhi reading should change");
   
   ChineseCard *card = [self _cardForKeyword:@"不会"];
-  STAssertNotNil(card, @"Card could not be found: 不会");
-  STAssertEqualObjects(@"bu4 hui4", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"bù huì", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"bú huì", card.sandhiReading, @"Tone sandhi reading should change"); 
+  XCTAssertNotNil(card, @"Card could not be found: 不会");
+  XCTAssertEqualObjects(@"bu4 hui4", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"bù huì", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"bú huì", card.sandhiReading, @"Tone sandhi reading should change"); 
   
   card = [self _cardForKeyword:@"不错"];
-  STAssertNotNil(card, @"Card could not be found: 不错");
-  STAssertEqualObjects(@"bu4 cuo4", card.reading, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"bù cuò", card.attributedReading.string, @"Regular reading should not change"); 
-  STAssertEqualObjects(@"bú cuò", card.sandhiReading, @"Tone sandhi reading should change");
+  XCTAssertNotNil(card, @"Card could not be found: 不错");
+  XCTAssertEqualObjects(@"bu4 cuo4", card.reading, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"bù cuò", card.attributedReading.string, @"Regular reading should not change"); 
+  XCTAssertEqualObjects(@"bú cuò", card.sandhiReading, @"Tone sandhi reading should change");
 }
 
 #pragma mark - Helpers
@@ -229,15 +229,15 @@
   NSError *error = nil;
   JFlashDatabase *db = [JFlashDatabase sharedJFlashDatabase];
   BOOL result = [db setupTestDatabaseAndOpenConnectionWithError:&error];
-  STAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
+  XCTAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
   
   //Setup FTS
   result = [db setupAttachedDatabase:CURRENT_FTS_TEST_DATABASE asName:@"fts"];
-  STAssertTrue(result, @"Failed to setup search database");
+  XCTAssertTrue(result, @"Failed to setup search database");
   
   //Setup Cards
   result = [db setupAttachedDatabase:CURRENT_CARD_TEST_DATABASE asName:@"cards"];
-  STAssertTrue(result, @"Failed to setup cards database");
+  XCTAssertTrue(result, @"Failed to setup cards database");
 }
 
 - (void)tearDown
@@ -245,7 +245,7 @@
   JFlashDatabase *db = [JFlashDatabase sharedJFlashDatabase];
   NSError *error = nil;
   BOOL result = [db removeTestDatabaseWithError:&error];
-  STAssertTrue(result, @"Test database cannot be removed for some reason.\nError: %@", [error localizedDescription]);
+  XCTAssertTrue(result, @"Test database cannot be removed for some reason.\nError: %@", [error localizedDescription]);
 }
 
 

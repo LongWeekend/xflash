@@ -10,7 +10,6 @@
 #import "FMResultSet.h"
 #import "Plugin.h"
 #import "NSDate+LWEUtilities.h"
-#import "ASIHTTPRequest.h"
 
 extern NSString * const LWEPluginDidInstall;
 
@@ -40,7 +39,12 @@ extern NSString * const LWEPluginDidInstall;
 //========= THESE GIVE STATE ========
 
 - (BOOL) isTimeForCheckingUpdate;
-- (BOOL)checkNewPluginsAsynchronous:(BOOL)asynch;
+
+//! Fetches the latest available-plugins plist from the server using NSURLSession.
+//! The completion block is invoked on the main queue with success=YES if the
+//! plist was downloaded and applied, NO otherwise. The completion block may be
+//! nil for fire-and-forget callers.
+- (void) checkNewPluginsWithCompletion:(void (^)(BOOL success))completion;
 
 
 //! Returns YES if the plugin is loaded.  Directory plugins always return YES.

@@ -40,11 +40,12 @@
                     // The tag glossary is only in JFlash
                     NSLocalizedString(@"Tag Glossary",@"HelpViewController.Table_TagGlossary"),
 #endif
-                    NSLocalizedString(@"Backup Custom Sets",@"HelpViewController.Table_BackupCustomSets"),
-                    NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),
                     nil];
   self.sectionTitles = names;
   
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.estimatedRowHeight = 52;
+
   UIBarButtonItem *supportBtn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Ask Us", @"HelpViewController.GetSatsifactionLink")
                                                                   style:UIBarButtonItemStyleBordered
                                                                  target:self action:@selector(_supportBtnPressed:)] autorelease];
@@ -65,8 +66,7 @@
                         // We only use this in JFlash
                         @"tags@2x",
 #endif
-                        @"backup@2x",
-                        @"feedback@2x",nil];
+                        nil];
   currentIndex = 0;
 }
 
@@ -107,21 +107,17 @@
 
 - (void) _supportBtnPressed:(id)sender
 {
-  UIAlertView *supportAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"GetSatisfaction.com",@"HelpViewController.SupportAlertMsgTitle")  
-                                                         message:NSLocalizedString(@"Do you have a question?\nA feature request?\n\nIt's best to make your voice heard on our support site, but we respond to e-mail too!",@"HelpViewController.SupportAlertMsgMsg")
-                                                        delegate:self
-                                               cancelButtonTitle:NSLocalizedString(@"No Thanks",@"Cancel")
-                                               otherButtonTitles:NSLocalizedString(@"Visit Site",@"Visit Site"),NSLocalizedString(@"Send an Email",@"Mail Us"), nil];
-  [supportAlert show];
-  [supportAlert release];
-}
+  UIAlertController *alert = [UIAlertController
+    alertControllerWithTitle:NSLocalizedString(@"GetSatisfaction.com", @"HelpViewController.SupportAlertMsgTitle")
+                     message:NSLocalizedString(@"Do you have a question?\nA feature request?\n\nIt's best to make your voice heard on our support site, but we respond to e-mail too!", @"HelpViewController.SupportAlertMsgMsg")
+              preferredStyle:UIAlertControllerStyleAlert];
 
-#pragma mark - UIAlertViewDelegate Methods
+  [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"No Thanks", @"Cancel")
+                                           style:UIAlertActionStyleCancel handler:nil]];
 
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  if (buttonIndex == SUPPORT_ALERT_SITE_IDX)
-  {
+  [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Visit Site", @"Visit Site")
+                                           style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction *a) {
 #if defined (LWE_JFLASH)
     NSURL *url = [NSURL URLWithString:@"http://getsatisfaction.com/longweekend/products/longweekend_japanese_flash"];
 #elif defined (LWE_CFLASH)
@@ -130,25 +126,25 @@
     NSURL *url = [NSURL URLWithString:@"http://getsatisfaction.com/longweekend/"];
 #endif
     [[UIApplication sharedApplication] openURL:url];
-  }
-  else if (buttonIndex == SUPPORT_ALERT_EMAIL_IDX)
-  {
-    if ([MFMailComposeViewController canSendMail]) 
-    {
+  }]];
+
+  [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send an Email", @"Mail Us")
+                                           style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction *a) {
+    if ([MFMailComposeViewController canSendMail]) {
       MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
       picker.mailComposeDelegate = self;
       [picker setSubject:@"Please Make This Awesome."];
       [picker setToRecipients:[NSArray arrayWithObjects:LWE_SUPPORT_EMAIL, nil]];
-      [self presentModalViewController:picker animated:YES];
+      [self presentViewController:picker animated:YES completion:nil];
       [picker release];
-    }
-    else 
-    {
+    } else {
       [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Email Not Available", @"emailVM.notAvailable.title")
                                          message:NSLocalizedString(@"Oh no!  It looks like your device isn't set up for Mail yet!", @"emailVM.notAvailable.body")];
-      
     }
-  }
+  }]];
+
+  [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate Methods
@@ -181,6 +177,7 @@
   cell = [LWEUITableUtils reuseCellForIdentifier:@"help" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   cell.selectionStyle = UITableViewCellSelectionStyleGray;
+  cell.textLabel.numberOfLines = 0;
   cell.textLabel.text = [self.sectionTitles objectAtIndex:indexPath.row];
   return cell;  
 }

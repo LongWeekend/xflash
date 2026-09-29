@@ -30,19 +30,66 @@
                                     nil];
   Plugin *newPlugin = [Plugin pluginWithLegacyDictionary:legacyPluginHash];
   
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_key"], newPlugin.pluginId, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_name"], newPlugin.name, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_details"], newPlugin.details, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_html_content"], newPlugin.htmlString, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_version"], newPlugin.version, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_target_url"], newPlugin.targetURL, @"Should be equal");
-  STAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_target_path"], newPlugin.filePath, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_key"], newPlugin.pluginId, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_name"], newPlugin.name, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_details"], newPlugin.details, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_html_content"], newPlugin.htmlString, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_version"], newPlugin.version, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_target_url"], newPlugin.targetURL, @"Should be equal");
+  XCTAssertEqualObjects([legacyPluginHash objectForKey:@"plugin_target_path"], newPlugin.filePath, @"Should be equal");
   
   // Default to "Documents" for file location (this is a new feature)
-  STAssertEquals(kLWEFileLocationDocuments, newPlugin.fileLocation, @"Should be equal");
+  XCTAssertEqual(kLWEFileLocationDocuments, newPlugin.fileLocation, @"Should be equal");
   
   // Default to "database" type, this is a new feature
-  STAssertEqualObjects(@"database", newPlugin.pluginType, @"Should be equal");
+  XCTAssertEqualObjects(@"database", newPlugin.pluginType, @"Should be equal");
+}
+
+- (void)testLegacyPluginUnknownKeysDoNotCrash
+{
+  NSDictionary *legacyDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"SOME-KEY",     @"plugin_key",
+                              @"2.0",          @"plugin_version",
+                              @"Test Plugin",  @"plugin_name",
+                              @"Details here", @"plugin_details",
+                              @"<html/>",      @"plugin_html_content",
+                              @"file.db",      @"plugin_target_path",
+                              @"file.db",      @"plugin_file_name",
+                              @"UNKNOWN_KEY_1", @"some_future_key",
+                              @"UNKNOWN_KEY_2", @"another_future_key",
+                              nil];
+  Plugin *plugin = nil;
+  XCTAssertNoThrow(plugin = [Plugin pluginWithLegacyDictionary:legacyDict],
+                   @"Parsing a legacy dictionary with unknown keys must not throw");
+  XCTAssertNotNil(plugin, @"Plugin should be created despite unknown keys");
+}
+
+- (void)testLegacyPluginVersionCanBeComparedWithModernPlugin
+{
+  NSDictionary *legacyDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"FTS-DB",          @"plugin_key",
+                              @"1.1",             @"plugin_version",
+                              @"Legacy Plugin",   @"plugin_name",
+                              @"Details",         @"plugin_details",
+                              @"<html/>",         @"plugin_html_content",
+                              @"legacy.db",       @"plugin_target_path",
+                              @"legacy.db",       @"plugin_file_name",
+                              nil];
+  Plugin *legacyPlugin = [Plugin pluginWithLegacyDictionary:legacyDict];
+
+  NSDictionary *modernDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"Modern Plugin",    @"name",
+                              @"FTS-DB",           @"pluginId",
+                              @"database",         @"pluginType",
+                              @"2.0",              @"version",
+                              [NSNumber numberWithInt:LWEPluginLocationDocuments], @"fileLocation",
+                              @"modern.db",        @"filePath", nil];
+  Plugin *modernPlugin = [Plugin pluginWithDictionary:modernDict];
+
+  XCTAssertTrue([modernPlugin isNewVersionOfPlugin:legacyPlugin],
+                @"Modern plugin v2.0 should be newer than legacy plugin v1.1");
+  XCTAssertFalse([legacyPlugin isNewVersionOfPlugin:modernPlugin],
+                 @"Legacy plugin v1.1 should NOT be newer than modern plugin v2.0");
 }
 
 @end

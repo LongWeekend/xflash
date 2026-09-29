@@ -24,11 +24,6 @@
 
 #pragma mark - Settings Data Source
 
-- (CGFloat) sizeForAcknowledgementsRow
-{
-  return 435.0f;
-}
-
 /** Returns all the arrays to configure the settings table */
 - (NSArray*) settingsArrayWithPluginManager:(PluginManager *)pluginManager
 {
@@ -64,16 +59,9 @@
   NSArray *kanaKeys = [NSArray arrayWithObjects:SET_KANA_ONLY_ON,SET_KANA_ONLY_OFF,nil];
   NSDictionary *kanaDict = [NSDictionary dictionaryWithObjects:kanaObjects forKeys:kanaKeys];
   
-  // This is for controlling the size of the text in the Web Views
-  NSArray *textSizeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Normal",@"SettingsViewController.TextSizeNormal"),
-                             NSLocalizedString(@"Large",@"SettingsViewController.TextSizeLarge"),
-                             NSLocalizedString(@"Huge",@"SettingsViewController.TextSizeHuge"),nil];
-  NSArray *textSizeKeys = [NSArray arrayWithObjects:SET_TEXT_NORMAL,SET_TEXT_LARGE,SET_TEXT_HUGE,nil];
-  NSDictionary *textSizeDict = [NSDictionary dictionaryWithObjects:textSizeObjects forKeys:textSizeKeys];
-  
   // Create a complete dictionary of all settings display names & their setting constants
-  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,kanaDict,modeDict,textSizeDict,nil];
-  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_READING,APP_KANA_ONLY,APP_MODE,APP_TEXT_SIZE,nil];
+  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,kanaDict,modeDict,nil];
+  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_READING,APP_KANA_ONLY,APP_MODE,nil];
   self.settingsHash = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
 
   //======================================
@@ -85,9 +73,8 @@
                                NSLocalizedString(@"Study Language",@"SettingsViewController.SettingNames_StudyLanguage"),
                                NSLocalizedString(@"Furigana / Reading",@"SettingsViewController.SettingNames_DisplayFuriganaReading"),
                                NSLocalizedString(@"Common Kana Words",@"SettingsViewController.SettingNames_KanaOnlyWords"),
-                               NSLocalizedString(@"Text Size",@"SettingsViewController.SettingNames_TextSize"),
                                NSLocalizedString(@"Difficulty",@"SettingsViewController.SettingNames_ChangeDifficulty"),nil];
-  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_KANA_ONLY,APP_TEXT_SIZE,APP_ALGORITHM,nil];
+  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_KANA_ONLY,APP_ALGORITHM,nil];
   NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
   
   NSMutableArray *userSettingNames = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
@@ -97,11 +84,6 @@
   NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_REMINDER,APP_USER,APP_PLUGIN,nil];
   NSMutableArray *userSettingArray = [NSMutableArray arrayWithObjects:userSettingNames,userSettingKeys,NSLocalizedString(@"Application",@"SettingsViewController.TableHeader_Application"),nil];
   
-  NSArray *socialNames = [NSArray arrayWithObjects:NSLocalizedString(@"Follow us on Twitter",@"SettingsViewController.SettingNames_Twitter"),
-                          NSLocalizedString(@"See us on Facebook",@"SettingsViewController.SettingNames_Facebook"),nil];
-  NSArray *socialKeys = [NSArray arrayWithObjects:APP_TWITTER,APP_FACEBOOK,nil];
-  NSArray *socialArray = [NSArray arrayWithObjects:socialNames,socialKeys,NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs"),nil];
-  
   NSArray *aboutNames = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses data from the EDICT dictionary and Tanaka Corpus. The EDICT files are property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",@"SettingsViewController.Acknowledgements"),nil];
   NSArray *aboutKeys = [NSArray arrayWithObjects:APP_ABOUT,nil];
   NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,NSLocalizedString(@"Acknowledgements",@"SettingsViewController.TableHeader_Acknowledgements"),nil];
@@ -110,11 +92,11 @@
 	// If there is a new available update plugin, it will show in the first section, however, if it does not have anything, it will show nothing. 
 	if (newAvailableUpdate > 0)
   {
-		return [NSArray arrayWithObjects:newUpdateArray,cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
+		return [NSArray arrayWithObjects:newUpdateArray,cardSettingArray,userSettingArray,aboutArray,nil];
   }
-	else 
+	else
   {
-		return [NSArray arrayWithObjects:cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
+		return [NSArray arrayWithObjects:cardSettingArray,userSettingArray,aboutArray,nil];
   }
 }
 

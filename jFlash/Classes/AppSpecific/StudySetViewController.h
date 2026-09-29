@@ -11,9 +11,8 @@
 #import "Group.h"
 #import "TagPeer.h"
 #import "GroupPeer.h"
-#import "BackupManager.h"
 
-@interface StudySetViewController : UITableViewController <UISearchBarDelegate, LWEBackupManagerDelegate>
+@interface StudySetViewController : UITableViewController <UISearchBarDelegate>
 {
   UIBarButtonItem *_addButton;
   UIButton *searchOverlayBtn;
@@ -36,6 +35,5 @@
 @property (nonatomic, retain) NSMutableArray *tagArray;
 @property (nonatomic, retain) NSArray *subgroupArray;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
-@property (retain) BackupManager *backupManager;
 
 @end

@@ -15,7 +15,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 @implementation ModalTaskViewController
 
-@synthesize taskMsgLabel, progressIndicator, startButton, taskHandler, webView;
+@synthesize taskMsgLabel, progressIndicator, startButton, taskHandler, webViewContainer;
 
 // For content/webview
 @synthesize webViewContent;
@@ -26,7 +26,16 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
+
+  // Create the WKWebView programmatically inside the XIB-instantiated container.
+  WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+  _webView = [[WKWebView alloc] initWithFrame:self.webViewContainer.bounds
+                                configuration:config];
+  [config release];
+  _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+  _webView.scrollView.bounces = NO;
+  [self.webViewContainer addSubview:_webView];
+
   // Make sure the buttons are set to the right states
   [self updateButtons];
   [self showDetailedView];
@@ -185,19 +194,17 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 - (IBAction) showDetailedView
 {
-  [self.webView shutOffBouncing];
-  
   // Only show content if we have set this variable
   if (self.webViewContent)
   {
     NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:@"plugin-resources/index.html"]];
-    [self.webView loadHTMLString:self.webViewContent baseURL:url];
+    [_webView loadHTMLString:self.webViewContent baseURL:url];
   }
 }
 
 - (void) viewDidUnload
 {
-  [self setWebView:nil];
+  self.webViewContainer = nil;
   [super viewDidUnload];
   self.taskMsgLabel = nil;
   self.progressIndicator = nil;
@@ -206,11 +213,12 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 //! standard dealloc
 - (void)dealloc
 {
+  [_webView release];
   [taskMsgLabel release];
   [progressIndicator release];
   [webViewContent release];
   [taskHandler release];
-  self.webView = nil;
+  [webViewContainer release];
   [super dealloc];
 }
 

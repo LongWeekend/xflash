@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import "Card.h"
-#import "UIWebView+LWENoBounces.h"
 #import "MoodIcon.h"
 #import "StudyViewProtocols.h"
 
@@ -29,16 +29,23 @@ extern NSString * const LWECardHTMLTemplate_EtoJ;
 - (BOOL)shouldRevealCardView:(CardViewController*)cvc;
 @end
 
-@interface CardViewController : UIViewController <StudyViewSubcontrollerProtocol>
+@interface CardViewController : UIViewController <StudyViewSubcontrollerProtocol, WKNavigationDelegate>
 {
   //! Holds a reference to the current meaning's string-replacement javascript
   NSString *_tmpJavascript;
+  //! WKWebView created programmatically inside meaningWebViewContainer.
+  WKWebView *_meaningWebView;
 }
 
 //! Designated initializer.  Passing "NO" to displayMainHeadword shows alt headword (e.g. English)
 - (id) initDisplayMainHeadword:(BOOL)displayMainHeadword;
 
 - (IBAction) doToggleReadingBtn;
+
+#if defined(LWE_JFLASH)
+//! Speaks the current headword using AVSpeechSynthesizer.
+- (IBAction) doSpeakHeadword;
+#endif
 
 //! Use when you want to show the reading (w/o persisting that state)
 - (void) turnReadingOn;
@@ -48,6 +55,10 @@ extern NSString * const LWECardHTMLTemplate_EtoJ;
 
 //! Whatever the value of readingVisible is, this will reset it to that state.
 - (void) resetReadingVisibility;
+
+//! Lays out reading, headword, and webview based on current bounds.
+//! Call from StudyViewController.viewDidLayoutSubviews (child VC containment is informal).
+- (void) layoutCardSubviews;
 
 //! Implement this delegate to control how the card is displayed in a mode.
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
@@ -79,8 +90,13 @@ extern NSString * const LWECardHTMLTemplate_EtoJ;
 //! If the headword is scrollable, the "more icon" will show to help the user understand
 @property (nonatomic, retain) IBOutlet UIImageView *headwordMoreIcon;
 
-//! Web view that renders the meaning HTML
-@property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;
+#if defined(LWE_JFLASH)
+//! Speaker button that triggers TTS for the current headword.
+@property (nonatomic, retain) UIButton *speakBtn;
+#endif
+
+//! Container view (XIB-instantiated UIView) into which the WKWebView is added in viewDidLoad.
+@property (nonatomic, retain) IBOutlet UIView *meaningWebViewContainer;
 
 @property (nonatomic, retain) NSString *baseHtml;
 @end

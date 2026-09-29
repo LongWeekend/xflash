@@ -11,6 +11,8 @@
 #import "PracticeModeCardViewDelegate.h"
 #import "TagPeer.h"
 #import "PracticeCardSelector.h"
+#import "CardPeer.h"
+#import "UserHistoryPeer.h"
 
 static NSString * const kTagTestDefaultName             = @"TestTag";
 static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
@@ -35,15 +37,15 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   NSError *error = nil;
   
   NSInteger nextCardLevel = [cardSelector calculateNextCardLevelForTag:longWeekendFavTag error:&error];
-  STAssertTrue(nextCardLevel < 6, @"Next card level is outside of possible range");
-  STAssertNil(error, @"There should not be an error getting the next level: %@", error);
+  XCTAssertTrue(nextCardLevel < 6, @"Next card level is outside of possible range");
+  XCTAssertNil(error, @"There should not be an error getting the next level: %@", error);
   
   // Now we cause an error but it's robust enough to work anyway
   Card *card = [practiceMode getNextCard:longWeekendFavTag afterCard:nil direction:nil];
   [longWeekendFavTag moveCard:card toLevel:1];
   [longWeekendFavTag setCardCount:1];
   nextCardLevel = [cardSelector calculateNextCardLevelForTag:longWeekendFavTag error:&error];
-  STAssertTrue(nextCardLevel < 6, @"Next card level is outside of possible range");
+  XCTAssertTrue(nextCardLevel < 6, @"Next card level is outside of possible range");
   
   [cardSelector release];
   [practiceMode release];
@@ -57,11 +59,11 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
   [longWeekendFavTag populateCardIds];
   Card *card = [practiceMode getNextCard:longWeekendFavTag afterCard:nil direction:nil];
-  STAssertNotNil(card,@"Could not get random card");
+  XCTAssertNotNil(card,@"Could not get random card");
   
   [longWeekendFavTag moveCard:card toLevel:5];
   NSInteger count = [[[longWeekendFavTag cardsByLevel] objectAtIndex:5] count];
-  STAssertTrue(count > 0, @"Moved card to level 5 but level 5 is empty");
+  XCTAssertTrue(count > 0, @"Moved card to level 5 but level 5 is empty");
   
   [practiceMode release];
 }
@@ -76,12 +78,12 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   for (Card *card in cardIds)
   {
     BOOL subscribed = [TagPeer subscribeCard:card toTag:newlyCreatedTag];
-    STAssertTrue(subscribed,@"Could not subscribe card %@ to tag %@",card,newlyCreatedTag);
+    XCTAssertTrue(subscribed,@"Could not subscribe card %@ to tag %@",card,newlyCreatedTag);
   }
   
   //Make sure that the test study set has the same count as the sample study set.
   NSArray *newCardIds = [CardPeer retrieveFaultedCardsForTag:newlyCreatedTag];
-  STAssertEquals([cardIds count],[newCardIds count],@"Count number is diferent from default tag and the newly created group study: %@", [newlyCreatedTag tagName]);
+  XCTAssertEqual([cardIds count],[newCardIds count],@"Count number is diferent from default tag and the newly created group study: %@", [newlyCreatedTag tagName]);
   
   //Remove the card one by one.
   NSUInteger count = [newCardIds count];
@@ -92,11 +94,11 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
     BOOL success = [TagPeer cancelMembership:card fromTag:newlyCreatedTag error:&error]; 
     if ((i != (count-1)) && (success == NO)) 
     {
-      STFail(@"Fail in removing a card from the newly created study set.\nCard with id: %d cannot be removed with error: %@", card.cardId, [error localizedDescription]);
+      XCTFail(@"Fail in removing a card from the newly created study set.\nCard with id: %d cannot be removed with error: %@", card.cardId, [error localizedDescription]);
     }
     else if ((i == (count-1)) && (success == NO))
     {
-      STAssertTrue(((success == NO) && error && ([error code] == kAllBuriedAndHiddenError)), @"Last card also get 'removed' which should not be removed.");
+      XCTAssertTrue(((success == NO) && error && ([error code] == kAllBuriedAndHiddenError)), @"Last card also get 'removed' which should not be removed.");
       NSLog(@"[TEST LOG]Last card in an active set couldn't be removed. Error from the TagPeer: %@", error);
     }
     else
@@ -113,7 +115,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   FMResultSet *rs = nil;
   NSString *testSql = nil;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  STAssertNotNil(db, @"Couldn't get DB");
+  XCTAssertNotNil(db, @"Couldn't get DB");
   
   // This will return any card IDs in card_tag_link that are not associated with cards in cards
   testSql = @"SELECT l.* FROM card_tag_link l LEFT JOIN cards c ON l.card_id = c.card_id WHERE c.card_id IS NULL";
@@ -123,7 +125,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   {
     [cardResults addObject:[NSNumber numberWithInt:0]];
   }
-  STAssertTrue([cardResults count] == 0, @"There should not be any unpaired card IDs!  Array: %@",cardResults);
+  XCTAssertTrue([cardResults count] == 0, @"There should not be any unpaired card IDs!  Array: %@",cardResults);
 
   // This will return any tag IDs in card_tag_link that are not associated with tags in tags
   testSql = @"SELECT l.* FROM card_tag_link l LEFT JOIN tags t ON l.tag_id = t.tag_id WHERE t.tag_id IS NULL";
@@ -133,7 +135,218 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   {
     [cardResults addObject:[NSNumber numberWithInt:0]];
   }
-  STAssertTrue([tagResults count] == 0, @"There should not be any unpaired card IDs!  Array: %@",tagResults);
+  XCTAssertTrue([tagResults count] == 0, @"There should not be any unpaired card IDs!  Array: %@",tagResults);
+}
+
+#pragma mark - Card Retrieval
+
+- (void)testRetrieveFaultedCardsForFavoritesTagReturnsCards
+{
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  NSArray *cards = [CardPeer retrieveFaultedCardsForTag:tag];
+  XCTAssertNotNil(cards, @"retrieveFaultedCardsForTag should not return nil");
+  XCTAssertTrue([cards count] > 0, @"Favorites tag should have at least one card");
+}
+
+- (void)testFaultedCardIsFaultBeforeHydration
+{
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  NSArray *cards = [CardPeer retrieveFaultedCardsForTag:tag];
+  XCTAssertTrue([cards count] > 0, @"Need at least one card to test");
+  Card *card = [cards objectAtIndex:0];
+  XCTAssertTrue(card.isFault, @"Card retrieved via retrieveFaultedCardsForTag should start as a fault");
+}
+
+- (void)testCardHydrationLoadsHeadword
+{
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  NSArray *cards = [CardPeer retrieveFaultedCardsForTag:tag];
+  XCTAssertTrue([cards count] > 0, @"Need at least one card to test");
+  Card *card = [cards objectAtIndex:0];
+  [card hydrate];
+  XCTAssertFalse(card.isFault, @"Card should not be a fault after hydration");
+  XCTAssertNotNil(card._headword, @"Hydrated card must have a headword");
+  XCTAssertTrue([card._headword length] > 0, @"Headword should be non-empty");
+}
+
+- (void)testBlankCardWithIdPreservesCardId
+{
+  NSInteger testId = 42;
+  Card *card = [CardPeer blankCardWithId:testId];
+  XCTAssertNotNil(card, @"blankCardWithId should return a card object");
+  XCTAssertEqual(testId, card.cardId, @"Card ID should match the value passed to blankCardWithId:");
+}
+
+#pragma mark - Tag Structure
+
+- (void)testFlattenCardArraysReturnsNonEmptyArray
+{
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  NSMutableArray *flattened = [tag flattenCardArrays];
+  XCTAssertNotNil(flattened, @"flattenCardArrays should not return nil");
+  XCTAssertTrue([flattened count] > 0, @"Favorites tag should have cards across levels");
+}
+
+- (void)testSeenCardCountIsNonNegative
+{
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  NSInteger seenCount = [tag seenCardCount];
+  XCTAssertTrue(seenCount >= 0, @"Seen card count must be non-negative, got %ld", (long)seenCount);
+}
+
+- (void)testTagCardCountIsPositive
+{
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  XCTAssertTrue(tag.cardCount > 0, @"Favorites tag should have at least one card, got %ld", (long)tag.cardCount);
+}
+
+#pragma mark - Tag Membership
+
+- (void)testSubscribeCardToNewTagAndVerifyMembership
+{
+  Tag *newTag = [TagPeer createTagNamed:@"MembershipTestTag" inGroup:[GroupPeer topLevelGroup]];
+  XCTAssertNotNil(newTag, @"Should be able to create a new tag");
+
+  Tag *favTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  NSArray *cards = [CardPeer retrieveFaultedCardsForTag:favTag];
+  XCTAssertTrue([cards count] > 0, @"Need at least one card to test");
+  Card *card = [cards objectAtIndex:0];
+
+  BOOL subscribed = [TagPeer subscribeCard:card toTag:newTag];
+  XCTAssertTrue(subscribed, @"Subscribing card to new tag should succeed");
+  XCTAssertTrue([TagPeer card:card isMemberOfTag:newTag], @"Card should be a member after subscribe");
+}
+
+- (void)testCancelMembershipRemovesCard
+{
+  Tag *newTag = [TagPeer createTagNamed:@"CancelMemberTestTag" inGroup:[GroupPeer topLevelGroup]];
+  Tag *favTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  NSArray *cards = [CardPeer retrieveFaultedCardsForTag:favTag];
+
+  // Subscribe two cards so we can remove one without hitting the "last card" error
+  XCTAssertTrue([cards count] >= 2, @"Need at least 2 cards");
+  Card *card1 = [cards objectAtIndex:0];
+  Card *card2 = [cards objectAtIndex:1];
+  [TagPeer subscribeCard:card1 toTag:newTag];
+  [TagPeer subscribeCard:card2 toTag:newTag];
+
+  NSError *error = nil;
+  BOOL removed = [TagPeer cancelMembership:card1 fromTag:newTag error:&error];
+  XCTAssertTrue(removed, @"Should be able to remove card1 from tag: %@", error);
+  XCTAssertFalse([TagPeer card:card1 isMemberOfTag:newTag], @"Card should not be a member after removal");
+}
+
+#pragma mark - UserHistoryPeer
+
+- (void)testRecordCorrectFromLevel0MovesCardToLevel2
+{
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  Card *card = [practiceMode getNextCard:tag afterCard:nil direction:nil];
+  XCTAssertNotNil(card, @"Should get a card from the favorites tag");
+
+  [tag moveCard:card toLevel:0];
+  card.levelId = 0;
+
+  [UserHistoryPeer recordCorrectForCard:card inTag:tag];
+
+  NSMutableArray *level2 = [[tag cardsByLevel] objectAtIndex:2];
+  XCTAssertTrue([level2 containsObject:card], @"Correct from level 0 should place card at level 2");
+  [practiceMode release];
+}
+
+- (void)testRecordCorrectFromLevel1MovesCardToLevel2
+{
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  Card *card = [practiceMode getNextCard:tag afterCard:nil direction:nil];
+  XCTAssertNotNil(card, @"Should get a card");
+
+  [tag moveCard:card toLevel:1];
+  card.levelId = 1;
+
+  [UserHistoryPeer recordCorrectForCard:card inTag:tag];
+
+  NSMutableArray *level2 = [[tag cardsByLevel] objectAtIndex:2];
+  XCTAssertTrue([level2 containsObject:card], @"Correct from level 1 should place card at level 2");
+  [practiceMode release];
+}
+
+- (void)testRecordCorrectFromLevel4MovesCardToLevel5
+{
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  Card *card = [practiceMode getNextCard:tag afterCard:nil direction:nil];
+  XCTAssertNotNil(card, @"Should get a card");
+
+  [tag moveCard:card toLevel:4];
+  card.levelId = 4;
+
+  [UserHistoryPeer recordCorrectForCard:card inTag:tag];
+
+  NSMutableArray *level5 = [[tag cardsByLevel] objectAtIndex:5];
+  XCTAssertTrue([level5 containsObject:card], @"Correct from level 4 should place card at level 5");
+  [practiceMode release];
+}
+
+- (void)testRecordCorrectFromLevel5StaysAtLevel5
+{
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  Card *card = [practiceMode getNextCard:tag afterCard:nil direction:nil];
+  XCTAssertNotNil(card, @"Should get a card");
+
+  [tag moveCard:card toLevel:5];
+  card.levelId = 5;
+
+  [UserHistoryPeer recordCorrectForCard:card inTag:tag];
+
+  NSMutableArray *level5 = [[tag cardsByLevel] objectAtIndex:5];
+  XCTAssertTrue([level5 containsObject:card], @"Correct from level 5 should keep card at level 5");
+  [practiceMode release];
+}
+
+- (void)testRecordWrongMovesCardToLevel1
+{
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  Card *card = [practiceMode getNextCard:tag afterCard:nil direction:nil];
+  XCTAssertNotNil(card, @"Should get a card");
+
+  [tag moveCard:card toLevel:3];
+  card.levelId = 3;
+
+  [UserHistoryPeer recordWrongForCard:card inTag:tag];
+
+  NSMutableArray *level1 = [[tag cardsByLevel] objectAtIndex:1];
+  XCTAssertTrue([level1 containsObject:card], @"Wrong answer from any level should place card at level 1");
+  [practiceMode release];
+}
+
+- (void)testBuryCardMovesCardToLevel5
+{
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  Tag *tag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+  [tag populateCardIds];
+  Card *card = [practiceMode getNextCard:tag afterCard:nil direction:nil];
+  XCTAssertNotNil(card, @"Should get a card");
+
+  [tag moveCard:card toLevel:1];
+  card.levelId = 1;
+
+  [UserHistoryPeer buryCard:card inTag:tag];
+
+  NSMutableArray *level5 = [[tag cardsByLevel] objectAtIndex:5];
+  XCTAssertTrue([level5 containsObject:card], @"Buried card should be at level 5");
+  [practiceMode release];
 }
 
 #pragma mark - Setting up
@@ -144,15 +357,15 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   NSError *error = nil;
   JFlashDatabase *db = [JFlashDatabase sharedJFlashDatabase];
   BOOL result = [db setupTestDatabaseAndOpenConnectionWithError:&error];
-  STAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
+  XCTAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
   
   //Setup FTS
   result = [db setupAttachedDatabase:CURRENT_FTS_TEST_DATABASE asName:@"fts"];
-  STAssertTrue(result, @"Failed to setup search database");
+  XCTAssertTrue(result, @"Failed to setup search database");
 
   //Setup Cards
   result = [db setupAttachedDatabase:CURRENT_CARD_TEST_DATABASE asName:@"cards"];
-  STAssertTrue(result, @"Failed to setup cards database");
+  XCTAssertTrue(result, @"Failed to setup cards database");
   
   // Try to set the current tag to be LWE favorites
   Tag *favoritesTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
@@ -165,7 +378,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   JFlashDatabase *db = [JFlashDatabase sharedJFlashDatabase];
   NSError *error = nil;
   BOOL result = [db removeTestDatabaseWithError:&error];
-  STAssertTrue(result, @"Test database cannot be removed for some reason.\nError: %@", [error localizedDescription]);
+  XCTAssertTrue(result, @"Test database cannot be removed for some reason.\nError: %@", [error localizedDescription]);
 }
 
 @end

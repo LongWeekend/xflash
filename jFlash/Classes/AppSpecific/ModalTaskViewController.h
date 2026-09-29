@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import "LWELongRunningTaskProtocol.h"
-#import "UIWebView+LWENoBounces.h"
 #import "LWEPackageDownloader.h"
 
 extern NSString * const LWEModalTaskDidCancel;
@@ -17,6 +17,7 @@ extern NSString * const LWEModalTaskDidCancel;
 {
   NSString *webViewContentDirectory;              //! Sets the sub directory of the content to load into the details web view
   NSString *webViewContentFileName;               //! Sets the filename of the content to load into the details web view
+  WKWebView *_webView;
 }
 
 // IBActions
@@ -35,7 +36,8 @@ extern NSString * const LWEModalTaskDidCancel;
 @property (nonatomic, retain) IBOutlet UILabel *taskMsgLabel;
 @property (nonatomic, retain) IBOutlet UIButton *startButton;
 @property (nonatomic, retain) UIProgressView *progressIndicator;
-@property (retain, nonatomic) IBOutlet UIWebView *webView;
+//! Container view (XIB-instantiated UIView) that hosts the WKWebView added in viewDidLoad.
+@property (retain, nonatomic) IBOutlet UIView *webViewContainer;
 
 // User-set properties
 

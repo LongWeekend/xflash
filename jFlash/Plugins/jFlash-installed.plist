@@ -18,8 +18,40 @@
 		<string>jFlash-CARD-1.1.db</string>
 		<key>fileLocation</key>
 		<integer>0</integer>
-		<key>comment</key>
-		<string>fileLocation values: 0 = Bundle, 1 = Library, 2 = Documents</string>
+	</dict>
+	<key>FTS_DB</key>
+	<dict>
+		<key>pluginId</key>
+		<string>FTS_DB</string>
+		<key>version</key>
+		<string>1.1</string>
+		<key>name</key>
+		<string>Awesomely Fast Search v1.1</string>
+		<key>details</key>
+		<string>Adds sub-second full dictionary search</string>
+		<key>pluginType</key>
+		<string>database</string>
+		<key>filePath</key>
+		<string>jFlash-FTS-1.1.db</string>
+		<key>fileLocation</key>
+		<integer>0</integer>
+	</dict>
+	<key>EX_DB</key>
+	<dict>
+		<key>pluginId</key>
+		<string>EX_DB</string>
+		<key>version</key>
+		<string>1.2</string>
+		<key>name</key>
+		<string>Fifty Thousand Examples v1.2</string>
+		<key>details</key>
+		<string>Adds sentences to practice screen</string>
+		<key>pluginType</key>
+		<string>database</string>
+		<key>filePath</key>
+		<string>jFlash-EX-1.2.db</string>
+		<key>fileLocation</key>
+		<integer>0</integer>
 	</dict>
 </dict>
 </plist>

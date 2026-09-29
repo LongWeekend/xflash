@@ -1,6 +1,6 @@
 [submodule "jFlash/Classes/External/FMDB"]
 	path = jFlash/Classes/External/FMDB
-	url = http://github.com/ccgus/fmdb.git
+	url = https://github.com/ccgus/fmdb.git
 [submodule "jFlash/Server/lweflash/lib/gaesessions"]
 	path = jFlash/Server/lweflash/lib/gaesessions
 	url = https://github.com/dound/gae-sessions.git
@@ -9,22 +9,22 @@
 	url = git@github.com:LongWeekend/Long-Weekend-Dev-Tools.git
 [submodule "jFlash/Classes/External/asi-http-request"]
 	path = jFlash/Classes/External/asi-http-request
-	url = git://github.com/pokeb/asi-http-request.git
+	url = https://github.com/pokeb/asi-http-request.git
 [submodule "jFlash/Classes/External/janrain"]
 	path = jFlash/Classes/External/janrain
 	url = git@github.com:LongWeekend/engage.iphone.git
 [submodule "jFlash/Classes/External/DSActivityView"]
 	path = jFlash/Classes/External/DSActivityView
-	url = git@github.com:rsharrott/DSActivityView.git
+	url = https://github.com/dominik-hadl/DSActivityView.git
 [submodule "jFlash/Classes/External/TTTAttributedLabel"]
 	path = jFlash/Classes/External/TTTAttributedLabel
-	url = git@github.com:LongWeekend/TTTAttributedLabel.git
+	url = https://github.com/TTTAttributedLabel/TTTAttributedLabel.git
 [submodule "jFlash/Classes/External/LWEGradientButton"]
 	path = jFlash/Classes/External/LWEGradientButton
 	url = git@github.com:LongWeekend/LWEGradientButton.git
 [submodule "jFlash/Classes/External/MBProgressHUD"]
 	path = jFlash/Classes/External/MBProgressHUD
-	url = git://github.com/matej/MBProgressHUD.git
+	url = https://github.com/jdg/MBProgressHUD.git
 [submodule "jFlash/Classes/External/jump.ios"]
 	path = jFlash/Classes/External/jump.ios
-	url = git@github.com:janrain/jump.ios.git
+	url = https://github.com/janrain/jump.ios.git

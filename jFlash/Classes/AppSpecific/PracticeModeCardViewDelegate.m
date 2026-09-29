@@ -182,8 +182,6 @@
 
 - (void)actionBarDidChangeMode:(ActionBarViewController *)avc
 {
-  // Change action bar view to original XIB
-  [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController" owner:avc options:nil];
 }
 
 -(void) actionBarWillSetup:(ActionBarViewController*)avc

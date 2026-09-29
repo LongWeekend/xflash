@@ -47,9 +47,6 @@
 
 + (void) _updateSettingsFrom11to12:(NSUserDefaults *)settings
 {
-  // Set the new key for text size
-  [settings setObject:SET_TEXT_NORMAL forKey:APP_TEXT_SIZE];
-  
   //New key for the user settings preference in version 1.6.2
   [settings setObject:LWE_CF_VERSION_1_2 forKey:APP_SETTINGS_VERSION];
 
